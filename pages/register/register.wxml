@@ -1,0 +1,32 @@
+r<!--pages/register/register.wxml-->
+<view class="container">
+
+<!--图标-->
+  <view class="register-icon">
+  <image class="register-img" src="../images/register.jpg"></image>
+  </view>
+
+
+<!--账户-->
+  <view class="inputView">
+  <image class="smallicon" src="../images/name.jpg"></image>
+  <label class="register">Name</label>
+  <input class="inputText" placeholder="请输入昵称" bindinput="userInput"/>
+  </view>
+
+
+<!--密码-->
+  <view class="inputView">
+  <image class="smallicon" src="../images/phone.jpg"></image>
+  <label class="register">Phone</label>
+  <input class="inputText" placeholder="请输入电话" bindinput="phoneInput" />
+  </view>
+
+
+<!--注册-->
+<view class="registerButtonView">
+  <button class="registerButton" type="primary" size="default" bindtap="uploadInfo">Join Us</button>
+</view>
+
+
+</view>

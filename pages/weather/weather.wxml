@@ -1,0 +1,31 @@
+<view class="content">
+    <text class="city">{{city}}</text>
+    <view class="today">
+        <view class="main">
+            <view class="left">
+                <view class="tempnow">{{weather.tmp}}℃</view>
+                <view class="weather">
+                    {{city}}
+                    {{weather.tmp}}℃
+                </view>
+            </view>
+            <view class="right">
+                <view class="kongqi">体感温度：{{weather.fl}}</view>
+                <view class="kongqi">相对湿度：{{weather.hum}}</view>
+                <view class="kongqi">降水量（mm）：{{weather.pcpn}}</view>
+                <view class="kongqi">气压：{{weather.pres}}</view>
+                <view class="kongqi">能见度：{{weather.vis}}</view>
+            </view>
+        </view>
+        <!-- <view class="advice">穿衣建议：{{life.info.chuanyi}}</view>
+        <view class="update">最近更新：{{realtime.time}}</view> -->
+    </view>
+
+    <!-- <import src="../template/temp01"/>
+
+    <view class="future">
+        <block wx:for="{{weather}}">
+            <template is="future-item" data="{{item}}"/>
+        </block>
+    </view> -->
+</view>

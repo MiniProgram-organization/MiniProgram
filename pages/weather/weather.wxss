@@ -1,0 +1,73 @@
+.content{
+    font-family: '微软雅黑','宋体';
+    background-color: #252525;
+    color: #767676;
+    font-size: 12px;
+    width: 100%;
+    height: 100%;
+}
+.city{
+    font-size: 16px;
+    padding-left: 10px;
+    color: #eee;
+}
+.today{
+    width: 80%;
+    margin: 0 auto;
+    height: 500rpx;
+    padding-top: 100rpx;
+}
+.main{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}
+.left{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+.right{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 30rpx;
+}
+.tempnow{
+    color: #48a2e0;
+    font-size: 60px;
+    height: 160rpx;
+}
+.weather{
+    color: #fff;
+    font-size: 20px;
+    height: 60rpx;
+}
+.kongqi{
+    font-size: 16px;
+    height: 80rpx;
+}
+.pm25{
+    font-size: 16px;
+    height: 60rpx;
+}
+.wind{
+    font-size: 10px;
+}
+.update{
+    text-align: right;
+}
+.advice{
+    padding-top: 20rpx;
+}
+.future{
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    margin: 0 auto;
+}
+.future-item{
+    width: 25%;
+    text-align: center;
+    line-height: 60rpx;
+}
