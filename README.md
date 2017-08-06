@@ -194,7 +194,7 @@
 
 ```json
 {
-    "status": true,
+    "status": "OK",
     "now": {
         "cond": {
             "code": "100",
