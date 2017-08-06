@@ -13,15 +13,13 @@
 
 目前使用的是腾讯小程序提供的地图，后续如果功能丰富可能会用到百度地图的api，和服务器数据交换的细节见[交接](#index)
 
-#### 4.调用百度天气api显示天气
-
-百度的天气api有点bug，因为连错误结果都不返回给我，所以目前还没有数据
+#### 4.天气的API使用的是和风天气API，官网地址为：[https://www.heweather.com](https://www.heweather.com)
 
 
 
 ## 交接
 
-####**注意**
+#### **注意**
 
 数据的交互全部采用json格式，数据类型严格按照json所示定义，即：
 
@@ -127,16 +125,16 @@
   status:"OK"
   coordinates:[
     {
-  		"POI_id":3,
+        "POI_id":1,
         "category":"school",
         "venue":"Fudan University",
         "longitude": 123.324,
         "latitude": 50
     },
     {
-        "POI_id":5,
+        "POI_id":2,
         "category":"residence",
-        "venue":"lsh"s dormitory",
+        "venue":"lsh's dormitory",
         "longitude": 123.43535,
         "latitude": 50.334
     }......
@@ -157,7 +155,8 @@
 
 ```json
 {
-  POI_id: 2,
+  POI_id: 1,
+  created_by_user: false,
   openid: "haasdfasf",
   latitude: 10.43535,
   longitude: 54.454
@@ -171,3 +170,51 @@
   status: "OK"
 }
 ```
+
+
+#### 5.天气查询
+
+##### 相关函数：`sgz`
+
+##### url: [https://40525433.fudan-mini-program.com/cgi-bin/Weather](https://40525433.fudan-mini-program.com/cgi-bin/Weather)
+
+##### method: POST
+
+##### 发送数据格式： 
+
+```json
+{
+  openid: "agdsg1sdg",
+  latitude: 10.43535,
+  longitude: 54.454
+}
+```
+
+##### 接收数据格式：
+
+```json
+{
+    "status": "OK",
+    "now": {
+        "cond": {
+            "code": "100",
+            "txt": "晴"
+        },
+        "fl": "29",
+        "hum": "81",
+        "pcpn": "0",
+        "pres": "1004",
+        "tmp": "27",
+        "vis": "7",
+        "wind": {
+            "deg": "216",
+            "dir": "西南风",
+            "sc": "3-4",
+            "spd": "13"
+        }
+    },
+    "city": "北京",
+    "country": "中国"
+}
+```
+
