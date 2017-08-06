@@ -12,7 +12,8 @@ Page({
     longitude: '',
     latitude: '',
     actionSheetHidden: true,
-    actionSheetItems: []
+    actionSheetItems: [],
+    includePoints: []
   },
 
   /**
@@ -56,14 +57,19 @@ Page({
                /*tempMarkers作为数据中转*/
 
 
-              //先加入中心位置 
+              //marker数组
               var tempMarkers = [{
                 latitude: latitude,
                 longitude: longitude,
                 iconPath: '../images/mapicon.jpg'
               }];
 
-              var actionSheetItemsTemp = []
+              
+            
+
+              //触发事件数组
+              var actionSheetItemsTemp = [];
+
 
               for (var i = 0; i < coordinates.length; i++) {
                 var tempLatitude = coordinates[i].latitude;
@@ -76,6 +82,8 @@ Page({
                   POI_id: POI_id,
                   venue: venue
                 });
+
+      
 
 
 
@@ -93,6 +101,8 @@ Page({
               that.setData({
                 actionSheetItems: actionSheetItemsTemp
               });
+
+              
 
               that.setData({
                 markers: tempMarkers
@@ -144,23 +154,41 @@ Page({
   bindItemTap: function(e){
     var that = this;
     console.log("选择的内容为：");
-    console.log(e.currentTarget.dataset.name);
+    var poi_id = e.currentTarget.dataset.name;
+
     wx.request({
       url: 'https://40525433.fudan-mini-program.com/cgi-bin/CheckIn',
       method: 'POST',
       data: {
+        created_by_user: false,
         openid: getApp().globalData.openid,
         latitude: that.data.latitude,
         longitude: that.data.longitude,
-        POI_id: e.currentTarget.dataset.name  
+        POI_id: poi_id 
       },
       success: function(e){
-        if( e.data.status == "OK" ){
-          console.log("签到成功");
+        var check_venue = "";
+        for (var i = 0; i < that.data.actionSheetItems.length; i++){
+          if (that.data.actionSheetItems[i].POI_id == poi_id){
+            check_venue = that.data.actionSheetItems[i].venue;
+            break;
+          }
         }
+        
+        if( e.data.status == "OK" ){
+          wx.showToast({
+            title: check_venue + " checked",
+            icon: 'loading',
+            duration: 500
+          });
+        }
+      },
+      fail: function(e){
+        console.log("签到失败");
+        console.log(e);
       }
 
-    })
+    });
   },
 
 

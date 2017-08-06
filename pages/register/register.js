@@ -46,7 +46,7 @@ Page({
         title: '用户名和电话不能为空',
         icon: 'loading',
         duration: 1000
-      })
+      });
     }else{
       // 显示消息
       wx.showToast({
