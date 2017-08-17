@@ -22,7 +22,7 @@ App({
         console.log('code is '+code);
         wx.getUserInfo({
           success: function(res){
-            that.globalData.rawData = eval('('+res.rawData+')');
+            that.globalData.rawData = JSON.parse(res.rawData);
             console.log(that.globalData.rawData);
             var iv = res.iv;
             wx.request({
