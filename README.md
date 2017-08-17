@@ -218,3 +218,53 @@
 }
 ```
 
+
+
+#### 6.历史签到记录
+
+##### 相关函数：`sgz`
+
+##### url: [https://40525433.fudan-mini-program.com/cgi-bin/History](https://40525433.fudan-mini-program.com/cgi-bin/History)
+
+##### method: POST
+
+##### 发送数据格式： 
+
+```json
+{
+  openid: "agdsg1sdg"
+}
+```
+
+##### 接收数据格式：
+
+```json
+{
+    "status": "OK",
+    "checkin_num": 3,
+    "checkins": [
+        {
+          "venue": "Fudan University",
+          "datetime": "2017-07-01 08:08:08",
+          "category": "school",
+          "latitude": 23.123,
+          "longitude": 123.123
+        },
+        {
+          "venue": "Peking University",
+          "datetime": "2017-07-02 08:08:08",
+          "category": "school",
+          "latitude": 43.123,
+          "longitude": 123.123
+        },
+        {
+          "venue": "Peking University",
+          "datetime": "2017-08-16 10:10:10",
+          "category": "school",
+          "latitude": 43.123,
+          "longitude": 123.123
+        }
+      ]
+}
+```
+
