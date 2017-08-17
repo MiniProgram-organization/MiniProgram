@@ -243,7 +243,8 @@
     "status": "OK",
     "checkin_num": 3,
     "checkins": [
-        {
+        { 
+		  "POI_id": 1,
           "venue": "Fudan University",
           "datetime": "2017-07-01 08:08:08",
           "category": "school",
@@ -251,6 +252,7 @@
           "longitude": 123.123
         },
         {
+		  "POI_id": 3,
           "venue": "Peking University",
           "datetime": "2017-07-02 08:08:08",
           "category": "school",
@@ -258,6 +260,7 @@
           "longitude": 123.123
         },
         {
+	      "POI_id": 3,
           "venue": "Peking University",
           "datetime": "2017-08-16 10:10:10",
           "category": "school",
