@@ -1,33 +1,43 @@
 {
   "pages": [
+    "pages/activity/activity",
     "pages/map/map",
     "pages/register/register",
-    "pages/weather/weather"
+    "pages/weather/weather",
+    "pages/account/account",
+    "pages/history/history",
+    "pages/friends/friends",
+    "pages/places/places"
   ],
   "window": {
-   "window": {
-    "navigationBarBackgroundColor": "#FFFFFF",
-    "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "微信接口功能演示",
-    "backgroundColor": "#ffffff",
-    "backgroundTextStyle": "light"
-  }
+    "window": {
+      "navigationBarBackgroundColor": "#FFFFFF",
+      "navigationBarTextStyle": "black",
+      "navigationBarTitleText": "微信接口功能演示",
+      "backgroundColor": "#ffffff",
+      "backgroundTextStyle": "light"
+    }
   },
   "tabBar": {
-      "color": "#353535",
-      "selectedColor": "#3cc51f",
-      "borderStyle": "white",
-      "backgroundColor": "#ffffff",
+    "color": "#353535",
+    "selectedColor": "#3cc51f",
+    "borderStyle": "white",
+    "backgroundColor": "#ffffff",
     "list": [
-      {
-        "iconPath": "pages/images/mapicon.jpg",
-        "pagePath": "pages/map/map",
-        "text": "地图"
-      },
       {
         "iconPath": "pages/images/weathericon.jpg",
         "pagePath": "pages/weather/weather",
         "text": "天气"
+      },
+      {
+        "iconPath": "pages/images/activityicon.jpg",
+        "pagePath": "pages/activity/activity",
+        "text": "活动"
+      },
+      {
+        "iconPath": "pages/images/accounticon.jpg",
+        "pagePath": "pages/account/account",
+        "text": "账号"
       }
     ]
   },

@@ -1,0 +1,18 @@
+
+
+<view style="width:{{windowWidth}}px;height:{{windowHeight}}px">
+<image style="width:30%; height:20%; display:flex;margin:20px 20px 50px 120px" 
+        src="{{avatarUrl}}">
+</image>
+
+
+<image bindtap="redirectHistory" src="../images/account/history.jpg" class="discover-image"
+      style="margin:20px 20px 20px 35px;width:80%; height:20%;">
+</image>
+<image bindtap="redirectPlaces" src="../images/account/places.jpg" class="discover-image"
+      style="margin:20px 20px 20px 35px;width:80%; height:20%;">
+</image>
+<image bindtap="redirectFriends" src="../images/account/friends.jpg" class="discover-image"
+      style="margin:20px 20px 20px 35px;width:80%; height:20%;">
+</image>
+</view>

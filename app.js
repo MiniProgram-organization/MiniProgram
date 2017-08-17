@@ -22,7 +22,8 @@ App({
         console.log('code is '+code);
         wx.getUserInfo({
           success: function(res){
-            that.globalData.rawData = res.rawData;
+            that.globalData.rawData = eval('('+res.rawData+')');
+            console.log(that.globalData.rawData);
             var iv = res.iv;
             wx.request({
               url: 'https://40525433.fudan-mini-program.com/cgi-bin/Login',
@@ -38,7 +39,7 @@ App({
                 if(res.data.registered==true){
                   console.log('registered');
                   wx.redirectTo({
-                    url: '/pages/map/map',
+                    url: '/pages/activity/activity',
                     success: function(){
                       console.log("aaa");
                     }
@@ -91,7 +92,7 @@ App({
     openid: '',
     windowWidth: '',
     windowHeight: '',
-    rawData: ''
+    rawData: {}
   }
 
 })
