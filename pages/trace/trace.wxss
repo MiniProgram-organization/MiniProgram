@@ -1,0 +1,6 @@
+.line-css {
+  height:1px;
+  background:#888;
+  margin:20rpx;
+
+}

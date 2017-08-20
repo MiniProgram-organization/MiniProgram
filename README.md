@@ -59,9 +59,8 @@
 {
   status: "OK"
   registered: true,
-  openid: "asdfasf"
+  openid: "asdfasf".
 }
-
 ```
 
 

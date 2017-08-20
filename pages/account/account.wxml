@@ -1,18 +1,21 @@
 
 
 <view style="width:{{windowWidth}}px;height:{{windowHeight}}px">
-<image style="width:30%; height:20%; display:flex;margin:20px 20px 50px 120px" 
+<image style="width:15%; height:10%;margin:3% 42% 3% 43%" 
         src="{{avatarUrl}}">
 </image>
 
+<view style="width: 100%">
+<text style="margin:0% 40% 0% 40%">{{nickName}}</text>
+</view>
 
-<image bindtap="redirectHistory" src="../images/account/history.jpg" class="discover-image"
-      style="margin:20px 20px 20px 35px;width:80%; height:20%;">
+<image bindtap="redirectHistory" src="../images/account/trace.jpg" class="discover-image"
+      style="margin:20px 20px 10px 35px;width:80%; height:20%;">
 </image>
 <image bindtap="redirectPlaces" src="../images/account/places.jpg" class="discover-image"
-      style="margin:20px 20px 20px 35px;width:80%; height:20%;">
+      style="margin:20px 20px 10px 35px;width:80%; height:20%;">
 </image>
 <image bindtap="redirectFriends" src="../images/account/friends.jpg" class="discover-image"
-      style="margin:20px 20px 20px 35px;width:80%; height:20%;">
+      style="margin:20px 20px 10px 35px;width:80%; height:20%;">
 </image>
 </view>

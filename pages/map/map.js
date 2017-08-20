@@ -35,40 +35,6 @@ Page({
     
   },
 
-  checkIn: function(e){
-    var that = this;
-
-    wx.request({
-      url: 'https://40525433.fudan-mini-program.com/cgi-bin/CheckIn',
-      method: 'POST',
-      data: {
-        created_by_user: false,
-        openid: getApp().globalData.openid,
-        latitude: that.data.latitude,
-        longitude: that.data.longitude,
-        POI_id: that.data.POI_id
-      },
-      success: function (e) {
-        if (e.data.status == "OK") {
-          wx.showToast({
-            title: that.data.venue + " checked",
-            icon: 'loading',
-            duration: 500
-          });
-        }
-      },
-      fail: function (e) {
-        console.log("签到失败");
-        console.log(e);
-      }
-
-    });
-  },
-
-
-
-
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -1,1 +1,12 @@
 /* pages/activity/activity.wxss */
+#child {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left:0;
+  right:0;
+  margin: auto;
+  width:50%;
+  height: 30%;
+ }
+ #pentagon {    position: relative;    width: 54px;    border-width: 50px 18px 0;    border-style: solid;    border-color: red transparent;}#pentagon:before {    content: "";    position: absolute;    height: 0;    width: 0;    top: -85px;    left: -18px;    border-width: 0 45px 35px;    border-style: solid;    border-color: transparent transparent red;}

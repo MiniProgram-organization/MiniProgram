@@ -5,7 +5,7 @@
     "pages/register/register",
     "pages/weather/weather",
     "pages/account/account",
-    "pages/history/history",
+    "pages/trace/trace",
     "pages/friends/friends",
     "pages/places/places"
   ],

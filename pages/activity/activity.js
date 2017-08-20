@@ -9,10 +9,13 @@ Page({
    * 页面的初始数据
    */
   data: {
+    windowWidth: getApp().globalData.windowWidth,
+    windowHeight: getApp().globalData.windowHeight,
     latitude: "",
     longitude: "",
     hidden: false,
-    markers: []
+    markers: [],
+    include_points: [],
   },
 
   redictDetail: function (e) {
@@ -38,6 +41,50 @@ Page({
       url: url
     })
   },
+
+  checkIn: function (e) {
+    var that = this;
+    var target_id = parseInt(e.currentTarget.id); 
+    console.log("target_id" + target_id);
+    var target_latitude, target_longitude, target_category, target_venue;
+    for (var index = 0; index < this.data.markers.length; index++) {
+      if (this.data.markers[index].POI_id == target_id) {
+        target_latitude = this.data.markers[index].latitude;
+        target_longitude = this.data.markers[index].longitude;
+        target_venue = this.data.markers[index].venue;
+        target_category = this.data.markers[index].category;
+        break;
+      }
+    }
+    console.log(target_latitude, target_longitude, target_id);
+    wx.request({
+      url: 'https://40525433.fudan-mini-program.com/cgi-bin/CheckIn',
+      method: 'POST',
+      data: {
+        created_by_user: false,
+        openid: getApp().globalData.openid,
+        latitude: target_latitude,
+        longitude: target_longitude,
+        POI_id: target_id
+      },
+      success: function (e) {
+        if (e.data.status == "OK") {
+          wx.showToast({
+            title: target_venue + " checked",
+            icon: 'loading',
+            duration: 500
+          });
+        }
+      },
+      fail: function (e) {
+        console.log("签到失败");
+        console.log(e);
+      }
+
+    });
+  },
+
+
 
   fetchData: function(){
     var that = this;
@@ -79,6 +126,7 @@ Page({
 
               //marker数组
               var tempMarkers = [];
+              var tempIncludePoints = [];
 
               for (var i = 0; i < coordinates.length; i++) {
                 var tempLatitude = coordinates[i].latitude;
@@ -93,13 +141,19 @@ Page({
                   longitude: tempLongitude,
                   iconPath: '../images/' + category + '.jpg',
                   category: category,
-                  venue: venue
+                  venue: venue,
+                  checkButton: '../images/checkButton.jpg'
+                });
+                tempIncludePoints.push({
+                  latitude: tempLatitude,
+                  longitude: tempLongitude, 
                 });
               }
               console.log(tempMarkers);
 
               that.setData({
-                markers: tempMarkers
+                markers:tempMarkers,
+                include_points:tempIncludePoints
               });
             } else {
               console.log("未收到青鸟林的附近位置坐标");

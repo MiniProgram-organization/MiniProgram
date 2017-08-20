@@ -1,9 +1,29 @@
 <!--hotest.wxml-->
-<view class="container">
-  <view class="topic-main">
+<view style="width: {{windowWidth}}px; height:{{windowHeight}}px">
+  <view style="width:80%; height:30%; margin:5% 10% 10% 10%">  
+    <map bindmarkertap="markertap" latitude="{{latitude}}" 
+longitude="{{longitude}}" include-points="{{include_points}}" markers="{{markers}}" style="width:100%"/>
+    <view style="margin:5% 0% 10% 0%">
+      <view style="float:left;height:10px;width:33%">
+        <text style="padding:0% 10% 0% 30%;color:yellow">33</text>
+        <view style="">Checkins</view>
+      </view>
+      <view style="float:left;height:10px;width:33%;">
+        <text style="padding:0% 10% 0% 30%;color:yellow">44</text>
+        <view style="padding:0% 10% 0% 15%">Places</view>
+      </view>
+      <view style="float:left;top:20px;height:10px;width:33%;">
+        <text style="padding:0% 10% 0% 30%;color:yellow">55</text>
+        <view style="">Categories</view>
+      </view>
+    </view>
+  </view>
+
+
+  <view class="topic-main" style="margin:20% 0% 0% 0%">
       <block wx:for="{{markers}}">
-        <view class="topic-item" index="{{index}}" id="{{item.POI_id}}" catchtap="redictDetail">
-            <image class="member-avatar" src="{{item.iconPath}}" background-size="cover"></image>
+        <view class="topic-item" index="{{index}}" id="{{item.POI_id}}">
+            <image catchtap="redictDetail" class="member-avatar" src="{{item.iconPath}}" background-size="cover"></image>
             <view class="topic-info">
                 <view class="topic-inner">
                     <view class="topic-left">
@@ -12,7 +32,7 @@
                             <text class="node-name">{{item.category}}</text>
                         </view>
                     </view>
-        
+                <image bindtap="checkIn" id="{{item.POI_id}}" class="member-avatar" src="{{item.checkButton}}"></image>
                 </view>
             </view>
         </view>

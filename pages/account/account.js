@@ -7,7 +7,8 @@ Page({
   data: {
     windowWidth: '',
     windowHeight: '',
-    avatarUrl: ''
+    avatarUrl: '',
+    nickName: ''
   },
 
   /**
@@ -15,15 +16,17 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
+      nickName: getApp().globalData.rawData.nickName,
       windowWidth: getApp().globalData.windowWidth,
       windowHeight: getApp().globalData.windowHeight,
       avatarUrl: getApp().globalData.rawData.avatarUrl
     });
+    console.log(this.data.nickName);
   },
 
   redirectHistory: function(){
     wx.navigateTo({
-      url: '../history/history'
+      url: '../trace/trace'
     });
   },
 
