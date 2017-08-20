@@ -78,15 +78,14 @@
 ```json
 {
   openid: "asdfasdfsad",
-  rawData: {"nickName":"hazelnut",
-            "gender":1,
-            "language":"zh_CN",
-            "city":"",
-            "province":"Chongqing",
-            "country":"China",                  
-            "avatarUrl":"https://wx.qlogo.cn"
-            }
-  username: "老板最帅",
+  rawData: "{\"nickName\":\"hazelnut\",
+            \"gender\":1,
+            \"language\":\"zh_CN\",
+            \"city\":\"Chongqing\",
+            \"province\":\"Chongqing\",
+            \"country\":\"China\",
+            \"avatarUrl\":\"https://wx.qlogo.cn\"
+            }",
   Tel: "15202345235",
 }
 ```
@@ -244,25 +243,25 @@
     "checkin_num": 3,
     "checkins": [
         { 
-		  "POI_id": 1,
+          "POI_id": 1,
           "venue": "Fudan University",
-          "datetime": "2017-07-01 08:08:08",
+          "datetime": "2017-07-01 08:08:08.213",
           "category": "school",
           "latitude": 23.123,
           "longitude": 123.123
         },
         {
-		  "POI_id": 3,
+          "POI_id": 3,
           "venue": "Peking University",
-          "datetime": "2017-07-02 08:08:08",
+          "datetime": "2017-07-02 08:08:08.123",
           "category": "school",
           "latitude": 43.123,
           "longitude": 123.123
         },
         {
-	      "POI_id": 3,
+          "POI_id": 3,
           "venue": "Peking University",
-          "datetime": "2017-08-16 10:10:10",
+          "datetime": "2017-08-16 10:10:10.321",
           "category": "school",
           "latitude": 43.123,
           "longitude": 123.123
