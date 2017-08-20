@@ -46,6 +46,7 @@
 }
 
 .topic-title {
+    font-size:150%;
     height:120rpx;
     line-height: 1.4;
     box-sizing: border-box;
@@ -58,6 +59,7 @@
 }
 
 .node-name {
+    font-size: 150%;
     display: inline-block;
     margin-right: 20rpx;
     padding:5rpx 10rpx;

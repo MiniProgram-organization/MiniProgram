@@ -5,32 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    checkins: [
-      {
-        "POI_id": 1,
-        "venue": "Fudan University",
-        "datetime": "2017-07-01 08:08:08",
-        "category": "school",
-        "latitude": 23.123,
-        "longitude": 123.123
-      },
-      {
-        "POI_id": 5,
-        "venue": "Peking University",
-        "datetime": "2017-07-02 08:08:08",
-        "category": "school",
-        "latitude": 43.123,
-        "longitude": 123.123
-      },
-      {
-        "POI_id": 5,
-        "venue": "Peking University",
-        "datetime": "2017-08-16 10:10:10",
-        "category": "school",
-        "latitude": 43.123,
-        "longitude": 123.123
-      }
-    ]
+    checkins: []
   },
 
   /**
@@ -51,7 +26,7 @@ Page({
       success: function (res) {
         if (res.data.status == "OK") {
           that.setData({
-            // checkins: res.data.checkins
+            checkins: res.data.checkins
           });
         } else {
           console.log("获取用户信息失败");

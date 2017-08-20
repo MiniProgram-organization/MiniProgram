@@ -72,7 +72,7 @@ Page({
           wx.showToast({
             title: target_venue + " checked",
             icon: 'loading',
-            duration: 500
+            duration: 3000 
           });
         }
       },
@@ -125,7 +125,14 @@ Page({
 
 
               //marker数组
-              var tempMarkers = [];
+              var tempMarkers = [{
+                POI_id: 0,
+                venue:"Yourself",
+                latitude: latitude,
+                longitude: longitude,
+                category: "center",
+                iconPath: '../images/center.jpg'
+              }];
               var tempIncludePoints = [];
 
               for (var i = 0; i < coordinates.length; i++) {
