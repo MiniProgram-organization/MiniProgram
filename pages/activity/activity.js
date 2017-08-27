@@ -57,6 +57,7 @@ Page({
       }
     }
     console.log(target_latitude, target_longitude, target_id);
+    console.log(getApp().globalData.openid);
     wx.request({
       url: 'https://40525433.fudan-mini-program.com/cgi-bin/CheckIn',
       method: 'POST',
@@ -68,7 +69,35 @@ Page({
         POI_id: target_id
       },
       success: function (e) {
+        var mydate = new Date();
+        console.log(e);
+        console.log("HHHHH");
         if (e.data.status == "OK") {
+          var old_history = wx.getStorageSync('history');
+          if (!old_history){
+            wx.setStorage({
+              key: 'history',
+              data: [{
+                POI_id: target_id,
+                category: target_category,
+                venue: target_venue,
+                datetime: mydate.toLocaleTimeString()
+              }]
+            })
+          }else{
+            console.log("LLLLLL");
+            old_history.push({
+              POI_id: target_id,
+              category: target_category,
+              venue: target_venue,
+              datetime: mydate.toLocaleTimeString()
+            });
+            wx.setStorage({
+              key: 'history',
+              data: old_history,
+            });
+          }
+
           wx.showToast({
             title: target_venue + " checked",
             icon: 'loading',

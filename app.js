@@ -15,7 +15,19 @@ App({
 
 
     console.log("发送请求");
-  
+
+
+    var registered = wx.getStorageSync("registered")
+    if(registered){
+      console.log("Successfully get storage");
+      that.globalData.openid = wx.getStorageSync('openid');
+      wx.redirectTo({
+        url: '/pages/activity/activity',
+        success: function () {
+        }
+      });
+    }else{
+
     wx.login({
       success: function(res){
         var code = res.code;
@@ -25,6 +37,7 @@ App({
             that.globalData.rawData = JSON.parse(res.rawData);
             console.log(that.globalData.rawData);
             var iv = res.iv;
+            console.log("Don't get storage");
             wx.request({
               url: 'https://40525433.fudan-mini-program.com/cgi-bin/Login',
               method:'POST',
@@ -38,6 +51,9 @@ App({
                 
                 if(res.data.registered==true){
                   console.log('registered');
+                
+                  wx.setStorageSync('registered', 'OK');
+                  wx.setStorageSync('openid', res.data.openid);
                   wx.redirectTo({
                     url: '/pages/activity/activity',
                     success: function(){
@@ -62,6 +78,7 @@ App({
         }) 
       }
     });
+    }
     
   },
   /**
