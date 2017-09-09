@@ -28,7 +28,7 @@ longitude="{{longitude}}" include-points="{{include_points}}" markers="{{markers
                 <view class="topic-inner">
                     <view class="topic-left">
                         <view class="topic-title"><text>{{item.venue}}</text></view>
-                        <view >
+                        <view>
                             <text class="node-name">{{item.category}}</text>
                         </view>
                     </view>

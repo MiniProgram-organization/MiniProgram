@@ -164,7 +164,7 @@ Page({
               }];
               var tempIncludePoints = [];
 
-              for (var i = 0; i < coordinates.length; i++) {
+              for (var i = 0; i < 5; i++) {
                 var tempLatitude = coordinates[i].latitude;
                 var tempLongitude = coordinates[i].longitude;
                 var category = coordinates[i].category;
