@@ -5,6 +5,20 @@ module.exports = {
 }
 
 
+// 获取时间
+function formatTime(date) {
+  var year = date.getFullYear()
+  var month = date.getMonth() + 1
+  var day = date.getDate()
+
+  var hour = date.getHours()
+  var minute = date.getMinutes()
+  var second = date.getSeconds()
+
+  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+}
+
+
 
 /*@brief 每次向服务器请求的时候，需要确保我们有用户的openid，所以要维护用户的登录状态，
  *@return true: 用户已经注册过手机

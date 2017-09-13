@@ -15,28 +15,7 @@ Page({
     this.setData({
       checkins: wx.getStorageSync('history')
     });
-    // this.fetchHistory();
   },
-
-  // fetchHistory: function(){
-  //   var that = this;
-  //   wx.request({
-  //     method: "POST",
-  //     url: 'https://40525433.fudan-mini-program.com/cgi-bin/History',
-  //     data: {
-  //       openid: getApp().globalData.openid
-  //     },
-  //     success: function (res) {
-  //       if (res.data.status == "OK") {
-  //         that.setData({
-  //           checkins: res.data.checkins
-  //         });
-  //       } else {
-  //         console.log("获取用户信息失败");
-  //       }
-  //      }
-  //     });
-  // },
 
 
   /**

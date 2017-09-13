@@ -1,0 +1,60 @@
+<view style="width: {{windowWidth}}px; height:{{windowHeight*0.15}}px">
+  <text style="text-align:center; font-size:100%">留下自己的足迹</text>
+</view>
+
+<view class="page__bd">
+  <view class="weui-search-bar">
+    <view class="weui-search-bar__form">
+      <view class="weui-search-bar__box">
+        <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+        <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{searchPOIVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+        <view class="weui-icon-clear" wx:if="{{searchPOIVal.length > 0}}" bindtap="clearInput">
+          <icon type="clear" size="14"></icon>
+        </view>
+      </view>
+      <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+                    <icon class="weui-icon-search" type="search" size="14"></icon>
+                    <view class="weui-search-bar__text">搜索</view>
+                </label>
+    </view>
+    <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+  </view>
+</view>
+
+<view>
+  <scroll-view scroll-y>
+    <view style="width: {{windowWidth}}px; height:{{windowHeight*0.3}}px">
+      <view class="topic-main" style="margin:20% 0% 0% 0%">
+
+        <block wx:for="{{markers}}">
+          <view bindtap="checkIn" class="topic-item" index="{{index}}" id="{{item.POI_id}}">
+            <image catchtap="redictDetail" class="member-avatar" src="{{item.logoPath}}" background-size="cover"></image>
+            <view class="topic-info">
+              <view class="topic-inner">
+                <view class="topic-left">
+                  <view class="topic-title"><text>{{item.venue}}</text></view>
+                  <view>
+                    <text class="node-name">{{item.category}}</text>
+                  </view>
+                </view>
+                
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+
+
+    </view>
+  </scroll-view>
+</view>
+
+<view style="display: flex;flex-direction:row">
+  <view style="flex:1">
+  <button class="weui-btn" type="primary">拍摄</button>
+  </view>
+  <view style="flex:0.1"></view>
+  <view style="flex:1">
+  <button style="flex:1" class="weui-btn" type="primary">不知道干嘛</button>
+  </view>
+</view>
