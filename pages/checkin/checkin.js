@@ -21,6 +21,7 @@ Page({
   },
 
   onShareAppMessage: function (res) {
+    var that = this;
     console.log(res);
     if (res.from === 'button') {
       // 来自页面内转发按钮
@@ -29,6 +30,8 @@ Page({
     return {
       title: '自定义转发标题',
       desc: '分享内容',
+      // path: '/pages/checkin/checkin?markers=' + JSON.stringify(that.data.markers),
+      path: '/pages/activity/activity',
       success: function (res) {
         console.log(res);
         // 转发成功
@@ -38,12 +41,6 @@ Page({
         // 转发失败
       }
     }
-  },
-
-  shareToOthers: function(){
-    onShareAppMessage({
-      from: "button",
-    });
   },
 
   redirectToActivity: function(){
