@@ -57,7 +57,7 @@
   </view>
   <view style="flex:0.1"></view>
   <view style="flex:1">
-  <button style="flex:1" class="weui-btn" type="primary">不知道干嘛</button>
+  <button open-type="share" style="flex:1" class="weui-btn" type="primary">分享给别人</button>
   </view>
 </view>
 </view>

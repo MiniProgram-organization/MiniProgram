@@ -20,6 +20,32 @@ Page({
     inputShowed: false
   },
 
+  onShareAppMessage: function (res) {
+    console.log(res);
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '自定义转发标题',
+      desc: '分享内容',
+      success: function (res) {
+        console.log(res);
+        // 转发成功
+      },
+      fail: function (res) {
+        console.log(res);
+        // 转发失败
+      }
+    }
+  },
+
+  shareToOthers: function(){
+    onShareAppMessage({
+      from: "button",
+    });
+  },
+
   redirectToActivity: function(){
     console.log("redirect to activity");
     wx.switchTab({
