@@ -23,8 +23,8 @@
 
 <view>
   <scroll-view scroll-y>
-    <view style="width: {{windowWidth}}px; height:{{windowHeight*0.3}}px">
-      <view class="topic-main" style="margin:20% 0% 0% 0%">
+    <view style="width: {{windowWidth}}px; height:{{windowHeight*0.48}}px">
+      <view class="topic-main">
 
         <block wx:for="{{markers}}">
           <view bindtap="checkIn" class="topic-item" index="{{index}}" id="{{item.POI_id}}">
@@ -49,12 +49,15 @@
   </scroll-view>
 </view>
 
+
+<view style="margin:{{windowHeight*0.1}}px 0px 0px 0px">
 <view style="display: flex;flex-direction:row">
   <view style="flex:1">
-  <button class="weui-btn" type="primary">拍摄</button>
+  <button bindtap="redirectToActivity" class="weui-btn" type="primary">返回</button>
   </view>
   <view style="flex:0.1"></view>
   <view style="flex:1">
   <button style="flex:1" class="weui-btn" type="primary">不知道干嘛</button>
   </view>
+</view>
 </view>

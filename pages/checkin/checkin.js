@@ -20,6 +20,19 @@ Page({
     inputShowed: false
   },
 
+  redirectToActivity: function(){
+    console.log("redirect to activity");
+    wx.switchTab({
+      url: '../activity/activity',
+      success:function(res){
+        console.log(res);
+      },
+      fail: function(res){
+        console.log(res);
+      }
+    })
+  },
+
   showInput: function () {
     this.setData({
       inputShowed: true
