@@ -81,7 +81,7 @@ Page({
             category: that.data.category,
             venue: that.data.venue,
             time: time,
-            date: '9/25/2017',
+            date: date,
             logoPath: that.data.logoPath
           });
           wx.setStorage({
@@ -94,13 +94,13 @@ Page({
           wx.showToast({
             title: that.data.venue + " 签到成功",
             icon: 'loading',
-            duration: 3000
+            duration: 1000
           });
         } else {
           wx.showToast({
             title: that.data.venue + " 签到失败",
             icon: 'loading',
-            duration: 3000
+            duration: 1000
           });
         }
 

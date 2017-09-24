@@ -4,15 +4,15 @@
     <map bindmarkertap="markertap" latitude="{{latitude}}" longitude="{{longitude}}" include-points="{{include_points}}" markers="{{markers}}" style="width:100%" />
     <view style="margin:5% 0% 10% 0%">
       <view style="float:left;height:10px;width:33%">
-        <text style="padding:0% 10% 0% 30%;color:blue">33</text>
+        <text style="padding:0% 10% 0% 30%;color:blue">{{checkInTimes}}</text>
         <view style="">Checkins</view>
       </view>
       <view style="float:left;height:10px;width:33%;">
-        <text style="padding:0% 10% 0% 30%;color:blue">44</text>
+        <text style="padding:0% 10% 0% 30%;color:blue">{{checkInPlaces}}</text>
         <view style="padding:0% 10% 0% 15%">Places</view>
       </view>
       <view style="float:left;top:20px;height:10px;width:33%;">
-        <text style="padding:0% 10% 0% 30%;color:blue">55</text>
+        <text style="padding:0% 10% 0% 30%;color:blue">{{checkInCategories}}</text>
         <view style="">Categories</view>
       </view>
     </view>
@@ -25,14 +25,17 @@
   <view>
     <text style="font-size:150%; position:relative;left:5%; color:blue">
     Timeline
-  </text>
-    <view class="topic-main">
-      <block wx:for="{{checkins}}">
+    </text>
+  </view>
+  <view class="topic-main">
+    <block wx:for="{{classifiedCheckIns}}" wx:key="date">
+    <text style="position:relative;left:10%; color:green">{{item.date}}</text>
+      <block wx:for="{{item.checkInList}}">
         <view index="{{index}}" id="{{item.POI_id}}" style="display: flex;flex-direction:row">
-          <view style="width:{{windowWidth*0.15}}px">
+          <view style="width:{{windowWidth*0.2}}px">
             <canvas canvas-id="{{item.POI_id}}" />
           </view>
-          <view style="width:{{windowWidth*0.85}}px">
+          <view style="width:{{windowWidth*0.8}}px">
             <view class="topic-item" catchtap="redictDetail">
               <image class="member-avatar" src="{{item.logoPath}}" background-size="cover"></image>
               <view class="topic-info">
@@ -50,8 +53,7 @@
           </view>
         </view>
       </block>
+    </block>
 
-    </view>
   </view>
-
 </view>

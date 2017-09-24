@@ -18,7 +18,10 @@ Page({
     markers: [],
     include_points: [],
     checkins: [],  //原始的历史记录
-    classifiedCheckIns: [] //分类之后的历史记录
+    classifiedCheckIns: [], //分类之后的历史记录
+    checkInTimes: 0,
+    checkInPlaces: 0,
+    checkInCategories: 0,
   },
 
 
@@ -171,7 +174,17 @@ classifyByDate: function(){
   var that = this;
   var currentDate = '';
   var currentClass = {};
-  
+
+
+  //用字典的方法来统计签到的地点数和种类数
+  var categoryDic = {};
+  var placeDic ={};
+  var checkInTimes = 0;
+  var checkInCategories = 0;
+  var checkInPlaces = 0;  
+
+
+
   for(var i = 0; i < that.data.checkins.length; i++){
     
     //出现新的日期，则增加新的一个date对象
@@ -179,7 +192,6 @@ classifyByDate: function(){
 
       //如果上一个对象不为空(排除第一个的情况)，则把上一个对象塞入数组中
       if (currentClass.date){
-        console.log("GGGG");
         tempClassifyByDate.push(currentClass);
       }
 
@@ -190,7 +202,20 @@ classifyByDate: function(){
       currentClass['checkInList'] = [];
     }
     
-    //将当前签到记录塞入
+    //统计签到地点数，种类数，并将当前签到记录塞入
+    checkInTimes += 1;
+    if (!categoryDic[that.data.checkins[i].category]){
+      console.log("LLL");
+      checkInCategories += 1;
+      categoryDic[that.data.checkins[i].category] = true;
+    }
+
+    if (!placeDic[that.data.checkins[i].POI_id]) {
+      checkInPlaces += 1;
+      placeDic[that.data.checkins[i].POI_id] = true;
+    }
+    
+
     currentClass['checkInList'].push(that.data.checkins[i]);
   }
   
@@ -198,7 +223,10 @@ classifyByDate: function(){
   tempClassifyByDate.push(currentClass);
 
   this.setData({
-    classifiedCheckIns: tempClassifyByDate
+    classifiedCheckIns: tempClassifyByDate,
+    checkInTimes: checkInTimes,
+    checkInPlaces: checkInPlaces,
+    checkInCategories: checkInCategories
   });
 
   console.log(this.data.classifiedCheckIns);
@@ -209,10 +237,10 @@ drawLine: function(){
   for (var i = 0; i < this.data.checkins.length; i++){
     var POI_id = this.data.checkins[i].POI_id;
     const ctx = wx.createCanvasContext(POI_id);
-    ctx.moveTo(30, 10);
-    ctx.setLineWidth(3);
+    ctx.moveTo(50, 0);
+    ctx.setLineWidth(6);
     ctx.setStrokeStyle('yellow');
-    ctx.lineTo(30, 100);
+    ctx.lineTo(50, 100);
     ctx.stroke();
     ctx.draw();
   };

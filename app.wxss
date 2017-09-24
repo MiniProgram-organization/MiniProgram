@@ -100,7 +100,7 @@ page{
 }
 
 .node-name {
-    font-size: 150%;
+    font-size: 100%;
     display: inline-block;
     margin-right: 20rpx;
     padding:5rpx 10rpx;
