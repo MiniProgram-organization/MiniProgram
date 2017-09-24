@@ -17,7 +17,8 @@ Page({
     hidden: false,
     markers: [],
     include_points: [],
-    checkins: []
+    checkins: [],  //原始的历史记录
+    classifiedCheckIns: [] //分类之后的历史记录
   },
 
 
@@ -154,7 +155,7 @@ onLoad: function (options) {
   });
 
 
-  //按照日期对签到记录分类
+  //  按照日期对签到记录分类
   this.classifyByDate();
 
   //绘制竖线
@@ -166,12 +167,46 @@ onLoad: function (options) {
 },
 
 classifyByDate: function(){
-  var classified
+  var tempClassifyByDate = [];
+  var that = this;
+  var currentDate = '';
+  var currentClass = {};
+  
+  for(var i = 0; i < that.data.checkins.length; i++){
+    
+    //出现新的日期，则增加新的一个date对象
+    if (currentDate != that.data.checkins[i].date){
+
+      //如果上一个对象不为空，则把上一个对象塞入数组中
+      if (!currentClass){
+        tempClassifyByDate.push(currentClass);
+      }
+
+      currentClass = {};
+      currentClass.date = that.data.checkins[i].date;
+      currentDate = that.data.checkins[i].date;
+
+      currentClass['checkInList'] = [];
+    }
+    
+    //将当前记录塞入
+    currentClass['checkInList'].push(that.data.checkins[i]);
+  }
+  
+  //最后一个也需要塞入进去
+  tempClassifyByDate.push(currentClass);
+
+  this.setData({
+    classifiedCheckIns: tempClassifyByDate
+  });
+
+  console.log(this.data.classifiedCheckIns);
 },
 
 drawLine: function(){
-  this.data.checkins.map(function(item){
-    var POI_id = item.POI_id;
+  console.log(this.data.checkins);
+  for (var i = 0; i < this.data.checkins.length; i++){
+    var POI_id = this.data.checkins[i].POI_id;
     const ctx = wx.createCanvasContext(POI_id);
     ctx.moveTo(30, 10);
     ctx.setLineWidth(3);
@@ -179,8 +214,7 @@ drawLine: function(){
     ctx.lineTo(30, 100);
     ctx.stroke();
     ctx.draw();
-  });
-  
+  };
 },
 
 
