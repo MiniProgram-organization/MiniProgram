@@ -177,8 +177,9 @@ classifyByDate: function(){
     //出现新的日期，则增加新的一个date对象
     if (currentDate != that.data.checkins[i].date){
 
-      //如果上一个对象不为空，则把上一个对象塞入数组中
-      if (!currentClass){
+      //如果上一个对象不为空(排除第一个的情况)，则把上一个对象塞入数组中
+      if (currentClass.date){
+        console.log("GGGG");
         tempClassifyByDate.push(currentClass);
       }
 
@@ -189,7 +190,7 @@ classifyByDate: function(){
       currentClass['checkInList'] = [];
     }
     
-    //将当前记录塞入
+    //将当前签到记录塞入
     currentClass['checkInList'].push(that.data.checkins[i]);
   }
   

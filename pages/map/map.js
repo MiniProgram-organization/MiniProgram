@@ -81,7 +81,7 @@ Page({
             category: that.data.category,
             venue: that.data.venue,
             time: time,
-            date: date,
+            date: '9/25/2017',
             logoPath: that.data.logoPath
           });
           wx.setStorage({
