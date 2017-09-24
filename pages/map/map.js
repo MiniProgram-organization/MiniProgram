@@ -99,14 +99,14 @@ Page({
         if (e.data.status == "OK") {
           wx.showToast({
             title: that.data.venue + " 签到成功",
-            icon: 'loading',
-            duration: 1000
+            icon: 'success',
+            duration: 2000
           });
         } else {
           wx.showToast({
             title: that.data.venue + " 签到失败",
             icon: 'loading',
-            duration: 1000
+            duration: 2000
           });
         }
 
