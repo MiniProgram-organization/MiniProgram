@@ -22,7 +22,7 @@ Page({
 
 
 
-  /*进入地图的细节，目前作为保留接口*/
+  /*查看签到的地方，目前作为保留接口*/
   redictDetail: function (e) {
     var target_id = e.currentTarget.id;
     var target_latitude, target_longitude, target_category, target_venue
@@ -127,6 +127,8 @@ Page({
       }
     });
 
+    
+    
     setTimeout(function () {
       that.setData({
         hidden: true
@@ -145,14 +147,40 @@ onLoad: function (options) {
     key: 'A5EBZ-DCPK4-IFSU7-XIQGW-NJKPJ-2NFLM'
   });
 
+
+  //获取历史数据
   this.setData({
     checkins: wx.getStorageSync('history')
   });
 
-  
 
+  //按照日期对签到记录分类
+  this.classifyByDate();
+
+  //绘制竖线
+  this.drawLine();
+
+  //获取当前数据
   this.fetchData();
 
+},
+
+classifyByDate: function(){
+  var classified
+},
+
+drawLine: function(){
+  this.data.checkins.map(function(item){
+    var POI_id = item.POI_id;
+    const ctx = wx.createCanvasContext(POI_id);
+    ctx.moveTo(30, 10);
+    ctx.setLineWidth(3);
+    ctx.setStrokeStyle('yellow');
+    ctx.lineTo(30, 100);
+    ctx.stroke();
+    ctx.draw();
+  });
+  
 },
 
 

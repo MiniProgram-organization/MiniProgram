@@ -22,29 +22,36 @@
     <button bindtap="redirectCheckIn" type="primary">签到</button>
   </view>
 
-<view>
-  <text style="font-size:150%; position:relative;left:5%; color:blue">
+  <view>
+    <text style="font-size:150%; position:relative;left:5%; color:blue">
     Timeline
   </text>
-  <view class="topic-main">
-    <block wx:for="{{checkins}}">
-      <view class="topic-item" index="{{index}}" id="{{item.POI_id}}" catchtap="redictDetail">
-        <image class="member-avatar" src="{{item.logoPath}}" background-size="cover"></image>
-        <view class="topic-info">
-          <view class="topic-inner">
-            <view class="topic-left">
-              <view class="topic-title"><text>{{item.venue}}</text></view>
-              <view>
-                <text class="node-name">{{item.category}}</text>
-                <text class="member-nickname">{{item.time}}</text>
+    <view class="topic-main">
+      <block wx:for="{{checkins}}">
+        <view index="{{index}}" id="{{item.POI_id}}" style="display: flex;flex-direction:row">
+          <view style="width:{{windowWidth*0.15}}px">
+            <canvas canvas-id="{{item.POI_id}}" />
+          </view>
+          <view style="width:{{windowWidth*0.85}}px">
+            <view class="topic-item" catchtap="redictDetail">
+              <image class="member-avatar" src="{{item.logoPath}}" background-size="cover"></image>
+              <view class="topic-info">
+                <view class="topic-inner">
+                  <view class="topic-left">
+                    <view class="topic-title"><text>{{item.venue}}</text></view>
+                    <view>
+                      <text class="node-name">{{item.category}}</text>
+                      <text class="member-nickname">{{item.time}}</text>
+                    </view>
+                  </view>
+                </view>
               </view>
             </view>
           </view>
         </view>
-      </view>
-    </block>
+      </block>
 
+    </view>
   </view>
-</view>
 
 </view>

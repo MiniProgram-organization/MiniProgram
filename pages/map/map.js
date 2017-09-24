@@ -13,6 +13,8 @@ Page({
     POI_id:'',
     longitude: '',
     latitude: '',
+    category: '',
+    logoPath: ''
   },
 
   /**
@@ -22,10 +24,12 @@ Page({
     var that = this;
     console.log(options);
     this.setData({
-      POI_id: options.POI_id,
-      longitude: options.target_longitude,
-      latitude: options.target_latitude,
+      POI_id: options.target_id,
+      longitude: parseFloat(options.target_longitude),
+      latitude: parseFloat(options.target_latitude),
       venue: options.target_venue,
+      category: options.target_category,
+      logoPath: options.target_logoPath,
       markers: [{
         latitude: options.target_latitude,
         longitude: options.target_longitude,
@@ -34,6 +38,83 @@ Page({
     });
     
   },
+
+
+  checkIn: function (e) {
+    var that = this;
+    console.log("poi_id type is " + typeof (that.data.POI_id));
+    wx.request({
+      url: 'https://40525433.fudan-mini-program.com/cgi-bin/CheckIn',
+      method: 'POST',
+      data: {
+        created_by_user: false,
+        openid: getApp().globalData.openid,
+        latitude: that.data.latitude,
+        longitude: that.data.longitude,
+        POI_id: that.data.POI_id,
+      },
+      success: function (e) {
+        console.log(e);
+        var datetime = new Date();
+        var time = datetime.toLocaleTimeString();
+        var date = datetime.toLocaleDateString();
+        var old_history = wx.getStorageSync('history');
+        if (!old_history) {
+          console.log("咩有缓存");
+          wx.setStorage({
+            key: 'history',
+            data: [{
+              POI_id: that.data.POI_id,
+              category: that.data.category,
+              venue: that.data.venue,
+              time: time,
+              date: date,
+              logoPath: that.data.logoPath
+            }]
+          })
+        } else {
+          console.log("有历史缓存");
+
+          //插入头部，因为是按照时间倒序排列的
+          old_history.unshift({
+            POI_id: that.data.POI_id,
+            category: that.data.category,
+            venue: that.data.venue,
+            time: time,
+            date: date,
+            logoPath: that.data.logoPath
+          });
+          wx.setStorage({
+            key: 'history',
+            data: old_history,
+          });
+        }
+
+        if (e.data.status == "OK") {
+          wx.showToast({
+            title: that.data.venue + " 签到成功",
+            icon: 'loading',
+            duration: 3000
+          });
+        } else {
+          wx.showToast({
+            title: that.data.venue + " 签到失败",
+            icon: 'loading',
+            duration: 3000
+          });
+        }
+
+      },
+      fail: function (e) {
+        console.log("获取位置网络连接失败");
+      }
+
+    });
+  },
+
+
+
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成

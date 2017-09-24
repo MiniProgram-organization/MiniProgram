@@ -80,6 +80,33 @@ Page({
     this.searchPOI();
   },
 
+  /*进入地图的细节，目前作为保留接口*/
+  redictDetail: function (e) {
+    var target_id = e.currentTarget.id;
+    var target_latitude, target_longitude, target_category, target_venue, target_logoPath;
+    for (var index = 0; index < this.data.markers.length; index++) {
+      if (this.data.markers[index].POI_id == target_id) {
+        target_latitude = this.data.markers[index].latitude;
+        target_longitude = this.data.markers[index].longitude;
+        target_venue = this.data.markers[index].venue;
+        target_category = this.data.markers[index].category;
+        target_logoPath = this.data.markers[index].logoPath;
+        break;
+      }
+    }
+
+    var url = '../map/map?target_id=' + target_id
+      + '&target_latitude=' + target_latitude
+      + '&target_longitude=' + target_longitude
+      + '&target_category=' + target_category
+      + '&target_logoPath=' + target_logoPath
+      + '&target_venue=' + target_venue;
+
+    wx.navigateTo({
+      url: url
+    })
+  },
+
   
 
   searchPOI: function () {
@@ -128,90 +155,7 @@ Page({
     });
   },
 
-  checkIn: function (e) {
-    var that = this;
-    var target_id = parseInt(e.currentTarget.id); 
-    console.log("target_id" + target_id);
-    var target_latitude, target_longitude, target_category, target_venue, target_logoPath;
-    for (var index = 0; index < this.data.markers.length; index++) {
-      if (this.data.markers[index].POI_id == target_id) {
-        target_latitude = this.data.markers[index].latitude;
-        target_longitude = this.data.markers[index].longitude;
-        target_venue = this.data.markers[index].venue;
-        target_category = this.data.markers[index].category;
-        target_logoPath = this.data.markers[index].logoPath;
-        break;
-      }
-    }
-    console.log(target_latitude, target_longitude, target_id);
-    console.log(getApp().globalData.openid);
-    wx.request({
-      url: 'https://40525433.fudan-mini-program.com/cgi-bin/CheckIn',
-      method: 'POST',
-      data: {
-        created_by_user: false,
-        openid: getApp().globalData.openid,
-        latitude: target_latitude,
-        longitude: target_longitude,
-        POI_id: target_id
-      },
-      success: function (e) {
-        var datetime = new Date();
-        var time=datetime.toLocaleTimeString();
-        var date=datetime.toLocaleDateString();
-        var old_history = wx.getStorageSync('history');
-        if (!old_history) {
-          console.log("咩有缓存");
-          wx.setStorage({
-            key: 'history',
-            data: [{
-              POI_id: target_id,
-              category: target_category,
-              venue: target_venue,
-              time: time,
-              date: date,
-              logoPath: target_logoPath
-            }]
-          })
-        } else {
-          console.log("有历史缓存");
-
-          //插入头部，因为是按照时间倒序排列的
-          old_history.unshift({
-            POI_id: target_id,
-            category: target_category,
-            venue: target_venue,
-            time: time,
-            date: date,
-            logoPath: target_logoPath
-          });
-          wx.setStorage({
-            key: 'history',
-            data: old_history,
-          });
-        }
-
-        if (e.data.status == "OK") {
-          wx.showToast({
-            title: target_venue + " 签到成功",
-            icon: 'loading',
-            duration: 3000 
-          });
-        }else{
-          wx.showToast({
-            title: target_venue + " 签到失败",
-            icon: 'loading',
-            duration: 3000
-          });
-        }
-        
-      },
-      fail: function (e) {
-        console.log("获取位置网络连接失败");
-      }
-
-    });
-  },
+  
 
   /**
    * 生命周期函数--监听页面加载
