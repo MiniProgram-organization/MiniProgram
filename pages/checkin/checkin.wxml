@@ -1,5 +1,11 @@
-<view style="width: {{windowWidth}}px; height:{{windowHeight*0.15}}px">
-  <text style="text-align:center; font-size:100%">留下自己的足迹</text>
+<view style="width: {{windowWidth}}px; height:{{windowHeight*0.18}}px">
+  <view style="display: flex;flex-direction:row">
+      <view style="flex:0.3"></view>
+      <view style="flex:0.4">
+      <view class="page__title" style="font-size:400%;color:green">足迹</view>
+      </view>
+      <view style="flex:0.3"></view>
+  </view>    
 </view>
 
 <view class="page__bd">
@@ -23,7 +29,7 @@
 
 <view>
   <scroll-view scroll-y>
-    <view style="width: {{windowWidth}}px; height:{{windowHeight*0.48}}px">
+    <view style="width: {{windowWidth}}px; height:{{windowHeight*0.6}}px">
       <view class="topic-main">
 
         <block wx:for="{{markers}}">
@@ -37,7 +43,7 @@
                     <text class="node-name">{{item.category}}</text>
                   </view>
                 </view>
-                
+
               </view>
             </view>
           </view>
@@ -47,17 +53,4 @@
 
     </view>
   </scroll-view>
-</view>
-
-
-<view style="margin:{{windowHeight*0.1}}px 0px 0px 0px">
-<view style="display: flex;flex-direction:row">
-  <view style="flex:1">
-  <button bindtap="redirectToActivity" class="weui-btn" type="primary">返回</button>
-  </view>
-  <view style="flex:0.1"></view>
-  <view style="flex:1">
-  <button open-type="share" style="flex:1" class="weui-btn" type="primary">分享给别人</button>
-  </view>
-</view>
 </view>

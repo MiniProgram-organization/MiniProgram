@@ -53,7 +53,7 @@ Page({
 
   redirectCheckIn: function () {
     var that = this;
-    wx.redirectTo({
+    wx.navigateTo({
       url: '../checkin/checkin?markers='+JSON.stringify(that.data.markers),
     })
   },

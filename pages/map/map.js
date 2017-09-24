@@ -39,6 +39,12 @@ Page({
     
   },
 
+  redirectToActivity: function(){
+    wx.switchTab({
+      url: '../activity/activity',
+    })
+  },
+
 
   checkIn: function (e) {
     var that = this;
