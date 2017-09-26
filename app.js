@@ -45,6 +45,14 @@ App({
                 code: code
               },
               success: function(res){
+                if (res.data.status=="ERROR"){
+                  console.log(res.data.message);
+                  wx.navigateTo({
+                    url: '/pages/error/error',
+                  })
+                  return;
+                }
+               
                 console.log(res.data.openid);
                 console.log(res.data.registered);
                 that.globalData.openid = res.data.openid;

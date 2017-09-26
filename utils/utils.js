@@ -1,3 +1,7 @@
+
+
+
+
 module.exports = {
   getOpenId: getOpenId,
   register: register,
@@ -99,11 +103,21 @@ function register(info) {
           url: '../map/map',
         })
       } else {
+        wx.showToast({
+          title: '注册失败',
+          icon: 'loading',
+          duration: 2000
+        });
         console.log('服务器端注册失败');
         console.log(res.data.message);
       }
     },
     fail: function () {
+      wx.showToast({
+        title: '注册失败',
+        icon: 'loading',
+        duration: 2000
+      });
       console.log('发送注册请求失败');
     }
   });

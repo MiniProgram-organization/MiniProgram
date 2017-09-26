@@ -8,7 +8,8 @@
     "pages/trace/trace",
     "pages/friends/friends",
     "pages/places/places",
-    "pages/checkin/checkin"
+    "pages/checkin/checkin",
+    "pages/error/error"
   ],
   "window": {
     "window": {

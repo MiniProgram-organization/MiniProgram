@@ -1,8 +1,7 @@
 // checkin.js
 var utils = require('../../utils/utils.js')
 var QQMapWX = require('../../utils/qqmap-wx-jssdk.js');
-var app = getApp()
-var qqmapsdk;
+var app = getApp();
 
 
 Page({
@@ -17,7 +16,8 @@ Page({
     longitude: "",
     markers: [],
     searchPOIVal: "",
-    inputShowed: false
+    inputShowed: false,
+    qqmapsdk: {}
   },
 
   onShareAppMessage: function (res) {
@@ -47,8 +47,8 @@ Page({
     console.log("redirect to activity");
     wx.switchTab({
       url: '../activity/activity',
-      success:function(res){
-        console.log(res);
+      success: function (e) {
+        
       },
       fail: function(res){
         console.log(res);
@@ -102,7 +102,7 @@ Page({
       + '&target_logoPath=' + target_logoPath
       + '&target_venue=' + target_venue;
 
-    wx.navigateTo({
+    wx.redirectTo({
       url: url
     })
   },
@@ -161,13 +161,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options.markers);
-    this.setData({
-      markers: JSON.parse(options.markers)
-    })
-    qqmapsdk = new QQMapWX({
-      key: 'A5EBZ-DCPK4-IFSU7-XIQGW-NJKPJ-2NFLM'
-    });
   },
 
   /**
@@ -181,6 +174,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    console.log(options.markers);
+    this.setData({
+      markers: JSON.parse(options.markers),
+      qqmapsdk: new QQMapWX({
+        key: 'A5EBZ-DCPK4-IFSU7-XIQGW-NJKPJ-2NFLM'
+      })
+    })
+    
   
   },
 

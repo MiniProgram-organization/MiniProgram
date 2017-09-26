@@ -26,7 +26,9 @@ Page({
 
 
 
-  /*查看签到的地方，目前作为保留接口*/
+  /*查看签到的地方，目前作为保留接口
+    TODO
+    */
   redictDetail: function (e) {
     var target_id = e.currentTarget.id;
     var target_latitude, target_longitude, target_category, target_venue
@@ -46,7 +48,7 @@ Page({
       + '&target_category=' + target_category
       + '&target_venue=' + target_venue;
 
-    wx.navigateTo({
+    wx.redirectTo({
       url: url
     })
   },
@@ -147,89 +149,6 @@ Page({
  */
 onLoad: function (options) {
 
-  qqmapsdk = new QQMapWX({
-    key: 'A5EBZ-DCPK4-IFSU7-XIQGW-NJKPJ-2NFLM'
-  });
-
-
-  //获取历史数据
-  this.setData({
-    checkins: wx.getStorageSync('history')
-  });
-
-
-  //  按照日期对签到记录分类
-  this.classifyByDate();
-
-  //绘制竖线
-  this.drawLine();
-
-  //获取当前数据
-  this.fetchData();
-
-},
-
-classifyByDate: function(){
-  var tempClassifyByDate = [];
-  var that = this;
-  var currentDate = '';
-  var currentClass = {};
-
-
-  //用字典的方法来统计签到的地点数和种类数
-  var categoryDic = {};
-  var placeDic ={};
-  var checkInTimes = 0;
-  var checkInCategories = 0;
-  var checkInPlaces = 0;  
-
-
-
-  for(var i = 0; i < that.data.checkins.length; i++){
-    
-    //出现新的日期，则增加新的一个date对象
-    if (currentDate != that.data.checkins[i].date){
-
-      //如果上一个对象不为空(排除第一个的情况)，则把上一个对象塞入数组中
-      if (currentClass.date){
-        tempClassifyByDate.push(currentClass);
-      }
-
-      currentClass = {};
-      currentClass.date = that.data.checkins[i].date;
-      currentDate = that.data.checkins[i].date;
-
-      currentClass['checkInList'] = [];
-    }
-    
-    //统计签到地点数，种类数，并将当前签到记录塞入
-    checkInTimes += 1;
-    if (!categoryDic[that.data.checkins[i].category]){
-      console.log("LLL");
-      checkInCategories += 1;
-      categoryDic[that.data.checkins[i].category] = true;
-    }
-
-    if (!placeDic[that.data.checkins[i].POI_id]) {
-      checkInPlaces += 1;
-      placeDic[that.data.checkins[i].POI_id] = true;
-    }
-    
-
-    currentClass['checkInList'].push(that.data.checkins[i]);
-  }
-  
-  //最后一个也需要塞入进去
-  tempClassifyByDate.push(currentClass);
-
-  this.setData({
-    classifiedCheckIns: tempClassifyByDate,
-    checkInTimes: checkInTimes,
-    checkInPlaces: checkInPlaces,
-    checkInCategories: checkInCategories
-  });
-
-  console.log(this.data.classifiedCheckIns);
 },
 
 drawLine: function(){
@@ -259,6 +178,89 @@ onReady: function () {
  * 生命周期函数--监听页面显示
  */
 onShow: function () {
+  qqmapsdk = new QQMapWX({
+    key: 'A5EBZ-DCPK4-IFSU7-XIQGW-NJKPJ-2NFLM'
+  });
+
+
+  //获取历史数据
+  this.setData({
+    checkins: wx.getStorageSync('history')
+  });
+
+
+  //  按照日期对签到记录分类
+  this.classifyByDate();
+
+  //绘制竖线
+  this.drawLine();
+
+  //获取当前数据
+  this.fetchData();
+
+},
+
+classifyByDate: function () {
+  var tempClassifyByDate = [];
+  var that = this;
+  var currentDate = '';
+  var currentClass = {};
+
+
+  //用字典的方法来统计签到的地点数和种类数
+  var categoryDic = {};
+  var placeDic = {};
+  var checkInTimes = 0;
+  var checkInCategories = 0;
+  var checkInPlaces = 0;
+
+
+
+  for (var i = 0; i < that.data.checkins.length; i++) {
+
+    //出现新的日期，则增加新的一个date对象
+    if (currentDate != that.data.checkins[i].date) {
+
+      //如果上一个对象不为空(排除第一个的情况)，则把上一个对象塞入数组中
+      if (currentClass.date) {
+        tempClassifyByDate.push(currentClass);
+      }
+
+      currentClass = {};
+      currentClass.date = that.data.checkins[i].date;
+      currentDate = that.data.checkins[i].date;
+
+      currentClass['checkInList'] = [];
+    }
+
+    //统计签到地点数，种类数，并将当前签到记录塞入
+    checkInTimes += 1;
+    if (!categoryDic[that.data.checkins[i].category]) {
+      console.log("LLL");
+      checkInCategories += 1;
+      categoryDic[that.data.checkins[i].category] = true;
+    }
+
+    if (!placeDic[that.data.checkins[i].POI_id]) {
+      checkInPlaces += 1;
+      placeDic[that.data.checkins[i].POI_id] = true;
+    }
+
+
+    currentClass['checkInList'].push(that.data.checkins[i]);
+  }
+
+  //最后一个也需要塞入进去
+  tempClassifyByDate.push(currentClass);
+
+  this.setData({
+    classifiedCheckIns: tempClassifyByDate,
+    checkInTimes: checkInTimes,
+    checkInPlaces: checkInPlaces,
+    checkInCategories: checkInCategories
+  });
+
+  console.log(this.data.classifiedCheckIns);
 
 },
 

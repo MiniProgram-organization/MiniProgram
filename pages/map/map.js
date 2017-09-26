@@ -42,6 +42,11 @@ Page({
   redirectToActivity: function(){
     wx.switchTab({
       url: '../activity/activity',
+      success: function (e) {
+        // var page = getCurrentPages().pop();
+        // if (page == undefined || page == null) return;
+        // page.onLoad();  
+      }
     })
   },
 
