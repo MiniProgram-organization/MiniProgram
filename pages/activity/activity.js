@@ -1,8 +1,6 @@
 // pages/activity/activity.js
-var utils = require('../../utils/utils.js')
-var QQMapWX = require('../../utils/qqmap-wx-jssdk.js');
-var app = getApp()
-var qqmapsdk;
+var utils = require('../../utils/utils.js');
+var app = getApp();
 
 Page({
 
@@ -10,8 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    windowWidth: getApp().globalData.windowWidth,
-    windowHeight: getApp().globalData.windowHeight,
+    windowWidth: app.globalData.windowWidth,
+    windowHeight: app.globalData.windowHeight,
     latitude: "",
     longitude: "",
     hidden: false,
@@ -56,7 +54,7 @@ Page({
   redirectCheckIn: function () {
     var that = this;
     wx.navigateTo({
-      url: '../checkin/checkin?markers='+JSON.stringify(that.data.markers),
+      url: '../checkin/checkin?markers='
     })
   },
 
@@ -83,7 +81,7 @@ Page({
           longitude: longitude,
         });
 
-        qqmapsdk.reverseGeocoder({
+        app.globalData.qqmapsdk.reverseGeocoder({
           location:{
             latitude: latitude,
             longitude: longitude
@@ -178,11 +176,6 @@ onReady: function () {
  * 生命周期函数--监听页面显示
  */
 onShow: function () {
-  qqmapsdk = new QQMapWX({
-    key: 'A5EBZ-DCPK4-IFSU7-XIQGW-NJKPJ-2NFLM'
-  });
-
-
   //获取历史数据
   this.setData({
     checkins: wx.getStorageSync('history')

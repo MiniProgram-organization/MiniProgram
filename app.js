@@ -1,14 +1,25 @@
 //app.js
 var utils = require('./utils/utils.js');
+var QQMapWX = require('./utils/qqmap-wx-jssdk.js');
+
 App({
   /**
    * @brief 先检查是否还处于登录状态，如果成功直接进入主页，否则进行登录流程
    */
   onLaunch: function () {
+
     var res = wx.getSystemInfoSync();
     var that = this;
     this.globalData.windowWidth = res.windowWidth;
     this.globalData.windowHeight = res.windowHeight;
+
+
+    //外部类
+    this.globalData.qqmapsdk = new QQMapWX({
+      key: 'A5EBZ-DCPK4-IFSU7-XIQGW-NJKPJ-2NFLM'
+    });
+
+
 
     console.log('手机高度为 ' + res.windowHeight);
     console.log('手机宽度为 ' + res.windowWidth);
@@ -117,7 +128,8 @@ App({
     openid: '',
     windowWidth: '',
     windowHeight: '',
-    rawData: {}
+    rawData: {},
+    qqmapsdk: {}
   }
 
 })

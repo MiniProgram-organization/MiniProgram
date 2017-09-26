@@ -10,14 +10,13 @@ Page({
    * 页面的初始数据
    */
   data: {
-    windowWidth: getApp().globalData.windowWidth,
-    windowHeight: getApp().globalData.windowHeight,
+    windowWidth: app.globalData.windowWidth,
+    windowHeight: app.globalData.windowHeight,
     latitude: "",
     longitude: "",
     markers: [],
     searchPOIVal: "",
     inputShowed: false,
-    qqmapsdk: {}
   },
 
   onShareAppMessage: function (res) {
@@ -111,7 +110,7 @@ Page({
 
   searchPOI: function () {
     var that = this;
-    qqmapsdk.search({
+    app.globalData.qqmapsdk.search({
       keyword: that.data.searchPOIVal,
       success: function (res) {
         console.log("搜索");
@@ -161,6 +160,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      qqmapsdk: new QQMapWX({
+        key: 'A5EBZ-DCPK4-IFSU7-XIQGW-NJKPJ-2NFLM'
+      })
+    })
   },
 
   /**
@@ -172,17 +176,92 @@ Page({
 
   /**
    * 生命周期函数--监听页面显示
+   * 每次重新进入或者第一次进入时都会再次搜索一遍附近POI
    */
   onShow: function () {
-    console.log(options.markers);
+    this.fetchData();
+  },
+
+
+
+  fetchData: function () {
+    var that = this;
+    console.log("获取openid" + app.globalData.openid);
     this.setData({
-      markers: JSON.parse(options.markers),
-      qqmapsdk: new QQMapWX({
-        key: 'A5EBZ-DCPK4-IFSU7-XIQGW-NJKPJ-2NFLM'
+      windowWidth: app.globalData.windowWidth,
+      windowHeight: app.globalData.windowHeight
+    });
+    console.log('当前宽度' + this.data.windowWidth);
+    console.log('当前高度' + this.data.windowHeight);
+
+    wx.getLocation({
+      type: 'wgs84', //返回可以用于wx.openLocation的经纬度
+      success: function (res) {
+        console.log(res);
+        var latitude = res.latitude;
+        var longitude = res.longitude;
+        that.setData({
+          latitude: latitude,
+          longitude: longitude,
+        });
+
+        app.globalData.qqmapsdk.reverseGeocoder({
+          location: {
+            latitude: latitude,
+            longitude: longitude
+          },
+          get_poi: 1,
+          success: function (res) {
+            console.log("附近POI");
+            console.log(res.result.pois);
+            var coordinates = res.result.pois;
+            //marker数组
+            var tempMarkers = [];
+            var tempIncludePoints = [];
+
+            for (var i = 0; i < coordinates.length; i++) {
+              var tempLatitude = coordinates[i].location.lat;
+              var tempLongitude = coordinates[i].location.lng;
+              var category = coordinates[i].category
+              var venue = coordinates[i].title;
+              var POI_id = coordinates[i].id;
+
+              tempMarkers.push({
+                POI_id: POI_id,
+                latitude: tempLatitude,
+                longitude: tempLongitude,
+                iconPath: '../images/dot.jpg',
+                logoPath: '../images/' + parseInt(3 * Math.random()) + '.jpg',
+                category: category,
+                venue: venue
+              });
+              tempIncludePoints.push({
+                latitude: tempLatitude,
+                longitude: tempLongitude,
+              });
+            }
+            console.log(tempMarkers);
+
+            that.setData({
+              markers: tempMarkers,
+              include_points: tempIncludePoints
+            });
+
+          },
+          fail: function () {
+            console.log('发送位置失败');
+          }
+        });
+      }
+    });
+
+
+
+    setTimeout(function () {
+      that.setData({
+        hidden: true
       })
-    })
-    
-  
+    }, 300)
   },
 
   /**
