@@ -106,7 +106,7 @@ Page({
                 POI_id: POI_id,
                 latitude: tempLatitude,
                 longitude: tempLongitude,
-                iconPath: '../images/dot.jpg',
+                iconPath: '../images/map/dot.jpg',
                 // logoPath: '../images/' + parseInt(3 * Math.random()) + '.jpg',
                 category: category,
                 venue: venue

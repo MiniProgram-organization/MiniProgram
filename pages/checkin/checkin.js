@@ -228,7 +228,7 @@ Page({
                 POI_id: POI_id,
                 latitude: tempLatitude,
                 longitude: tempLongitude,
-                iconPath: '../images/dot.jpg',
+                iconPath: '../images/map/dot.jpg',
                 logoPath: '../images/location/' + app.globalData.locationMap[category.split(":")[0]] + '.png',
                 category: category,
                 venue: venue

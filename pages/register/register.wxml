@@ -3,13 +3,13 @@
 
 <!--图标-->
   <view class="register-icon">
-  <image class="register-img" src="../images/register.jpg"></image>
+  <image class="register-img" src="../images/register/register.jpg"></image>
   </view>
 
 
 <!--账户-->
   <view class="inputView">
-  <image class="smallicon" src="../images/name.jpg"></image>
+  <image class="smallicon" src="../images/register/name.jpg"></image>
   <label class="register">Name</label>
   <input class="inputText" placeholder="请输入昵称" bindinput="userInput"/>
   </view>
@@ -17,7 +17,7 @@
 
 <!--密码-->
   <view class="inputView">
-  <image class="smallicon" src="../images/phone.jpg"></image>
+  <image class="smallicon" src="../images/register/phone.jpg"></image>
   <label class="register">Phone</label>
   <input class="inputText" placeholder="请输入电话" bindinput="phoneInput" />
   </view>

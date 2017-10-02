@@ -1,4 +1,4 @@
-// pages/register/register.js
+///// pages/register/register.js
 var utils = require('../../utils/utils.js')
 Page({
 
