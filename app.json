@@ -9,7 +9,8 @@
     "pages/friends/friends",
     "pages/places/places",
     "pages/checkin/checkin",
-    "pages/error/error"
+    "pages/error/error",
+    "pages/showpeople/showpeople"
   ],
   "window": {
     "window": {
@@ -27,17 +28,17 @@
     "backgroundColor": "#ffffff",
     "list": [
       {
-        "iconPath": "pages/images/weathericon.jpg",
+        "iconPath": "pages/images/weathericon.png",
         "pagePath": "pages/weather/weather",
         "text": "天气"
       },
       {
-        "iconPath": "pages/images/activityicon.jpg",
+        "iconPath": "pages/images/activityicon.png",
         "pagePath": "pages/activity/activity",
         "text": "活动"
       },
       {
-        "iconPath": "pages/images/accounticon.jpg",
+        "iconPath": "pages/images/accounticon.png",
         "pagePath": "pages/account/account",
         "text": "账号"
       }

@@ -53,7 +53,6 @@ Page({
 
   checkIn: function (e) {
     var that = this;
-    console.log("poi_id type is " + typeof (that.data.POI_id));
     wx.request({
       url: 'https://40525433.fudan-mini-program.com/cgi-bin/CheckIn',
       method: 'POST',
@@ -65,6 +64,38 @@ Page({
         POI_id: that.data.POI_id,
       },
       success: function (e) {
+
+        wx.request({
+          url: 'https://40525433.fudan-mini-program.com/cgi-bin/QRCode',
+          method: 'GET',
+          success: function (e) {
+
+            console.log(e.data);
+            wx.request({
+              url: 'https://api.weixin.qq.com/cgi-bin/wxaapp/createwxaqrcode?access_token='+e.data.token,
+              method: 'POST',
+              data: {
+                "path": "pages/map", 
+                "width": 430
+              },
+              success: function(res){
+                console.log("获取二维码");
+                console.log(res);
+                wx.previewImage({
+                  urls: [res.data.url]
+                });
+              },
+              fail: function(res){
+                console.log(res);
+              }
+            })
+          }
+        })
+
+
+
+
+
         console.log(e);
         var datetime = new Date();
         var time = datetime.toLocaleTimeString();

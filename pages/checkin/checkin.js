@@ -126,14 +126,12 @@ Page({
           var category = coordinates[i].category;
           var venue = coordinates[i].title;
           var POI_id = coordinates[i].id;
-          
 
           tempMarkers.push({
             POI_id: POI_id,
             latitude: tempLatitude,
             longitude: tempLongitude,
-            iconPath: '../images/dot.jpg',
-            logoPath: '../images/' + parseInt(3*Math.random()) +'.jpg',
+            logoPath: '../images/location/' + app.globalData.locationMap[category.split(":")[0]] +'.png',
             category: category,
             venue: venue,
           });
@@ -231,7 +229,7 @@ Page({
                 latitude: tempLatitude,
                 longitude: tempLongitude,
                 iconPath: '../images/dot.jpg',
-                logoPath: '../images/' + parseInt(3 * Math.random()) + '.jpg',
+                logoPath: '../images/location/' + app.globalData.locationMap[category.split(":")[0]] + '.png',
                 category: category,
                 venue: venue
               });

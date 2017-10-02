@@ -129,7 +129,19 @@ App({
     windowWidth: '',
     windowHeight: '',
     rawData: {},
-    qqmapsdk: {}
+    qqmapsdk: {},
+    locationMap: {
+      "房产小区": "resident",
+      "教育学校": "school",
+      "酒店宾馆": "hotel",
+      "公司企业": "company",
+      "购物": "mall",
+      "美食": "restaurant",
+      "娱乐休闲": "entertainment",
+      "机构团体": "bureau",
+      "银行金融": "bank",
+      "生活服务": "living_service"
+    }
   }
 
 })
