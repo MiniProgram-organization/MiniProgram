@@ -54,11 +54,13 @@ Page({
         console.log("status: " + res.data.status);
         console.log("res.data:  " + res.data);
         console.log("city:  " + res.data.city);
+        console.log("wether:  " + res.data.now);
         var now = res.data.now;
         var city = res.data.city;
         page.setData({
           city: city,
-          weather: now
+          weather: now,
+          weathericonURL: "../images/weather/" + now.cond.code+".png",
         })
       },
       fail: function (res) {
