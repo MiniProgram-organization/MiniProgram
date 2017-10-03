@@ -14,4 +14,16 @@
     width: 20rpx;
     height: 128rpx;
     margin-top: 40rpx;
+
+}
+.date{
+   font-size: 100%;
+    display: inline-block;
+    border-radius: 0rpx 20rpx 20rpx 0rpx;
+    width: 250rpx;
+    background-color: #eee;
+}
+.datetext{
+  color:green;
+  margin-right: 20rpx;
 }

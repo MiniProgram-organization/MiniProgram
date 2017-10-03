@@ -29,7 +29,10 @@
   </view>
   <view class="topic-main">
     <block wx:for="{{classifiedCheckIns}}" wx:key="date">
-    <text style="position:relative;left:5%; color:green">{{item.date}}</text>
+    <view class="date" style="text-align:right">
+      <text class='datetext' >{{item.date}}</text>
+    </view>
+    
       <block wx:for="{{item.checkInList}}">
         <view index="{{index}}" id="{{item.POI_id}}" style="display: flex;flex-direction:row">
           <view style="width:{{windowWidth*0.1}}px;position:relative;left:5%;">

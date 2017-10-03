@@ -133,17 +133,38 @@ Page({
         }
 
         if (e.data.status == "OK") {
-          wx.showToast({
+         /* wx.showToast({
             title: that.data.venue + " 签到成功",
             icon: 'success',
             duration: 2000
-          });
+          });*/
+          wx.switchTab({
+            url: '../activity/activity',
+            success: function (e) {
+              wx.showToast({
+                title: that.data.venue + " 签到成功",
+                icon: 'success',
+                duration: 2000
+              });
+            }
+          })
         } else {
-          wx.showToast({
+        /*  wx.showToast({
             title: that.data.venue + " 签到失败",
             icon: 'loading',
             duration: 2000
-          });
+          });*/
+          wx.switchTab({
+            url: '../activity/activity',
+            success: function (e) {
+              wx.showToast({
+                title: that.data.venue + " 签到失败",
+                icon: 'loading',
+                duration: 2000
+              });
+            }
+          })
+
         }
 
       },
