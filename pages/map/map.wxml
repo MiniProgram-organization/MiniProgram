@@ -22,13 +22,11 @@
 
   <view style="margin:{{windowHeight*0.1}}px 0px 0px 0px">
     <view style="display: flex;flex-direction:row">
-      <view style="flex:1">
+      <view style="flex:0.3"></view>
+      <view style="flex:0.4">
         <button bindtap="checkIn" style="flex:1" class="weui-btn" type="primary">到此一游</button>
       </view>
-      <view style="flex:0.1"></view>
-      <view style="flex:1">
-        <button bindtap="redirectToActivity" class="weui-btn" type="primary">返回首页</button>
-      </view>
+      <view style="flex:0.3"></view>
     </view>
   </view>
 </view>

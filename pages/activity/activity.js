@@ -146,33 +146,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-    // wx.request({
-    //   url: 'https://40525433.fudan-mini-program.com/cgi-bin/QRCode',
-    //   method: 'GET',
-    //   success: function (e) {
-
-    //     console.log(e.data);
-    //     wx.request({
-    //       url: 'https://api.weixin.qq.com/cgi-bin/wxaapp/createwxaqrcode?access_token=' + e.data.token,
-    //       method: 'POST',
-    //       data: {
-    //         "path": "pages/map",
-    //         "width": 430
-    //       },
-    //       success: function (res) {
-    //         console.log("获取二维码");
-    //         console.log(res);
-    //         wx.previewImage({
-    //           urls: [res.data.url]
-    //         });
-    //       },
-    //       fail: function (res) {
-    //         console.log(res);
-    //       }
-    //     })
-    //   }
-    // });
+    wx.request({
+      url: 'https://40525433.fudan-mini-program.com/cgi-bin/QRCode',
+      method: 'POST',
+      data: {
+        "scene": "sgz"
+      },
+      success: function (e) {
+        console.log(e.data);
+      }
+    })
   },
   drawLine: function () {
     console.log(this.data.checkins);
