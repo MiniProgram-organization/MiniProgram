@@ -9,8 +9,8 @@ Page({
     windowWidth: getApp().globalData.windowWidth,
     windowHeight: getApp().globalData.windowHeight,
     markers: [],
-    venue:'',
-    POI_id:'',
+    venue: '',
+    POI_id: '',
     longitude: '',
     latitude: '',
     category: '',
@@ -20,7 +20,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options){
+  onLoad: function (options) {
     var that = this;
     console.log(options);
     this.setData({
@@ -36,10 +36,10 @@ Page({
         iconPath: '../images/' + options.target_category + '.jpg',
       }]
     });
-    
+
   },
 
-  getQRcode: function(){
+  getQRcode: function () {
     wx.request({
       url: 'https://40525433.fudan-mini-program.com/cgi-bin/QRCode',
       method: 'GET',
@@ -100,25 +100,29 @@ Page({
         }
 
         if (e.data.status == "OK") {
-          wx.showToast({
-            title: that.data.venue + " 签到成功",
-            icon: 'success',
-            duration: 2000
-          });
-
-          wx.redirectTo({
-            url: '../showpeople/showpeople?POI_id=' + that.data.POI_id
+          wx.switchTab({
+            url: '../activity/activity',
+            success: function (e) {
+              wx.showToast({
+                title: that.data.venue + " 签到成功",
+                icon: 'success',
+                duration: 2000
+              });
+            }
+          })
+        } else {
+          wx.switchTab({
+            url: '../activity/activity',
+            success: function (e) {
+              wx.showToast({
+                title: that.data.venue + " 签到失败",
+                icon: 'loading',
+                duration: 2000
+              });
+            }
           })
 
-
-        } else {
-          wx.showToast({
-            title: that.data.venue + " 签到失败",
-            icon: 'loading',
-            duration: 2000
-          });
         }
-
       },
       fail: function (e) {
         console.log("获取位置网络连接失败");

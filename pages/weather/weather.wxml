@@ -1,13 +1,14 @@
 <view class="content">
-    <text class="city">{{city}}</text>
+
     <view class="today">
         <view class="main">
             <view class="left">
                 <view class="tempnow">{{weather.tmp}}℃</view>
                 <view class="weather">
                     {{city}}
-                    {{weather.tmp}}℃
+                    {{weather.cond.txt}}
                 </view>
+                <image class="weathericon" src="{{weathericonURL}}"></image>
             </view>
             <view class="right">
                 <view class="kongqi">体感温度：{{weather.fl}}</view>

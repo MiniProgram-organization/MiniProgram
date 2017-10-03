@@ -71,7 +71,9 @@ page{
 .member-avatar {
   width: 128rpx;
   height: 128rpx;
+  margin-left: 10rpx;
   margin-right: 20rpx;
+  margin-top: 15rpx;
   border-radius: 100%;
 }
 
@@ -88,7 +90,7 @@ page{
 
 .topic-title {
     font-size:150%;
-    height:120rpx;
+    height:50rpx;
     line-height: 1.4;
     box-sizing: border-box;
     padding-top: 5rpx;
@@ -106,6 +108,7 @@ page{
     padding:5rpx 10rpx;
     border-radius: 5rpx;
     background-color: #eee;
+    margin-top: 20rpx;
 }
 
 .reply-num {

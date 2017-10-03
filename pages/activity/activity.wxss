@@ -10,3 +10,20 @@
   height: 30%;
  }
  #pentagon {    position: relative;    width: 54px;    border-width: 50px 18px 0;    border-style: solid;    border-color: red transparent;}#pentagon:before {    content: "";    position: absolute;    height: 0;    width: 0;    top: -85px;    left: -18px;    border-width: 0 45px 35px;    border-style: solid;    border-color: transparent transparent red;}
+.timeline{
+    width: 20rpx;
+    height: 128rpx;
+    margin-top: 40rpx;
+
+}
+.date{
+   font-size: 100%;
+    display: inline-block;
+    border-radius: 0rpx 20rpx 20rpx 0rpx;
+    width: 250rpx;
+    background-color: #eee;
+}
+.datetext{
+  color:green;
+  margin-right: 20rpx;
+}

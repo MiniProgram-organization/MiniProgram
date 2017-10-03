@@ -140,7 +140,10 @@ App({
       "娱乐休闲": "entertainment",
       "机构团体": "bureau",
       "银行金融": "bank",
-      "生活服务": "living_service"
+      "生活服务": "living_service",
+      "旅游设施": "tourism",
+      "基础设施": "infra",
+      "医疗保健": "hospital"
     }
   }
 

@@ -40,8 +40,14 @@
 }
 .weather{
     color: #fff;
-    font-size: 20px;
+    font-size: 22px;
     height: 60rpx;
+}
+.weathericon{
+    height: 150rpx;
+    width: 150rpx;
+    margin:0 auto;
+    padding-top: 30rpx;
 }
 .kongqi{
     font-size: 16px;
