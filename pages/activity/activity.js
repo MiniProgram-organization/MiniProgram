@@ -176,15 +176,17 @@ Page({
   },
   drawLine: function () {
     console.log(this.data.checkins);
+    
     for (var i = 0; i < this.data.checkins.length; i++) {
       var POI_id = this.data.checkins[i].POI_id;
       const ctx = wx.createCanvasContext(POI_id);
-      ctx.moveTo(50, 0);
-      ctx.setLineWidth(6);
+      ctx.moveTo(30, 20);
+      ctx.setLineWidth(8);
       ctx.setStrokeStyle('yellow');
-      ctx.lineTo(50, 100);
+      ctx.lineTo(30, 100);
       ctx.stroke();
       ctx.draw();
+      console.log("ok!!");
     };
   },
 
@@ -211,7 +213,7 @@ Page({
     this.classifyByDate();
 
     //绘制竖线
-    this.drawLine();
+    //this.drawLine();
 
     //获取当前数据
     this.fetchData();

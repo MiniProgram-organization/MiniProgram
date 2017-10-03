@@ -29,22 +29,24 @@
   </view>
   <view class="topic-main">
     <block wx:for="{{classifiedCheckIns}}" wx:key="date">
-    <text style="position:relative;left:10%; color:green">{{item.date}}</text>
+    <text style="position:relative;left:5%; color:green">{{item.date}}</text>
       <block wx:for="{{item.checkInList}}">
         <view index="{{index}}" id="{{item.POI_id}}" style="display: flex;flex-direction:row">
-          <view style="width:{{windowWidth*0.2}}px">
-            <canvas canvas-id="{{item.POI_id}}" />
+          <view style="width:{{windowWidth*0.1}}px;position:relative;left:5%;">
+           <image class="timeline" src="../images/activity/yellow_line.png"></image>
           </view>
-          <view style="width:{{windowWidth*0.8}}px">
+          <view style="width:{{windowWidth*0.9}}px">
             <view class="topic-item" catchtap="redictDetail">
               <image class="member-avatar" src="{{item.logoPath}}" background-size="cover"></image>
               <view class="topic-info">
                 <view class="topic-inner">
                   <view class="topic-left">
                     <view class="topic-title"><text>{{item.venue}}</text></view>
+                     <view>
+                      <text class="member-nickname">{{item.time}}</text>
+                    </view>
                     <view>
                       <text class="node-name">{{item.category}}</text>
-                      <text class="member-nickname">{{item.time}}</text>
                     </view>
                   </view>
                 </view>
