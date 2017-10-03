@@ -1,2 +1,3 @@
 <!--showpeople.wxml-->
 <text>showpeople.wxml</text>
+<image src="{{localUrl}}"></image>

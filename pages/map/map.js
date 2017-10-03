@@ -14,12 +14,28 @@ Page({
     longitude: '',
     latitude: '',
     category: '',
-    logoPath: ''
+    logoPath: '',
+    imgUrl: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
+
+  getQRCode: function () {
+    wx.request({
+      url: 'https://40525433.fudan-mini-program.com/cgi-bin/QRCode',
+      method: 'POST',
+      data: {
+        "scene": "lsh"
+      },
+      success: function (e) {
+        console.log(e.data);
+        app.globalData.qrcodeUrl = e.data.url;
+      }
+    })
+  },
+
   onLoad: function (options) {
     var that = this;
     console.log(options);
@@ -36,17 +52,7 @@ Page({
         iconPath: '../images/' + options.target_category + '.jpg',
       }]
     });
-
-  },
-
-  getQRcode: function () {
-    wx.request({
-      url: 'https://40525433.fudan-mini-program.com/cgi-bin/QRCode',
-      method: 'GET',
-      success: function (e) {
-        console.log(e.data);
-      }
-    })
+    that.getQRCode()
   },
 
 
@@ -100,8 +106,8 @@ Page({
         }
 
         if (e.data.status == "OK") {
-          wx.switchTab({
-            url: '../activity/activity',
+          wx.redirectTo({
+            url: '../showpeople/showpeople',
             success: function (e) {
               wx.showToast({
                 title: that.data.venue + " 签到成功",
@@ -111,8 +117,8 @@ Page({
             }
           })
         } else {
-          wx.switchTab({
-            url: '../activity/activity',
+          wx.redirectTo({
+            url: '../showpeople/showpeople',
             success: function (e) {
               wx.showToast({
                 title: that.data.venue + " 签到失败",
@@ -146,7 +152,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
   },
 
   /**

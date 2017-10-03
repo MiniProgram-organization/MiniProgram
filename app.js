@@ -130,6 +130,7 @@ App({
     windowHeight: '',
     rawData: {},
     qqmapsdk: {},
+    qrcodeUrl: "",
     locationMap: {
       "房产小区": "resident",
       "教育学校": "school",
@@ -141,7 +142,7 @@ App({
       "机构团体": "bureau",
       "银行金融": "bank",
       "生活服务": "living_service",
-      "旅游设施": "tourism",
+      "旅游景点": "tourism",
       "基础设施": "infra",
       "医疗保健": "hospital"
     }
