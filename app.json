@@ -28,17 +28,17 @@
     "backgroundColor": "#ffffff",
     "list": [
       {
-        "iconPath": "pages/images/icon/weathericon.png",
+        "iconPath": "pages/images/icon/weather_icon.png",
         "pagePath": "pages/weather/weather",
         "text": "天气"
       },
       {
-        "iconPath": "pages/images/icon/activityicon.png",
+        "iconPath": "pages/images/icon/activity_icon.png",
         "pagePath": "pages/activity/activity",
         "text": "活动"
       },
       {
-        "iconPath": "pages/images/icon/accounticon.png",
+        "iconPath": "pages/images/icon/account_icon.png",
         "pagePath": "pages/account/account",
         "text": "账号"
       }
