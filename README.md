@@ -156,12 +156,14 @@
 ```json
 {
   POI_id: "1",
-  category:"school",
-  venue: "Fudan University",
-  poi_lat: "12.3", //poi所在纬度
-  poi_lng: "55.4", //poi所在经度
-  city: "Shanghai",
-  country: "China",
+  POI_info: {
+    category:"school",
+    venue: "Fudan University",
+    latitude: 12.3, //poi所在纬度
+    longitude: 55.4, //poi所在经度
+    city: "上海",
+    country: "中国"
+  },
   created_by_user: false,
   openid: "haasdfasf",
   latitude: 10.43535, //用户所在纬度
