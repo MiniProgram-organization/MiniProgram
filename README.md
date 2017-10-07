@@ -259,7 +259,7 @@
         { 
           "POI_id": "1124235",
           "venue": "Fudan University",
-          "datetime": "2017-07-01 08:08:08.213",
+          "datetime": "2017-07-01 08:08:08",
           "category": "school",
           "latitude": 23.123,
           "longitude": 123.123
@@ -267,7 +267,7 @@
         {
           "POI_id": "23242",
           "venue": "Peking University",
-          "datetime": "2017-07-02 08:08:08.123",
+          "datetime": "2017-07-02 08:08:08",
           "category": "school",
           "latitude": 43.123,
           "longitude": 123.123
@@ -275,7 +275,7 @@
         {
           "POI_id": "3432423",
           "venue": "Peking University",
-          "datetime": "2017-08-16 10:10:10.321",
+          "datetime": "2017-08-16 10:10:10",
           "category": "school",
           "latitude": 43.123,
           "longitude": 123.123
@@ -284,7 +284,47 @@
 }
 ```
 
-#### 7.查看POI签到情况
+
+#### 7.获取二维码
+
+##### 说明：
+目前获取二维码的方式是采用[微信小程序官方文档的接口B](https://mp.weixin.qq.com/debug/wxadoc/dev/api/qrcode.html)。
+前端获取二维码分成以下两步：
+1. 前端发送POST请求给服务器，POST的参数按照官方文档接口B的描述填写，服务器向微信获取二维码，并把二维码图片保存在服务器上，然后向前端返回图片的url。
+2. 前端用GET的方式即可向服务器获取二维码图片。
+
+##### 相关函数：`sgz`
+
+##### url: [https://40525433.fudan-mini-program.com/cgi-bin/QRCode](https://40525433.fudan-mini-program.com/cgi-bin/QRCode)
+
+##### method: POST
+
+##### 发送数据格式： 
+
+```json
+{
+  scene: "lsh",
+  page: "pages/index/index",
+  width: 430,
+  auto_color: false,
+  line_color: {
+    "r":"0",
+    "g":"255",
+    "b":"0"
+  }
+}
+```
+
+##### 接收数据格式：
+
+```json
+{
+  status: "OK",
+  url: "https://40525433.fudan-mini-program.com/Files/QRCode1507377585.jpeg"
+}
+```
+
+#### 8.查看POI签到情况
 
 ##### 相关函数：`sgz`
 
