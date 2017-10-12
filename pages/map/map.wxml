@@ -17,7 +17,7 @@
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell">
       <view class="weui-cell__bd">
-        <textarea class="weui-textarea" placeholder="请输入文本" style="height: 8.3em" />
+        <textarea class="weui-textarea" value="{{text}}" placeholder="请输入文本" style="height: 8.3em" />
         <view class="weui-textarea-counter">0/200</view>
       </view>
     </view>
@@ -27,15 +27,11 @@
 
   <view style="margin:{{windowHeight*0.1}}px 0px 0px 0px">
     <view style="display: flex;flex-direction:row">
-      <view style="flex:0.18"></view>
-       <view style="flex:1">
-        <button bindtap="redirectToActivity" class="weui-btn" type="primary">返回首页</button>
-       </view>
       <view style="flex:0.2"></view>
-        <view style="flex:1">
+        <view style="flex:0.6">
         <button bindtap="checkIn" style="flex:1" class="weui-btn" type="primary">到此一游</button>
         </view>
-        <view style="flex:0.18"></view>
+      <view style="flex:0.2"></view>  
     </view>
   </view>
 </view>

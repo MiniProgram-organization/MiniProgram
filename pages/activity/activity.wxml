@@ -29,14 +29,14 @@
   </view>
   <view class="topic-main">
     <block wx:for="{{classifiedCheckIns}}" wx:key="date">
-    <view class="date" style="text-align:right">
-      <text class='datetext' >{{item.date}}</text>
-    </view>
-    
+      <view class="date" style="text-align:right">
+        <text class='datetext'>{{item.date}}</text>
+      </view>
+
       <block wx:for="{{item.checkInList}}">
         <view index="{{index}}" id="{{item.POI_id}}" style="display: flex;flex-direction:row">
           <view style="width:{{windowWidth*0.1}}px;position:relative;left:5%;">
-           <image class="timeline" src="../images/activity/yellow_line.png"></image>
+            <image class="timeline" src="../images/activity/yellow_line.png"></image>
           </view>
           <view style="width:{{windowWidth*0.9}}px">
             <view class="topic-item" catchtap="redictDetail">
@@ -45,7 +45,7 @@
                 <view class="topic-inner">
                   <view class="topic-left">
                     <view class="topic-title"><text>{{item.venue}}</text></view>
-                     <view>
+                    <view>
                       <text class="member-nickname">{{item.time}}</text>
                     </view>
                     <view>

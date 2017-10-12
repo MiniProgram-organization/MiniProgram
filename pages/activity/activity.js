@@ -24,32 +24,32 @@ Page({
 
 
 
-  /*查看签到的地方，目前作为保留接口
-    TODO
-    */
-  redictDetail: function (e) {
-    var target_id = e.currentTarget.id;
-    var target_latitude, target_longitude, target_category, target_venue
-    for (var index = 0; index < this.data.markers.length; index++) {
-      if (this.data.markers[index].POI_id == target_id) {
-        target_latitude = this.data.markers[index].latitude;
-        target_longitude = this.data.markers[index].longitude;
-        target_venue = this.data.markers[index].venue;
-        target_category = this.data.markers[index].category;
-        break;
-      }
-    }
+  // /*查看签到的地方，目前作为保留接口
+  //   TODO
+  //   */
+  // redictDetail: function (e) {
+  //   var target_id = e.currentTarget.id;
+  //   var target_latitude, target_longitude, target_category, target_venue
+  //   for (var index = 0; index < this.data.markers.length; index++) {
+  //     if (this.data.markers[index].POI_id == target_id) {
+  //       target_latitude = this.data.markers[index].latitude;
+  //       target_longitude = this.data.markers[index].longitude;
+  //       target_venue = this.data.markers[index].venue;
+  //       target_category = this.data.markers[index].category;
+  //       break;
+  //     }
+  //   }
 
-    var url = '../map/map?target_id=' + target_id
-      + '&target_latitude=' + target_latitude
-      + '&target_longitude=' + target_longitude
-      + '&target_category=' + target_category
-      + '&target_venue=' + target_venue;
+  //   var url = '../map/map?target_id=' + target_id
+  //     + '&target_latitude=' + target_latitude
+  //     + '&target_longitude=' + target_longitude
+  //     + '&target_category=' + target_category
+  //     + '&target_venue=' + target_venue;
 
-    wx.redirectTo({
-      url: url
-    })
-  },
+  //   wx.redirectTo({
+  //     url: url
+  //   })
+  // },
 
   redirectCheckIn: function () {
     var that = this;
@@ -73,18 +73,13 @@ Page({
     wx.getLocation({
       type: 'wgs84', //返回可以用于wx.openLocation的经纬度
       success: function (res) {
-        console.log(res);
-        var latitude = res.latitude;
-        var longitude = res.longitude;
-        that.setData({
-          latitude: latitude,
-          longitude: longitude,
-        });
+        app.globalData.latitude = res.latitude;
+        app.globalData.longitude = res.longitude;
 
         app.globalData.qqmapsdk.reverseGeocoder({
           location: {
-            latitude: latitude,
-            longitude: longitude
+            latitude: res.latitude,
+            longitude: res.longitude
           },
           get_poi: 1,
           success: function (res) {
@@ -146,16 +141,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.request({
-      url: 'https://40525433.fudan-mini-program.com/cgi-bin/QRCode',
-      method: 'POST',
-      data: {
-        "scene": "sgz"
-      },
-      success: function (e) {
-        console.log(e.data);
-      }
-    })
   },
 
   // drawLine: function () {

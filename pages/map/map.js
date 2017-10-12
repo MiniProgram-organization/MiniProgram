@@ -11,34 +11,21 @@ Page({
     markers: [],
     venue: '',
     POI_id: '',
-    longitude: '',
-    latitude: '',
+    longitude: '', //POI经度
+    latitude: '', //POI纬度
     category: '',
     logoPath: '',
-    imgUrl: ''
+    imgUrl: '',
+    text: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
 
-  getQRCode: function () {
-    wx.request({
-      url: 'https://40525433.fudan-mini-program.com/cgi-bin/QRCode',
-      method: 'POST',
-      data: {
-        "scene": "lsh"
-      },
-      success: function (e) {
-        console.log(e.data);
-        app.globalData.qrcodeUrl = e.data.url;
-      }
-    })
-  },
-
   onLoad: function (options) {
     var that = this;
-    console.log(options);
+    console.log(app.globalData);
     this.setData({
       POI_id: options.target_id,
       longitude: parseFloat(options.target_longitude),
@@ -58,15 +45,25 @@ Page({
 
   checkIn: function (e) {
     var that = this;
+    console.log(that.data.text);
     wx.request({
       url: 'https://40525433.fudan-mini-program.com/cgi-bin/CheckIn',
       method: 'POST',
       data: {
-        created_by_user: false,
-        openid: getApp().globalData.openid,
-        latitude: that.data.latitude,
-        longitude: that.data.longitude,
         POI_id: that.data.POI_id,
+        POI_info: {
+          category: that.data.category,
+          venue: that.data.venue,
+          latitude: that.data.latitude, //poi所在纬度
+          longitude: that.data.longitude, //poi所在经度
+          city: "上海",
+          country: "中国"
+        },
+        created_by_user: false,
+        openid: app.globalData.openid,
+        latitude:  app.globalData.latitude,//用户所在纬度
+        longitude: app.globalData.longitude,  //用户所在经度
+        text: that.data.text
       },
       success: function (e) {
         console.log(e);
@@ -74,40 +71,50 @@ Page({
         var time = datetime.toLocaleTimeString();
         var date = datetime.toLocaleDateString();
         var old_history = wx.getStorageSync('history');
-        if (!old_history) {
-          console.log("咩有缓存");
-          wx.setStorage({
-            key: 'history',
-            data: [{
+
+        if (e.data.status == "OK") {
+
+          if (!old_history) {
+            console.log("咩有缓存");
+            wx.setStorage({
+              key: 'history',
+              data: [{
+                POI_latitude: that.data.latitude,
+                POI_longitude: that.data.longitude,
+                latitude: that.globalData.latitude,
+                longitude: app.globalData.longitude,
+                POI_id: that.data.POI_id,
+                category: that.data.category,
+                venue: that.data.venue,
+                time: time,
+                date: date,
+                logoPath: that.data.logoPath
+              }]
+            })
+          } else {
+            console.log("有历史缓存");
+
+            //插入头部，因为是按照时间倒序排列的
+            old_history.unshift({
+              POI_latitude: that.data.latitude,
+              POI_longitude: that.data.longitude,
+              latitude: app.globalData.latitude,
+              longitude: app.globalData.longitude,
               POI_id: that.data.POI_id,
               category: that.data.category,
               venue: that.data.venue,
               time: time,
               date: date,
               logoPath: that.data.logoPath
-            }]
-          })
-        } else {
-          console.log("有历史缓存");
+            });
+            wx.setStorage({
+              key: 'history',
+              data: old_history,
+            });
+          }
 
-          //插入头部，因为是按照时间倒序排列的
-          old_history.unshift({
-            POI_id: that.data.POI_id,
-            category: that.data.category,
-            venue: that.data.venue,
-            time: time,
-            date: date,
-            logoPath: that.data.logoPath
-          });
-          wx.setStorage({
-            key: 'history',
-            data: old_history,
-          });
-        }
-
-        if (e.data.status == "OK") {
           wx.redirectTo({
-            url: '../showpeople/showpeople',
+            url: '../showpeople/showpeople?POI_id=' + that.data.POI_id,
             success: function (e) {
               wx.showToast({
                 title: that.data.venue + " 签到成功",
@@ -116,17 +123,15 @@ Page({
               });
             }
           })
+
         } else {
-          wx.redirectTo({
-            url: '../showpeople/showpeople',
-            success: function (e) {
-              wx.showToast({
-                title: that.data.venue + " 签到失败",
-                icon: 'loading',
-                duration: 2000
-              });
-            }
-          })
+
+          wx.showToast({
+            title: that.data.venue + " 签到失败",
+            icon: 'loading',
+            duration: 2000
+
+          });
 
         }
       },

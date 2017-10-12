@@ -306,7 +306,7 @@
 ```json
 {
   scene: "lsh",
-  page: "pages/index/index",
+  path: "pages/index/index",
   width: 430,
   auto_color: false,
   line_color: {

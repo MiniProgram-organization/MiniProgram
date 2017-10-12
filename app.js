@@ -8,6 +8,22 @@ App({
    */
   onLaunch: function () {
 
+    wx.getSetting({
+      success(res) {
+        if (!res.authSetting['scope.writePhotosAlbum']) {
+          wx.authorize({
+            scope: scope,
+            success() {
+              console.log('授权成功')
+            }
+          });
+        }else{
+          console.log("yijingshouquan");
+        }
+      }
+    })
+
+
     var res = wx.getSystemInfoSync();
     var that = this;
     this.globalData.windowWidth = res.windowWidth;
@@ -129,6 +145,8 @@ App({
     windowWidth: '',
     windowHeight: '',
     rawData: {},
+    latitude: 0.0,
+    longitude: 0.0,
     qqmapsdk: {},
     qrcodeUrl: "",
     locationMap: {
