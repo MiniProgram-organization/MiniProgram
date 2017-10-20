@@ -23,7 +23,6 @@ App({
       }
     })
 
-
     var res = wx.getSystemInfoSync();
     var that = this;
     this.globalData.windowWidth = res.windowWidth;
@@ -43,24 +42,13 @@ App({
 
     console.log("发送请求");
 
-
-    var registered = wx.getStorageSync("registered")
-    if(registered){
-      console.log("Successfully get storage");
-      that.globalData.openid = wx.getStorageSync('openid');
-      wx.redirectTo({
-        url: '/pages/activity/activity',
-        success: function () {
-        }
-      });
-    }else{
-
     wx.login({
       success: function(res){
         var code = res.code;
         console.log('code is '+code);
         wx.getUserInfo({
           success: function(res){
+            console.log(res.rawData);
             that.globalData.rawData = JSON.parse(res.rawData);
             console.log(that.globalData.rawData);
             var iv = res.iv;
@@ -69,7 +57,8 @@ App({
               url: 'https://40525433.fudan-mini-program.com/cgi-bin/Login',
               method:'POST',
               data:{
-                code: code
+                code: code,
+                rawDdata: that.globalData.rawData
               },
               success: function(res){
                 if (res.data.status=="ERROR"){
@@ -87,8 +76,8 @@ App({
                 if(res.data.registered==true){
                   console.log('registered');
                 
-                  wx.setStorageSync('registered', 'OK');
                   wx.setStorageSync('openid', res.data.openid);
+                  wx.setStorageSync('rawData', that.globalData.rawData);
                   wx.redirectTo({
                     url: '/pages/activity/activity',
                     success: function(){
@@ -98,11 +87,9 @@ App({
                   
                 }else{
                   console.log("Not registered");
-                  wx.redirectTo({
-                    url: '/pages/register/register',
-                    success:function(){
-                      console.log("bbb");
-                    }
+                  utils.register({
+                    rawData: getApp().globalData.rawData,
+                    openid: getApp().globalData.openid,
                   });
                 }
               }
@@ -113,8 +100,6 @@ App({
         }) 
       }
     });
-    }
-    
   },
   /**
    * 当小程序启动，或从后台进入前台显示，会触发 onShow

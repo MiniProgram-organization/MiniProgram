@@ -88,9 +88,7 @@ function register(info) {
     url: 'https://40525433.fudan-mini-program.com/cgi-bin/Register',
     method: 'POST',
     data: {
-      username: user,
       rawData: rawData,
-      Tel: phone,
       openid: openid,
     },
     success: function (res) {
@@ -99,6 +97,7 @@ function register(info) {
           title: '注册成功',
           icon: 'success'
         });
+        wx.setStorageSync('registered', 'OK');
         wx.switchTab({
           url: '../map/map',
         })

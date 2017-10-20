@@ -173,9 +173,19 @@ Page({
    */
   onShow: function () {
     //获取历史数据
-    this.setData({
-      checkins: wx.getStorageSync('history')
-    });
+    var history = wx.getStorageSync('history');
+
+    if(history!=""){
+      this.setData({
+        checkins: history
+      });
+    }else{
+      wx.request({
+        url: 'https://40525433.fudan-mini-program.com/cgi-bin/History',
+        openid: app.globalData.openid
+      })
+    }
+
 
 
     //  按照日期对签到记录分类

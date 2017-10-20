@@ -1,7 +1,7 @@
 <block wx:for="{{users}}">
   <view>
     <view class="topic-item" catchtap="redictDetail">
-      <image class="member-avatar" src="{{item.avatarUrl}}" background-size="cover"></image>
+      <image class="member-avatar" src="{{item.avatarURL}}" background-size="cover"></image>
       <view class="topic-info">
         <view class="topic-inner">
           <view class="topic-left">

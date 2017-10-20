@@ -1,4 +1,5 @@
 // pages/account/account.js
+var app = getApp();
 Page({
 
   /**
@@ -8,39 +9,28 @@ Page({
     windowWidth: '',
     windowHeight: '',
     avatarUrl: '',
-    nickName: ''
+    nickName: '',
+    gender: '',
+    province: '',
+    city: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(app.globalData);
     this.setData({
-      nickName: getApp().globalData.rawData.nickName,
-      windowWidth: getApp().globalData.windowWidth,
-      windowHeight: getApp().globalData.windowHeight,
-      avatarUrl: getApp().globalData.rawData.avatarUrl
+      nickName: app.globalData.rawData.nickName,
+      windowWidth: app.globalData.windowWidth,
+      windowHeight: app.globalData.windowHeight,
+      avatarUrl: app.globalData.rawData.avatarUrl,
+      gender: app.globalData.rawData.gender,
+      country: app.globalData.rawData.country,
     });
-    console.log(this.data.nickName);
+    
   },
 
-  redirectHistory: function(){
-    wx.navigateTo({
-      url: '../trace/trace'
-    });
-  },
-
-  redirectPlaces: function(){
-    wx.navigateTo({
-      url: '../places/places',
-    })
-  },
-
-  redirectFriends: function(){
-    wx.navigateTo({
-      url: '../friends/friends',
-    })
-  },
 
 
   /**
