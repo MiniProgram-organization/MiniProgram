@@ -12,20 +12,24 @@ Page({
     nickName: '',
     gender: '',
     province: '',
-    city: ''
+    city: '',
+    genderChoose: ['female', 'male']
+    
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;
     console.log(app.globalData);
-    this.setData({
+    that.setData({
       nickName: app.globalData.rawData.nickName,
       windowWidth: app.globalData.windowWidth,
       windowHeight: app.globalData.windowHeight,
       avatarUrl: app.globalData.rawData.avatarUrl,
-      gender: app.globalData.rawData.gender,
+      gender: that.data.genderChoose[app.globalData.rawData.gender],
+      province: app.globalData.rawData.province,
       country: app.globalData.rawData.country,
     });
     

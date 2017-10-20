@@ -17,7 +17,7 @@ App({
               console.log('授权成功')
             }
           });
-        }else{
+        } else {
           console.log("yijingshouquan");
         }
       }
@@ -43,11 +43,11 @@ App({
     console.log("发送请求");
 
     wx.login({
-      success: function(res){
+      success: function (res) {
         var code = res.code;
-        console.log('code is '+code);
+        console.log('code is ' + code);
         wx.getUserInfo({
-          success: function(res){
+          success: function (res) {
             console.log(res.rawData);
             that.globalData.rawData = JSON.parse(res.rawData);
             console.log(that.globalData.rawData);
@@ -55,49 +55,34 @@ App({
             console.log("Don't get storage");
             wx.request({
               url: 'https://40525433.fudan-mini-program.com/cgi-bin/Login',
-              method:'POST',
-              data:{
+              method: 'POST',
+              data: {
                 code: code,
                 rawDdata: that.globalData.rawData
               },
-              success: function(res){
-                if (res.data.status=="ERROR"){
+              success: function (res) {
+                if (res.data.status == "ERROR") {
                   console.log(res.data.message);
                   wx.navigateTo({
                     url: '/pages/error/error',
                   })
                   return;
                 }
-               
+
                 console.log(res.data.openid);
                 console.log(res.data.registered);
                 that.globalData.openid = res.data.openid;
-                
-                if(res.data.registered==true){
-                  console.log('registered');
-                
-                  wx.setStorageSync('openid', res.data.openid);
-                  wx.setStorageSync('rawData', that.globalData.rawData);
-                  wx.redirectTo({
-                    url: '/pages/activity/activity',
-                    success: function(){
-                      console.log("aaa");
-                    }
-                  });
-                  
-                }else{
-                  console.log("Not registered");
-                  utils.register({
-                    rawData: getApp().globalData.rawData,
-                    openid: getApp().globalData.openid,
-                  });
-                }
+
+                wx.redirectTo({
+                  url: '/pages/activity/activity',
+                  success: function () {
+                    console.log("aaa");
+                  }
+                });
               }
             });
-
-            
           }
-        }) 
+        })
       }
     });
   },

@@ -47,7 +47,8 @@
 
 ```json
 {
-  code: "013VSxwK1xExW70pcryK10EJwK1VSxw6"
+  code: "013VSxwK1xExW70pcryK10EJwK1VSxw6"，
+  rawData: {...}
 }
 ```
 
@@ -62,9 +63,9 @@
 ```
 
 
-#### 2.用户注册
+#### ~~2.用户注册~~
 
-##### 相关函数：`register()`
+##### 相关函数：`register`
 
 ##### url: [https://40525433.fudan-mini-program.com/cgi-bin/Register](https://40525433.fudan-mini-program.com/cgi-bin/Register)
 

@@ -1,21 +1,50 @@
 
 
 <view style="width:{{windowWidth}}px;height:{{windowHeight}}px">
-<image style="width:15%; height:10%;margin:3% 42% 3% 43%" 
+<image style="width:20%; height:15%;margin:3% 40% 0% 40%" 
         src="{{avatarUrl}}">
 </image>
+ <view class="weui-cells__title" style="text-align:center;font-size:30px">Basic Info</view>
+<view class="weui-cells weui-cells_after-title">
 
-<view style="width: 100%">
-<text style="margin:0% 40% 0% 40%">{{nickName}}</text>
-</view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">NickName</view>
+        </view>
+         <picker bindchange="bindOrganizationPickerChange" value="{{indexOrganization}}" range="{{arrayOrganizationName}}">
+            <text class="weui-input">{{nickName}}</text>
+         </picker>
+      </view>
 
-<image bindtap="redirectHistory" src="../images/account/trace.jpg" class="discover-image"
-      style="margin:20px 20px 10px 35px;width:80%; height:20%;">
-</image>
-<image bindtap="redirectPlaces" src="../images/account/places.jpg" class="discover-image"
-      style="margin:20px 20px 10px 35px;width:80%; height:20%;">
-</image>
-<image bindtap="redirectFriends" src="../images/account/friends.jpg" class="discover-image"
-      style="margin:20px 20px 10px 35px;width:80%; height:20%;">
-</image>
+
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">Gender</view>
+        </view>
+        <view class="weui-cell__bd">
+          <text class="weui-input">{{gender}}</text>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">Province</view>
+        </view>
+        <view class="weui-cell__bd">
+          <text class="weui-input">{{province}}</text>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">Country</view>
+        </view>
+        <view class="weui-cell__bd">
+          <text class="weui-input">{{country}}</text>
+        </view>
+      </view>
+
+
+    </view>
+
 </view>
