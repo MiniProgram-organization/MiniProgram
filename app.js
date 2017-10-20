@@ -7,7 +7,7 @@ App({
    * @brief 先检查是否还处于登录状态，如果成功直接进入主页，否则进行登录流程
    */
   onLaunch: function () {
-
+    
     wx.getSetting({
       success(res) {
         if (!res.authSetting['scope.writePhotosAlbum']) {

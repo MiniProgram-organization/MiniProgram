@@ -174,15 +174,26 @@ Page({
   onShow: function () {
     //获取历史数据
     var history = wx.getStorageSync('history');
-
+    var that = this;
+    
     if(history!=""){
+      console.log("自身获得缓存");
       this.setData({
         checkins: history
       });
     }else{
+      console.log("向lsh请求历史");
       wx.request({
         url: 'https://40525433.fudan-mini-program.com/cgi-bin/History',
-        openid: app.globalData.openid
+        openid: app.globalData.openid,
+        success: function(res){
+          console.log("lsh返回的历史");
+          console.log(res);
+          that.setData({
+            checkins: res.data.checkins
+          });
+          wx.setStorageSync('history', res.data.checkins);
+        }
       })
     }
 
