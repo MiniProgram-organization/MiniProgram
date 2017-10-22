@@ -1,28 +1,49 @@
-<!--hotest.wxml-->
+<!--pages/mood/mood.wxml-->
 <view style="width: {{windowWidth}}px; height:{{windowHeight}}px">
-  <view style="width:80%; height:30%; margin:5% 10% 10% 10%">
-    <map bindmarkertap="markertap" latitude="{{latitude}}" longitude="{{longitude}}" include-points="{{include_points}}" markers="{{markers}}" style="width:100%" />
-    <view style="margin:5% 0% 10% 0%">
-      <view style="float:left;height:10px;width:33%">
-        <text style="padding:0% 10% 0% 30%;color:blue">{{checkInTimes}}</text>
-        <view style="">Checkins</view>
+ <view class='middle_text'>
+  <text >选择心情</text>
+  </view>
+  <view style="width:80%; height:20%; margin:5% 10% 5% 10%">
+  <picker-view indicator-style="height: 50px;" style="width: 100%; height: 120px;" value="{{value}}" bindchange="bindChange">
+    <picker-view-column>
+     <view class="moodlist" wx:for="{{mood}}" style="line-height: 30px">
+     <view class="moodlistinside">
+      <image src="{{item.icon}}" class='moodicon'></image>
+      <text class="moodtext">{{item.text}}</text>
       </view>
-      <view style="float:left;height:10px;width:33%;">
-        <text style="padding:0% 10% 0% 30%;color:blue">{{checkInPlaces}}</text>
-        <view style="padding:0% 10% 0% 15%">Places</view>
-      </view>
-      <view style="float:left;top:20px;height:10px;width:33%;">
-        <text style="padding:0% 10% 0% 30%;color:blue">{{checkInCategories}}</text>
-        <view style="">Categories</view>
+     </view>
+    </picker-view-column>
+  </picker-view>
+  </view>
+
+ 
+
+  <view style="width:80%; height:10%; margin:10% 10% 10% 10%">
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <textarea class="weui-textarea" bindinput="textChange" value="{{text}}" placeholder="请输入心情文字" style="height: 2.3em" />
+        <view class="weui-textarea-counter">0/200</view>
       </view>
     </view>
   </view>
-
-  <view style="padding:10%">
-    <button bindtap="redirectCheckIn" type="primary">签到</button>
   </view>
 
-  <view>
+  <view style="margin:{{windowHeight*0.1}}px 0px 0px 0px">
+    <view style="display: flex;flex-direction:row">
+      <view style="flex:0.2"></view>
+        <view style="flex:0.5" class='two_button_left'>
+        <button bindtap="goToMoodStatistics" style="flex:1" class="weui-btn" type="primary">心情统计</button>
+        </view>
+         <view style="flex:0.5" class='two_button_right'>
+        <button bindtap="recordMood" style="flex:1" class="weui-btn" type="primary">记录心情</button>
+        </view>
+      <view style="flex:0.2"></view>  
+    </view>
+  </view>
+
+  
+ <view>
     <text style="font-size:150%; position:relative;left:5%; color:blue">
     Timeline
     </text>

@@ -9,7 +9,9 @@
     "pages/places/places",
     "pages/checkin/checkin",
     "pages/error/error",
-    "pages/showpeople/showpeople"
+    "pages/showpeople/showpeople",
+    "pages/mood/mood",
+    "pages/moodstatistics/moodstatistics"
   ],
   "window": {
     "window": {
@@ -35,6 +37,11 @@
         "iconPath": "pages/images/icon/activity_icon.png",
         "pagePath": "pages/activity/activity",
         "text": "活动"
+      },
+      {
+        "iconPath": "pages/images/icon/mood_icon.png",
+        "pagePath": "pages/mood/mood",
+        "text": "心情"
       },
       {
         "iconPath": "pages/images/icon/account_icon.png",

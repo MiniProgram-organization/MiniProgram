@@ -1,51 +1,42 @@
-// pages/account/account.js
+// pages/moodstatistics/moodstatistics.js
 var app = getApp();
+
+var timeslot = ['今日','本周','本月','今年','全部']
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    windowWidth: '',
-    windowHeight: '',
-    avatarUrl: '',
-    nickName: '',
-    gender: '',
-    province: '',
-    city: '',
-    latitude: '',
-    longitude: '',
-    ip:'',
-    genderChoose: ['female', 'male']
-    
+    timeslot:timeslot,
+    index: 0,
+    angernum: 0,
+    fearnum: 0,
+    neutralnum: 0,
+    happynum: 0,
+    sadnum:0
   },
-    
-    
   
+  bindPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      index: e.detail.value
+    })
+  },
+  textChange: function (e) {
+    this.setData({
+      text: e.detail.value
+    });
+    console.log(this.data.text);
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this;
-    console.log(app.globalData);
-    that.setData({
-      nickName: app.globalData.rawData.nickName,
-      windowWidth: app.globalData.windowWidth,
-      windowHeight: app.globalData.windowHeight,
-      avatarUrl: app.globalData.rawData.avatarUrl,
-      gender: that.data.genderChoose[app.globalData.rawData.gender],
-      province: app.globalData.rawData.province,
-      country: app.globalData.rawData.country,
-      latitude: app.globalData.latitude,
-      longitude: app.globalData.longitude
-
-    });
-
-    
+  
   },
-
-
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -58,7 +49,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that = this;
+  
   },
 
   /**

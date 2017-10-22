@@ -1,0 +1,73 @@
+<!--pages/moodstatistics/moodstatistics.wxml-->
+<view style="width: {{windowWidth}}px; height:{{windowHeight}}px">
+<view style="width:80%;  margin:5% 10% 5% 10%">
+  <view class="section">
+  <picker bindchange="bindPickerChange" value="{{index}}" range="{{timeslot}}">
+    <view class='picker'>
+    <text class='picker_text'>选择时间：{{timeslot[index]}}</text>
+    </view>
+  </picker>
+  </view>
+
+</view>
+
+
+ <view style="display: flex;flex-direction:row; width:80%;height:{{windowHeight*0.35}}px;margin:5% 10% 0% 10%">
+      <view style="flex:0.3" class="item1">
+       <view class='view_outimg'>
+        <image src='../images/mood/emotion_angry.png' class='mood_img'></image>
+        </view>
+         <view class='view_outimg'>
+          <text>生气:{{angernum}}次</text>
+          </view>
+      </view>
+      <view style="flex:0.05">
+      </view>
+      <view style="flex:0.3">
+        <view class='view_outimg'>
+        <image src='../images/mood/emotion_fear.png' class='mood_img'></image>
+        </view>
+              <view class='view_outimg'>
+          <text>恐惧:{{fearnum}}次</text>
+          </view>
+      </view>
+        <view style="flex:0.05" >
+      </view>
+      <view style="flex:0.3">
+       <view class='view_outimg'>
+        <image src='../images/mood/emotion_neutral.png' class='mood_img'></image>
+        </view>
+            <view class='view_outimg'>
+          <text>平淡:{{neutralnum}}次</text>
+          </view>
+      </view>
+  </view>
+<view style="display: flex;flex-direction:row; width:80%;height:{{windowHeight*0.35}}px;margin:5% 10% 0% 10%">
+    <view style="flex:0.13">
+      </view>
+      <view style="flex:0.3" class="item1">
+       <view class='view_outimg'>
+        <image src='../images/mood/emotion_happy.png' class='mood_img'></image>
+        </view>
+            <view class='view_outimg'>
+            <text>开心:{{happynum}}次</text>
+          </view>
+      </view>
+      <view style="flex:0.13">
+      </view>
+      <view style="flex:0.3">
+        <view class='view_outimg'>
+        <image src='../images/mood/emotion_sad.png' class='mood_img'></image>
+        </view>
+              <view class='view_outimg'>
+           <text>悲伤:{{sadnum}}次</text>
+          </view>
+      </view>
+        <view style="flex:0.13" >
+      </view>
+  </view>
+
+   <view class='button_mood'>
+    <button bindtap="redirectCheckIn" type="primary">生成心情曲线</button>
+  </view>
+</view>

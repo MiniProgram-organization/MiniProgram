@@ -44,6 +44,32 @@
         </view>
       </view>
 
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">IP Address</view>
+        </view>
+        <view class="weui-cell__bd">
+          <text class="weui-input">{{ip}}</text>
+        </view>
+      </view>
+
+        <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">Latitude</view>
+        </view>
+        <view class="weui-cell__bd">
+          <text class="weui-input">{{latitude}}</text>
+        </view>
+      </view>
+
+        <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">Longitude</view>
+        </view>
+        <view class="weui-cell__bd">
+          <text class="weui-input">{{longitude}}</text>
+        </view>
+      </view>
 
     </view>
 

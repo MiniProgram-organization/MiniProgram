@@ -1,0 +1,34 @@
+/* pages/mood/mood.wxss */
+.moodicon { 
+    height: 50rpx;
+    width: 50rpx;
+
+} 
+.moodlist{
+   display: flex;
+   align-items: center;
+}
+.moodtext{
+  padding-left: 30rpx;
+}
+.moodlistinside{
+   margin:0 auto;
+   display: flex;
+   align-items: center;
+}
+.mood_input_box_margin{
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+}
+.middle_text{
+  font-size: 20px;
+  text-align: center;
+  margin-top: 30rpx;
+
+}
+.two_button_left{
+  margin-right: 20rpx;
+}
+.two_button_right{
+  margin-left: 20rpx;
+}
