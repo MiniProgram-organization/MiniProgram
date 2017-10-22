@@ -58,7 +58,7 @@ App({
               method: 'POST',
               data: {
                 code: code,
-                rawDdata: that.globalData.rawData
+                rawData: that.globalData.rawData
               },
               success: function (res) {
                 if (res.data.status == "ERROR") {

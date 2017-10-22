@@ -2,7 +2,6 @@
   "pages": [
     "pages/activity/activity",
     "pages/map/map",
-    "pages/register/register",
     "pages/weather/weather",
     "pages/account/account",
     "pages/trace/trace",
