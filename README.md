@@ -37,6 +37,10 @@
 
 #### 1.登录，发送用户信息，换取openid
 
+##### 说明：
+由于目前取消了注册功能，所以改为在登录时自动注册。所以前端需要在登录时发送rawData给服务器。  
+另外，由于后台需要记录登录时的用户位置，所以前端需要发送location信息给服务器。
+
 ##### 相关函数：`getOpenId()`
 
 ##### url: [https://40525433.fudan-mini-program.com/cgi-bin/Login](https://40525433.fudan-mini-program.com/cgi-bin/Login)
@@ -47,8 +51,18 @@
 
 ```json
 {
-  code: "013VSxwK1xExW70pcryK10EJwK1VSxw6"，
-  rawData: {...}
+  "code": "013VSxwK1xExW70pcryK10EJwK1VSxw6",
+  "rawData":{
+    "nickName":"abc",
+    "gender":2,
+    "language":"en",
+    "city":"Shaoxing",
+    "province":"Zhejiang",
+    "country":"China",
+    "avatarUrl":"https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJ5gUpejVfCsfOw4cLH7g4XhpYIVMeK5PCGlJibEVjicicicgMJwtdnkjZmXCQk4XhRRjJibQvXdiaa2l7A/0"
+  },
+  "latitude": 10.3434,
+  "longitude": 33.3435
 }
 ```
 
@@ -63,7 +77,7 @@
 ```
 
 
-#### ~~2.用户注册~~
+#### 2.用户注册
 
 ##### 相关函数：`register`
 
@@ -84,7 +98,7 @@
             \"country\":\"China\",
             \"avatarUrl\":\"https://wx.qlogo.cn\"
             }",
-  Tel: "15202345235",
+  Tel: "15202345235", //取消
 }
 ```
 
@@ -326,6 +340,7 @@
   url: "https://40525433.fudan-mini-program.com/Files/QRCode1507377585.jpeg"
 }
 ```
+
 
 #### 8.查看POI签到情况
 
