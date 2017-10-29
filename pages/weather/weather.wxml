@@ -1,6 +1,6 @@
-<view class="content">
-
-    <view class="today">
+<view style="width: {{windowWidth}}px; height:{{windowHeight}}px" class="content"  >
+    <view style="width: {{windowWidth}}px; height:{{windowHeight*0.1}}px"> </view>
+    <view class="today" style=" height:{{windowHeight*0.4}}px" >
         <view class="main">
             <view class="left">
                 <view class="tempnow">{{weather.tmp}}℃</view>
@@ -13,20 +13,48 @@
             <view class="right">
                 <view class="kongqi">体感温度：{{weather.fl}}</view>
                 <view class="kongqi">相对湿度：{{weather.hum}}</view>
-                <view class="kongqi">降水量（mm）：{{weather.pcpn}}</view>
+                <view class="kongqi">降水量(mm)：{{weather.pcpn}}</view>
                 <view class="kongqi">气压：{{weather.pres}}</view>
                 <view class="kongqi">能见度：{{weather.vis}}</view>
             </view>
         </view>
-        <!-- <view class="advice">穿衣建议：{{life.info.chuanyi}}</view>
-        <view class="update">最近更新：{{realtime.time}}</view> -->
+
     </view>
+    <view style="width: {{windowWidth}}px; height:{{windowHeight*0.05}}px"> </view>
+    <view class="forecast" style="height:160px" >
+      <view style="height:40px" class='forecast_text' >
+       <text>天气预报</text>
+      </view>
+    <view style="height:60px" class='day1_view' >
+        <view style="float:left;width:31%;height:60px" class='forecast_day'>
+          <text>明天</text>
+        </view>
+         <view style="float:left;width:23%;"  class='forcast_category'>
+          <text>{{day1_weather.category}}</text>
+        </view>
+        <view style="float:left;width:23%;" class='forcast_temperature'>
+          <text>{{day2_weather.high}}</text>
+        </view>
+         <view style="float:left;width:23%;" class='forcast_temperature'>
+          <text>{{day2_weather.low}}</text>
+        </view>
+     </view>
 
-    <!-- <import src="../template/temp01"/>
+      <view style="height:60px" class='day1_view' >
+        <view style="float:left;width:31%;height:60px" class='forecast_day'>
+          <text>后天</text>
+        </view>
+         <view style="float:left;width:23%;" class='forcast_category'>
+         <text>{{day2_weather.category}}</text>
+        </view>
+         <view style="float:left;width:23%;" class='forcast_temperature'>
+          <text>{{day2_weather.high}}</text>
+        </view>
+         <view style="float:left;width:23%;" class='forcast_temperature'>
+          <text>{{day2_weather.low}}</text>
+        </view>
+     </view>
+    </view>
+    
 
-    <view class="future">
-        <block wx:for="{{weather}}">
-            <template is="future-item" data="{{item}}"/>
-        </block>
-    </view> -->
 </view>

@@ -1,5 +1,5 @@
 var utils = require('../../utils/utils.js')
-var app = getApp()
+var app = getApp();
 Page({
 
   /**
@@ -48,14 +48,56 @@ Page({
     console.log(this.data.text);
   },
 
+  loginNoOpenId: function(){
+    wx.login({
+      success: function (res) {
+        var code = res.code;
+        console.log('code is ' + code);
+        wx.getUserInfo({
+          success: function (res) {
+            console.log(res.rawData);
+            app.globalData.rawData = JSON.parse(res.rawData);
+            console.log(app.globalData.rawData);
+            var iv = res.iv;
+            console.log("Don't get storage");
+            wx.request({
+              url: 'https://40525433.fudan-mini-program.com/cgi-bin/Login',
+              method: 'POST',
+              data: {
+                code: code,
+                rawData: app.globalData.rawData,
+                latitude: app.globalData.latitude,
+                longitude: app.globalData.longitude,
+              },
+              success: function (res) {
+                if (res.data.status == "ERROR") {
+                  console.log(res.data.message);
+                  return;
+                }
+
+                console.log(res.data.openid);
+                console.log(res.data.registered);
+                app.globalData.openid = res.data.openid;
+              }
+            });
+          }
+        })
+      }
+    });
+  },
 
   checkIn: function (e) {
+
     var that = this;
+
     if (that.data.text == "") {
       wx.showToast({
         title: '请输入你的心情',
       })
     } else {
+      if (app.globalData.openid == ""){
+        that.loginNoOpenId();
+      }
       wx.request({
         url: 'https://40525433.fudan-mini-program.com/cgi-bin/CheckIn',
         method: 'POST',
@@ -128,6 +170,7 @@ Page({
             wx.redirectTo({
               url: '../showpeople/showpeople?POI_id=' + that.data.POI_id,
               success: function (e) {
+                
                 wx.showToast({
                   title: that.data.venue + " 签到成功",
                   icon: 'success',

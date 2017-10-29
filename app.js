@@ -1,4 +1,5 @@
 //app.js
+var app = getApp();
 var utils = require('./utils/utils.js');
 var QQMapWX = require('./utils/qqmap-wx-jssdk.js');
 
@@ -58,7 +59,9 @@ App({
               method: 'POST',
               data: {
                 code: code,
-                rawData: that.globalData.rawData
+                rawData: that.globalData.rawData,
+                latitude: that.globalData.latitude,
+                longitude: that.globalData.longitude,
               },
               success: function (res) {
                 if (res.data.status == "ERROR") {

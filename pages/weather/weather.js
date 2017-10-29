@@ -1,9 +1,13 @@
-var app = getApp()
+var app = getApp();
 Page({
   data: {
     // text:"这是一个页面"
     city: '',
-    weather: {}
+    weather: {},
+    windowWidth: app.globalData.windowWidth,
+    windowHeight: app.globalData.windowHeight,
+    day1_weather: {},
+    day2_weather: {},
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
@@ -14,6 +18,7 @@ Page({
   },
   onShow: function () {
     // 页面显示
+    this.getForcastWeather();
     this.loadInfo();
   },
   onHide: function () {
@@ -46,10 +51,9 @@ Page({
         openid:openid,
         latitude:latitude,
         longitude:longitude
+        
       },
-      // header: {
-      //   // "Content-Type":"application/json"
-      // },
+      
       success: function (res) {
         console.log("status: " + res.data.status);
         console.log("res.data:  " + res.data);
@@ -57,9 +61,21 @@ Page({
         console.log("wether:  " + res.data.now);
         var now = res.data.now;
         var city = res.data.city;
+        var day1_weather = {};
+        var day2_weather = {};
+
+        day1_weather['category'] = '多云'
+        day2_weather['category'] = '多云'
+        day1_weather['high'] = 28
+        day2_weather['high'] = 27
+        day1_weather['low'] = 20
+        day2_weather['low'] = 20
+
         page.setData({
           city: city,
           weather: now,
+          day1_weather: day1_weather,
+          day2_weather:day2_weather,
           weathericonURL: "../images/weather/" + now.cond.code+".png",
         })
       },
