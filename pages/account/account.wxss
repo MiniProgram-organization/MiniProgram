@@ -10,7 +10,31 @@
     display: flex;
     justify-content: space-between;
 }
-
+.privacy
+{
+  position: fixed;
+  text-align: center;
+  width: 100%;
+  font-size: 10sp;
+  bottom: 10px;
+  color: #C5C1AA;
+  
+}
+.weui-cells__title_account
+{
+  margin-top:10rpx;
+  margin-bottom:10rpx;
+  padding-left:15px;
+  padding-right:15px;
+  color:#999;
+  font-size:13px
+}
+.icon_view
+{
+   line-height:2.58823529em;
+   position: fixed;
+   right: 0px;
+}
 #hexagon {width: 100px;height: 55px;
           background: red;position: relative;}
           

@@ -56,5 +56,12 @@
   padding-left: 15%;
   padding-right: 15%;
   padding-top: 5%;
-
+}
+.view_pie
+{
+    margin: 0 auto;
+}
+.canvas_pie
+{
+  margin: 0 auto;
 }

@@ -9,6 +9,7 @@ Page({
     windowWidth: '',
     windowHeight: '',
     avatarUrl: '',
+    iconUrl: '',
     nickName: '',
     gender: '',
     province: '',
@@ -35,7 +36,8 @@ Page({
       province: app.globalData.rawData.province,
       country: app.globalData.rawData.country,
       latitude: app.globalData.latitude,
-      longitude: app.globalData.longitude
+      longitude: app.globalData.longitude,
+      iconUrl: "../images/account/ic_chevron_right_black_48dp.png",
 
     });
     
