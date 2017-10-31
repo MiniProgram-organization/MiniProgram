@@ -220,25 +220,89 @@
 {
     "status": "OK",
     "now": {
-        "cond": {
-            "code": "100",
-            "txt": "晴"
-        },
-        "fl": "29",
-        "hum": "81",
+        "cloud": "0",
+        "cond_code": "101",
+        "cond_txt": "多云",
+        "fl": "16",
+        "hum": "73",
         "pcpn": "0",
-        "pres": "1004",
-        "tmp": "27",
+        "pres": "1024",
+        "tmp": "14",
         "vis": "7",
-        "wind": {
-            "deg": "216",
-            "dir": "西南风",
-            "sc": "3-4",
-            "spd": "13"
-        }
+        "wind_deg": "83",
+        "wind_dir": "东风",
+        "wind_sc": "微风",
+        "wind_spd": "7"
     },
-    "city": "北京",
-    "country": "中国"
+    "forecast": [
+        {
+            "cond_code_d": "103",
+            "cond_code_n": "100",
+            "cond_txt_d": "晴间多云",
+            "cond_txt_n": "晴",
+            "date": "2017-10-31",
+            "hum": "59",
+            "pcpn": "0.0",
+            "pop": "0",
+            "pres": "1025",
+            "tmp_max": "18",
+            "tmp_min": "10",
+            "uv_index": "5",
+            "vis": "16",
+            "wind_deg": "166",
+            "wind_dir": "东南风",
+            "wind_sc": "微风",
+            "wind_spd": "6"
+        },
+        {
+            "cond_code_d": "101",
+            "cond_code_n": "101",
+            "cond_txt_d": "多云",
+            "cond_txt_n": "多云",
+            "date": "2017-11-01",
+            "hum": "61",
+            "pcpn": "0.0",
+            "pop": "0",
+            "pres": "1021",
+            "tmp_max": "22",
+            "tmp_min": "11",
+            "uv_index": "5",
+            "vis": "20",
+            "wind_deg": "114",
+            "wind_dir": "东南风",
+            "wind_sc": "微风",
+            "wind_spd": "7"
+        },
+        {
+            "cond_code_d": "101",
+            "cond_code_n": "101",
+            "cond_txt_d": "多云",
+            "cond_txt_n": "多云",
+            "date": "2017-11-02",
+            "hum": "68",
+            "pcpn": "0.0",
+            "pop": "2",
+            "pres": "1019",
+            "tmp_max": "22",
+            "tmp_min": "12",
+            "uv_index": "5",
+            "vis": "20",
+            "wind_deg": "296",
+            "wind_dir": "西北风",
+            "wind_sc": "微风",
+            "wind_spd": "3"
+        }
+    ],
+    "basic": {
+        "cid": "CN101020600",
+        "location": "浦东新区",
+        "parent_city": "上海",
+        "admin_area": "上海",
+        "cnty": "中国",
+        "lat": "31.24594307",
+        "lon": "121.56770325",
+        "tz": "+8.0"
+    }
 }
 ```
 
