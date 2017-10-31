@@ -66,14 +66,14 @@
         <view class="weui-cell__hd">
           <view class="weui-label">关于我们</view>
         </view>
-        <view class="weui-cell__bd">
+        <view class="weui-cell__bd" bindtap="goToAboutUs">
           <image style="width:48rpx; height:48rpx;margin:5% 0% 0% 0%" src="{{iconUrl}}"></image>
         </view>
       </view>
 
     </view>
   <view class='privacy'>
-  <text bindtap="goToMoodStatistics">隐私条款
+  <text bindtap="goToPrivacy">隐私条款
   </text>
   </view>
 </view>

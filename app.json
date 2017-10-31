@@ -11,7 +11,9 @@
     "pages/error/error",
     "pages/showpeople/showpeople",
     "pages/mood/mood",
-    "pages/moodstatistics/moodstatistics"
+    "pages/moodstatistics/moodstatistics",
+    "pages/privacy/privacy",
+    "pages/aboutus/aboutus"
   ],
   "window": {
     "window": {

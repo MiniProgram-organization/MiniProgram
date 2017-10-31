@@ -43,8 +43,19 @@ Page({
     
     
   },
+  goToPrivacy: function () {
+    var that = this;
+    wx.navigateTo({
+      url: '../privacy/privacy'
+    })
+  },
 
-
+  goToAboutUs: function(){
+    var that = this;
+    wx.navigateTo({
+      url: '../aboutus/aboutus'
+    })
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
