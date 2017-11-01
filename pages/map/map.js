@@ -16,7 +16,8 @@ Page({
     category: '',
     logoPath: '',
     imgUrl: '',
-    text: ''
+    text: '',
+    ad_info:{},
   },
 
   /**
@@ -25,7 +26,8 @@ Page({
 
   onLoad: function (options) {
     var that = this;
-    console.log(app.globalData);
+    console.log(options);
+    console.log(options.target_adinfo_city);
     this.setData({
       POI_id: options.target_id,
       longitude: parseFloat(options.target_longitude),
@@ -33,6 +35,9 @@ Page({
       venue: options.target_venue,
       category: options.target_category,
       logoPath: options.target_logoPath,
+      ad_province: options.target_adinfo_province,
+      ad_city: options.target_adinfo_city,
+      ad_district: options.target_adinfo_district,
       markers: [{
         latitude: options.target_latitude,
         longitude: options.target_longitude,
@@ -101,6 +106,7 @@ Page({
       wx.request({
         url: 'https://40525433.fudan-mini-program.com/cgi-bin/CheckIn',
         method: 'POST',
+        
         data: {
           POI_id: that.data.POI_id,
           POI_info: {
@@ -111,6 +117,9 @@ Page({
             city: "上海",
             country: "中国"
           },
+          POI_ad_province: that.data.ad_province,
+          POI_ad_city: that.data.ad_city,
+          POI_ad_district: that.data.ad_district,
           created_by_user: false,
           openid: app.globalData.openid,
           latitude: app.globalData.latitude,//用户所在纬度
@@ -123,8 +132,6 @@ Page({
           var time = datetime.toLocaleTimeString();
           var date = datetime.toLocaleDateString();
           var old_history = wx.getStorageSync('history');
-
-          console.log(that.data.text);
 
           if (e.data.status == "OK") {
 

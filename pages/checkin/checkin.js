@@ -5,7 +5,6 @@ var app = getApp();
 
 
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -82,7 +81,7 @@ Page({
   /*进入地图的细节，目前作为保留接口*/
   redictDetail: function (e) {
     var target_id = e.currentTarget.id;
-    var target_latitude, target_longitude, target_category, target_venue, target_logoPath;
+    var target_latitude, target_longitude, target_category, target_venue, target_logoPath, target_adinfo_province, target_adinfo_city, target_adinfo_district;
     for (var index = 0; index < this.data.markers.length; index++) {
       if (this.data.markers[index].POI_id == target_id) {
         target_latitude = this.data.markers[index].latitude;
@@ -90,6 +89,10 @@ Page({
         target_venue = this.data.markers[index].venue;
         target_category = this.data.markers[index].category;
         target_logoPath = this.data.markers[index].logoPath;
+        target_adinfo_province = this.data.markers[index].ad_info.province;
+        target_adinfo_city = this.data.markers[index].ad_info.city;
+        target_adinfo_district = this.data.markers[index].ad_info.district;
+        console.log(target_adinfo_province);
         break;
       }
     }
@@ -99,7 +102,10 @@ Page({
       + '&target_longitude=' + target_longitude
       + '&target_category=' + target_category
       + '&target_logoPath=' + target_logoPath
-      + '&target_venue=' + target_venue;
+      + '&target_venue=' + target_venue
+      + '&target_adinfo_province=' + target_adinfo_province
+    + '&target_adinfo_city=' + target_adinfo_city
+    + '&target_adinfo_district=' + target_adinfo_district;
 
     wx.redirectTo({
       url: url
@@ -126,7 +132,8 @@ Page({
           var category = coordinates[i].category;
           var venue = coordinates[i].title;
           var POI_id = coordinates[i].id;
-
+          var ad_info = coordinates[i].ad_info;
+          console.log(options.ad_info );
           tempMarkers.push({
             POI_id: POI_id,
             latitude: tempLatitude,
@@ -134,6 +141,7 @@ Page({
             logoPath: '../images/location/' + app.globalData.locationMap[category.split(":")[0]] +'.png',
             category: category,
             venue: venue,
+            ad_info: ad_info,
           });
           tempIncludePoints.push({
             latitude: tempLatitude,
@@ -223,6 +231,7 @@ Page({
               var category = coordinates[i].category
               var venue = coordinates[i].title;
               var POI_id = coordinates[i].id;
+              var ad_info = coordinates[i].ad_info;
 
               tempMarkers.push({
                 POI_id: POI_id,
@@ -231,14 +240,14 @@ Page({
                 iconPath: '../images/map/dot.jpg',
                 logoPath: '../images/location/' + app.globalData.locationMap[category.split(":")[0]] + '.png',
                 category: category,
-                venue: venue
+                venue: venue,
+                ad_info: ad_info,
               });
               tempIncludePoints.push({
                 latitude: tempLatitude,
                 longitude: tempLongitude,
               });
             }
-            console.log(tempMarkers);
 
             that.setData({
               markers: tempMarkers,
