@@ -466,12 +466,12 @@
 
 ```json
 { 
-  "mood_id": 1，          //心情类型(1-7)
-  "mood_text": "狂喜"     //心情类型对应的文字
-  "openid": "hafsdfs"，
-  "text":"心情文字"，   
-  "latitude": 10.43535,   //用户所在纬度
-  "longitude": 54.454,    //用户所在经度
+  "mood_id":1,           //心情类型(1-7)
+  "mood_text":"狂喜",    //心情类型对应的文字
+  "openid":"hafsdfs",
+  "text":"心情文字",
+  "latitude":10.43535,   //用户所在纬度
+  "longitude":54.454,    //用户所在经度
 }
 ```
 
