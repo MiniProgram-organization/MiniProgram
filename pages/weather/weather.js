@@ -64,19 +64,19 @@ Page({
         var day1_weather = {};
         var day2_weather = {};
 
-        day1_weather['category'] = '多云'
-        day2_weather['category'] = '多云'
-        day1_weather['high'] = 28
-        day2_weather['high'] = 27
-        day1_weather['low'] = 20
-        day2_weather['low'] = 20
+        day1_weather['category'] = res.data.forecast[1].cond_txt_n;
+        day2_weather['category'] = res.data.forecast[2].cond_txt_n;
+        day1_weather['high'] = res.data.forecast[1].tmp_max;
+        day2_weather['high'] = res.data.forecast[2].tmp_max;
+        day1_weather['low'] = res.data.forecast[1].tmp_min;
+        day2_weather['low'] = res.data.forecast[2].tmp_min;
 
         page.setData({
           city: city,
           weather: now,
           day1_weather: day1_weather,
           day2_weather:day2_weather,
-          weathericonURL: "../images/weather/" + now.cond.code+".png",
+          weathericonURL: "../images/weather/" + now.cond_code+".png",
         })
       },
       fail: function (res) {

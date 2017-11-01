@@ -20,10 +20,10 @@
     <view style="display: flex;flex-direction:row">
       <view style="flex:0.2"></view>
         <view style="flex:0.5" class='two_button_left'>
-        <button bindtap="goToMoodStatistics" style="flex:1" class="weui-btn" type="primary">心情统计</button>
+        <button bindtap="goToMoodStatistics" style="flex:1" class="weui-btn" type="primary">我的心情</button>
         </view>
          <view style="flex:0.5" class='two_button_right'>
-        <button bindtap="recordMood" style="flex:1" class="weui-btn" type="primary">记录心情</button>
+        <button bindtap="goToRecordMood" style="flex:1" class="weui-btn" type="primary">记录心情</button>
         </view>
       <view style="flex:0.2"></view>  
     </view>

@@ -6,7 +6,7 @@
                 <view class="tempnow">{{weather.tmp}}℃</view>
                 <view class="weather">
                     {{city}}
-                    {{weather.cond.txt}}
+                    {{weather.cond_txt}}
                 </view>
                 <image class="weathericon" src="{{weathericonURL}}"></image>
             </view>
@@ -33,10 +33,10 @@
           <text>{{day1_weather.category}}</text>
         </view>
         <view style="float:left;width:23%;" class='forcast_temperature'>
-          <text>{{day2_weather.high}}</text>
+          <text>{{day1_weather.high}}</text>
         </view>
          <view style="float:left;width:23%;" class='forcast_temperature'>
-          <text>{{day2_weather.low}}</text>
+          <text>{{day1_weather.low}}</text>
         </view>
      </view>
 

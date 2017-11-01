@@ -1,27 +1,35 @@
 // pages/mood/mood.js
 var app = getApp()
 
-var mood = [
+var mood =[
   {
-    "icon": "../images/mood/emotion_angry.png",
-    "text": "生气"
+    "icon": "../images/mood/emotion_sad.png",
+    "text": "狂喜"
   },
   {
-    "icon": "../images/mood/emotion_fear.png",
-    "text": "恐惧"
-  },
-  {
-    "icon": "../images/mood/emotion_neutral.png",
-    "text": "平淡"
-  },
-  {
-    "icon": "../images/mood/emotion_happy.png",
+    "icon": "../images/mood/emotion_sad.png",
     "text": "开心"
   },
   {
     "icon": "../images/mood/emotion_sad.png",
-    "text": "悲伤"
-  }
+    "text": "放松"
+  },
+  {
+    "icon": "../images/mood/emotion_angry.png",
+    "text": "平静"
+  },
+  {
+    "icon": "../images/mood/emotion_fear.png",
+    "text": "低落"
+  },
+  {
+    "icon": "../images/mood/emotion_neutral.png",
+    "text": "焦虑"
+  },
+  {
+    "icon": "../images/mood/emotion_happy.png",
+    "text": "生气"
+  },
 ]
 Page({
 
@@ -34,34 +42,30 @@ Page({
     latitude: "",
     longitude: "",
     moodTimes: 0,
-    mood:mood
+    mood:mood,
+    moodId: 0,
   },
   bindChange: function (e) {
-    const val = e.detail.value
+    this.moodId = e.detail.value;
     this.setData({
       mood: mood,
     })
   },
   goToMoodStatistics: function () {
-    var that = this;
     wx.navigateTo({
       url: '../moodstatistics/moodstatistics'
     })
   },
-  recordMood: function() {
-    var that = this;
-  },
-  textChange: function (e) {
-    this.setData({
-      text: e.detail.value
-    });
-    console.log(this.data.text);
+  goToRecordMood: function(){
+    wx.navigateTo({
+      url: '../recordmood/recordmood?moodId='+this.moodId
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.moodId = 0;
   },
 
   /**

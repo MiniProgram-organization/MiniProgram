@@ -6,14 +6,14 @@
     "pages/account/account",
     "pages/trace/trace",
     "pages/friends/friends",
-    "pages/places/places",
     "pages/checkin/checkin",
     "pages/error/error",
     "pages/showpeople/showpeople",
     "pages/mood/mood",
     "pages/moodstatistics/moodstatistics",
     "pages/privacy/privacy",
-    "pages/aboutus/aboutus"
+    "pages/aboutus/aboutus",
+    "pages/recordmood/recordmood"
   ],
   "window": {
     "window": {
