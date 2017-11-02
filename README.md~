@@ -552,3 +552,79 @@
 }
 ```
 
+
+#### 12.历史心情记录
+
+##### url:
+
+##### method: GET
+
+##### 发送数据格式：
+
+```json
+{ 
+  "openid":"hafsdfs"
+}
+```
+
+##### 接收数据格式：
+```json
+{
+    "status": "OK",
+    "mood_num": 2,
+    "moods": [
+        { 
+          "mood_id": 1,
+	  "mood_text":"狂喜",
+          "datetime": "2017-07-01 08:08:08",
+          "text":"心情文字",
+          "latitude": 23.123,
+          "longitude": 123.123
+        },
+        {
+          "mood_id": 1,
+	  "mood_text":"狂喜",
+          "datetime": "2016-07-01 08:08:08",
+          "text":"心情文字",
+          "latitude": 23.123,
+          "longitude": 123.123
+        }
+      ]
+}
+```
+
+#### 13.获取历史心情记录的类别分布情况
+
+##### url:
+
+##### method: GET
+
+##### 发送数据格式：
+
+```json
+{ 
+  "openid":"hafsdfs"
+}
+```
+
+##### 接收数据格式：
+```json
+{
+   "status": "OK",
+   "district_num": 3, //这个用户在三个类别的心情签过到
+   "districts": [
+      {
+        "mood_id":1,
+        "check_num":25,
+      },  
+      {
+        "mood_id":2,
+        "check_num":35,
+      },
+      {
+        "mood_id":7,
+        "check_num":5,
+      }
+   ]
+}
+```

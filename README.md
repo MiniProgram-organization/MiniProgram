@@ -611,7 +611,7 @@
 ```json
 {
    "status": "OK",
-   "district_num": 3, //这个用户三个类别签过到
+   "district_num": 3, //这个用户在三个类别的心情签过到
    "districts": [
       {
         "mood_id":1,
