@@ -176,12 +176,10 @@
     venue: "Fudan University",
     latitude: 12.3, //poi所在纬度
     longitude: 55.4, //poi所在经度
-    city: "上海",
-    country: "中国"
+    POI_ad_province: "上海市",
+    POI_ad_city: "上海市",
+    POI_ad_district: "黄浦区",
   },
-  POI_ad_province: "上海市",
-  POI_ad_city: "上海市",
-  POI_ad_district: "黄浦区",
   created_by_user: false,
   openid: "haasdfasf",
   latitude: 10.43535, //用户所在纬度

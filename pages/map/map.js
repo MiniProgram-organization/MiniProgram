@@ -114,12 +114,12 @@ Page({
             venue: that.data.venue,
             latitude: that.data.latitude, //poi所在纬度
             longitude: that.data.longitude, //poi所在经度
-            city: "上海",
-            country: "中国"
+            //city: "上海",
+            //country: "中国"
+            POI_ad_province: that.data.ad_province,
+            POI_ad_city: that.data.ad_city,
+            POI_ad_district: that.data.ad_district,
           },
-          POI_ad_province: that.data.ad_province,
-          POI_ad_city: that.data.ad_city,
-          POI_ad_district: that.data.ad_district,
           created_by_user: false,
           openid: app.globalData.openid,
           latitude: app.globalData.latitude,//用户所在纬度
@@ -136,7 +136,7 @@ Page({
           if (e.data.status == "OK") {
 
             if (!old_history) {
-              console.log("咩有缓存");
+              console.log("没有缓存");
               wx.setStorage({
                 key: 'history',
                 data: [{

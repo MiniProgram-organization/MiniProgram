@@ -13,7 +13,9 @@
     "pages/moodstatistics/moodstatistics",
     "pages/privacy/privacy",
     "pages/aboutus/aboutus",
-    "pages/recordmood/recordmood"
+    "pages/recordmood/recordmood",
+    "pages/categorysta/categorysta",
+    "pages/districtsta/districtsta"
   ],
   "window": {
     "window": {

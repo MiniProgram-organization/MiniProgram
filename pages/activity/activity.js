@@ -22,42 +22,24 @@ Page({
     checkInCategories: 0,
   },
 
-
-
-  // /*查看签到的地方，目前作为保留接口
-  //   TODO
-  //   */
-  // redictDetail: function (e) {
-  //   var target_id = e.currentTarget.id;
-  //   var target_latitude, target_longitude, target_category, target_venue
-  //   for (var index = 0; index < this.data.markers.length; index++) {
-  //     if (this.data.markers[index].POI_id == target_id) {
-  //       target_latitude = this.data.markers[index].latitude;
-  //       target_longitude = this.data.markers[index].longitude;
-  //       target_venue = this.data.markers[index].venue;
-  //       target_category = this.data.markers[index].category;
-  //       break;
-  //     }
-  //   }
-
-  //   var url = '../map/map?target_id=' + target_id
-  //     + '&target_latitude=' + target_latitude
-  //     + '&target_longitude=' + target_longitude
-  //     + '&target_category=' + target_category
-  //     + '&target_venue=' + target_venue;
-
-  //   wx.redirectTo({
-  //     url: url
-  //   })
-  // },
-
   redirectCheckIn: function () {
     var that = this;
     wx.navigateTo({
       url: '../checkin/checkin?markers='
     })
   },
-
+  Todistrictsta: function () {
+    var that = this;
+    wx.navigateTo({
+      url: '../districtsta/districtsta'
+    })
+  },
+  Tocategorysta: function () {
+    var that = this;
+    wx.navigateTo({
+      url: '../categorysta/categorysta'
+    })
+  },
 
 
   fetchData: function () {
