@@ -176,9 +176,9 @@
     venue: "Fudan University",
     latitude: 12.3, //poi所在纬度
     longitude: 55.4, //poi所在经度
-    POI_ad_province: "上海市",
-    POI_ad_city: "上海市",
-    POI_ad_district: "黄浦区",
+    province: "上海市",
+    city: "上海市",
+    district: "黄浦区"
   },
   created_by_user: false,
   openid: "haasdfasf",
@@ -459,7 +459,7 @@
 
 #### 9.记录心情
 
-##### url:
+##### url:[https://40525433.fudan-mini-program.com/cgi-bin/Mood](https://40525433.fudan-mini-program.com/cgi-bin/Mood)
 
 ##### method: POST
 
@@ -472,7 +472,7 @@
   "openid":"hafsdfs",
   "text":"心情文字",
   "latitude":10.43535,   //用户所在纬度
-  "longitude":54.454,    //用户所在经度
+  "longitude":54.454     //用户所在经度
 }
 ```
 
@@ -481,9 +481,9 @@
 
 #### 10.查看用户在上海市历史签到的行政区分布情况
 
-##### url:
+##### url:[https://40525433.fudan-mini-program.com/cgi-bin/District](https://40525433.fudan-mini-program.com/cgi-bin/District)
 
-##### method: GET
+##### method: POST
 
 ##### 发送数据格式：
 
@@ -501,15 +501,15 @@
    "districts": [
       {
         "district_name":"黄浦区",
-        "check_num":15,
+        "check_num":15
       },  
       {
         "district_name":"浦东新区",
-        "check_num":4,
+        "check_num":4
       },
       {
         "district_name":"徐汇区",
-        "check_num":25,
+        "check_num":25
       }
    ]
 }
@@ -518,9 +518,9 @@
 
 #### 11.查看用户在所有历史签到的类别分布情况
 
-##### url:
+##### url:[https://40525433.fudan-mini-program.com/cgi-bin/Category](https://40525433.fudan-mini-program.com/cgi-bin/Category)
 
-##### method: GET
+##### method: POST
 
 ##### 发送数据格式：
 
@@ -534,19 +534,19 @@
 ```json
 {
    "status": "OK",
-   "district_num": 3, //这个用户三个类别签过到
-   "districts": [
+   "category_num": 3, //这个用户三个类别签过到
+   "categories": [
       {
         "category_name":"机构团体",
-        "check_num":15,
+        "check_num":15
       },  
       {
-        "district_name":"旅游景点",
-        "check_num":4,
+        "category_name":"旅游景点",
+        "check_num":4
       },
       {
-        "district_name":"教育学校",
-        "check_num":25,
+        "category_name":"教育学校",
+        "check_num":25
       }
    ]
 }
@@ -555,9 +555,9 @@
 
 #### 12.历史心情记录
 
-##### url:
+##### url:[https://40525433.fudan-mini-program.com/cgi-bin/MoodHistory](https://40525433.fudan-mini-program.com/cgi-bin/MoodHistory)
 
-##### method: GET
+##### method: POST
 
 ##### 发送数据格式：
 
@@ -595,9 +595,9 @@
 
 #### 13.获取指定时间段历史心情记录的类别分布情况
 
-##### url:
+##### url: [https://40525433.fudan-mini-program.com/cgi-bin/MoodCategory](https://40525433.fudan-mini-program.com/cgi-bin/MoodCategory)
 
-##### method: GET
+##### method: POST
 
 ##### 发送数据格式：
 
@@ -613,8 +613,8 @@
 ```json
 {
    "status": "OK",
-   "district_num": 3, //这个用户在三个类别的心情签过到
-   "districts": [
+   "mood_id_num": 3, //这个用户在三个类别的心情签过到
+   "moods": [
       {
         "mood_id":1,
         "check_num":25,
