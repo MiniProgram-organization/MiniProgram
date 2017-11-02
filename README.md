@@ -514,3 +514,41 @@
    ]
 }
 ```
+
+
+#### 11.查看用户在所有历史签到的类别分布情况
+
+##### url:
+
+##### method: GET
+
+##### 发送数据格式：
+
+```json
+{ 
+  "openid":"hafsdfs"
+}
+```
+
+##### 接收数据格式：
+```json
+{
+   "status": "OK",
+   "district_num": 3, //这个用户三个类别签过到
+   "districts": [
+      {
+        "category_name":"机构团体",
+        "check_num":15,
+      },  
+      {
+        "district_name":"旅游景点",
+        "check_num":4,
+      },
+      {
+        "district_name":"教育学校",
+        "check_num":25,
+      }
+   ]
+}
+```
+
