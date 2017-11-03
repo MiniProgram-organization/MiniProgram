@@ -12,7 +12,32 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var chart = new Charts({
+      canvasId: 'columnCanvas',
+      type: 'column',
+      categories: ['2016-08', '2016-09', '2016-10', '2016-11', '2016-12', '2017'],
+      series: [{
+        name: '成交量1',
+        data: [15, 20, 45, 37, 4, 80]
+      }, {
+        name: '成交量2',
+        data: [70, 40, 65, 100, 34, 18]
+      }, {
+        name: '成交量3',
+        data: [70, 40, 65, 100, 34, 18]
+      }, {
+        name: '成交量4',
+        data: [70, 40, 65, 100, 34, 18]
+      }],
+      yAxis: {
+        format: function (val) {
+          return val + '万';
+        }
+      },
+      width: 640,
+      height: 400,
+      dataLabel: false
+    });
   },
 
   /**

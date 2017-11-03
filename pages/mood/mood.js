@@ -3,31 +3,31 @@ var app = getApp()
 
 var mood =[
   {
-    "icon": "../images/mood/emotion_sad.png",
+    "icon": "../images/mood/7.png",
     "text": "狂喜"
   },
   {
-    "icon": "../images/mood/emotion_sad.png",
+    "icon": "../images/mood/6.png",
     "text": "开心"
   },
   {
-    "icon": "../images/mood/emotion_sad.png",
+    "icon": "../images/mood/5.png",
     "text": "放松"
   },
   {
-    "icon": "../images/mood/emotion_angry.png",
+    "icon": "../images/mood/4.png",
     "text": "平静"
   },
   {
-    "icon": "../images/mood/emotion_fear.png",
+    "icon": "../images/mood/3.png",
     "text": "低落"
   },
   {
-    "icon": "../images/mood/emotion_neutral.png",
+    "icon": "../images/mood/2.png",
     "text": "焦虑"
   },
   {
-    "icon": "../images/mood/emotion_happy.png",
+    "icon": "../images/mood/1.png",
     "text": "生气"
   },
 ]

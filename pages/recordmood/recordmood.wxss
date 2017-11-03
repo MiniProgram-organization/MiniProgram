@@ -1,1 +1,28 @@
 /* pages/recordmood/recordmood.wxss */
+.middle_text{
+  font-size: 20px;
+  text-align: center;
+  margin-top: 30rpx;
+}
+.title
+{
+  margin-top: 20px;
+  text-align: center;
+}
+.moodicon
+{
+  height: 50px;
+  width: 50px;
+}
+.moodtext
+{
+  font-size: 20px;
+}
+.input_box_margin{
+  margin-top: 10px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+.input_box_margin2{
+  margin-top: 10px;
+}

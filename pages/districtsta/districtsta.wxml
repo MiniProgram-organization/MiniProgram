@@ -1,2 +1,14 @@
 <!--pages/districtsta/districtsta.wxml-->
-<text>pages/districtsta/districtsta.wxml</text>
+<view style="width: {{windowWidth}}px; height:{{windowHeight}}px">
+<view style="width:80%;  margin:5% 10% 5% 10%">
+  <view class="title">
+  <text>上海市签到行政区分布</text>
+  </view>
+</view>
+
+<view style="width: {{windowWidth}}px;" class='view_pie'>
+  <canvas class='.canvas_pie' canvas-id="pieCanvas" style="width: {{windowWidth*0.8}}px;height:{{windowHeight}}px" >
+  </canvas>
+</view>
+
+</view>

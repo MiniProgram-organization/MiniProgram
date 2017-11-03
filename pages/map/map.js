@@ -79,7 +79,6 @@ Page({
                   console.log(res.data.message);
                   return;
                 }
-
                 console.log(res.data.openid);
                 console.log(res.data.registered);
                 app.globalData.openid = res.data.openid;
@@ -92,7 +91,6 @@ Page({
   },
 
   checkIn: function (e) {
-
     var that = this;
 
     if (that.data.text == "") {
@@ -116,9 +114,9 @@ Page({
             longitude: that.data.longitude, //poi所在经度
             //city: "上海",
             //country: "中国"
-            POI_ad_province: that.data.ad_province,
-            POI_ad_city: that.data.ad_city,
-            POI_ad_district: that.data.ad_district,
+            province: that.data.ad_province,
+            city: that.data.ad_city,
+            district: that.data.ad_district,
           },
           created_by_user: false,
           openid: app.globalData.openid,

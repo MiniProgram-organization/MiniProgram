@@ -1,7 +1,7 @@
 /* pages/mood/mood.wxss */
 .moodicon { 
-    height: 50rpx;
-    width: 50rpx;
+    height: 80rpx;
+    width: 80rpx;
 
 } 
 .moodlist{
@@ -24,7 +24,6 @@
   font-size: 20px;
   text-align: center;
   margin-top: 30rpx;
-
 }
 .two_button_left{
   margin-right: 20rpx;
