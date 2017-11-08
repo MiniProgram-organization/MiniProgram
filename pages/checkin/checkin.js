@@ -133,7 +133,7 @@ Page({
           var venue = coordinates[i].title;
           var POI_id = coordinates[i].id;
           var ad_info = coordinates[i].ad_info;
-          console.log(options.ad_info );
+          // console.log(options.ad_info );
           tempMarkers.push({
             POI_id: POI_id,
             latitude: tempLatitude,
