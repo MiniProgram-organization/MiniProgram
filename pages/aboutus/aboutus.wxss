@@ -1,1 +1,17 @@
 /* pages/aboutus/aboutus.wxss */
+.title{
+  font-size: 140%;
+  text-align: center;
+}
+.content
+{
+  font-size: 100%;
+}
+.input_title
+{
+  color:#999;
+  text-align: center;
+  font-size:14px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}

@@ -1,1 +1,9 @@
 /* pages/privacy/privacy.wxss */
+.title{
+  font-size: 140%;
+  text-align: center;
+}
+.content
+{
+  font-size: 100%;
+}

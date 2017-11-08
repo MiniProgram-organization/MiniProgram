@@ -56,7 +56,11 @@ Page({
       type: 'wgs84', //返回可以用于wx.openLocation的经纬度
       success: function (res) {
         app.globalData.latitude = res.latitude;
-        app.globalData.longitude = res.longitude;
+        app.globalData.longitude = res.longitude; 
+
+        //存储一个缓存的经纬度,用于定位失败时使用
+        wx.setStorageSync('latitude', res.latitude);
+        wx.setStorageSync('longitude', res.longitude);
 
         app.globalData.qqmapsdk.reverseGeocoder({
           location: {

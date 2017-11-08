@@ -14,11 +14,10 @@ Page({
     this.loadInfo();
   },
   onReady: function () {
-    // 页面渲染完成
+    // 页面渲染完成s
   },
   onShow: function () {
     // 页面显示
-    this.getForcastWeather();
     this.loadInfo();
   },
   onHide: function () {
@@ -29,18 +28,25 @@ Page({
   },
   loadInfo: function () {
     var self = this;
+    var getSuccess = 0;
+    var timer = 0
     wx.getLocation({
-      type: 'wgs84',
-      success: function (res) {
-        console.log(res);
-
-        var openid = app.globalData.openid;
-        console.log("获取openid! " + openid);
-        var latitude = res.latitude;
-        var longitude = res.longitude;
-        self.loadWeather(latitude, longitude, openid);
-      }
+        type: 'wgs84',
+        success: function (res) {
+          var openid = app.globalData.openid;
+          //如果没有openId 需要加上一个判断
+          var latitude = res.latitude;
+          var longitude = res.longitude;
+          self.loadWeather(latitude, longitude, openid);
+        },
+        fail: function (res) {
+          wx.showToast({
+            title: '定位失败!',
+            duration: 2000
+          })
+        }
     })
+    
   },
   loadWeather: function (latitude, longitude, openid) {
     var page = this;
@@ -50,17 +56,11 @@ Page({
       data: {
         openid:openid,
         latitude:latitude,
-        longitude:longitude
-        
+        longitude:longitude      
       },
-      
       success: function (res) {
-        console.log("status: " + res.data.status);
-        console.log("res.data:  " + res.data);
-        console.log("city:  " + res.data.city);
-        console.log("wether:  " + res.data.now);
         var now = res.data.now;
-        var city = res.data.city;
+        var city = res.data.basic.location;
         var day1_weather = {};
         var day2_weather = {};
 
