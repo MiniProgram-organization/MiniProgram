@@ -27,7 +27,7 @@
     Timeline
     </text>
   </view>
-  
+
   <view class="topic-main">
     <block wx:for="{{classifiedCheckIns}}" wx:key="date">
       <view class="date" style="text-align:right">
@@ -45,7 +45,9 @@
               <view class="topic-info">
                 <view class="topic-inner">
                   <view class="topic-left">
-                    <view class="topic-title"><text>{{item.venue}}</text></view>
+                    <view class="topic-title">
+                      <text>{{item.venue}}</text>
+                    </view>
                     <view>
                       <text class="member-nickname">{{item.time}}</text>
                     </view>

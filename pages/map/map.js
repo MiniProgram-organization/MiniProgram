@@ -129,14 +129,14 @@ Page({
           var datetime = new Date();
           var time = datetime.toLocaleTimeString();
           var date = datetime.toLocaleDateString();
-          var old_history = wx.getStorageSync('history');
+          var old_history = wx.getStorageSync('checkins');
 
           if (e.data.status == "OK") {
 
             if (!old_history) {
               console.log("没有缓存");
               wx.setStorage({
-                key: 'history',
+                key: 'checkins',
                 data: [{
                   POI_latitude: that.data.latitude,
                   POI_longitude: that.data.longitude,
@@ -167,7 +167,7 @@ Page({
                 logoPath: that.data.logoPath
               });
               wx.setStorage({
-                key: 'history',
+                key: 'checkins',
                 data: old_history,
               });
             }
