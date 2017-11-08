@@ -7,8 +7,39 @@ App({
   /**
    * @brief 先检查是否还处于登录状态，如果成功直接进入主页，否则进行登录流程
    */
+  globalData: {
+    windowWidth: '',
+    rawData:{},
+    windowHeight: '',
+    openid: '',
+    checkins: [],
+    rawData: {},
+    latitude: 0.0,
+    longitude: 0.0,
+    qqmapsdk: {},
+    qrcodeUrl: "",
+    locationMap: {
+      "房产小区": "resident",
+      "教育学校": "school",
+      "酒店宾馆": "hotel",
+      "公司企业": "company",
+      "购物": "mall",
+      "美食": "restaurant",
+      "娱乐休闲": "entertainment",
+      "机构团体": "bureau",
+      "银行金融": "bank",
+      "生活服务": "living_service",
+      "旅游景点": "tourism",
+      "基础设施": "infra",
+      "医疗保健": "hospital"
+    },
+    categoryDic:{},
+    districtDict:{},
+    placeDict:{}
+  },
+
   onLaunch: function () {
-    
+    // wx.clearStorage();
     wx.getSetting({
       success(res) {
         if (!res.authSetting['scope.writePhotosAlbum']) {
@@ -42,52 +73,6 @@ App({
 
 
     console.log("发送请求");
-
-    wx.login({
-      success: function (res) {
-        var code = res.code;
-        console.log('code is ' + code);
-        wx.getUserInfo({
-          success: function (res) {
-            console.log(res.rawData);
-            that.globalData.rawData = JSON.parse(res.rawData);
-            console.log(that.globalData.rawData);
-            var iv = res.iv;
-            console.log("Don't get storage");
-            wx.request({
-              url: 'https://40525433.fudan-mini-program.com/cgi-bin/Login',
-              method: 'POST',
-              data: {
-                code: code,
-                rawData: that.globalData.rawData,
-                latitude: that.globalData.latitude,
-                longitude: that.globalData.longitude,
-              },
-              success: function (res) {
-                if (res.data.status == "ERROR") {
-                  console.log(res.data.message);
-                  wx.navigateTo({
-                    url: '/pages/error/error',
-                  })
-                  return;
-                }
-
-                console.log(res.data.openid);
-                console.log(res.data.registered);
-                that.globalData.openid = res.data.openid;
-
-                wx.redirectTo({
-                  url: '/pages/activity/activity',
-                  success: function () {
-                    console.log("aaa");
-                  }
-                });
-              }
-            });
-          }
-        })
-      }
-    });
   },
   /**
    * 当小程序启动，或从后台进入前台显示，会触发 onShow
@@ -109,35 +94,10 @@ App({
   onError: function (msg) {
 
   }
-  ,
   /**
    * 
    */
-  globalData: {
-    openid: '',
-    windowWidth: '',
-    windowHeight: '',
-    rawData: {},
-    latitude: 0.0,
-    longitude: 0.0,
-    qqmapsdk: {},
-    qrcodeUrl: "",
-    locationMap: {
-      "房产小区": "resident",
-      "教育学校": "school",
-      "酒店宾馆": "hotel",
-      "公司企业": "company",
-      "购物": "mall",
-      "美食": "restaurant",
-      "娱乐休闲": "entertainment",
-      "机构团体": "bureau",
-      "银行金融": "bank",
-      "生活服务": "living_service",
-      "旅游景点": "tourism",
-      "基础设施": "infra",
-      "医疗保健": "hospital"
-    }
-  }
+
 
 })
 

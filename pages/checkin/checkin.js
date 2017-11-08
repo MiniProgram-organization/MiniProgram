@@ -78,7 +78,6 @@ Page({
     this.searchPOI();
   },
 
-  /*进入地图的细节，目前作为保留接口*/
   redictDetail: function (e) {
     var target_id = e.currentTarget.id;
     var target_latitude, target_longitude, target_category, target_venue, target_logoPath, target_adinfo_province, target_adinfo_city, target_adinfo_district;
@@ -133,7 +132,7 @@ Page({
           var venue = coordinates[i].title;
           var POI_id = coordinates[i].id;
           var ad_info = coordinates[i].ad_info;
-          console.log(options.ad_info );
+          // console.log(options.ad_info );
           tempMarkers.push({
             POI_id: POI_id,
             latitude: tempLatitude,
