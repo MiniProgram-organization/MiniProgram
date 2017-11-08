@@ -72,7 +72,7 @@ App({
                   return;
                 }
 
-                console.log(res.data.openid);
+                console.log(res.data.openid+"???????/");
                 console.log(res.data.registered);
                 that.globalData.openid = res.data.openid;
 

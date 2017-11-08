@@ -14,11 +14,10 @@ Page({
     this.loadInfo();
   },
   onReady: function () {
-    // 页面渲染完成
+    // 页面渲染完成s
   },
   onShow: function () {
     // 页面显示
-    this.getForcastWeather();
     this.loadInfo();
   },
   onHide: function () {
@@ -50,17 +49,12 @@ Page({
       data: {
         openid:openid,
         latitude:latitude,
-        longitude:longitude
-        
+        longitude:longitude      
       },
       
       success: function (res) {
-        console.log("status: " + res.data.status);
-        console.log("res.data:  " + res.data);
-        console.log("city:  " + res.data.city);
-        console.log("wether:  " + res.data.now);
         var now = res.data.now;
-        var city = res.data.city;
+        var city = res.data.basic.location;
         var day1_weather = {};
         var day2_weather = {};
 
