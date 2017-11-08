@@ -1,4 +1,5 @@
 // pages/categorysta/categorysta.js
+var wxCharts = require('../../utils/wxcharts.js');
 Page({
 
   /**

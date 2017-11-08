@@ -28,18 +28,25 @@ Page({
   },
   loadInfo: function () {
     var self = this;
+    var getSuccess = 0;
+    var timer = 0
     wx.getLocation({
-      type: 'wgs84',
-      success: function (res) {
-        console.log(res);
-
-        var openid = app.globalData.openid;
-        console.log("获取openid! " + openid);
-        var latitude = res.latitude;
-        var longitude = res.longitude;
-        self.loadWeather(latitude, longitude, openid);
-      }
+        type: 'wgs84',
+        success: function (res) {
+          var openid = app.globalData.openid;
+          //如果没有openId 需要加上一个判断
+          var latitude = res.latitude;
+          var longitude = res.longitude;
+          self.loadWeather(latitude, longitude, openid);
+        },
+        fail: function (res) {
+          wx.showToast({
+            title: '定位失败!',
+            duration: 2000
+          })
+        }
     })
+    
   },
   loadWeather: function (latitude, longitude, openid) {
     var page = this;
@@ -51,7 +58,6 @@ Page({
         latitude:latitude,
         longitude:longitude      
       },
-      
       success: function (res) {
         var now = res.data.now;
         var city = res.data.basic.location;

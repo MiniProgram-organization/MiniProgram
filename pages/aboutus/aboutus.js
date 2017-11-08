@@ -14,7 +14,17 @@ Page({
   onLoad: function (options) {
   
   },
-
+  backToAccount: function(options){
+    wx.switchTab({
+      url: '../account/account',
+    })
+  },
+  textChange: function (e) {
+    this.setData({
+      text: e.detail.value
+    });
+    console.log(this.data.text);
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
