@@ -289,12 +289,12 @@ Page({
 
       //统计签到地点数，种类数，并将当前签到记录塞入
       checkInTimes += 1;
-      if (!categoryDic[that.data.checkins[i].category]) {
+      if (!categoryDic[that.data.checkins[i].category.split(":")[0]]) {
         console.log("LLL");
         checkInCategories += 1;
         categoryDic[that.data.checkins[i].category.split(":")[0]] = 1;
       }else{
-        categoryDic[that.data.checkins[i].category].split(":")[0] += 1;
+        categoryDic[that.data.checkins[i].category.split(":")[0]] += 1;
       }
 
       if(!that.data.checkins[i].district||that.data.checkins[i].district == ""){
