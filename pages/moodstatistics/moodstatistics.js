@@ -12,11 +12,12 @@ Page({
     windowWidth: app.globalData.windowWidth,
     windowHeight: app.globalData.windowHeight,
     timeslot:timeslot,
-    categoryres:{}
+    categoryres:{},
+    hint_text:"请选择时间"
   },
   
   bindPickerChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+    //console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       index: e.detail.value
     })
@@ -38,11 +39,20 @@ Page({
         if(res.data.mood_id_num == 0)
         {
           //显示此时间段无心情记录
-          wx.showToast({
-            title: timeslot[that.data.index]+'无记录',
+          that.setData({
+            hint_text: timeslot[e.detail.value]+'无记录'
           })
         }
-        else that.showCategory();
+        else {
+          var total_num = 0
+          for (var i = 0; i < res.data.moods.length; i++) {
+            total_num = total_num + res.data.moods[i].check_num
+          }
+          that.setData({
+            hint_text: timeslot[e.detail.value] + '您记录了' + total_num+'条心情'
+          })
+          that.showCategory();
+        }
       },
       fail: function(res){
       }

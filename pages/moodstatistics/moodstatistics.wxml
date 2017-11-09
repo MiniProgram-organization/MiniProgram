@@ -10,7 +10,9 @@
   </view>
 
 </view>
-
+<view class='hint'>
+  <text>{{hint_text}}</text>
+</view>
 <view style="width: {{windowWidth}}px;" class='view_pie'>
   <canvas class='.canvas_pie' canvas-id="pieCanvas" style="width: {{windowWidth*0.8}}px;height:{{windowHeight}}px" >
   </canvas>

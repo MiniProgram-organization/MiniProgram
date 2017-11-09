@@ -28,7 +28,6 @@
  align-items: center;
   
 }
-
 .item2 {
   background-color: dodgerblue;
 }
@@ -64,4 +63,9 @@
 .canvas_pie
 {
   margin: 0 auto;
+}
+.hint
+{
+  text-align: center;
+  font-size: 18px;
 }

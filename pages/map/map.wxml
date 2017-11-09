@@ -12,7 +12,7 @@
   <text>{{venue}}</text>
   </view>
   
-  <view class="weui-cells__title">记录下你的心情</view>
+  <view class="weui-cells__title">这一刻的想法</view>
   <view class= "input_box_margin">
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell">
