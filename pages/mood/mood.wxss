@@ -31,3 +31,24 @@
 .two_button_right{
   margin-left: 20rpx;
 }
+.member-moodtext{
+  margin-top: 3rpx;
+}
+.member-square{
+  width: 150rpx;
+  height: 128rpx;
+  margin-left: 10rpx;
+  margin-right: 20rpx;
+  margin-top: 15rpx;
+}
+.date{
+   font-size: 100%;
+    display: inline-block;
+    border-radius: 0rpx 20rpx 20rpx 0rpx;
+    width: 250rpx;
+    background-color: #eee;
+}
+.datetext{
+  color:green;
+  margin-right: 20rpx;
+}
