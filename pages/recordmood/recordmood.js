@@ -106,7 +106,7 @@ Page({
           url: '../mood/mood',
           success: function (e) {
             wx.showToast({
-              title: "记录成功：" + that.data.mood_text,
+              title: "记录成功：\n" + that.data.mood_text,
               icon: 'success',
               duration: 2000
             });
@@ -116,7 +116,7 @@ Page({
       fail: function(e)
       {
         wx.showToast({
-          title: "记录失败：" + that.data.mood_text,
+          title: "记录失败：\n" + that.data.mood_text,
           icon: 'loading',
           duration: 2000
         });

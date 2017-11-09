@@ -111,14 +111,14 @@ Page({
           var longitude = wx.getStorageSync('longitude')
           if (latitude == "") {
             wx.showToast({
-              title: '请开启定位!',
+              title: '定位失败!请检查设置!',
               duration: 1000,
               icon: 'loading'
             })
           }
           else {
             wx.showToast({
-              title: '使用上次位置!',
+              title: '定位失败!使用上次位置!',
               duration: 1000,
               icon: 'loading'
             })
