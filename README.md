@@ -673,7 +673,7 @@
 ##### 接收数据格式：
 ```json
 {
-   "status": "OK"
+   "status": "OK",
    "place_num": 3,  //查询到的n个place,如果签到的不同place小于n,则返回不同的place数目。
    "places": [      //按签到次数排序
       {
