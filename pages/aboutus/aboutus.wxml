@@ -27,7 +27,7 @@
     <view style="display: flex;flex-direction:row">
  <view style="flex:0.1"></view>
         <view style="flex:0.8">
-        <button bindtap="checkIn" style="flex:1" class="weui-btn" type="primary">提交</button>
+        <button bindtap="submit" style="flex:1" class="weui-btn" type="primary">提交</button>
         </view>
         <view style="flex:0.1"></view>
     </view>

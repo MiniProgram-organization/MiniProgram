@@ -39,6 +39,7 @@ Page({
   },
   bindChange: function (e) {
     this.moodId = e.detail.value;
+    console.log(e.detail.value);
     this.setData({mood: mood,})
   },
   goToMoodStatistics: function () {

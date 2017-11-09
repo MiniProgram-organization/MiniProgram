@@ -14,9 +14,10 @@ Page({
   onLoad: function (options) {
   
   },
-  backToAccount: function(options){
-    wx.switchTab({
-      url: '../account/account',
+  submit: function(e){
+    wx.showToast({
+      title: '功能暂未开通',
+      icon:"loading",
     })
   },
   textChange: function (e) {
