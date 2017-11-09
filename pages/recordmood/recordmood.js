@@ -1,9 +1,9 @@
 // pages/recordmood/recordmood.js
 var app = getApp();
 var wxCharts = require('../../utils/wxcharts.js');
+//从0-6对应
 var all_name = ['狂喜','开心','放松','平静','低落','焦虑','生气']
-var all_set = 
-[
+var all_set = [
   '哇咔咔，我也为你开心o(￣▽￣)ｄ 保持这一刻的好心情吧！@_@',
   '很高兴能分享你的好心情(*≧∪≦)',
   '保持这一刻的闲适心境，拥抱所有可能的未知o(￣▽￣)ｄ',
@@ -13,7 +13,6 @@ var all_set =
   '世界如此美妙，你却…… '
 ]
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -27,22 +26,50 @@ Page({
   },
   recordMood: function (options)
   {
-    
     var that = this;
-    console.log(that.data.mood_text)
     wx.request({
       url: 'https://40525433.fudan-mini-program.com/cgi-bin/Mood',
       method: 'POST',
       data:{
-        mood_id: that.data.mood_id,           //心情类型(1-7)
-        mood_text:  that.data.mood_text,    //心情类型对应的文字
+        mood_id: that.data.mood_id,        //心情类型(0-6)
+        mood_text: that.data.mood_text,    //心情类型对应的文字
         openid: app.globalData.openid,
         text: that.data.text,
         latitude: app.globalData.latitude,//用户所在纬度
         longitude: app.globalData.longitude,  //用户所在经度
       },
       success: function (e) {
-        console.log("??????")
+        //添加到缓存
+        var old_history = wx.getStorageSync('history_mood');
+        var datetime = new Date();
+        var time = datetime.toLocaleTimeString();
+        var date = datetime.toLocaleDateString();
+        var datetimestring = date + ' ' + time.substring(time.length - 8, time.length)
+        if (old_history == ""){
+          wx.setStorageSync('history_mood', [{
+            mood_id: that.data.mood_id,
+            mood_text: that.data.mood_text,    //心情类型对应的文字
+            text: that.data.text,
+            datetime: datetimestring,
+            latitude: app.globalData.latitude,//用户所在纬度
+            longitude: app.globalData.longitude,  //用户所在经度
+            simpletime: time.substring(time.length - 8, time.length),
+            logoPath: '../images/mood/' + that.data.mood_id + '.png'
+          }])
+        }
+        else{
+          old_history.unshift({
+            mood_id: that.data.mood_id,
+            mood_text: that.data.mood_text,    //心情类型对应的文字
+            text: that.data.text,
+            datetime: datetimestring,
+            latitude: app.globalData.latitude,//用户所在纬度
+            longitude: app.globalData.longitude,  //用户所在经度
+            simpletime: time.substring(time.length - 8, time.length),
+            logoPath: '../images/mood/' + that.data.mood_id + '.png'
+          });
+          wx.setStorageSync('history_mood', old_history);
+        }
         wx.switchTab({
           url: '../mood/mood',
           success: function (e) {
@@ -69,27 +96,24 @@ Page({
     this.setData({
       text: e.detail.value
     });
-    console.log(this.data.text);
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options.moodId);
     this.setData({
       icon_url: '../images/mood/' + (parseInt(options.moodId)+1)+'.png',
       mood_id:options.moodId,
       mood_text: all_name[parseInt(options.moodId)],
       mood_set: all_set[parseInt(options.moodId)]
     })
-    console.log(this.data)
+    var old_history = wx.getStorageSync('history_mood');
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
   },
 
   /**

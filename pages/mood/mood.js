@@ -23,7 +23,6 @@ var mood =[{
     "text": "生气"
   }]
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -35,15 +34,12 @@ Page({
     moodTimes: 0,
     mood:mood,
     moodId: 0,
-    history_moodlist:[],
-    show_moodlist:[],
+    history_mood:[],
     classifiedMoods:[],
   },
   bindChange: function (e) {
     this.moodId = e.detail.value;
-    this.setData({
-      mood: mood,
-    })
+    this.setData({mood: mood,})
   },
   goToMoodStatistics: function () {
     wx.navigateTo({
@@ -56,29 +52,26 @@ Page({
     })
   },
   classifyByDate: function () {
+    var that = this;
     var tempClassifyByDate = [];
     var currentDate = '';
     var currentClass = {};
-    for (var i = 0; i < this.data.show_moodlist.length; i++) {
-
-      //出现新的日期，则增加新的一个date对象
-      var tempData = this.data.show_moodlist[i].datetime.substring(0,10);  
+    for (var i = 0; i < this.data.history_mood.length; i++) {
+      
+      var tempData = this.data.history_mood[i].datetime.substring(0,10);  
       if (currentDate != tempData){
-        if (currentClass.date) {
-          tempClassifyByDate.push(currentClass);
-        }
+        if (currentClass.date) tempClassifyByDate.push(currentClass);
         currentClass = {};
         currentClass.date = tempData;
         currentDate = tempData;
         currentClass['moodList'] = [];
       }
-      currentClass['moodList'].push(this.data.show_moodlist[i]);
+      currentClass['moodList'].push(this.data.history_mood[i]);
+      console.log(currentClass+'..')
     }
-    //最后一个也需要塞入进去
     tempClassifyByDate.push(currentClass);
-    this.setData({
-      classifiedMoods: tempClassifyByDate,
-    });
+    console.log(tempClassifyByDate)
+    this.setData({classifiedMoods: tempClassifyByDate,});
   },
   /**
    * 生命周期函数--监听页面加载
@@ -91,7 +84,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
   },
 
   /**
@@ -101,47 +93,46 @@ Page({
     //获取历史数据
     var history_mood = wx.getStorageSync('history_mood');
     var that = this;
-
-    console.log("请求历史心情");
-    wx.request({
-        url: 'https://40525433.fudan-mini-program.com/cgi-bin/MoodHistory',
-        data:{
-          openid: app.globalData.openid,
-        },
-        method: 'POST',
-        success: function (res) {
-          console.log("返回的历史心情");
-          console.log(res);
-          var show_moodlist = [];
-          for (var i = 0; i < res.data.moods.length; i++){
-            var temp_table = {}
-            temp_table = res.data.moods[i];
-            temp_table['simpletime'] = res.data.moods[i].datetime.substring(11, 19)
-            temp_table['logoPath'] = '../images/mood/'+res.data.moods[i].mood_id+'.png';
-            show_moodlist.push(temp_table);
+    if (history_mood != "") {
+      this.setData({history_mood: history_mood});
+      this.classifyByDate();
+    }
+    else{
+      wx.request({
+          url: 'https://40525433.fudan-mini-program.com/cgi-bin/MoodHistory',
+          data:{
+            openid: app.globalData.openid,
+          },
+          method: 'POST',
+          success: function (res) {
+            var temp_history_mood = [];
+            for (var i = 0; i < res.data.moods.length; i++){
+              var temp_table = {}
+              temp_table = res.data.moods[i];
+              temp_table['simpletime'] = res.data.moods[i].datetime.substring(11, 19)
+              temp_table['logoPath'] = '../images/mood/'+res.data.moods[i].mood_id+'.png';
+              temp_history_mood.push(temp_table);
+            }
+            that.setData({
+              history_mood: temp_history_mood,
+            });
+            wx.setStorageSync('history_mood', temp_history_mood);
+            console.log(wx.getStorageSync('history_mood'))
+            that.classifyByDate();
           }
-          that.setData({
-            history_moodlist: res.data.moods,
-            show_moodlist: show_moodlist,
-          });
-          wx.setStorageSync('history_mood', show_moodlist);
-          that.classifyByDate();
-        }
-    })
+      })
+    }
   },
-
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
   
   },
-
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
   },
 
   /**
@@ -162,6 +153,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   }
 })
