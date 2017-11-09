@@ -1,5 +1,6 @@
 // pages/account/account.js
 var app = getApp();
+var genderChoose = ['未知','男', '女']
 Page({
 
   /**
@@ -17,8 +18,6 @@ Page({
     latitude: '',
     longitude: '',
     ip:'',
-    genderChoose: ['female', 'male']
-    
   },
     
   /**
@@ -26,19 +25,33 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    console.log(app.globalData);
+    var nickName = "";
+    var gender = "";
+    var province = "";
+    var country = "";
+    console.log(app.globalData.rawData.gender)
+    nickName = app.globalData.rawData.nickName;
+    gender = genderChoose[app.globalData.rawData.gender];
+    province = app.globalData.rawData.province;
+    country = app.globalData.rawData.country;
+    var latitude = app.globalData.latitude;
+    var longitude = app.globalData.longitude;
+    if (nickName == "") nickName = " ";
+    if (gender == "") gender = " ";
+    if (province == "") provincee = " ";
+    if (country == "") country = " ";
+
     that.setData({
-      nickName: app.globalData.rawData.nickName,
+      nickName: nickName,
       windowWidth: app.globalData.windowWidth,
       windowHeight: app.globalData.windowHeight,
       avatarUrl: app.globalData.rawData.avatarUrl,
-      gender: that.data.genderChoose[app.globalData.rawData.gender],
-      province: app.globalData.rawData.province,
-      country: app.globalData.rawData.country,
+      gender: gender,
+      province: province,
+      country: country,
       latitude: app.globalData.latitude,
       longitude: app.globalData.longitude,
       iconUrl: "../images/account/ic_chevron_right_black_48dp.png",
-
     });
     
     
