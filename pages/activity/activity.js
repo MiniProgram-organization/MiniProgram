@@ -41,8 +41,7 @@ Page({
     })
   },
 
-
-  fetchData: function () {
+  fetchData: function (cnt) {
     var that = this;
     this.setData({
       windowWidth: app.globalData.windowWidth,
@@ -52,9 +51,9 @@ Page({
     wx.getLocation({
       type: 'wgs84', //返回可以用于wx.openLocation的经纬度
       success: function (res) {
+        cnt = cnt + 1
         app.globalData.latitude = res.latitude;
         app.globalData.longitude = res.longitude; 
-
         //存储一个缓存的经纬度,用于定位失败时使用
         wx.setStorageSync('latitude', res.latitude);
         wx.setStorageSync('longitude', res.longitude);
@@ -94,7 +93,6 @@ Page({
               });
             }
             console.log(tempMarkers);
-
             that.setData({
               markers: tempMarkers,
               include_points: tempIncludePoints
@@ -102,14 +100,77 @@ Page({
 
           },
           fail: function () {
-            console.log('发送位置失败');
+
           }
         });
+      },
+      fail: function(){
+        cnt = cnt + 1
+        if (cnt < 10) fetchData(cnt)
+        else {
+          var latitude = wx.getStorageInfoSync('latitude')
+          var longitude = wx.getStorageInfoSync('longitude')
+          if (latitude == "") {
+            wx.showToast({
+              title: '定位失败!',
+              duration: 2000
+            })
+          }
+          else {
+            //使用缓存定位
+            app.globalData.latitude = latitude;
+            app.globalData.longitude = longitude;
+            app.globalData.qqmapsdk.reverseGeocoder({
+              location: {
+                latitude: latitude,
+                longitude: longitude
+              },
+              get_poi: 1,
+              success: function (res) {
+                console.log("附近POI");
+                console.log(res.result.pois);
+                var coordinates = res.result.pois;
+                //marker数组
+                var tempMarkers = [];
+                var tempIncludePoints = [];
+
+                for (var i = 0; i < coordinates.length; i++) {
+                  var tempLatitude = coordinates[i].location.lat;
+                  var tempLongitude = coordinates[i].location.lng;
+                  var category = coordinates[i].category
+                  var venue = coordinates[i].title;
+                  var POI_id = coordinates[i].id;
+
+                  tempMarkers.push({
+                    POI_id: POI_id,
+                    latitude: tempLatitude,
+                    longitude: tempLongitude,
+                    iconPath: '../images/map/dot.jpg',
+                    category: category,
+                    venue: venue
+                  });
+                  tempIncludePoints.push({
+                    latitude: tempLatitude,
+                    longitude: tempLongitude,
+                  });
+                }
+                console.log(tempMarkers);
+                that.setData({
+                  markers: tempMarkers,
+                  include_points: tempIncludePoints
+                });
+
+              },
+              fail: function () {
+
+              }
+            });
+
+
+          }
+        }
       }
     });
-
-
-
     setTimeout(function () {
       that.setData({
         hidden: true
@@ -325,7 +386,7 @@ Page({
       checkInCategories: checkInCategories
     });
 
-    this.fetchData();
+    this.fetchData(1);
 
   },
 

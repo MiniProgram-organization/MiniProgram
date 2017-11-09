@@ -26,27 +26,44 @@ Page({
   onUnload: function () {
     // 页面关闭
   },
+  getLocationResur: function(cnt){
+    var that = this;
+    wx.getLocation({
+      type: 'wgs84',
+      success: function (res) {
+        cnt = cnt + 1
+        var openid = app.globalData.openid;
+        //如果没有openId 需要加上一个判断
+        var latitude = res.latitude;
+        var longitude = res.longitude;
+        that.loadWeather(latitude, longitude, openid);
+      },
+      fail: function (res) {
+        cnt = cnt + 1
+        if (cnt < 10){
+          that.getLocationResur(cnt)
+        }
+        else{
+          var latitude = wx.getStorageInfoSync('latitude')
+          var longitude = wx.getStorageInfoSync('longitude')
+          var openid = app.globalData.openid;
+          if (latitude == ""){
+            wx.showToast({
+              title: '定位失败!',
+              duration: 2000
+            })
+          }
+          else{
+            that.loadWeather(latitude, longitude, openid);
+          }
+        }
+      }
+    })
+  },
   loadInfo: function () {
-    var self = this;
     var getSuccess = 0;
     var timer = 0
-    wx.getLocation({
-        type: 'wgs84',
-        success: function (res) {
-          var openid = app.globalData.openid;
-          //如果没有openId 需要加上一个判断
-          var latitude = res.latitude;
-          var longitude = res.longitude;
-          self.loadWeather(latitude, longitude, openid);
-        },
-        fail: function (res) {
-          wx.showToast({
-            title: '定位失败!',
-            duration: 2000
-          })
-        }
-    })
-    
+    this.getLocationResur(1);
   },
   loadWeather: function (latitude, longitude, openid) {
     var page = this;
