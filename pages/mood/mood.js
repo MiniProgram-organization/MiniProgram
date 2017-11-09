@@ -44,6 +44,7 @@ Page({
     moodTimes: 0,
     mood:mood,
     moodId: 0,
+    history_moodlist:[],
   },
   bindChange: function (e) {
     this.moodId = e.detail.value;
@@ -79,7 +80,32 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    //获取历史数据
+    var history_mood = wx.getStorageSync('history_mood');
+    var that = this;
+
+    /*if (history_mood != "") {
+      console.log("自身获得缓存");
+      this.setData({
+        checkins: history_mood
+      });
+    } else {*/
+      console.log("请求历史心情");
+      wx.request({
+        url: 'https://40525433.fudan-mini-program.com/cgi-bin/MoodHistory',
+        data:{
+          openid: app.globalData.openid,
+        },
+        method: 'POST',
+        success: function (res) {
+          console.log("返回的历史心情");
+          console.log(res);
+          that.setData({
+            history_moodlist: res.data.moods
+          });
+          wx.setStorageSync('history_mood', res.data.moods);
+        }
+      })
   },
 
   /**
