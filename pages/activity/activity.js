@@ -57,7 +57,6 @@ Page({
         //存储一个缓存的经纬度,用于定位失败时使用
         wx.setStorageSync('latitude', res.latitude);
         wx.setStorageSync('longitude', res.longitude);
-
         app.globalData.qqmapsdk.reverseGeocoder({
           location: {
             latitude: res.latitude,
@@ -106,17 +105,23 @@ Page({
       },
       fail: function(){
         cnt = cnt + 1
-        if (cnt < 10) fetchData(cnt)
+        if (cnt < 10) that.fetchData(cnt)
         else {
-          var latitude = wx.getStorageInfoSync('latitude')
-          var longitude = wx.getStorageInfoSync('longitude')
+          var latitude = wx.getStorageSync('latitude')
+          var longitude = wx.getStorageSync('longitude')
           if (latitude == "") {
             wx.showToast({
-              title: '定位失败!',
-              duration: 2000
+              title: '请开启定位!',
+              duration: 1000,
+              icon: 'loading'
             })
           }
           else {
+            wx.showToast({
+              title: '使用上次位置!',
+              duration: 1000,
+              icon: 'loading'
+            })
             //使用缓存定位
             app.globalData.latitude = latitude;
             app.globalData.longitude = longitude;

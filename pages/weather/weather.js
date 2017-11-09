@@ -44,16 +44,24 @@ Page({
           that.getLocationResur(cnt)
         }
         else{
-          var latitude = wx.getStorageInfoSync('latitude')
-          var longitude = wx.getStorageInfoSync('longitude')
+          var latitude = wx.getStorageSync('latitude')
+          var longitude = wx.getStorageSync('longitude')
           var openid = app.globalData.openid;
           if (latitude == ""){
             wx.showToast({
-              title: '定位失败!',
-              duration: 2000
+              title: '请开启定位!',
+              duration: 1000,
+              icon: 'loading'
             })
           }
           else{
+            wx.showToast({
+              title: '使用上次位置!',
+              duration: 1000,
+              icon: 'loading'
+            })
+            console.log(latitude)
+            console.log(longitude+'....')
             that.loadWeather(latitude, longitude, openid);
           }
         }
