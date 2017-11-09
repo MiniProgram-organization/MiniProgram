@@ -44,13 +44,10 @@ Page({
 
   fetchData: function () {
     var that = this;
-    console.log("获取openid" + app.globalData.openid);
     this.setData({
       windowWidth: app.globalData.windowWidth,
       windowHeight: app.globalData.windowHeight
     });
-    console.log('当前宽度' + this.data.windowWidth);
-    console.log('当前高度' + this.data.windowHeight);
 
     wx.getLocation({
       type: 'wgs84', //返回可以用于wx.openLocation的经纬度
@@ -158,42 +155,101 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    //获取历史数据
-    var history = wx.getStorageSync('history');
-    var that = this;
+    this.getOpenId();
+    console.log(this.data.checkins);
     
-    if(history!=""){
-      console.log("自身获得缓存");
+    console.log(this.data.classifiedCheckIns);
+    
+
+  },
+
+  getOpenId: function(){
+    var that = this;
+    wx.login({
+      success: function (res) {
+        var code = res.code;
+
+        wx.getUserInfo({
+          success: function (res) {
+            
+            getApp().globalData.rawData = JSON.parse(res.rawData);
+            
+            var iv = res.iv;
+            
+            wx.request({
+              url: 'https://40525433.fudan-mini-program.com/cgi-bin/Login',
+              method: 'POST',
+              data: {
+                code: code,
+                rawData: getApp().globalData.rawData,
+                latitude: getApp().globalData.latitude,
+                longitude: getApp().globalData.longitude,
+              },
+              success: function (res) {
+                if (res.data.status == "ERROR") {
+                  console.log(res.data.message);
+                  wx.navigateTo({
+                    url: '/pages/error/error',
+                  })
+                  return;
+                }
+
+                
+                getApp().globalData.openid = res.data.openid;
+                
+                that.getCheckIns();
+              }
+            })
+          }
+        });
+      }
+    });
+  },
+
+  getCheckIns: function(){
+    //获取历史数据
+    var checkins = wx.getStorageSync('checkins');
+    var that = this;
+    if (checkins != "") {
       this.setData({
-        checkins: history
+        checkins: checkins
       });
-    }else{
+      that.classifyByDate();
+    } else {
       console.log("向lsh请求历史");
+
+      console.log(getApp().globalData.openid);
+
       wx.request({
         url: 'https://40525433.fudan-mini-program.com/cgi-bin/History',
-        openid: app.globalData.openid,
-        success: function(res){
+        data: {
+          openid: getApp().globalData.openid
+        },
+        method: 'POST',
+        success: function (res) {
           console.log("lsh返回的历史");
           console.log(res);
+
+          for (var i = 0; i < res.data.checkins.length; i++) {
+            res.data.checkins[i].date = res.data.checkins[i]['datetime'].split(" ")[0];
+            res.data.checkins[i].time = res.data.checkins[i]['datetime'].split(" ")[1];
+
+            //需要自行设置logoPath
+            var category = res.data.checkins[i].category;
+            res.data.checkins[i].logoPath = '../images/location/' + app.globalData.locationMap[category.split(":")[0]] + '.png';
+          }
+
           that.setData({
             checkins: res.data.checkins
           });
-          wx.setStorageSync('history', res.data.checkins);
+          wx.setStorageSync('checkins', res.data.checkins);
+
+
+
+          that.classifyByDate();
         }
       })
     }
-
-
-
-    //  按照日期对签到记录分类
-    this.classifyByDate();
-
-    //绘制竖线
-    //this.drawLine();
-
-    //获取当前数据
-    this.fetchData();
-
   },
 
   classifyByDate: function () {
@@ -206,6 +262,7 @@ Page({
     //用字典的方法来统计签到的地点数和种类数
     var categoryDic = {};
     var placeDic = {};
+    var districtDic ={};
     var checkInTimes = 0;
     var checkInCategories = 0;
     var checkInPlaces = 0;
@@ -231,20 +288,33 @@ Page({
 
       //统计签到地点数，种类数，并将当前签到记录塞入
       checkInTimes += 1;
-      if (!categoryDic[that.data.checkins[i].category]) {
+      if (!categoryDic[that.data.checkins[i].category.split(":")[0]]) {
         console.log("LLL");
         checkInCategories += 1;
-        categoryDic[that.data.checkins[i].category] = true;
+        categoryDic[that.data.checkins[i].category.split(":")[0]] = 1;
+      }else{
+        categoryDic[that.data.checkins[i].category.split(":")[0]] += 1;
+      }
+
+      if(!that.data.checkins[i].district||that.data.checkins[i].district == ""){
+        that.data.checkins[i].district = "未知";
+      }
+      if (!districtDic[that.data.checkins[i].district]){
+        districtDic[that.data.checkins[i].district] = 1;
+      }else{
+        districtDic[that.data.checkins[i].district] += 1;
       }
 
       if (!placeDic[that.data.checkins[i].POI_id]) {
         checkInPlaces += 1;
         placeDic[that.data.checkins[i].POI_id] = true;
       }
-
-
       currentClass['checkInList'].push(that.data.checkins[i]);
     }
+
+    getApp().globalData.categoryDic = categoryDic;
+    getApp().globalData.placeDic = placeDic;
+    getApp().globalData.districtDic = districtDic;
 
     //最后一个也需要塞入进去
     tempClassifyByDate.push(currentClass);
@@ -256,7 +326,7 @@ Page({
       checkInCategories: checkInCategories
     });
 
-    console.log(this.data.classifiedCheckIns);
+    this.fetchData();
 
   },
 

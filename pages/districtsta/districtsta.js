@@ -9,32 +9,38 @@ Page({
   data: {
     windowWidth: app.globalData.windowWidth,
     windowHeight: app.globalData.windowHeight,
+    series: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.constructDistrictSeries();
+
     var pieChart = new wxCharts({
       animation: true,
       disablePieStroke: true,
       canvasId: 'pieCanvas',
       type: 'pie',
-      series: [{
-        name: '黄浦',
-        data: 3,
-      }, {
-        name: '徐汇 ',
-        data: 5,
-        color: '#CDBA96',
-      }, {
-        name: '浦东新区',
-        data: 4,
-      }],
-
+      series: this.data.series,
       width: app.globalData.windowWidth * 0.8,
       height: 300,
       dataLabel: true,
+    });
+  },
+
+  constructDistrictSeries: function(){
+    var tempSeries = []
+    for (var key in getApp().globalData.districtDic){
+      var serie = {
+        name: key,
+        data: getApp().globalData.districtDic[key]
+      }
+      tempSeries.push(serie);
+    }
+    this.setData({
+      series: tempSeries
     });
   },
 
