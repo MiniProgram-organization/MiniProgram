@@ -630,3 +630,117 @@
    ]
 }
 ```
+
+
+#### 14.用户为我们提供意见
+
+##### url: [https://40525433.fudan-mini-program.com/cgi-bin/](https://40525433.fudan-mini-program.com/cgi-bin/)
+
+##### method: POST
+
+##### 发送数据格式：
+
+```json
+{ 
+  openid:"hafsdfs",
+  opinion_text:"你们的东西做的太好了！",    
+}
+```
+
+##### 接收数据格式：
+```json
+{
+   "status": "OK"
+}
+```
+
+
+#### 15.查询用户签到数量最多的n个Place
+
+##### url: [https://40525433.fudan-mini-program.com/cgi-bin/](https://40525433.fudan-mini-program.com/cgi-bin/)
+
+##### method: GET
+
+##### 发送数据格式：
+
+```json
+{ 
+  openid:"hafsdfs",
+  place_num:5
+}
+```
+
+##### 接收数据格式：
+```json
+{
+   "status": "OK"
+   "place_num": 3,  //查询到的n个place,如果签到的不同place小于n,则返回不同的place数目。
+   "places": [      //按签到次数排序
+      {
+        "POI_id":"fsfs1",
+ 	"POI_name":"复旦大学张江校区",
+        "check_num":25,
+      },  
+      {
+        "POI_id":"fsfs2",
+ 	"POI_name":"计算机楼",
+        "check_num":20,
+      }, 
+      {
+        "POI_id":"fsfsd3",
+ 	"POI_name":"保障楼",
+        "check_num":10,
+      }
+   ]
+}
+```
+
+
+#### 16.查询金币信息
+
+##### url: [https://40525433.fudan-mini-program.com/cgi-bin/](https://40525433.fudan-mini-program.com/cgi-bin/)
+
+##### method: GET
+
+##### 发送数据格式：
+
+```json
+{ 
+  openid:"hafsdfs",
+}
+```
+
+##### 接收数据格式：
+```json
+{
+   "status": "OK",
+   "coin_num":236  //金币数量
+}
+```
+
+
+#### 16.查询在某poi签到次数最多的一个用户
+
+##### url: [https://40525433.fudan-mini-program.com/cgi-bin/](https://40525433.fudan-mini-program.com/cgi-bin/)
+
+##### method: GET
+
+##### 发送数据格式：
+
+```json
+{ 
+  "POI_id":"vdfdsf"
+}
+```
+
+##### 接收数据格式：
+```json
+{
+   "status": "OK",
+   "openid":"1234",
+   "nickName":"lsh",
+   "avatarUrl":"https://wx.qlogo.cn/abcd",
+   "datetime":"2017-07-01 08:08:08",   //这个签到最多的用户，上一次签到的时间。
+   "checkin_num":109                   //该用户在这个POI签到的次数。
+}
+```
