@@ -4,3 +4,11 @@
   font-size: 20px;
   text-align: center;
 }
+.view_pie
+{
+    margin: 0 auto;
+}
+.canvas_pie
+{
+  margin: 0 auto;
+}
