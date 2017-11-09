@@ -642,8 +642,8 @@
 
 ```json
 { 
-  openid:"hafsdfs",
-  opinion_text:"你们的东西做的太好了！",    
+  "openid":"hafsdfs",
+  "opinion_text":"你们的东西做的太好了！",    
 }
 ```
 
@@ -665,8 +665,8 @@
 
 ```json
 { 
-  openid:"hafsdfs",
-  place_num:5
+  "openid":"hafsdfs",
+  "place_num":5
 }
 ```
 
@@ -706,7 +706,7 @@
 
 ```json
 { 
-  openid:"hafsdfs",
+  "openid":"hafsdfs",
 }
 ```
 
