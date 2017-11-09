@@ -44,13 +44,10 @@ Page({
 
   fetchData: function () {
     var that = this;
-    console.log("获取openid" + app.globalData.openid);
     this.setData({
       windowWidth: app.globalData.windowWidth,
       windowHeight: app.globalData.windowHeight
     });
-    console.log('当前宽度' + this.data.windowWidth);
-    console.log('当前高度' + this.data.windowHeight);
 
     wx.getLocation({
       type: 'wgs84', //返回可以用于wx.openLocation的经纬度
@@ -172,14 +169,13 @@ Page({
       success: function (res) {
         var code = res.code;
 
-        console.log('code is ' + code);
         wx.getUserInfo({
           success: function (res) {
-            console.log(res.rawData);
+            
             getApp().globalData.rawData = JSON.parse(res.rawData);
-            console.log(getApp().globalData.rawData);
+            
             var iv = res.iv;
-            console.log("Don't get storage");
+            
             wx.request({
               url: 'https://40525433.fudan-mini-program.com/cgi-bin/Login',
               method: 'POST',
@@ -198,10 +194,9 @@ Page({
                   return;
                 }
 
-                console.log(res.data.openid);
-                console.log(res.data.registered);
+                
                 getApp().globalData.openid = res.data.openid;
-                console.log("global Data" + getApp().globalData.openid);
+                
                 that.getCheckIns();
               }
             })
