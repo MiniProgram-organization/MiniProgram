@@ -734,30 +734,6 @@
 }
 ```
 
-
-#### 16.查询金币信息
-
-##### url: [https://40525433.fudan-mini-program.com/cgi-bin/](https://40525433.fudan-mini-program.com/cgi-bin/)
-
-##### method: GET
-
-##### 发送数据格式：
-
-```json
-{ 
-  "openid":"hafsdfs",
-}
-```
-
-##### 接收数据格式：
-```json
-{
-   "status": "OK",
-   "coin_num":236  //金币数量
-}
-```
-
-
 #### 16.查询在某poi签到次数最多的一个用户
 
 ##### url: [https://40525433.fudan-mini-program.com/cgi-bin/](https://40525433.fudan-mini-program.com/cgi-bin/)

@@ -4,7 +4,7 @@
   <view class="section">
   <picker bindchange="bindPickerChange" value="{{index}}" range="{{timeslot}}">
     <view class='picker'>
-    <text class='picker_text'>选择时间：{{timeslot[index]}}</text>
+    <text class='picker_text'>请选择时间：{{timeslot[index]}}</text>
     </view>
   </picker>
   </view>
@@ -17,5 +17,7 @@
   <canvas class='.canvas_pie' canvas-id="pieCanvas" style="width: {{windowWidth*0.8}}px;height:{{windowHeight}}px" >
   </canvas>
 </view>
-
+<view class='hint'>
+  <text>!!!!!!!!!</text>
+</view>
 </view>

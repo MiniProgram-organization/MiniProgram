@@ -92,12 +92,12 @@ Page({
 
   checkIn: function (e) {
     var that = this;
-
+  /*
     if (that.data.text == "") {
       wx.showToast({
         title: '请输入你的心情',
       })
-    } else {
+    } else {*/
       if (app.globalData.openid == ""){
         that.loginNoOpenId();
       }
@@ -210,7 +210,7 @@ Page({
         }
 
       });
-    }
+    //}
   },
 
 

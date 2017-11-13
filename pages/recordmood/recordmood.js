@@ -71,7 +71,6 @@ Page({
         longitude: app.globalData.longitude,  //用户所在经度
       },
       success: function (e) {
-        console.log(e.data)
         //添加到缓存
         var old_history = wx.getStorageSync('history_mood');
         var datetime = new Date();

@@ -48,7 +48,7 @@
           <view class="weui-label">积分</view>
         </view>
         <view class="weui-cell__bd">
-          <text class="weui-input">{{scores}}</text>
+          <text class="weui-input">{{scores}} (详见官网)</text>
         </view>
       </view>
 
@@ -57,7 +57,7 @@
           <view class="weui-label">经纬度</view>
         </view>
         <view class="weui-cell__bd">
-          <text class="weui-input">{{longitude}},{{latitude}}</text>
+          <text class="weui-input">{{latitude_text}}，{{longitude_text}}</text>
         </view>
       </view>
 
