@@ -52,3 +52,7 @@
   color:green;
   margin-right: 20rpx;
 }
+.awardtext{
+  text-align: center;
+  font-size: 13px;
+}

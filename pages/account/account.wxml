@@ -43,6 +43,14 @@
           <text class="weui-input">{{country}}</text>
         </view>
       </view>
+  <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">积分</view>
+        </view>
+        <view class="weui-cell__bd">
+          <text class="weui-input">{{scores}}</text>
+        </view>
+      </view>
 
         <view class="weui-cell weui-cell_input">
         <view class="weui-cell__hd">
@@ -53,6 +61,7 @@
         </view>
       </view>
 
+     
       <view class="weui-cell weui-cell_input">
         <view class="weui-cell__hd">
           <view class="weui-label">关于我们</view>

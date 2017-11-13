@@ -8,6 +8,11 @@ Page({
     windowHeight: app.globalData.windowHeight,
     day1_weather: {},
     day2_weather: {},
+    con_day: 0,
+    less_day: 7,
+    object_day: 7,
+    award_text_1: "",
+    award_text_2: "",
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
@@ -74,7 +79,7 @@ Page({
     this.getLocationResur(1);
   },
   loadWeather: function (latitude, longitude, openid) {
-    var page = this;
+    var that = this;
     wx.request({
       url: 'https://40525433.fudan-mini-program.com/cgi-bin/Weather',
       method: 'POST',
@@ -88,7 +93,17 @@ Page({
         var city = res.data.basic.location;
         var day1_weather = {};
         var day2_weather = {};
-
+        var award = res.data.award.award;
+        var scores = res.data.award.scores;
+        var duration = res.data.award.duration;
+        console.log(res.data)
+        wx.setStorageSync('scores', scores);
+        wx.setStorageSync('duration_weather', duration);
+        if (award> 0){
+          wx.showToast({
+            title: '查看天气\n'+'+'+award+'分',
+          })
+        }
         day1_weather['category'] = res.data.forecast[1].cond_txt_n;
         day2_weather['category'] = res.data.forecast[2].cond_txt_n;
         day1_weather['high'] = res.data.forecast[1].tmp_max;
@@ -96,13 +111,66 @@ Page({
         day1_weather['low'] = res.data.forecast[1].tmp_min;
         day2_weather['low'] = res.data.forecast[2].tmp_min;
 
-        page.setData({
+        that.setData({
           city: city,
           weather: now,
           day1_weather: day1_weather,
           day2_weather:day2_weather,
           weathericonURL: "../images/weather/" + now.cond_code+".png",
         })
+
+        if ((duration % 7 == 0) && ((duration % 28) != 0)) {
+          if ((duration / 7) % 4 == 1) {
+            that.setData({
+              con_day: duration,
+              award_text_1: "连续查看天气",
+              award_text_2: "天了，真棒！\n又获得额外积分奖励啦~"
+            })
+          }
+          else if ((duration / 7) % 4 == 2) {
+            that.setData({
+              con_day: duration,
+              award_text_1: "连续查看天气",
+              award_text_2: "天了，exciting！\n又获得额外积分奖励啦~"
+            })
+          }
+          else if ((duration / 7) % 4 == 3) {
+            that.setData({
+              con_day: duration,
+              award_text_1: "连续查看天气",
+              award_text_2: "天了，amazing！\n又获得额外积分奖励啦~"
+            })
+          }
+        }
+        else if (duration % 28 == 0) {
+          that.setData({
+            con_day: duration,
+            award_text_1: "连续查看天气",
+            award_text_2: "天了，天啦噜！一份超值额外积分大礼砸中了你~"
+          })
+        }
+        else if (duration % 7 != 0) {
+          var object_day = (parseInt(duration / 7) + 1) * 7;
+          console.log(object_day)
+          if (object_day % 28 == 0) {
+            that.setData({
+              con_day: duration,
+              object_day: object_day,
+              less_day: object_day - duration,
+              award_text_1: "已连续查看天气",
+              award_text_2: "天了！还差" + (object_day - duration) + "天就能获得连续28天超值额外积分奖励喔，加油~"
+            })
+          }
+          else {
+            that.setData({
+              con_day: duration,
+              object_day: object_day,
+              less_day: object_day - duration,
+              award_text_1: "已连续查看天气",
+              award_text_2: "天了！还差" + (object_day - duration) + "天就能获得额外积分奖励喔，加油~"
+            })
+          }
+        }
       },
       fail: function (res) {
         console.log("发送天气信息失败" + res);

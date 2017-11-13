@@ -18,6 +18,7 @@ Page({
     latitude: '',
     longitude: '',
     ip:'',
+    scores:0,
   },
     
   /**
@@ -41,6 +42,11 @@ Page({
     if (province == "") provincee = " ";
     if (country == "") country = " ";
 
+    var socresTemp = wx.getStorageSync('scores')
+    var scores = 0;
+    if (socresTemp != 0){
+      scores = socresTemp;
+    }
     that.setData({
       nickName: nickName,
       windowWidth: app.globalData.windowWidth,
@@ -52,6 +58,7 @@ Page({
       latitude: app.globalData.latitude,
       longitude: app.globalData.longitude,
       iconUrl: "../images/account/ic_chevron_right_black_48dp.png",
+      scores: scores,
     });
     
     

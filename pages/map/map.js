@@ -112,8 +112,6 @@ Page({
             venue: that.data.venue,
             latitude: that.data.latitude, //poi所在纬度
             longitude: that.data.longitude, //poi所在经度
-            //city: "上海",
-            //country: "中国"
             province: that.data.ad_province,
             city: that.data.ad_city,
             district: that.data.ad_district,
@@ -132,6 +130,11 @@ Page({
           var old_history = wx.getStorageSync('checkins');
 
           if (e.data.status == "OK") {
+            var award = e.data.award;
+            var scores = e.data.scores;
+            var duration = e.data.duration;
+            wx.setStorageSync('scores', scores);
+            wx.setStorageSync('duration_checkin', duration);
 
             if (!old_history) {
               console.log("没有缓存");
@@ -152,7 +155,6 @@ Page({
               })
             } else {
               console.log("有历史缓存");
-
               //插入头部，因为是按照时间倒序排列的
               old_history.unshift({
                 POI_latitude: that.data.latitude,
@@ -175,19 +177,27 @@ Page({
             wx.redirectTo({
               url: '../showpeople/showpeople?POI_id=' + that.data.POI_id,
               success: function (e) {
-                
-                wx.showToast({
-                  title: that.data.venue + " 签到成功",
-                  icon: 'success',
-                  duration: 2000
-                });
+                if (award > 0){
+                  wx.showToast({
+                    title: "签到成功\n" +'+'+award+'分',
+                    icon: 'success',
+                    duration: 2000
+                  });
+                }
+                else{
+                  wx.showToast({
+                    title: "签到成功",
+                    icon: 'success',
+                    duration: 2000
+                  });
+                }
               }
             })
 
           } else {
 
             wx.showToast({
-              title: that.data.venue + " 签到失败",
+              title: "签到失败",
               icon: 'loading',
               duration: 2000
 

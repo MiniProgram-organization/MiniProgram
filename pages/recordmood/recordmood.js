@@ -71,12 +71,19 @@ Page({
         longitude: app.globalData.longitude,  //用户所在经度
       },
       success: function (e) {
+        console.log(e.data)
         //添加到缓存
         var old_history = wx.getStorageSync('history_mood');
         var datetime = new Date();
         var time = datetime.toLocaleTimeString();
         var date = datetime.toLocaleDateString();
         var datetimestring = date + ' ' + time.substring(time.length - 8, time.length)
+        var duration = e.data.duration;
+        var award = e.data.award;
+        var scores = e.data.scores;
+        wx.setStorageSync('scores', scores);
+        wx.setStorageSync('duration_mood', duration);
+
         if (old_history == ""){
           wx.setStorageSync('history_mood', [{
             mood_id: that.data.mood_id,
@@ -105,11 +112,20 @@ Page({
         wx.switchTab({
           url: '../mood/mood',
           success: function (e) {
-            wx.showToast({
-              title: "记录成功：\n" + that.data.mood_text,
-              icon: 'success',
-              duration: 2000
-            });
+            if (award > 0){
+              wx.showToast({
+                title: "记录成功：\n" + that.data.mood_text+'\n'+'+'+award+'分',
+                icon: 'success',
+                duration: 2000
+              });
+            }
+            else{
+              wx.showToast({
+                title: "记录成功：\n" + that.data.mood_text,
+                icon: 'success',
+                duration: 2000
+              });
+            }
           }
         })
       },

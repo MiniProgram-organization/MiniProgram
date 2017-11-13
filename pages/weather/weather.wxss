@@ -79,12 +79,21 @@
 {
   display: flex;
 }
+.awardtext{
+  text-align: center;
+  font-size: 13px;
+  color: #fff;
+  position: fixed;
+  bottom: 10px;
+  width: 85%;
+  margin: 0 auto;
+}
 .forecast_day
 {
   line-height:60px;
   font-size: 17px;
   color: #ffffff;
-      margin-left: 30px;
+  margin-left: 30px;
 }
 .forcast_category
 {
@@ -96,9 +105,9 @@
 .forcast_temperature
 {
   line-height:60px;
-   font-size: 16px;
-    color: #ffffff;
-   text-align: center;
+  font-size: 16px;
+  color: #ffffff;
+  text-align: center;
 }
 .forecast_text
 {
