@@ -13,10 +13,11 @@ Page({
     object_day: 7,
     award_text_1: "",
     award_text_2: "",
+    air:{},
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
-    this.loadInfo();
+    //this.loadInfo();
   },
   onReady: function () {
     // 页面渲染完成s
@@ -89,6 +90,7 @@ Page({
         longitude:longitude      
       },
       success: function (res) {
+        console.log(res.data)
         var now = res.data.now;
         var city = res.data.basic.location;
         var day1_weather = {};
@@ -99,7 +101,7 @@ Page({
         console.log(res.data)
         wx.setStorageSync('scores', scores);
         wx.setStorageSync('duration_weather', duration);
-        if (award> 0){
+        if (award > 0){
           wx.showToast({
             title: '查看天气\n'+'+'+award+'分',
           })
