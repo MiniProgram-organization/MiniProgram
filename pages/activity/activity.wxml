@@ -8,8 +8,8 @@
         <view bindtap="Todistrictsta" style="">Checkins</view>
       </view>
       <view style="float:left;height:10px;width:33%;">
-        <text style="padding:0% 10% 0% 30%;color:blue">{{checkInPlaces}}</text>
-        <view style="padding:0% 10% 0% 15%">Places</view>
+        <text  bindtap="Toplacesta" style="padding:0% 10% 0% 30%;color:blue">{{checkInPlaces}}</text>
+        <view  bindtap="Toplacesta" style="padding:0% 10% 0% 15%">Places</view>
       </view>
       <view style="float:left;top:20px;height:10px;width:33%;">
         <text bindtap="Tocategorysta" style="padding:0% 10% 0% 30%;color:blue">{{checkInCategories}}</text>

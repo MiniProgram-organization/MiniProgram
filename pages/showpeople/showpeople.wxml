@@ -1,3 +1,12 @@
+
+
+<view class='crown_view'>
+<image class="member-avatar" src="{{crown_url}}"></image>
+</view>
+<view class='usertext_view'>
+  <text>{{POI_name}}签到王:{{king_user}}</text>
+</view>
+
 <block wx:for="{{users}}">
   <view>
     <view class="topic-item" catchtap="redictDetail">
@@ -19,6 +28,8 @@
   </view>
 </block>
 
+<view>
+
 <view style="display: flex;flex-direction:row">
   <view style="flex:0.2"></view>
   <view style="flex:0.6">
@@ -29,4 +40,6 @@
 
 <view style="display:{{displayQrCode}}"> 
 <image  src="{{qrcodeUrl}}"></image>  
+</view>
+
 </view>

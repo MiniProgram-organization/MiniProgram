@@ -90,15 +90,16 @@ Page({
         longitude:longitude      
       },
       success: function (res) {
+        console.log(openid)
         console.log(res.data)
         var now = res.data.now;
+        var air = res.data.air;
         var city = res.data.basic.location;
         var day1_weather = {};
         var day2_weather = {};
         var award = res.data.award.award;
         var scores = res.data.award.scores;
         var duration = res.data.award.duration;
-        console.log(res.data)
         wx.setStorageSync('scores', scores);
         wx.setStorageSync('duration_weather', duration);
         if (award > 0){
@@ -115,6 +116,7 @@ Page({
 
         that.setData({
           city: city,
+          air: air,
           weather: now,
           day1_weather: day1_weather,
           day2_weather:day2_weather,

@@ -45,7 +45,12 @@ Page({
       url: '../categorysta/categorysta'
     })
   },
-
+  Toplacesta: function () {
+    var that = this;
+    wx.navigateTo({
+      url: '../placesta/placesta'
+    })
+  },
   fetchData: function (cnt) {
     var that = this;
     this.setData({

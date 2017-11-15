@@ -92,12 +92,6 @@ Page({
 
   checkIn: function (e) {
     var that = this;
-  /*
-    if (that.data.text == "") {
-      wx.showToast({
-        title: '请输入你的心情',
-      })
-    } else {*/
       if (app.globalData.openid == ""){
         that.loginNoOpenId();
       }
@@ -175,7 +169,7 @@ Page({
             }
 
             wx.redirectTo({
-              url: '../showpeople/showpeople?POI_id=' + that.data.POI_id,
+              url: '../showpeople/showpeople?POI_id=' + that.data.POI_id+'&POI_name='+that.data.venue,
               success: function (e) {
                 if (award > 0){
                   wx.showToast({

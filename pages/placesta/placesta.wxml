@@ -1,20 +1,14 @@
-<!--pages/moodstatistics/moodstatistics.wxml-->
+<!--pages/placesta/placesta.wxml-->
 <view style="width: {{windowWidth}}px; height:{{windowHeight}}px">
 <view style="width:80%;  margin:5% 10% 5% 10%">
-  <view class="section">
-  <picker bindchange="bindPickerChange" value="{{index}}" range="{{timeslot}}">
-    <view class='picker'>
-    <text class='picker_text'>请选择时间：{{timeslot[index]}}</text>
-    </view>
-  </picker>
+  <view class="title">
+  <text>签到最多地点</text>
   </view>
+</view>
 
-</view>
-<view class='hint'>
-  <text>{{hint_text}}</text>
-</view>
 <view style="width: {{windowWidth}}px;" class='view_pie'>
   <canvas class='.canvas_pie' canvas-id="pieCanvas" style="width: {{windowWidth*0.8}}px;height:{{windowHeight}}px" >
   </canvas>
 </view>
+
 </view>

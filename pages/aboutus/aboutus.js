@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    text:"",
   },
 
   /**
@@ -15,10 +15,39 @@ Page({
   
   },
   submit: function(e){
-    wx.showToast({
+    var that = this;
+    if(that.data.text == ""){
+      wx.showToast({
+        title: '为空时不能提交',
+        icon: 'loading'
+      })
+    }
+    else{
+      wx.request({
+        url: 'https://40525433.fudan-mini-program.com/cgi-bin/Feedback',
+        method: 'POST',
+        data: {
+          openid:'',
+          opinion_text:''
+        },
+        success: function (res){
+          wx.showToast({
+            title: '提交成功，感谢您的反馈!',
+            icon: 'success'
+          })
+        },
+        fail: function(res){
+          wx.showToast({
+            title: '提交失败，未知错误!',
+            icon: 'loading'
+          })
+        }
+      })
+    }
+   /*wx.showToast({
       title: '功能暂未开通',
       icon:"loading",
-    })
+    })*/
   },
   textChange: function (e) {
     this.setData({
