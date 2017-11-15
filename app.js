@@ -31,7 +31,8 @@ App({
       "生活服务": "living_service",
       "旅游景点": "tourism",
       "基础设施": "infra",
-      "医疗保健": "hospital"
+      "医疗保健": "hospital",
+      "运动健身": "sports"
     },
     categoryDic:{},
     districtDict:{},
