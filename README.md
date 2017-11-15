@@ -315,7 +315,7 @@
             "wind_spd": "3"
         }
     ],
-    "air_now_city": {
+    "air": {
                 "aqi": "19",
                 "co": "0",
                 "main": "",
@@ -685,8 +685,7 @@
 
 #### 14.用户为我们提供意见
 
-##### url: [https://40525433.fudan-mini-program.com/cgi-bin/](https://40525433.fudan-mini-program.com/cgi-bin/)
-
+##### url: [https://40525433.fudan-mini-program.com/cgi-bin/Feedback](https://40525433.fudan-mini-program.com/cgi-bin/Feedback)
 ##### method: POST
 
 ##### 发送数据格式：
