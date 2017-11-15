@@ -33,7 +33,7 @@ Page({
     var line_catrgory = ['上海市政府','复旦大学','计算机楼','长泰广场','汇智'];
     var line_data = [6,4,3,2,1];
     var pieChart = new wxCharts({
-      animation: true,
+      animation: true ,
       disablePieStroke: true,
       canvasId: 'pieCanvas',
       type: 'line',
