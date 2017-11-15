@@ -1,4 +1,5 @@
 // pages/aboutus/aboutus.js
+var app = getApp();
 Page({
 
   /**
@@ -6,6 +7,7 @@ Page({
    */
   data: {
     text:"",
+    openid: app.globalData.openid,
   },
 
   /**
@@ -27,8 +29,8 @@ Page({
         url: 'https://40525433.fudan-mini-program.com/cgi-bin/Feedback',
         method: 'POST',
         data: {
-          openid:'',
-          opinion_text:''
+          openid: app.globalData.openid,
+          opinion_text:that.data.text,
         },
         success: function (res){
           wx.showToast({
