@@ -707,7 +707,7 @@
 
 #### 15.查询用户签到数量最多的n个Place
 
-##### url: [https://40525433.fudan-mini-program.com/cgi-bin/](https://40525433.fudan-mini-program.com/cgi-bin/)
+##### url: [https://40525433.fudan-mini-program.com/cgi-bin/FrequentPOIs](https://40525433.fudan-mini-program.com/cgi-bin/FrequentPOIs)
 
 ##### method: GET
 
@@ -747,7 +747,7 @@
 
 #### 16.查询在某poi签到次数最多的一个用户
 
-##### url: [https://40525433.fudan-mini-program.com/cgi-bin/](https://40525433.fudan-mini-program.com/cgi-bin/)
+##### url: [https://40525433.fudan-mini-program.com/cgi-bin/FrequentUsers](https://40525433.fudan-mini-program.com/cgi-bin/FrequentUsers)
 
 ##### method: GET
 
