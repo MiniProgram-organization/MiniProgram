@@ -3,6 +3,15 @@
   text-align: center;
   margin-top: 10px;
 }
+.image_crown{
+   text-align: center;
+   width: 40px;
+   height: 30px;
+}
+.user_icon_view{
+   margin-top: -5px;
+   text-align: center;
+}
 .usertext_view{
   margin-top: 5px;
   text-align: center;
@@ -17,4 +26,8 @@
    text-align: center;
    width: 200px;
    height: 200px;
+}
+.usertext_num_view{
+  text-align: center;
+  font-size: 11px;
 }

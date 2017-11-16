@@ -29,11 +29,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
-    var line_catrgory = ['上海市政府','复旦大学','计算机楼','长泰广场','汇智'];
-    var line_data = [6,4,3,2,1];
+    this.getMostPlace();
+  },
+  showLine: function (line_catrgory, line_data){
     var pieChart = new wxCharts({
-      animation: true ,
+      animation: true,
       disablePieStroke: true,
       canvasId: 'pieCanvas',
       type: 'line',
@@ -47,18 +47,47 @@ Page({
         }
       }],
       yAxis: {
-        title: '记录次数',
+        title: '签到次数',
         format: function (val) {
           return val;
         },
         min: 0
       },
-      width: app.globalData.windowWidth * 0.8,
-      height: 300,
+      width: app.globalData.windowWidth * 0.9,
+      height: 350,
       dataLabel: true,
     });
   },
-
+  getMostPlace: function (){
+    var line_catrgory = [];
+    var line_data = [];
+    var that = this;
+    wx.request({
+      url: 'https://40525433.fudan-mini-program.com/cgi-bin/FrequentPOIs',
+      method: 'POST',
+      data: {
+        place_num:5,
+        openid: getApp().globalData.openid,
+      },
+      success: function (res) {
+        console.log(res.data)
+        console.log(res.data.places.length)
+        for (var i = 0; i < res.data.places.length; i++){
+          line_catrgory.push(res.data.places[i].venue)
+          line_data.push(res.data.places[i].check_num)
+        }
+        if (res.data.places.length == 0){
+          wx.showToast({
+            title: '无签到记录!',
+            icon:'loading'
+          })
+        }
+        else that.showLine(line_catrgory, line_data)
+      },
+      fail: function(res){
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */

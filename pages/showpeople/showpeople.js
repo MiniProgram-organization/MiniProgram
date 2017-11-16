@@ -12,7 +12,9 @@ Page({
     displayQrCode: "none",
     users: [],
     crown_url:'../images/showpeople/crown.png',
-    king_user:'张江一哥',
+    king_user_name:'',
+    king_user_icon:'',
+    king_user_num:0,
     POI_name:'',
   },
 
@@ -89,16 +91,33 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    console.log(options)
     that.setData({
       POI_id: options.POI_id,
       POI_name: options.POI_name
     });
-   // that.requestMostUser();
-    //console.log("begin");
+    that.getKingUser();
     that.requestPoiHistory();
-    //console.log("end");
-    //that.getQRCode();
+  },
+  getKingUser: function(){
+    var that = this;
+    wx.request({
+      url: 'https://40525433.fudan-mini-program.com/cgi-bin/FrequentUsers',
+      method: 'POST',
+      data: {
+        POI_id: that.data.POI_id,
+        user_num: 1
+      },
+      success: function (res) {
+        that.setData({
+          king_user_name:res.data.users[0].nickName,
+          king_user_num: res.data.users[0].check_num,
+          king_user_icon:res.data.users[0].avatarUrl
+        })
+      },
+      fail: function(res){
+
+      }
+    })
   },
   requestMostUser: function(){
     var that = this;
@@ -129,9 +148,6 @@ Page({
       }
     })
   },
-
-
-
 
   /**
    * 生命周期函数--监听页面初次渲染完成

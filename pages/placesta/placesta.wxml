@@ -2,7 +2,7 @@
 <view style="width: {{windowWidth}}px; height:{{windowHeight}}px">
 <view style="width:80%;  margin:5% 10% 5% 10%">
   <view class="title">
-  <text>签到最多地点</text>
+  <text>签到数量Top5 Places</text>
   </view>
 </view>
 
