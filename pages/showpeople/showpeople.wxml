@@ -1,3 +1,36 @@
+<block wx:for="{{users}}">
+  <view>
+    <view class="topic-item" catchtap="redictDetail">
+      <image class="member-avatar" src="{{item.avatarUrl}}" background-size="cover"></image>
+      <view class="topic-info">
+        <view class="topic-inner">
+          <view class="topic-left">
+            <view class="topic-title"><text>{{item.text}}</text></view>
+            <view>
+              <text class="member-nickname">{{item.datetime}}</text>
+            </view>
+            <view>
+              <text class="node-name">{{item.nickName}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</block>
+
+<view style="display: flex;flex-direction:row">
+  <view style="flex:0.2"></view>
+  <view style="flex:0.6">
+    <button bindtap="QRCode" style="flex:1" class="weui-btn" type="primary">生成二维码</button>
+  </view>
+  <view style="flex:0.2"></view>
+</view>
+
+<view style="display:{{displayQrCode}}"> 
+<image  src="{{qrcodeUrl}}"></image>  
+</view>
+=======
 
 
 <view class='crown_view'>
@@ -42,3 +75,4 @@
 <image class='qr_image' src="{{qrcodeUrl}}"></image>  
 </view>
 </view>
+
