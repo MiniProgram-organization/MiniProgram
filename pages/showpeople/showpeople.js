@@ -94,16 +94,11 @@ Page({
       POI_id: options.POI_id,
       POI_name: options.POI_name
     });
-
    // that.requestMostUser();
     //console.log("begin");
-
     that.requestPoiHistory();
-
     //console.log("end");
-
-    that.getQRCode();
-
+    //that.getQRCode();
   },
   requestMostUser: function(){
     var that = this;
