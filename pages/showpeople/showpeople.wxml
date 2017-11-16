@@ -38,8 +38,7 @@
   <view style="flex:0.2"></view>
 </view>
 
-<view style="display:{{displayQrCode}}"> 
-<image  src="{{qrcodeUrl}}"></image>  
+<view class='qr_view' style="display:{{displayQrCode}}"> 
+<image class='qr_image' src="{{qrcodeUrl}}"></image>  
 </view>
-
 </view>
