@@ -21,7 +21,7 @@ Page({
   QRCode: function () {
     var that = this;
     this.setData({
-      displayQrCode: "inline"
+      displayQrCode: "block"
     });
     console.log(that.data.qrcodeUrl);
     wx.downloadFile({
@@ -97,6 +97,7 @@ Page({
     });
     that.getKingUser();
     that.requestPoiHistory();
+    that.getQRCode();
   },
   getKingUser: function(){
     var that = this;
