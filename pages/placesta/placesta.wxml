@@ -1,0 +1,14 @@
+<!--pages/placesta/placesta.wxml-->
+<view style="width: {{windowWidth}}px; height:{{windowHeight}}px">
+<view style="width:80%;  margin:5% 10% 5% 10%">
+  <view class="title">
+  <text>签到最多地点</text>
+  </view>
+</view>
+
+<view style="width:  {{windowWidth}}px;" class='view_pie'>
+  <canvas class='.canvas_pie' canvas-id="pieCanvas" style="width: {{windowWidth*0.8}}px;height:{{windowHeight}}px" >
+  </canvas>
+</view>
+
+</view>

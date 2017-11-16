@@ -1,1 +1,20 @@
 /* showpeople.wxss */
+.crown_view{
+  text-align: center;
+  margin-top: 10px;
+}
+.usertext_view{
+  margin-top: 5px;
+  text-align: center;
+  font-size: 20px;
+}
+.qr_view
+{
+  text-align: center;
+  margin-top: 10px;
+}
+.qr_image{
+   text-align: center;
+   width: 200px;
+   height: 200px;
+}

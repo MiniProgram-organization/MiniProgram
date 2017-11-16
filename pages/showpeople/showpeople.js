@@ -10,7 +10,10 @@ Page({
     windowHeight: app.globalData.windowHeight,
     qrcodeUrl: "",
     displayQrCode: "none",
-    users: []
+    users: [],
+    crown_url:'../images/showpeople/crown.png',
+    king_user:'张江一哥',
+    POI_name:'',
   },
 
   QRCode: function () {
@@ -27,7 +30,6 @@ Page({
         wx.saveImageToPhotosAlbum({
           tempFilePath: filePath,
           success: function (res) {
-            console.log("LLLLL");
             console.log(res);
           },
           fail: function (res) {
@@ -87,19 +89,20 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-
+    console.log(options)
     that.setData({
-      POI_id: options.POI_id
+      POI_id: options.POI_id,
+      POI_name: options.POI_name
     });
-
-    console.log("begin");
-
+   // that.requestMostUser();
+    //console.log("begin");
     that.requestPoiHistory();
-
-    console.log("end");
-
-    that.getQRCode();
-
+    //console.log("end");
+    //that.getQRCode();
+  },
+  requestMostUser: function(){
+    var that = this;
+    
   },
 
   getQRCode: function () {

@@ -25,13 +25,11 @@
 
   <view style="margin:20px 0px 0px 0px">
     <view style="display: flex;flex-direction:row">
-        <view style="flex:0.45">
-        <button bindtap="backToAccount" style="flex:1" class="weui-btn" type="primary">返回</button>
-        </view>
  <view style="flex:0.1"></view>
-        <view style="flex:0.45">
-        <button bindtap="checkIn" style="flex:1" class="weui-btn" type="primary">提交</button>
+        <view style="flex:0.8">
+        <button bindtap="submit" style="flex:1" class="weui-btn" type="primary">提交</button>
         </view>
+        <view style="flex:0.1"></view>
     </view>
   </view>
 

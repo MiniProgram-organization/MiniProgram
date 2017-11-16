@@ -20,6 +20,11 @@ Page({
     checkInTimes: 0,
     checkInPlaces: 0,
     checkInCategories: 0,
+    con_day:0,
+    less_day:7,
+    object_day:7,
+    award_text_1:"",
+    award_text_2:"",
   },
 
   redirectCheckIn: function () {
@@ -40,25 +45,93 @@ Page({
       url: '../categorysta/categorysta'
     })
   },
-
-
-  fetchData: function () {
+  Toplacesta: function () {
+    var that = this;
+    wx.navigateTo({
+      url: '../placesta/placesta'
+    })
+  },
+  fetchData: function (cnt) {
     var that = this;
     this.setData({
       windowWidth: app.globalData.windowWidth,
       windowHeight: app.globalData.windowHeight
     });
 
+    var duration = wx.getStorageSync('duration_checkin');
+    if (duration == ""){
+      this.setData({
+        con_day:0,
+        less_day:7,
+        object_day:7,
+        award_text_1: "已连续签到",
+        award_text_2: "天了！还差7天就能获得额外积分奖励喔，加油~"
+      })
+    }
+    else{
+      if ((duration % 7 == 0) && ((duration % 28)!= 0)){
+        if ((duration/7)%4==1){
+            this.setData({
+              con_day: duration,
+              award_text_1: "连续签到",
+              award_text_2: "天了，真棒！\n又获得额外积分奖励啦~"
+            })
+        }
+        else if ((duration / 7) % 4 == 2){
+          this.setData({
+            con_day: duration,
+            award_text_1: "连续签到",
+            award_text_2: "天了，exciting！\n又获得额外积分奖励啦~"
+          })
+        }
+        else if ((duration / 7) % 4 == 3) {
+          this.setData({
+            con_day: duration,
+            award_text_1: "连续签到",
+            award_text_2: "天了，amazing！\n又获得额外积分奖励啦~"
+          })
+        }
+      }
+      else if (duration%28==0){
+        this.setData({
+          con_day: duration,
+          award_text_1: "连续签到",
+          award_text_2: "天了，天啦噜！一份超值额外积分大礼砸中了你~"
+        })
+      }
+      else if (duration % 7 != 0){
+        var object_day = (parseInt(duration / 7) + 1) * 7;
+        console.log(object_day)
+        if(object_day%28 == 0){
+          this.setData({
+            con_day: duration,
+            object_day: object_day,
+            less_day: object_day - duration,
+            award_text_1: "已连续签到",
+            award_text_2: "天了！还差" + (object_day - duration)+"天就能获得连续28天超值额外积分奖励喔，加油~"
+          })
+        }
+        else{
+          this.setData({
+            con_day: duration,
+            object_day: object_day,
+            less_day: object_day - duration,
+            award_text_1: "已连续签到",
+            award_text_2: "天了！还差" + (object_day - duration) + "天就能获得额外积分奖励喔，加油~"
+          })
+        }
+      }
+    }
+
     wx.getLocation({
       type: 'wgs84', //返回可以用于wx.openLocation的经纬度
       success: function (res) {
+        cnt = cnt + 1
         app.globalData.latitude = res.latitude;
         app.globalData.longitude = res.longitude; 
-
         //存储一个缓存的经纬度,用于定位失败时使用
         wx.setStorageSync('latitude', res.latitude);
         wx.setStorageSync('longitude', res.longitude);
-
         app.globalData.qqmapsdk.reverseGeocoder({
           location: {
             latitude: res.latitude,
@@ -85,7 +158,6 @@ Page({
                 latitude: tempLatitude,
                 longitude: tempLongitude,
                 iconPath: '../images/map/dot.jpg',
-                // logoPath: '../images/' + parseInt(3 * Math.random()) + '.jpg',
                 category: category,
                 venue: venue
               });
@@ -95,7 +167,6 @@ Page({
               });
             }
             console.log(tempMarkers);
-
             that.setData({
               markers: tempMarkers,
               include_points: tempIncludePoints
@@ -103,14 +174,83 @@ Page({
 
           },
           fail: function () {
-            console.log('发送位置失败');
+
           }
         });
+      },
+      fail: function(){
+        cnt = cnt + 1
+        if (cnt < 10) that.fetchData(cnt)
+        else {
+          var latitude = wx.getStorageSync('latitude')
+          var longitude = wx.getStorageSync('longitude')
+          if (latitude == "") {
+            wx.showToast({
+              title: '定位失败!请检查设置!',
+              duration: 1000,
+              icon: 'loading'
+            })
+          }
+          else {
+            wx.showToast({
+              title: '定位失败!使用上次位置!',
+              duration: 1000,
+              icon: 'loading'
+            })
+            //使用缓存定位
+            app.globalData.latitude = latitude;
+            app.globalData.longitude = longitude;
+            app.globalData.qqmapsdk.reverseGeocoder({
+              location: {
+                latitude: latitude,
+                longitude: longitude
+              },
+              get_poi: 1,
+              success: function (res) {
+                console.log("附近POI");
+                console.log(res.result.pois);
+                var coordinates = res.result.pois;
+                //marker数组
+                var tempMarkers = [];
+                var tempIncludePoints = [];
+
+                for (var i = 0; i < coordinates.length; i++) {
+                  var tempLatitude = coordinates[i].location.lat;
+                  var tempLongitude = coordinates[i].location.lng;
+                  var category = coordinates[i].category
+                  var venue = coordinates[i].title;
+                  var POI_id = coordinates[i].id;
+
+                  tempMarkers.push({
+                    POI_id: POI_id,
+                    latitude: tempLatitude,
+                    longitude: tempLongitude,
+                    iconPath: '../images/map/dot.jpg',
+                    category: category,
+                    venue: venue
+                  });
+                  tempIncludePoints.push({
+                    latitude: tempLatitude,
+                    longitude: tempLongitude,
+                  });
+                }
+                console.log(tempMarkers);
+                that.setData({
+                  markers: tempMarkers,
+                  include_points: tempIncludePoints
+                });
+
+              },
+              fail: function () {
+
+              }
+            });
+
+
+          }
+        }
       }
     });
-
-
-
     setTimeout(function () {
       that.setData({
         hidden: true
@@ -326,7 +466,7 @@ Page({
       checkInCategories: checkInCategories
     });
 
-    this.fetchData();
+    this.fetchData(1);
 
   },
 

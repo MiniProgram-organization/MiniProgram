@@ -13,14 +13,14 @@
             <view class="right">
                 <view class="kongqi">体感温度：{{weather.fl}}</view>
                 <view class="kongqi">相对湿度：{{weather.hum}}</view>
-                <view class="kongqi">降水量(mm)：{{weather.pcpn}}</view>
-                <view class="kongqi">气压：{{weather.pres}}</view>
+                <view class="kongqi">空气质量：{{air.qlty}}</view>
+                <view class="kongqi">AQI：{{air.aqi}}</view>
                 <view class="kongqi">能见度：{{weather.vis}}</view>
             </view>
         </view>
-
     </view>
-    <view style="width: {{windowWidth}}px; height:{{windowHeight*0.05}}px"> </view>
+    <view style="width: {{windowWidth}}px; height:{{windowHeight*0.05}}px">
+     </view>
     <view class="forecast" style="height:160px" >
       <view style="height:40px" class='forecast_text' >
        <text>天气预报</text>
@@ -53,8 +53,11 @@
          <view style="float:left;width:23%;" class='forcast_temperature'>
           <text>{{day2_weather.low}}</text>
         </view>
-     </view>
+      </view>
+      
+    <view style="height:40px" class='awardtext'>
+    {{award_text_1}}<span style="color: red">{{con_day}}</span>{{award_text_2}}
+   </view>
     </view>
-    
-
+  
 </view>

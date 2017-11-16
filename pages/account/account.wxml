@@ -43,25 +43,25 @@
           <text class="weui-input">{{country}}</text>
         </view>
       </view>
-
-        <view class="weui-cell weui-cell_input">
+  <view class="weui-cell weui-cell_input">
         <view class="weui-cell__hd">
-          <view class="weui-label">纬度</view>
+          <view class="weui-label">积分</view>
         </view>
         <view class="weui-cell__bd">
-          <text class="weui-input">{{latitude}}</text>
+          <text class="weui-input">{{scores}} (详见官网)</text>
         </view>
       </view>
 
         <view class="weui-cell weui-cell_input">
         <view class="weui-cell__hd">
-          <view class="weui-label">经度</view>
+          <view class="weui-label">经纬度</view>
         </view>
         <view class="weui-cell__bd">
-          <text class="weui-input">{{longitude}}</text>
+          <text class="weui-input">{{latitude_text}}，{{longitude_text}}</text>
         </view>
       </view>
 
+     
       <view class="weui-cell weui-cell_input">
         <view class="weui-cell__hd">
           <view class="weui-label">关于我们</view>
