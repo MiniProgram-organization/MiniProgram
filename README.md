@@ -209,11 +209,11 @@
 ```json
 {
     "status": "OK",
-    "award": 1,  //本次签到所获得的奖励分数
-    "scores": 3, //加上本次奖励后，用户的总得分
+    "award": 21,  //本次签到所获得的奖励分数,20+1
+    "scores": 27, //加上本次奖励后，用户的总得分。7(每天签到一次，共7天)+20(连续签到7天奖励，第1次)
     "duration": 7,  //用户连续签到的天数
-    "bonus_7": 20,  //当duration==7时，bonus_7为连续7天签到的奖励分数，否则为0
-    "bonus_30": 0   //当duration==30时，bonus_7为连续30天签到的奖励分数，否则为0
+    "bonus_7": 20,  //当duration%7==0时，bonus_7为连续7天签到的奖励分数，否则为0
+    "bonus_28": 0   //当duration%28==0时，bonus_28为连续28天签到的奖励分数，否则为0
 }
 ```
 
@@ -338,11 +338,11 @@
         "tz": "+8.0"
     },
     "award": {
-        "award": 1,  //本次查天气所获得的奖励分数
-        "scores": 3, //加上本次奖励后，用户的总得分
-        "duration": 7,  //用户连续查天气的天数
-        "bonus_7": 0,  //当duration==7时，bonus_7为连续7天查天气的奖励分数，否则为0
-        "bonus_30": 100   //当duration==30时，bonus_7为连续30天查天气的奖励分数，否则为0
+        "award": 101,  //本次查天气所获得的奖励分数
+        "scores": 188, //加上本次奖励后，用户的总得分。28*1(每天查天气一次，共28天)+20*3(每连续7天奖励一次，共3次)+100(连续查天气28天奖励，第一次)
+        "duration": 28,  //用户连续查天气的天数
+        "bonus_7": 0,  //当duration%7==0时，bonus_7为连续7天查天气的奖励分数，否则为0
+        "bonus_28": 100   //当duration%28==0时，bonus_28为连续28天查天气的奖励分数，否则为0
     }
 }
 ```
@@ -524,8 +524,8 @@
     "award": 1,  //本次记录心情所获得的奖励分数
     "scores": 3, //加上本次奖励后，用户的总得分
     "duration": 2,  //用户连续记录心情的天数
-    "bonus_7": 0,  //当duration==7时，bonus_7为连续7天记录心情的奖励分数，否则为0
-    "bonus_30": 0   //当duration==30时，bonus_7为连续30天记录心情的奖励分数，否则为0
+    "bonus_7": 0,  //当duration%7==0时，bonus_7为连续7天记录心情的奖励分数，否则为0
+    "bonus_28": 0   //当duration%28==0时，bonus_28为连续28天记录心情的奖励分数，否则为0
 }
 ```
 
@@ -626,7 +626,7 @@
     "moods": [
         { 
           "mood_id": 1,
-	  "mood_text":"狂喜",
+          "mood_text":"狂喜",
           "datetime": "2017-07-01 08:08:08",
           "text":"心情文字",
           "latitude": 23.123,
@@ -634,7 +634,7 @@
         },
         {
           "mood_id": 1,
-	  "mood_text":"狂喜",
+          "mood_text":"狂喜",
           "datetime": "2016-07-01 08:08:08",
           "text":"心情文字",
           "latitude": 23.123,
@@ -724,21 +724,21 @@
 ```json
 {
    "status": "OK",
-   "place_num": 3,  //查询到的n个place,如果签到的不同place小于n,则返回不同的place数目。
+   "place_num": 3,  //查询到的n个place,如果签到的不同place小于n,则返回不同的place数目；如果因为并列使得存在多于n个place，则返回全部并列的place。
    "places": [      //按签到次数排序
       {
         "POI_id":"fsfs1",
- 	"POI_name":"复旦大学张江校区",
+        "venue":"复旦大学张江校区",
         "check_num":25,
       },  
       {
         "POI_id":"fsfs2",
- 	"POI_name":"计算机楼",
+        "venue":"计算机楼",
         "check_num":20,
       }, 
       {
         "POI_id":"fsfsd3",
- 	"POI_name":"保障楼",
+        "venue":"保障楼",
         "check_num":10,
       }
    ]
@@ -755,7 +755,8 @@
 
 ```json
 { 
-  "POI_id":"vdfdsf"
+  "POI_id":"9211009583842527247",
+  "user_num":1
 }
 ```
 
@@ -763,10 +764,15 @@
 ```json
 {
    "status": "OK",
-   "openid":"1234",
-   "nickName":"lsh",
-   "avatarUrl":"https://wx.qlogo.cn/abcd",
-   "datetime":"2017-07-01 08:08:08",   //这个签到最多的用户，上一次签到的时间。
-   "checkin_num":109                   //该用户在这个POI签到的次数。
+   "user_num":1, //如果两个用户签到次数相同，则返回“上一次签到时间”(即datetime域)早的用户。
+   "users":[
+      {
+        "openid":"1234",
+        "nickName":"lsh",
+        "avatarUrl":"https://wx.qlogo.cn/abcd",
+        "datetime":"2017-07-01 08:08:08",   //这个签到最多的用户，上一次签到的时间。
+        "check_num":109                   //该用户在这个POI签到的次数。
+      }
+  ]
 }
 ```
