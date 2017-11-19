@@ -530,9 +530,9 @@
 ```
 
 
-#### 10.查看用户在上海市历史签到的行政区分布情况
+#### 10.查看用户历史签到的行政区分布情况
 
-##### url:[https://40525433.fudan-mini-program.com/cgi-bin/District](https://40525433.fudan-mini-program.com/cgi-bin/District)
+##### url:[https://40525433.fudan-mini-program.com/cgi-bin/Area](https://40525433.fudan-mini-program.com/cgi-bin/Area)
 
 ##### method: POST
 
@@ -540,7 +540,9 @@
 
 ```json
 { 
-  "openid":"hafsdfs"
+  "openid":"hafsdfs",
+  "area_type":1
+  //1:district, 2:city
 }
 ```
 
@@ -548,19 +550,34 @@
 ```json
 {
    "status": "OK",
-   "district_num": 3, //这个用户在上海的三个行政区签过到
-   "districts": [
+   "area_num": 3, //这个用户在三个行政区签过到
+   "areas": [
       {
-        "district_name":"黄浦区",
+        "area_name":"上海-黄浦区",
         "check_num":15
       },  
       {
-        "district_name":"浦东新区",
+        "area_name":"漳州-龙文区",
         "check_num":4
       },
       {
-        "district_name":"徐汇区",
+        "area_name":"上海-徐汇区",
         "check_num":25
+      }
+   ]
+}
+
+{
+   "status": "OK",
+   "area_num": 2, //这个用户在三个行政区签过到
+   "areas": [
+      {
+        "area_name":"上海"
+        "check_num":40
+      },  
+      {
+        "area_name":"漳州"
+        "check_num":4
       }
    ]
 }
