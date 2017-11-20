@@ -145,7 +145,8 @@ Page({
                   time: time,
                   text: that.data.text,
                   date: date,
-                  logoPath: that.data.logoPath
+                  logoPath: that.data.logoPath,
+                  text: that.data.text,
                 }]
               })
             } else {
@@ -162,7 +163,8 @@ Page({
                 time: time,
                 text: that.data.text,
                 date: date,
-                logoPath: that.data.logoPath
+                logoPath: that.data.logoPath,
+                text: that.data.text,
               });
               wx.setStorage({
                 key: 'checkins',

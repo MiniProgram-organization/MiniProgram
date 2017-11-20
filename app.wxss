@@ -60,7 +60,6 @@ page{
 
 .topic-item {
     padding:30rpx;
-    border-bottom: 1px solid #eee;
 }
 
 .topic-item {

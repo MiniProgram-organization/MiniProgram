@@ -38,7 +38,7 @@
       </view>
 
       <block wx:for="{{item.checkInList}}">
-        <view index="{{index}}" id="{{item.POI_id}}" style="display: flex;flex-direction:row">
+        <view class='item_view' index="{{index}}" id="{{item.POI_id}}" style="display: flex;flex-direction:row">
           <view style="width:{{windowWidth*0.1}}px;position:relative;left:5%;">
             <image class="timeline" src="../images/activity/yellow_line.png"></image>
           </view>
@@ -61,6 +61,7 @@
                 </view>
               </view>
             </view>
+             <view style="padding:0% 10% 0% 0%" class='checkin_text'>这一刻的想法: {{item.text}}</view>
           </view>
         </view>
       </block>
