@@ -153,7 +153,6 @@ Page({
               var category = coordinates[i].category
               var venue = coordinates[i].title;
               var POI_id = coordinates[i].id;
-
               tempMarkers.push({
                 POI_id: POI_id,
                 latitude: tempLatitude,
@@ -161,6 +160,7 @@ Page({
                 iconPath: '../images/map/dot.jpg',
                 category: category,
                 venue: venue
+
               });
               tempIncludePoints.push({
                 latitude: tempLatitude,
@@ -385,9 +385,6 @@ Page({
             checkins: res.data.checkins
           });
           wx.setStorageSync('checkins', res.data.checkins);
-
-
-
           that.classifyByDate();
         }
       })
