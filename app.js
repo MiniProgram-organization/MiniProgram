@@ -36,7 +36,7 @@ App({
     },
     categoryDic:{},
     districtDict:{},
-    placeDict:{}
+    placeDict:{},
   },
 
   onLaunch: function () {

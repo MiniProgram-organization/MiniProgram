@@ -4,11 +4,11 @@
     <map bindmarkertap="markertap" latitude="{{latitude}}" longitude="{{longitude}}" include-points="{{include_points}}" markers="{{markers}}" style="width:100%" />
     <view style="margin:5% 0% 10% 0%">
       <view style="float:left;height:10px;width:33%">
-        <text bindtap="Todistrictsta" style="padding:0% 10% 0% 30%;color:blue">{{checkInTimes}}</text>
-        <view bindtap="Todistrictsta" style="">Checkins</view>
+        <text bindtap="Todistrictsta" style="padding:0% 10% 0% 40%;color:blue">{{checkInTimes}}</text>
+        <view bindtap="Todistrictsta" style="text-align:center">District</view>
       </view>
       <view style="float:left;height:10px;width:33%;">
-        <text  bindtap="Toplacesta" style="padding:0% 10% 0% 30%;color:blue">{{checkInPlaces}}</text>
+        <text  bindtap="Toplacesta" style="padding:0% 10% 0% 35%;color:blue">{{checkInPlaces}}</text>
         <view  bindtap="Toplacesta" style="padding:0% 10% 0% 15%">Places</view>
       </view>
       <view style="float:left;top:20px;height:10px;width:33%;">
