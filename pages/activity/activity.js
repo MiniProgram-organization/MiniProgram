@@ -123,6 +123,7 @@ Page({
       }
     }
 
+    
     wx.getLocation({
       type: 'wgs84', //返回可以用于wx.openLocation的经纬度
       success: function (res) {
@@ -174,7 +175,7 @@ Page({
 
           },
           fail: function () {
-
+            
           }
         });
       },
@@ -296,6 +297,7 @@ Page({
    */
   onShow: function () {
     this.getOpenId();
+    console.log('activity........!!!!!!!!!!!!!')
     console.log(this.data.checkins);
     
     console.log(this.data.classifiedCheckIns);
@@ -418,7 +420,6 @@ Page({
         if (currentClass.date) {
           tempClassifyByDate.push(currentClass);
         }
-
         currentClass = {};
         currentClass.date = that.data.checkins[i].date;
         currentDate = that.data.checkins[i].date;

@@ -34,7 +34,7 @@ Page({
   showLine: function (line_catrgory, line_data){
     var pieChart = new wxCharts({
       animation: true,
-      disablePieStroke: true,
+   //   disablePieStroke: true,
       canvasId: 'pieCanvas',
       type: 'line',
       categories: line_catrgory,
@@ -53,7 +53,7 @@ Page({
         },
         min: 0
       },
-      width: app.globalData.windowWidth * 0.9,
+      width: 200,
       height: 350,
       dataLabel: true,
     });

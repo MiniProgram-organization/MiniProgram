@@ -36,7 +36,7 @@
 
         <block wx:for="{{markers}}">
           <view bindtap="redictDetail" class="topic-item" index="{{index}}" id="{{item.POI_id}}">
-            <image catchtap="redictDetail" class="member-avatar" src="{{item.logoPath}}" background-size="cover"></image>
+            <image class="member-avatar" src="{{item.logoPath}}" background-size="cover"></image>
             <view class="topic-info">
               <view class="topic-inner">
                 <view class="topic-left">

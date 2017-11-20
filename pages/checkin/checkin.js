@@ -80,6 +80,7 @@ Page({
 
   redictDetail: function (e) {
     var target_id = e.currentTarget.id;
+
     var target_latitude, target_longitude, target_category, target_venue, target_logoPath, target_adinfo_province, target_adinfo_city, target_adinfo_district;
     for (var index = 0; index < this.data.markers.length; index++) {
       if (this.data.markers[index].POI_id == target_id) {
@@ -110,9 +111,6 @@ Page({
       url: url
     })
   },
-
-  
-
   searchPOI: function () {
     var that = this;
     app.globalData.qqmapsdk.search({
@@ -199,6 +197,7 @@ Page({
     console.log('当前宽度' + this.data.windowWidth);
     console.log('当前高度' + this.data.windowHeight);
 
+    
     wx.getLocation({
       type: 'wgs84', //返回可以用于wx.openLocation的经纬度
       success: function (res) {

@@ -42,7 +42,7 @@
   <view style="flex:0.2"></view>
 </view>
 
-<view class='qr_view' style="display:{{displayQrCode}};text-align: center" align="center"> 
+<view class='qr_view' style="display:{{displayQrCode}} " align="center"> 
 <image class='qr_image' src="{{qrcodeUrl}}"></image>  
 </view>
 </view>
