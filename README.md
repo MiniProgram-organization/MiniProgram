@@ -384,7 +384,8 @@
           "datetime": "2017-07-01 08:08:08",
           "category": "school",
           "latitude": 23.123,
-          "longitude": 123.123
+          "longitude": 123.123,
+          "text":"男神最帅！"
         },
         {
           "POI_id": "23242",
@@ -392,7 +393,8 @@
           "datetime": "2017-07-02 08:08:08",
           "category": "school",
           "latitude": 43.123,
-          "longitude": 123.123
+          "longitude": 123.123,
+          "text":"秦歌棒棒哒！"
         },
         {
           "POI_id": "3432423",
@@ -400,7 +402,8 @@
           "datetime": "2017-08-16 10:10:10",
           "category": "school",
           "latitude": 43.123,
-          "longitude": 123.123
+          "longitude": 123.123,
+          "text":"皮卡丘萌萌哒！！"
         }
       ]
 }
