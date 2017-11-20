@@ -143,7 +143,7 @@ Page({
                   category: that.data.category,
                   venue: that.data.venue,
                   time: time,
-                  text: text,
+                  text: that.data.text,
                   date: date,
                   logoPath: that.data.logoPath
                 }]
@@ -160,7 +160,7 @@ Page({
                 category: that.data.category,
                 venue: that.data.venue,
                 time: time,
-                text: text,
+                text: that.data.text,
                 date: date,
                 logoPath: that.data.logoPath
               });

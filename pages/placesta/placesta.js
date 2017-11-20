@@ -32,6 +32,7 @@ Page({
     this.getMostPlace();
   },
   showLine: function (line_catrgory, line_data){
+    var that = this;
     var pieChart = new wxCharts({
       animation: true,
    //   disablePieStroke: true,
@@ -53,7 +54,7 @@ Page({
         },
         min: 0
       },
-      width: 200,
+      width: that.data.windowWidth,
       height: 350,
       dataLabel: true,
     });
