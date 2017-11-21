@@ -122,7 +122,6 @@ Page({
           var time = datetime.toLocaleTimeString();
           var date = datetime.toLocaleDateString();
           var old_history = wx.getStorageSync('checkins');
-
           if (e.data.status == "OK") {
             var award = e.data.award;
             var scores = e.data.scores;
