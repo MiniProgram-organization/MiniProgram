@@ -209,6 +209,8 @@
 ```json
 {
     "status": "OK",
+    "date": "2017-11-21",
+    "time": "19:31:59",
     "award": 21,  //本次签到所获得的奖励分数,20+1
     "scores": 27, //加上本次奖励后，用户的总得分。7(每天签到一次，共7天)+20(连续签到7天奖励，第1次)
     "duration": 7,  //用户连续签到的天数
@@ -489,11 +491,11 @@
         "text":"老板最帅！！！"
       },
       {
-      "openid":"123",
-      "nickName":"gongdao",
-      "avatarUrl":"https://wx.qlogo.cn/abc",
-      "datetime":"2017-05-01 08:08:08",
-      "text":"老板最帅！！！"
+        "openid":"123",
+        "nickName":"gongdao",
+        "avatarUrl":"https://wx.qlogo.cn/abc",
+        "datetime":"2017-05-01 08:08:08",
+        "text":"老板最帅！！！"
       }
    ]
 }
@@ -524,6 +526,8 @@
 ```json
 {
     "status": "OK",
+    "date": "2017-11-21",
+    "time": "19:31:59",
     "award": 1,  //本次记录心情所获得的奖励分数
     "scores": 3, //加上本次奖励后，用户的总得分
     "duration": 2,  //用户连续记录心情的天数
