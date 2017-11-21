@@ -348,6 +348,24 @@ Page({
     });
   },
 
+ getPlaces: function(){
+    var that = this;
+    wx.request({
+      url: 'https://40525433.fudan-mini-program.com/cgi-bin/FrequentPOIs',
+      method: 'POST',
+      data: {
+        openid: getApp().globalData.openid,
+        place_num: 5
+      },
+      success: function(res){
+        if(res.data.status == "OK"){
+          getApp().globalData.placeList = res.data.places
+        }
+      }
+    })
+ },
+
+
   getCheckIns: function(){
     //获取历史数据
     var checkins = wx.getStorageSync('checkins');

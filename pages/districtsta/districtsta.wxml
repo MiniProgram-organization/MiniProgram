@@ -7,7 +7,7 @@
 </view>
 
 <view style="width: {{windowWidth}}px;" class='view_pie'>
-  <canvas class='.canvas_pie' canvas-id="pieCanvas" style="width: {{windowWidth*0.8}}px;height:{{windowHeight}}px" >
+  <canvas class='.canvas_pie' canvas-id="pieCanvas" style="margin:0 auto; width: {{windowWidth*0.8}}px;height:{{windowHeight}}px" >
   </canvas>
 </view>
 
