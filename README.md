@@ -234,7 +234,8 @@
 {
   openid: "agdsg1sdg",
   latitude: 10.43535,
-  longitude: 54.454
+  longitude: 54.454,
+  location: "北京" //该参数用于查询其他城市天气，如果没有此参数则按经纬度查询。
 }
 ```
 
