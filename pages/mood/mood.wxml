@@ -43,7 +43,7 @@
         <text class='datetext'>{{item.date}}</text>
       </view>
     <block wx:for="{{item.moodList}}">
-      <view style="width:{{windowWidth*0.9}}px">
+      <view class='item_view' style="width:{{windowWidth*0.9}}px">
             <view class="topic-item" catchtap="redictDetail">
               <image class="member-square" src="{{item.logoPath}}" background-size="cover"></image>
               <view class="topic-info">

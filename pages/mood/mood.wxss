@@ -56,3 +56,6 @@
   text-align: center;
   font-size: 13px;
 }
+.item_view{
+    border-bottom: 1px solid #eee;
+}
