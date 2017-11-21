@@ -27,16 +27,18 @@ Page({
     wx.downloadFile({
       url: that.data.qrcodeUrl,
       success: function (res) {
+        console.log(res);
         var filePath = res.tempFilePath;
+        console.log(filePath)
         console.log(filePath);
         wx.saveImageToPhotosAlbum({
-          tempFilePath: filePath,
+          filePath: filePath,
           success: function (res) {
             console.log(res);
           },
           fail: function (res) {
             console.log("HHHHH");
-            console.log(res);
+            console.log(res.errMsg);
             wx.openSetting({
               success: function (settingdata) {
                 console.log(settingdata)
