@@ -209,6 +209,8 @@
 ```json
 {
     "status": "OK",
+    "date": "2017-11-21",
+    "time": "19:31:59",
     "award": 21,  //本次签到所获得的奖励分数,20+1
     "scores": 27, //加上本次奖励后，用户的总得分。7(每天签到一次，共7天)+20(连续签到7天奖励，第1次)
     "duration": 7,  //用户连续签到的天数
@@ -489,11 +491,11 @@
         "text":"老板最帅！！！"
       },
       {
-      "openid":"123",
-      "nickName":"gongdao",
-      "avatarUrl":"https://wx.qlogo.cn/abc",
-      "datetime":"2017-05-01 08:08:08",
-      "text":"老板最帅！！！"
+        "openid":"123",
+        "nickName":"gongdao",
+        "avatarUrl":"https://wx.qlogo.cn/abc",
+        "datetime":"2017-05-01 08:08:08",
+        "text":"老板最帅！！！"
       }
    ]
 }
@@ -524,6 +526,8 @@
 ```json
 {
     "status": "OK",
+    "date": "2017-11-21",
+    "time": "19:31:59",
     "award": 1,  //本次记录心情所获得的奖励分数
     "scores": 3, //加上本次奖励后，用户的总得分
     "duration": 2,  //用户连续记录心情的天数
@@ -706,6 +710,7 @@
 #### 14.用户为我们提供意见
 
 ##### url: [https://40525433.fudan-mini-program.com/cgi-bin/Feedback](https://40525433.fudan-mini-program.com/cgi-bin/Feedback)
+
 ##### method: POST
 
 ##### 发送数据格式：
@@ -729,7 +734,7 @@
 
 ##### url: [https://40525433.fudan-mini-program.com/cgi-bin/FrequentPOIs](https://40525433.fudan-mini-program.com/cgi-bin/FrequentPOIs)
 
-##### method: GET
+##### method: POST
 
 ##### 发送数据格式：
 
@@ -769,7 +774,7 @@
 
 ##### url: [https://40525433.fudan-mini-program.com/cgi-bin/FrequentUsers](https://40525433.fudan-mini-program.com/cgi-bin/FrequentUsers)
 
-##### method: GET
+##### method: POST
 
 ##### 发送数据格式：
 
@@ -794,5 +799,42 @@
         "check_num":109                   //该用户在这个POI签到的次数。
       }
   ]
+}
+```
+
+
+#### 16.获取天气城市列表
+
+##### url: [https://40525433.fudan-mini-program.com/cgi-bin/City](https://40525433.fudan-mini-program.com/cgi-bin/City)
+
+##### method: POST
+
+##### 发送数据格式：
+
+```json
+{ 
+  "level":2,  //查询的级别，当level=1时，无需query值，接口返回所有1级城市。当level=2时，query指定一个1级城市，接口返回该城市的所有二级辖域。
+  "query":"上海" //当level=1时，无需该参数。
+}
+```
+
+##### 接收数据格式：
+```json
+{
+    "status": "OK",
+    "city_num": 11,
+    "cities": [
+        "上海",
+        "嘉定",
+        "奉贤",
+        "宝山",
+        "崇明",
+        "徐汇",
+        "松江",
+        "浦东新区",
+        "金山",
+        "闵行",
+        "青浦"
+    ]
 }
 ```
