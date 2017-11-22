@@ -16,7 +16,9 @@
     "pages/recordmood/recordmood",
     "pages/categorysta/categorysta",
     "pages/districtsta/districtsta",
-    "pages/placesta/placesta"
+    "pages/placesta/placesta",
+    "pages/chooseArea/chooseArea",
+    "pages/otherMood/otherMood"
   ],
   "window": {
     "window": {

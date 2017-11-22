@@ -2,7 +2,7 @@
 var wxCharts = require('../../utils/wxcharts.js');
 var app = getApp();
 var timeslot = ['今日','本周','本月','今年','全部']
-var all_name = ['狂喜', '开心', '放松', '平静', '低落', '焦虑', '生气']
+var all_name = ['狂喜', '开心', '放松', '平静', '低落', '焦虑', '生气','其他']
 Page({
 
   /**

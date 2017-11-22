@@ -36,7 +36,7 @@
 }
 .member-square{
   width: 150rpx;
-  height: 128rpx;
+  height: 140rpx;
   margin-left: 10rpx;
   margin-right: 20rpx;
   margin-top: 15rpx;

@@ -34,11 +34,15 @@ Page({
         wx.saveImageToPhotosAlbum({
           filePath: filePath,
           success: function (res) {
-            console.log(res);
+            //console.log(res);
+            wx.showToast({
+              title: '小程序码已保存到相册!',
+              icon:'success'
+            })
           },
           fail: function (res) {
-            console.log("HHHHH");
-            console.log(res.errMsg);
+           // console.log("HHHHH");
+            //console.log(res.errMsg);
             wx.openSetting({
               success: function (settingdata) {
                 console.log(settingdata)

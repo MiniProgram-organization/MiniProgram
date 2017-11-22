@@ -21,6 +21,9 @@ var mood =[{
   },{
     "icon": "../images/mood/6.png",
     "text": "生气"
+  },{
+    "icon": "../images/mood/7.png",  //之后替换图片
+    "text": "其他"
   }]
 Page({
   /**
@@ -53,9 +56,16 @@ Page({
     })
   },
   goToRecordMood: function(){
-    wx.navigateTo({
-      url: '../recordmood/recordmood?moodId='+this.moodId
-    })
+    if (this.moodId == 7){
+      wx.navigateTo({
+        url: '../otherMood/otherMood?moodId='+this.moodId
+      })
+    }
+    else{
+      wx.navigateTo({
+        url: '../recordmood/recordmood?moodId='+this.moodId
+      })
+    }
   },
   classifyByDate: function () {
     var that = this;
@@ -175,6 +185,7 @@ Page({
           },
           method: 'POST',
           success: function (res) {
+            console.log(res)
             var temp_history_mood = [];
             for (var i = 0; i < res.data.moods.length; i++){
               var temp_table = {}

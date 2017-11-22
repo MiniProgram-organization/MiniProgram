@@ -8,6 +8,7 @@
                     {{city}}
                     {{weather.cond_txt}}
                 </view>
+                <view bindtap="toChooseArea" class="chooseArea">点击切换区域</view>
                 <image class="weathericon" src="{{weathericonURL}}"></image>
             </view>
             <view class="right">

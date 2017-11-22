@@ -1,0 +1,24 @@
+<!--pages/chooseArea.wxml-->
+<view style="width: {{windowWidth}}px; height:{{windowHeight}}px">
+<view style="width: {{windowWidth}}px; height:{{windowHeight*0.1}}px">
+  <view style="display: flex;flex-direction:row">
+   <view style="flex:1">
+       </view>
+      <view style="flex:1">
+      <view class="page__title" style="font-size:150%;margin:10px 0px 10px 0px;color:green">{{title}}</view>
+      </view>
+       <view style="flex:1">
+       </view>
+  </view> 
+  <view class='line'></view>   
+</view>
+<view>
+<view class='showList' wx:key="{{showList}}">
+    <view class='areaLine' bindtap="listListener" id="{{item.id}}">
+    <text class='name_text'>{{item}} </text>
+    </view>
+</view>
+</view>
+</view>
+
+

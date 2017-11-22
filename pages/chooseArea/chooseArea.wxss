@@ -1,0 +1,18 @@
+/* pages/chooseArea/chooseArea.wxss */
+.areaLine
+{
+  padding-bottom: 10px;
+  padding-top: 10px;
+  padding-left: 10px;
+  border-bottom: 1px solid #eee;
+}
+.line{
+  border-bottom: 1.5px solid #eee;
+}
+.name_text
+{
+   font-size:18px;
+}
+.showList{
+  margin-top: 5px;
+}

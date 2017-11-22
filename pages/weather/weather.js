@@ -32,6 +32,12 @@ Page({
   onUnload: function () {
     // 页面关闭
   },
+  toChooseArea: function(cnt){
+    var that = this;
+    wx.navigateTo({
+      url: '../chooseArea/chooseArea'
+    })
+  },
   getLocationResur: function(cnt){
     var that = this;
     wx.getLocation({
