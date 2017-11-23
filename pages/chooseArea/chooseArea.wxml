@@ -13,11 +13,11 @@
   <view class='line'></view>   
 </view>
 <view>
-<view class='showList' wx:key="{{showList}}">
+<block class='showList' wx:for="{{showList}}">
     <view class='areaLine' bindtap="listListener" id="{{item.id}}">
-    <text class='name_text'>{{item}} </text>
+      <text class='name_text'>{{item.name}} </text>
     </view>
-</view>
+</block>
 </view>
 </view>
 

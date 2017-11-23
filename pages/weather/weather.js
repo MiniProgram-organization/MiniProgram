@@ -14,16 +14,28 @@ Page({
     award_text_1: "",
     award_text_2: "",
     air:{},
+    weatherCity:"",
+    parent:"",
   },
   onLoad: function (options) {
-    // 页面初始化 options为页面跳转所带来的参数
-    //this.loadInfo();
+    
   },
   onReady: function () {
     // 页面渲染完成s
   },
   onShow: function () {
     // 页面显示
+    // 页面初始化 options为页面跳转所带来的参数
+    var tmpWeatherCity = wx.getStorageSync('weatherCity');
+    console.log(tmpWeatherCity)
+    console.log('??')
+    this.setData({
+      weatherCity: tmpWeatherCity[0],
+      parent: tmpWeatherCity[1],
+    })
+    console.log(this.data.weatherCity)
+    console.log(this.data.parent)
+    wx.setStorageSync('weatherCity', "")
     this.loadInfo();
   },
   onHide: function () {
@@ -86,18 +98,41 @@ Page({
     this.getLocationResur(1);
   },
   loadWeather: function (latitude, longitude, openid) {
+
     var that = this;
+    var data = {};
+    if (this.data.weatherCity == ""){
+      data = {
+        openid: openid,
+        latitude: latitude,
+        longitude: longitude
+      }
+    }
+    else{
+      data = {
+        openid: openid,
+        latitude: latitude,
+        longitude: longitude,
+        location: this.data.weatherCity ,
+        parent: this.data.parent
+      }
+      console.log(data)
+    }
     wx.request({
       url: 'https://40525433.fudan-mini-program.com/cgi-bin/Weather',
       method: 'POST',
-      data: {
-        openid:openid,
-        latitude:latitude,
-        longitude:longitude      
-      },
+      data: data,
       success: function (res) {
         console.log(openid)
         console.log(res.data)
+        if (res.data.status == "ERROR"){
+          wx.showToast({
+            title: '服务器功能未启用',
+            icon: 'loading'
+          })
+          return;
+        }
+
         var now = res.data.now;
         var air = res.data.air;
         var city = res.data.basic.location;
@@ -183,7 +218,7 @@ Page({
         }
       },
       fail: function (res) {
-        console.log("发送天气信息失败" + res);
+        //console.log("发送天气信息失败" + res);
       }
     });
   }

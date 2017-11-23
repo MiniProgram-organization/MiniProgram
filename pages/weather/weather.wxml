@@ -4,7 +4,7 @@
         <view class="main">
             <view class="left">
                 <view class="tempnow">{{weather.tmp}}℃</view>
-                <view class="weather">
+                <view  bindtap="toChooseArea" class="weather">
                     {{city}}
                     {{weather.cond_txt}}
                 </view>

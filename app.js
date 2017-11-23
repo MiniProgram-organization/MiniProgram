@@ -18,6 +18,7 @@ App({
     longitude: 0.0,
     qqmapsdk: {},
     qrcodeUrl: "",
+    weatherCity:"",
     locationMap: {
       "房产小区": "resident",
       "教育学校": "school",
@@ -66,15 +67,9 @@ App({
     this.globalData.qqmapsdk = new QQMapWX({
       key: 'A5EBZ-DCPK4-IFSU7-XIQGW-NJKPJ-2NFLM'
     });
-
-
-
     console.log('手机高度为 ' + res.windowHeight);
     console.log('手机宽度为 ' + res.windowWidth);
-
-
     console.log("发送请求");
-
   },
   /**
    * 当小程序启动，或从后台进入前台显示，会触发 onShow
