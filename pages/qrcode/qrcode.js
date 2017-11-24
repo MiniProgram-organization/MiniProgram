@@ -5,7 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    qrcodeUrl: ""
+    qrcodeUrl: "",
+    windowWidth: getApp().globalData.windowWidth,
+    windowHeight: getApp().globalData.windowHeight 
   },
 
   /**
@@ -32,23 +34,20 @@ Page({
         var filePath = res.tempFilePath;
         console.log(filePath)
         console.log(filePath);
-        wx.redirectTo({
-          url: '../activity/activity',
-        });
+        
         wx.saveImageToPhotosAlbum({
           filePath: filePath,
           success: function (res) {
             //console.log(res);
-            wx.showToast({
-              title: '小程序码已保存到相册!',
-              icon: 'success',
-              success: function(){
+            wx.showModal({
+              title: '可以将图片分享到朋友圈',
+              content: '个性的小程序码已保存到手机相册!',
+              success:function(){
+                 wx.switchTab({
+                  url: '../account/account',
+                })
               },
-              fail: function(){
-                console.log("gg");
-              }
-            })
-            
+              });
           },
           fail: function (res) {
             // console.log("HHHHH");
