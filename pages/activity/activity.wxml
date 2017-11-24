@@ -40,7 +40,7 @@
       <block wx:for="{{item.checkInList}}">
         <view class='item_view' index="{{index}}" id="{{item.POI_id}}" style="display: flex;flex-direction:row">
           <view style="width:{{windowWidth*0.1}}px;position:relative;left:5%;">
-            <image class="timeline" src="../images/activity/yellow_line.png"></image>
+            <image class="timeline" style="height:{{item.height_p}}%"src="../images/activity/yellow_line.png"></image>
           </view>
           <view style="width:{{windowWidth*0.9}}px">
             <view class="topic-item" catchtap="redictDetail">
@@ -61,7 +61,7 @@
                 </view>
               </view>
             </view>
-             <view style="padding:0% 10% 0% 0%" class='checkin_text'>这一刻的想法: {{item.text}}</view>
+             <view style="padding:0% 10% 0% 0%" class='checkin_text'>{{item.text}}</view>
           </view>
         </view>
       </block>

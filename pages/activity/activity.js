@@ -390,18 +390,24 @@ Page({
           console.log("lsh返回的历史");
           console.log(res);
 
+        // var tmpCheckins = [];
           for (var i = 0; i < res.data.checkins.length; i++) {
+            var tmpCheckin = 
             res.data.checkins[i].date = res.data.checkins[i]['datetime'].split(" ")[0];
             res.data.checkins[i].time = res.data.checkins[i]['datetime'].split(" ")[1];
-
             //需要自行设置logoPath
             var category = res.data.checkins[i].category;
             res.data.checkins[i].logoPath = '../images/location/' + app.globalData.locationMap[category.split(":")[0]] + '.png';
+            if(res.data.checkins[i].text != ""){
+              res.data.checkins[i]['height_p'] = 80;
+            }
+            else res.data.checkins[i]['height_p'] = 65;
           }
 
           that.setData({
             checkins: res.data.checkins
           });
+          console.log(that.data.checkins)
           wx.setStorageSync('checkins', res.data.checkins);
           that.classifyByDate();
         }

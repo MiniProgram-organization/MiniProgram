@@ -2,11 +2,11 @@
 <view style="width: {{windowWidth}}px; height:{{windowHeight}}px">
 <view style="width:80%; height:90%; margin:5% 10% 5% 10%">
   <view class='title'>
-    <text>ZhangJ Go</text>
+    <text>卿云 Go</text>
   </view>
   <view class='content'>
     <text>
-    ZhangJ Go是一款提供城市生活服务的小程序，主要功能模块分为查看实地天气，签到，心情记录三大块。其中，天气功能为您提供一键查看实时天气服务，签到功能将帮您生成您在城市中的足记，心情记录为您提供心情服务，帮助您在城市的高压中照顾好自己的心情。
+    卿云 Go是一款提供城市生活服务的小程序，主要功能模块分为查看实地天气，签到，心情记录三大块。其中，天气功能为您提供一键查看实时天气服务，签到功能将帮您生成您在城市中的足记，心情记录为您提供心情服务，帮助您在城市的高压中照顾好自己的心情。
     </text>
   </view>
   <view class="input_title">

@@ -117,15 +117,19 @@ Page({
           text: that.data.text
         },
         success: function (e) {
-          console.log(e);
           var datetime = new Date();
-          var time = datetime.toLocaleTimeString();
-          var date = datetime.toLocaleDateString();
+          var time = e.data.time;
+          var date = e.data.date
+          var height_p = 65;
+          if (that.data.text != ""){
+            height_p = 80;
+          }
           var old_history = wx.getStorageSync('checkins');
           if (e.data.status == "OK") {
             var award = e.data.award;
             var scores = e.data.scores;
             var duration = e.data.duration;
+
             wx.setStorageSync('scores', scores);
             wx.setStorageSync('duration_checkin', duration);
 
@@ -146,6 +150,7 @@ Page({
                   date: date,
                   logoPath: that.data.logoPath,
                   text: that.data.text,
+                  height_p: height_p,
                 }]
               })
             } else {
@@ -164,6 +169,7 @@ Page({
                 date: date,
                 logoPath: that.data.logoPath,
                 text: that.data.text,
+                height_p: height_p,
               });
               wx.setStorage({
                 key: 'checkins',

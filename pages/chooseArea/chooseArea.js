@@ -30,9 +30,13 @@ Page({
           },
           success: function (res) {
             var tmpShowList = []
+            tmpShowList.push({
+              id: 0,
+              name: '默认位置'
+            })
             for (var i = 0; i < res.data.cities.length; i++){
               tmpShowList.push({
-                id:i,
+                id:i+1,
                 name: res.data.cities[i]
               })
             }
@@ -58,7 +62,12 @@ Page({
       selectedName: this.data.showList[e.currentTarget.id].name
     })
     if(this.data.level == 0){
-      this.queryCity();
+      if (e.currentTarget.id == 0){
+        wx.switchTab({
+          url: '../weather/weather'
+        })
+      }
+      else this.queryCity();
     }
     else if(this.data.level == 1){
       this.queryArea();
@@ -68,8 +77,6 @@ Page({
     }
   },
   goToWeather: function(){
-    console.log(this.data.selectedName)
-    console.log('????')
     var that = this;
     wx.setStorageSync('weatherCity', [this.data.selectedName, this.data.parent])
     wx.switchTab({
