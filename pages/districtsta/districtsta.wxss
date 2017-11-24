@@ -14,11 +14,14 @@
   margin: 0 auto;
 }
 .picker{
-  background-color: #FFFFFF;
+  background-color: #FAFAFA;
   padding: 10rpx;
 }
 .picker_text
 {
   font-size:18px ;
   text-align: center;
+}
+.bg{
+  background: #fff;
 }

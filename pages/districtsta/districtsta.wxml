@@ -1,7 +1,7 @@
 <!--pages/districtsta/districtsta.wxml-->
-<view style="width: {{windowWidth}}px; height:{{windowHeight}}px">
+<view class='bg'>
 
-<view style="width:80%;  margin:5% 10% 5% 10%">
+<view style="width:80%;  padding:5% 10% 5% 10%">
   <view class="section">
   <picker bindchange="bindPickerChange" value="{{index}}" range="{{areaslot}}">
     <view class='picker'>

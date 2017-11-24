@@ -12,3 +12,6 @@
 {
   margin: 0 auto;
 }
+.bg{
+  background: #fff
+}

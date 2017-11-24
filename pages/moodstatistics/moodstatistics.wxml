@@ -1,6 +1,6 @@
 <!--pages/moodstatistics/moodstatistics.wxml-->
-<view style="width: {{windowWidth}}px; height:{{windowHeight}}px">
-<view style="width:80%;  margin:5% 10% 5% 10%">
+<view class='bg'>
+<view style="width:80%; padding:5% 10% 5% 10%">
   <view class="section">
   <picker bindchange="bindPickerChange" value="{{index}}" range="{{timeslot}}">
     <view class='picker'>

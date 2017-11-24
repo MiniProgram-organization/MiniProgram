@@ -1,6 +1,6 @@
 <!--pages/districtsta/districtsta.wxml-->
-<view style="width: {{windowWidth}}px; height:{{windowHeight}}px">
-<view style="width:80%;  margin:5% 10% 5% 10%">
+<view class='bg'>
+<view style="width:80%;  padding:5% 10% 5% 10%">
   <view class="title">
   <text>签到类别</text>
   </view>

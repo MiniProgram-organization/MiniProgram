@@ -35,9 +35,8 @@ Page({
     var that = this;
     var pieChart = new wxCharts({
       animation: true,
-   //   disablePieStroke: true,
       canvasId: 'pieCanvas',
-      type: 'line',
+      type: 'column',
       categories: line_catrgory,
 
       series: [{

@@ -1,6 +1,6 @@
 /* pages/moodstatistics/moodstatistics.wxss */
 .picker{
-  background-color: #FFFFFF;
+  background-color: #FAFAFA;
   padding: 10rpx;
 }
 .picker_text
@@ -68,4 +68,7 @@
 {
   text-align: center;
   font-size: 18px;
+}
+.bg{
+  background: #FFFFFF
 }
