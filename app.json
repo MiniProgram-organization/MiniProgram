@@ -28,7 +28,8 @@
       "navigationBarTitleText": "微信接口功能演示",
       "backgroundColor": "#ffffff",
       "backgroundTextStyle": "light"
-    }
+    },
+    "enablePullDownRefresh": "true"
   },
   "tabBar": {
     "color": "#353535",

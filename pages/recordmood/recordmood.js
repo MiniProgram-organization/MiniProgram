@@ -56,19 +56,18 @@ Page({
       mood_id:-1,
       text:"",
   },
-  recordMood: function (options)
-  {
+  recordRequest: function (latitude, longitude){
     var that = this;
     wx.request({
       url: 'https://40525433.fudan-mini-program.com/cgi-bin/Mood',
       method: 'POST',
-      data:{
+      data: {
         mood_id: that.data.mood_id,        //心情类型(0-6)
         mood_text: that.data.mood_text,    //心情类型对应的文字
         openid: app.globalData.openid,
         text: that.data.text,
-        latitude: app.globalData.latitude,//用户所在纬度
-        longitude: app.globalData.longitude,  //用户所在经度
+        latitude: latitude,//用户所在纬度
+        longitude: longitude,  //用户所在经度
       },
       success: function (e) {
         //添加到缓存
@@ -83,7 +82,7 @@ Page({
         wx.setStorageSync('scores', scores);
         wx.setStorageSync('duration_mood', duration);
 
-        if (old_history == ""){
+        if (old_history == "") {
           wx.setStorageSync('history_mood', [{
             mood_id: that.data.mood_id,
             mood_text: that.data.mood_text,    //心情类型对应的文字
@@ -95,7 +94,7 @@ Page({
             logoPath: '../images/mood/' + that.data.mood_id + '.png'
           }])
         }
-        else{
+        else {
           old_history.unshift({
             mood_id: that.data.mood_id,
             mood_text: that.data.mood_text,    //心情类型对应的文字
@@ -111,14 +110,14 @@ Page({
         wx.switchTab({
           url: '../mood/mood',
           success: function (e) {
-            if (award > 0){
+            if (award > 0) {
               wx.showToast({
-                title: "记录成功：\n" + that.data.mood_text+'\n'+'+'+award+'分',
+                title: "记录成功：\n" + that.data.mood_text + '\n' + '+' + award + '分',
                 icon: 'success',
                 duration: 2000
               });
             }
-            else{
+            else {
               wx.showToast({
                 title: "记录成功：\n" + that.data.mood_text,
                 icon: 'success',
@@ -128,13 +127,24 @@ Page({
           }
         })
       },
-      fail: function(e)
-      {
+      fail: function (e) {
         wx.showToast({
           title: "记录失败：\n" + that.data.mood_text,
           icon: 'loading',
           duration: 2000
         });
+      }
+    })
+  },
+  recordMood: function ()
+  {
+    var that = this;
+    wx.getLocation({
+      success: function(res) {
+        that.recordRequest(res.latitude,res.longitude);
+      },
+      fail: function(){
+        that.recordRequest(app.globalData.latitude, app.globalData.longitude);
       }
     })
 

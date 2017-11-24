@@ -7,8 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    windowWidth: '',
-    windowHeight: '',
+    windowWidth: app.globalData.windowWidth,
+    windowHeight: app.globalData.windowHeight,
     avatarUrl: '',
     iconUrl: '',
     nickName: '',
@@ -28,8 +28,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
-    
+
   },
 
   redirectToQRCode: function () {
@@ -53,7 +52,6 @@ Page({
         }
       },
       success: function (e) {
-        console.log(e.data);
         that.setData({
           qrcodeUrl: e.data.url
         });
@@ -85,27 +83,88 @@ Page({
   onReady: function () {
   
   },
-
   /**
    * 生命周期函数--监听页面显示
    */
+  getLocationResur: function (cnt) {
+    var that = this;
+    wx.getLocation({
+      type: 'wgs84',
+      success: function (res) {
+        cnt = cnt + 1
+        that.setData({
+          latitude: res.latitude,
+          longitude: res.longitude
+        })
+        that.getMyInfo();
+      },
+      fail: function (res) {
+        cnt = cnt + 1
+        if (cnt < 10) {
+          that.getLocationResur(cnt);
+        }
+        else {
+          var latitude = wx.getStorageSync('latitude')
+          var longitude = wx.getStorageSync('longitude')
+          if (latitude == "") {
+            wx.showToast({
+              title: '定位失败!请检查设置!',
+              duration: 1000,
+              icon: 'loading'
+            })
+          }
+          else {
+            wx.showToast({
+              title: '定位失败!使用上次位置!',
+              duration: 1000,
+              icon: 'loading'
+            })
+            that.setData({
+              latitude: res.latitude,
+              longitude: res.longitude
+            })
+            that.getMyInfo();
+          }
+        }
+      }
+    })
+  },
   onShow: function () {
     var that = this;
     var nickName = "";
     var gender = "";
     var province = "";
     var country = "";
-    console.log(app.globalData.rawData.gender)
     nickName = app.globalData.rawData.nickName;
     gender = genderChoose[app.globalData.rawData.gender];
     province = app.globalData.rawData.province;
     country = app.globalData.rawData.country;
-    var latitude = app.globalData.latitude;
-    var longitude = app.globalData.longitude;
     if (nickName == "") nickName = " ";
     if (gender == "") gender = " ";
     if (province == "") provincee = " ";
     if (country == "") country = " ";
+    var socresTemp = wx.getStorageSync('scores')
+    var scores = 0;
+    if (socresTemp != 0) {
+      scores = socresTemp;
+    }
+    this.setData({
+      nickName: nickName,
+      windowWidth: app.globalData.windowWidth,
+      windowHeight: app.globalData.windowHeight,
+      avatarUrl: app.globalData.rawData.avatarUrl,
+      gender: gender,
+      province: province,
+      country: country,
+      iconUrl: "../images/account/ic_chevron_right_black_48dp.png",
+      scores: scores,
+    });
+    this.getLocationResur(1);
+  },
+  getMyInfo: function(){
+    var that = this;
+    var latitude = String(this.data.latitude);
+    var longitude = String(this.data.longitude);
 
     var latitude_text;
     var longitude_text;
@@ -131,24 +190,13 @@ Page({
     if (socresTemp != 0) {
       scores = socresTemp;
     }
-    that.setData({
-      nickName: nickName,
-      windowWidth: app.globalData.windowWidth,
-      windowHeight: app.globalData.windowHeight,
-      avatarUrl: app.globalData.rawData.avatarUrl,
-      gender: gender,
-      province: province,
-      country: country,
+    this.setData({
       latitude: app.globalData.latitude,
       longitude: app.globalData.longitude,
-      iconUrl: "../images/account/ic_chevron_right_black_48dp.png",
-      scores: scores,
       latitude_text: latitude_text,
       longitude_text: longitude_text,
-
     });
   },
-
   /**
    * 生命周期函数--监听页面隐藏
    */
@@ -167,7 +215,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    //wx.stopPullDownRefresh()
   },
 
   /**
