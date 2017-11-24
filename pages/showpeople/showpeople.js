@@ -31,9 +31,8 @@ Page({
           var numbers = res.data.user_num;
           var modifiedusers = res.data.users;
           console.log("查看签到人数");
-          console.log(users);
 
-          for(index in modifiedusers){
+          for(var index in modifiedusers){
             if (modifiedusers[index].text.length > 10){
               modifiedusers[index].text = modifiedusers[index].text.slice(0,10);
             }
@@ -63,7 +62,6 @@ Page({
     });
     that.getKingUser();
     that.requestPoiHistory();
-    that.getQRCode();
   },
   getKingUser: function(){
     var that = this;
