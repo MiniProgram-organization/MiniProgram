@@ -1,0 +1,5 @@
+<!--pages/qrcode/qrcode.wxml-->
+<text>pages/qrcode/qrcode.wxml</text>
+
+<button bindtap="saveQRCode">点击保存</button>
+<image src="{{qrcodeUrl}}"></image>

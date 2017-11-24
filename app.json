@@ -18,7 +18,8 @@
     "pages/districtsta/districtsta",
     "pages/placesta/placesta",
     "pages/chooseArea/chooseArea",
-    "pages/otherMood/otherMood"
+    "pages/otherMood/otherMood",
+    "pages/qrcode/qrcode"
   ],
   "window": {
     "window": {

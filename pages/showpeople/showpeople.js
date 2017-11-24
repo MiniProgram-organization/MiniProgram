@@ -8,7 +8,6 @@ Page({
   data: {
     windowWidth: app.globalData.windowWidth,
     windowHeight: app.globalData.windowHeight,
-    qrcodeUrl: "",
     displayQrCode: "none",
     users: [],
     crown_url:'../images/showpeople/crown.png',
@@ -17,53 +16,6 @@ Page({
     king_user_num:0,
     POI_name:'',
   },
-
-  QRCode: function () {
-    var that = this;
-    this.setData({
-      displayQrCode: "block"
-    });
-    console.log(that.data.qrcodeUrl);
-    wx.downloadFile({
-      url: that.data.qrcodeUrl,
-      success: function (res) {
-        console.log(res);
-        var filePath = res.tempFilePath;
-        console.log(filePath)
-        console.log(filePath);
-        wx.saveImageToPhotosAlbum({
-          filePath: filePath,
-          success: function (res) {
-            //console.log(res);
-            wx.showToast({
-              title: '小程序码已保存到相册!',
-              icon:'success'
-            })
-          },
-          fail: function (res) {
-           // console.log("HHHHH");
-            //console.log(res.errMsg);
-            wx.openSetting({
-              success: function (settingdata) {
-                console.log(settingdata)
-                if (settingdata.authSetting['scope.writePhotosAlbum']) {
-                  console.log('获取权限成功，给出再次点击图片保存到相册的提示。')
-                }
-                else {
-                  console.log('获取权限失败，给出不给权限就无法正常使用的提示')
-                }
-              }
-            });
-          }
-        });
-      },
-      fail: function (res) {
-        console.log("TTTT");
-        console.log(res);
-      }
-    });
-  },
-
   requestPoiHistory: function () {
     var that = this;
     wx.request({
@@ -130,32 +82,6 @@ Page({
     var that = this;
     
   },
-
-  getQRCode: function () {
-    var that = this;
-    wx.request({
-      url: 'https://40525433.fudan-mini-program.com/cgi-bin/QRCode',
-      method: 'POST',
-      data: {
-        scene: "lsh",
-        path: "pages/map/map",
-        width: 430,
-        auto_color: false,
-        line_color: {
-          "r": "0",
-          "g": "255",
-          "b": "0"
-        }
-      },
-      success: function (e) {
-        console.log(e.data);
-        that.setData({
-          qrcodeUrl: e.data.url
-        });
-      }
-    })
-  },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

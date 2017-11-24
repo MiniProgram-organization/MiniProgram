@@ -1,9 +1,13 @@
 
 
 <view style="width:{{windowWidth}}px;height:{{windowHeight}}px">
-<image style="width:20%; height:15%;margin:5% 40% 0% 40%" 
+<image bindtap="redirectToQRCode" style="width:15%; height:10%;margin:5% 40% 0% 40%" 
         src="{{avatarUrl}}">
 </image>
+<view style="width:30%;margin:5% 40% 0% 35%">
+  <view>点击头像分享</view>
+</view>
+
  <view class="weui-cells__title" style="text-align:center;font-size:30px">个人信息</view>
 <view class="weui-cells weui-cells_after-title">
 
@@ -52,6 +56,8 @@
         </view>
       </view>
 
+      
+
         <view class="weui-cell weui-cell_input">
         <view class="weui-cell__hd">
           <view class="weui-label">经纬度</view>
@@ -70,7 +76,7 @@
           <image style="width:48rpx; height:48rpx;margin:5% 0% 0% 0%" src="{{iconUrl}}"></image>
         </view>
       </view>
-
+      
     </view>
   <view class='privacy'>
   <text bindtap="goToPrivacy">隐私条款

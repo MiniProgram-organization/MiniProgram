@@ -18,6 +18,7 @@ Page({
     latitude: '',
     longitude: '',
     ip:'',
+    qrcodeUrl: '',
     scores:0,
     latitude_text:'',
     longitude_text:''
@@ -30,6 +31,40 @@ Page({
     
     
   },
+
+  redirectToQRCode: function () {
+    this.getQRCode();
+  },
+
+  getQRCode: function () {
+    var that = this;
+    wx.request({
+      url: 'https://40525433.fudan-mini-program.com/cgi-bin/QRCode',
+      method: 'POST',
+      data: {
+        scene: "lsh",
+        path: "pages/map/map",
+        width: 430,
+        auto_color: false,
+        line_color: {
+          "r": "0",
+          "g": "255",
+          "b": "0"
+        }
+      },
+      success: function (e) {
+        console.log(e.data);
+        that.setData({
+          qrcodeUrl: e.data.url
+        });
+        wx.redirectTo({
+          url: '../qrcode/qrcode?qrcodeUrl='+that.data.qrcodeUrl,
+        })
+      }
+    })
+  },
+
+
   goToPrivacy: function () {
     var that = this;
     wx.navigateTo({
