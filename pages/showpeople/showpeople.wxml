@@ -34,14 +34,6 @@
 
 <view>
 
-<view style="display: flex;flex-direction:row">
-  <view style="flex:0.2"></view>
-  <view style="flex:0.6">
-    <button bindtap="QRCode" style="flex:1" class="weui-btn" type="primary">生成小程序码</button>
-  </view>
-  <view style="flex:0.2"></view>
-</view>
-
 <view class='qr_view' style="display:{{displayQrCode}} " align="center">  
 </view>
 </view>

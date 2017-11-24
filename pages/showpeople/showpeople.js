@@ -29,11 +29,18 @@ Page({
         console.log(res.data);
         if (res.data.status == "OK") {
           var numbers = res.data.user_num;
-          var users = res.data.users;
+          var modifiedusers = res.data.users;
           console.log("查看签到人数");
-          console.log(users);
+
+          for(var index in modifiedusers){
+            if (modifiedusers[index].text.length > 10){
+              modifiedusers[index].text = modifiedusers[index].text.slice(0,10);
+            }
+          } 
+
+
           that.setData({
-            users: users
+            users: modifiedusers
           });
         } else {
           wx.showToast({
@@ -55,7 +62,6 @@ Page({
     });
     that.getKingUser();
     that.requestPoiHistory();
-    that.getQRCode();
   },
   getKingUser: function(){
     var that = this;
