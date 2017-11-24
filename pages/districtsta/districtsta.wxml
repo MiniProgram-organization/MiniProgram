@@ -13,7 +13,7 @@
 
 <view style="width:80%;  margin:5% 10% 5% 10%">
   <view class="title">
-  <text>上海市签到行政区分布</text>
+  <text>{{title}}</text>
   </view>
 </view>
 
