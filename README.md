@@ -839,3 +839,31 @@
     ]
 }
 ```
+
+
+#### 17.查询积分，连续活跃天数
+
+##### url: [https://40525433.fudan-mini-program.com/cgi-bin/](https://40525433.fudan-mini-program.com/cgi-bin/)
+
+##### method: POST
+
+##### 发送数据格式：
+
+```json
+{ 
+  "openid":"xfvsdgf", 
+}
+```
+
+##### 接收数据格式：
+```json
+{
+    "status": "OK",
+    "scores": 100,
+    "duration_checkin": 11,
+    "duration_weather": 12,
+    "duration_mood":0,
+}
+```
+
+

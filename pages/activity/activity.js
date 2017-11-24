@@ -57,7 +57,7 @@ Page({
       windowWidth: app.globalData.windowWidth,
       windowHeight: app.globalData.windowHeight
     });
-
+    
     var duration = wx.getStorageSync('duration_checkin');
     if (duration == ""){
       this.setData({
