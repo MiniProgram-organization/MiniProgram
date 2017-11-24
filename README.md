@@ -843,7 +843,7 @@
 
 #### 17.查询积分，连续活跃天数
 
-##### url: [https://40525433.fudan-mini-program.com/cgi-bin/](https://40525433.fudan-mini-program.com/cgi-bin/)
+##### url: [https://40525433.fudan-mini-program.com/cgi-bin/Scores](https://40525433.fudan-mini-program.com/cgi-bin/Scores)
 
 ##### method: POST
 
