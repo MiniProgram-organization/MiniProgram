@@ -57,16 +57,21 @@ Page({
       windowWidth: app.globalData.windowWidth,
       windowHeight: app.globalData.windowHeight
     });
-    
+
     var duration = wx.getStorageSync('duration_checkin');
     if (duration == ""){
+      //如果没有缓存
+      /*wx.request({
+        url: 'https://40525433.fudan-mini-program.com/cgi-bin/',
+      })*/
+      /*
       this.setData({
         con_day:0,
         less_day:7,
         object_day:7,
         award_text_1: "已连续签到",
         award_text_2: "天了！还差7天就能获得额外积分奖励喔，加油~"
-      })
+      })*/
     }
     else{
       if ((duration % 7 == 0) && ((duration % 28)!= 0)){
@@ -310,14 +315,12 @@ Page({
     wx.login({
       success: function (res) {
         var code = res.code;
-
         wx.getUserInfo({
+          lang:'zh_CN',
           success: function (res) {
-            
             getApp().globalData.rawData = JSON.parse(res.rawData);
-            
             var iv = res.iv;
-            
+            console.log(res)
             wx.request({
               url: 'https://40525433.fudan-mini-program.com/cgi-bin/Login',
               method: 'POST',

@@ -91,7 +91,6 @@ Page({
     if (longitude > 0) longitude_text = longitude_text + 'E';
     else if (longitude < 0) longitude_text = longitude_text + 'W';
 
-
     var socresTemp = wx.getStorageSync('scores')
     var scores = 0;
     if (socresTemp != 0) {
