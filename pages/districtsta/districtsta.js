@@ -1,14 +1,13 @@
 // pages/districtsta/districtsta.js
 var wxCharts = require('../../utils/wxcharts.js');
 var app = getApp();
+var areaslot = ['城市', '城市辖区']
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     windowWidth: app.globalData.windowWidth,
-    windowHeight: app.globalData.windowHeight
+    windowHeight: app.globalData.windowHeight,
+    areaslot: areaslot,
+    index:0,
   },
 
   /**
@@ -48,12 +47,16 @@ Page({
         }
       }
     })
-
-    
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
+  bindPickerChange: function(e){
+    this.setData({
+      index: e.detail.value
+    })
+    var that = this;
+  },
   onReady: function () {
   
   },

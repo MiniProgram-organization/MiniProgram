@@ -13,11 +13,11 @@ Page({
     windowHeight: app.globalData.windowHeight,
     timeslot:timeslot,
     categoryres:{},
-    hint_text:"请选择时间"
+    hint_text:"请选择时间",
+    index:0
   },
   
   bindPickerChange: function (e) {
-    //console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       index: e.detail.value
     })
