@@ -1,5 +1,16 @@
 <!--pages/districtsta/districtsta.wxml-->
 <view style="width: {{windowWidth}}px; height:{{windowHeight}}px">
+
+<view style="width:80%;  margin:5% 10% 5% 10%">
+  <view class="section">
+  <picker bindchange="bindPickerChange" value="{{index}}" range="{{areaslot}}">
+    <view class='picker'>
+    <text class='picker_text'>请选择划分粒度：{{areaslot[index]}}</text>
+    </view>
+  </picker>
+  </view>
+  </view>
+
 <view style="width:80%;  margin:5% 10% 5% 10%">
   <view class="title">
   <text>上海市签到行政区分布</text>

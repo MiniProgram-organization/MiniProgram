@@ -60,13 +60,18 @@ Page({
 
     var duration = wx.getStorageSync('duration_checkin');
     if (duration == ""){
+      //如果没有缓存
+      /*wx.request({
+        url: 'https://40525433.fudan-mini-program.com/cgi-bin/',
+      })*/
+      /*
       this.setData({
         con_day:0,
         less_day:7,
         object_day:7,
         award_text_1: "已连续签到",
         award_text_2: "天了！还差7天就能获得额外积分奖励喔，加油~"
-      })
+      })*/
     }
     else{
       if ((duration % 7 == 0) && ((duration % 28)!= 0)){
@@ -310,14 +315,12 @@ Page({
     wx.login({
       success: function (res) {
         var code = res.code;
-
         wx.getUserInfo({
+          lang:'zh_CN',
           success: function (res) {
-            
             getApp().globalData.rawData = JSON.parse(res.rawData);
-            
             var iv = res.iv;
-            
+            console.log(res)
             wx.request({
               url: 'https://40525433.fudan-mini-program.com/cgi-bin/Login',
               method: 'POST',
@@ -390,18 +393,24 @@ Page({
           console.log("lsh返回的历史");
           console.log(res);
 
+        // var tmpCheckins = [];
           for (var i = 0; i < res.data.checkins.length; i++) {
+            var tmpCheckin = 
             res.data.checkins[i].date = res.data.checkins[i]['datetime'].split(" ")[0];
             res.data.checkins[i].time = res.data.checkins[i]['datetime'].split(" ")[1];
-
             //需要自行设置logoPath
             var category = res.data.checkins[i].category;
             res.data.checkins[i].logoPath = '../images/location/' + app.globalData.locationMap[category.split(":")[0]] + '.png';
+            if(res.data.checkins[i].text != ""){
+              res.data.checkins[i]['height_p'] = 80;
+            }
+            else res.data.checkins[i]['height_p'] = 65;
           }
 
           that.setData({
             checkins: res.data.checkins
           });
+          console.log(that.data.checkins)
           wx.setStorageSync('checkins', res.data.checkins);
           that.classifyByDate();
         }
