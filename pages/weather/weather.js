@@ -95,6 +95,13 @@ Page({
   loadInfo: function () {
     var getSuccess = 0;
     var timer = 0
+    var inChina = wx.getStorageSync('inChina');
+    if (inChina == 0){
+       wx.showToast({
+         title: '抱歉，您目前不在卿云Go的服务区!',
+         icon: 'loading'
+       })
+    }
     this.getLocationResur(1);
   },
   loadWeather: function (latitude, longitude, openid) {

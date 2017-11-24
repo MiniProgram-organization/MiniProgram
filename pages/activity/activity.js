@@ -26,12 +26,65 @@ Page({
     award_text_1:"",
     award_text_2:"",
   },
-
   redirectCheckIn: function () {
     var that = this;
     wx.navigateTo({
       url: '../checkin/checkin?markers='
     })
+  },
+  setDuration: function (duration){
+    if ((duration % 7 == 0) && ((duration % 28) != 0)) {
+      if ((duration / 7) % 4 == 1) {
+        this.setData({
+          con_day: duration,
+          award_text_1: "连续签到",
+          award_text_2: "天了，真棒！\n又获得额外积分奖励啦~"
+        })
+      }
+      else if ((duration / 7) % 4 == 2) {
+        this.setData({
+          con_day: duration,
+          award_text_1: "连续签到",
+          award_text_2: "天了，exciting！\n又获得额外积分奖励啦~"
+        })
+      }
+      else if ((duration / 7) % 4 == 3) {
+        this.setData({
+          con_day: duration,
+          award_text_1: "连续签到",
+          award_text_2: "天了，amazing！\n又获得额外积分奖励啦~"
+        })
+      }
+    }
+    else if (duration % 28 == 0) {
+      this.setData({
+        con_day: duration,
+        award_text_1: "连续签到",
+        award_text_2: "天了，天啦噜！一份超值额外积分大礼砸中了你~"
+      })
+    }
+    else if (duration % 7 != 0) {
+      var object_day = (parseInt(duration / 7) + 1) * 7;
+      console.log(object_day)
+      if (object_day % 28 == 0) {
+        this.setData({
+          con_day: duration,
+          object_day: object_day,
+          less_day: object_day - duration,
+          award_text_1: "已连续签到",
+          award_text_2: "天了！还差" + (object_day - duration) + "天就能获得连续28天超值额外积分奖励喔，加油~"
+        })
+      }
+      else {
+        this.setData({
+          con_day: duration,
+          object_day: object_day,
+          less_day: object_day - duration,
+          award_text_1: "已连续签到",
+          award_text_2: "天了！还差" + (object_day - duration) + "天就能获得额外积分奖励喔，加油~"
+        })
+      }
+    }
   },
   Todistrictsta: function () {
     var that = this;
@@ -61,71 +114,27 @@ Page({
     var duration = wx.getStorageSync('duration_checkin');
     if (duration == ""){
       //如果没有缓存
-      /*wx.request({
-        url: 'https://40525433.fudan-mini-program.com/cgi-bin/',
-      })*/
-      /*
-      this.setData({
-        con_day:0,
-        less_day:7,
-        object_day:7,
-        award_text_1: "已连续签到",
-        award_text_2: "天了！还差7天就能获得额外积分奖励喔，加油~"
-      })*/
+      
+      wx.request({
+        url: 'https://40525433.fudan-mini-program.com/cgi-bin/Scores',
+        method: 'POST',
+        data: {
+          openid: getApp().globalData.openid
+        },
+        success: function (res) {
+          wx.setStorageSync('duration_checkin', res.data.duration_checkin);
+          wx.setStorageSync('duration_weather', res.data.duration_weather);
+          wx.setStorageSync('duration_mood', res.data.duration_mood);
+          wx.setStorageSync('scores', res.data.scores);
+          that.setDuration(res.data.duration_checkin)
+        },
+        fail: function(res){
+
+        }
+      })
     }
     else{
-      if ((duration % 7 == 0) && ((duration % 28)!= 0)){
-        if ((duration/7)%4==1){
-            this.setData({
-              con_day: duration,
-              award_text_1: "连续签到",
-              award_text_2: "天了，真棒！\n又获得额外积分奖励啦~"
-            })
-        }
-        else if ((duration / 7) % 4 == 2){
-          this.setData({
-            con_day: duration,
-            award_text_1: "连续签到",
-            award_text_2: "天了，exciting！\n又获得额外积分奖励啦~"
-          })
-        }
-        else if ((duration / 7) % 4 == 3) {
-          this.setData({
-            con_day: duration,
-            award_text_1: "连续签到",
-            award_text_2: "天了，amazing！\n又获得额外积分奖励啦~"
-          })
-        }
-      }
-      else if (duration%28==0){
-        this.setData({
-          con_day: duration,
-          award_text_1: "连续签到",
-          award_text_2: "天了，天啦噜！一份超值额外积分大礼砸中了你~"
-        })
-      }
-      else if (duration % 7 != 0){
-        var object_day = (parseInt(duration / 7) + 1) * 7;
-        console.log(object_day)
-        if(object_day%28 == 0){
-          this.setData({
-            con_day: duration,
-            object_day: object_day,
-            less_day: object_day - duration,
-            award_text_1: "已连续签到",
-            award_text_2: "天了！还差" + (object_day - duration)+"天就能获得连续28天超值额外积分奖励喔，加油~"
-          })
-        }
-        else{
-          this.setData({
-            con_day: duration,
-            object_day: object_day,
-            less_day: object_day - duration,
-            award_text_1: "已连续签到",
-            award_text_2: "天了！还差" + (object_day - duration) + "天就能获得额外积分奖励喔，加油~"
-          })
-        }
-      }
+      this.setDuration(duration)
     }
 
     
@@ -141,12 +150,19 @@ Page({
         app.globalData.qqmapsdk.reverseGeocoder({
           location: {
             latitude: res.latitude,
-            longitude: res.longitude
+            longitude: res.longitude,
           },
           get_poi: 1,
           success: function (res) {
-            console.log("附近POI");
-            console.log(res.result.pois);
+            if(res.result.pois == undefined){
+              wx.showToast({
+                title: '抱歉，您目前不在卿云Go的服务区!',
+                icon:'loading'
+              })
+              wx.setStorageSync('inChina', 0)
+              return;
+            }
+            wx.setStorageSync('inChina', 1)
             var coordinates = res.result.pois;
             //marker数组
             var tempMarkers = [];
@@ -338,8 +354,6 @@ Page({
                   })
                   return;
                 }
-
-                
                 getApp().globalData.openid = res.data.openid;
                 
                 that.getCheckIns();
@@ -380,9 +394,7 @@ Page({
       that.classifyByDate();
     } else {
       console.log("向lsh请求历史");
-
       console.log(getApp().globalData.openid);
-
       wx.request({
         url: 'https://40525433.fudan-mini-program.com/cgi-bin/History',
         data: {
