@@ -6,7 +6,7 @@
         src="{{avatarUrl}}">
         </image>
 </view>
-<view class='.share_text'>
+<view bindtap="redirectToQRCode" class='.share_text'>
   <view>点击头像分享</view>
 </view>
 
