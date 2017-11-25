@@ -32,13 +32,13 @@
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell" >
         <view class="weui-cell__bd">
-          <textarea class="weui-textarea" bindinput="textChange" value="{{text}}" placeholder="写点心情寄语吧!" style="height: 8.3em" />
-          <view class="weui-textarea-counter">0/200</view>
+          <textarea maxlength="140"  class="weui-textarea" bindinput="textChange" value="{{text}}" placeholder="写点心情寄语吧!" style="height: 8.3em" />
+          <view class="weui-textarea-counter">0-140</view>
         </view>
       </view>
     </view>
   </view>
-<view style="margin:{{windowHeight*0.05}}px 0px 0px 0px">
+<view style="margin:{{windowHeight*0.05}}px 0px {{windowHeight*0.05}}px 0px">
     <view style="display: flex;flex-direction:row">
       <view style="flex:0.2"></view>
         <view style="flex:0.6">
