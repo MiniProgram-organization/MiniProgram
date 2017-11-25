@@ -2,25 +2,25 @@
 var app = getApp();
 var mood =[{
     "icon": "../images/mood/0.png",
-    "text": "狂喜"
+    "text": "狂喜 ꉂ(ˊᗜˋ*)	"
   },{
     "icon": "../images/mood/1.png",
-    "text": "开心"
+    "text": "开心 (⁎˃ᴗ˂⁎)"
   },{
     "icon": "../images/mood/2.png",
-    "text": "放松"
+    "text": "放松 ✧( •˓◞•̀ )"
   },{
     "icon": "../images/mood/3.png",
-    "text": "平静"
+    "text": "平静 ʕ·ᴥ·ʔ"
   },{
     "icon": "../images/mood/4.png",
-    "text": "低落"
+    "text": "低落 눈_눈"
   },{
     "icon": "../images/mood/5.png",
-    "text": "焦虑"
+    "text": "焦虑 ⚆_⚆"
   },{
     "icon": "../images/mood/6.png",
-    "text": "生气"
+    "text": "生气 (-᷅_-᷄)"
   },{
     "icon": "../images/mood/7.png",  //之后替换图片
     "text": "其他"

@@ -1,5 +1,5 @@
 <!--pages/qrcode/qrcode.wxml-->
-<button bindtap="saveQRCode">点击保存</button>
-<view style='margin:10% 10% 0% 5%'>
+<button bindtap="saveQRCode">保存到相册</button>
+<view class='qrimg'>
 <image style="width: {{windowWidth}} height: {{windowHeight}}" src="{{qrcodeUrl}}"></image>
 </view>
