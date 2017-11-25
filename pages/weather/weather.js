@@ -27,14 +27,14 @@ Page({
     // 页面显示
     // 页面初始化 options为页面跳转所带来的参数
     var tmpWeatherCity = wx.getStorageSync('weatherCity');
-    console.log(tmpWeatherCity)
-    console.log('??')
+   // console.log(tmpWeatherCity)
+  //  console.log('??')
     this.setData({
       weatherCity: tmpWeatherCity[0],
       parent: tmpWeatherCity[1],
     })
-    console.log(this.data.weatherCity)
-    console.log(this.data.parent)
+   // console.log(this.data.weatherCity)
+   // console.log(this.data.parent)
     wx.setStorageSync('weatherCity', "")
     this.loadInfo();
   },
