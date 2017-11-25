@@ -55,7 +55,7 @@ Page({
         that.setData({
           qrcodeUrl: e.data.url
         });
-        wx.redirectTo({
+        wx.navigateTo({
           url: '../qrcode/qrcode?qrcodeUrl='+that.data.qrcodeUrl,
         })
       }
