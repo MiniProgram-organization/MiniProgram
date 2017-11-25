@@ -34,7 +34,7 @@ Page({
 
           for(var index in modifiedusers){
             if (modifiedusers[index].text.length > 10){
-              modifiedusers[index].text = modifiedusers[index].text.slice(0,10);
+              modifiedusers[index].text = modifiedusers[index].text.slice(0,10)+ '....';
             }
           } 
 
