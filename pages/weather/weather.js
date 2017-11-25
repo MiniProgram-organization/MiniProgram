@@ -162,14 +162,27 @@ Page({
         day1_weather['low'] = res.data.forecast[1].tmp_min;
         day2_weather['low'] = res.data.forecast[2].tmp_min;
 
-        that.setData({
-          city: city,
-          air: air,
-          weather: now,
-          day1_weather: day1_weather,
-          day2_weather:day2_weather,
-          weathericonURL: "../images/weather/" + now.cond_code+".png",
-        })
+        if (res.data.air.aqi == "") {
+          that.setData({
+            city: city,
+            air: {aqi:'暂无', qlty:'暂无'},
+            weather: now,
+            day1_weather: day1_weather,
+            day2_weather: day2_weather,
+            weathericonURL: "../images/weather/" + now.cond_code + ".png",
+          })
+        }
+        else
+        {
+          that.setData({
+            city: city,
+            air: air,
+            weather: now,
+            day1_weather: day1_weather,
+            day2_weather: day2_weather,
+            weathericonURL: "../images/weather/" + now.cond_code + ".png",
+          })
+        }
 
         if ((duration % 7 == 0) && ((duration % 28) != 0)) {
           if ((duration / 7) % 4 == 1) {

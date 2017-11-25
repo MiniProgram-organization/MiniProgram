@@ -38,9 +38,8 @@ Page({
         wx.saveImageToPhotosAlbum({
           filePath: filePath,
           success: function (res) {
-            //console.log(res);
             wx.showModal({
-              title: '可以将图片分享到朋友圈',
+              title: '将图片分享到朋友圈吧~',
               content: '个性的小程序码已保存到手机相册!',
               success:function(){
                  wx.switchTab({
