@@ -1,5 +1,5 @@
 <view style="width: {{windowWidth}}px; height:{{windowHeight}}px" class="content"  >
-    <view style="width: {{windowWidth}}px; height:{{windowHeight*0.1}}px"> </view>
+    <view style="width: {{windowWidth}}px; height:{{windowHeight*0.05}}px"> </view>
     <view class="today" style=" height:{{windowHeight*0.4}}px" >
         <view class="main">
             <view class="left">
