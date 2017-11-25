@@ -1,14 +1,17 @@
 
 
 <view style="width:{{windowWidth}}px;height:{{windowHeight}}px">
-<image bindtap="redirectToQRCode" style="width:15%; height:10%;margin:5% 40% 0% 40%" 
+  <view class='head_view'>
+<image class='headimg' bindtap="redirectToQRCode"  
         src="{{avatarUrl}}">
-</image>
-<view style="width:30%;margin:5% 40% 0% 35%">
+        </image>
+</view>
+<view class='.share_text'>
   <view>点击头像分享</view>
 </view>
 
  <view class="weui-cells__title" style="text-align:center;font-size:30px">个人信息</view>
+ 
 <view class="weui-cells weui-cells_after-title">
 
       <view class="weui-cell weui-cell_input">
@@ -32,21 +35,13 @@
 
       <view class="weui-cell weui-cell_input">
         <view class="weui-cell__hd">
-          <view class="weui-label">省</view>
+          <view class="weui-label">地区</view>
         </view>
         <view class="weui-cell__bd">
-          <text class="weui-input">{{province}}</text>
+          <text class="weui-input">{{country}} - {{province}}</text>
         </view>
       </view>
 
-      <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-          <view class="weui-label">国家</view>
-        </view>
-        <view class="weui-cell__bd">
-          <text class="weui-input">{{country}}</text>
-        </view>
-      </view>
   <view class="weui-cell weui-cell_input">
         <view class="weui-cell__hd">
           <view class="weui-label">积分</view>
