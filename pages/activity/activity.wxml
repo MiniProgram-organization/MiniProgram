@@ -5,15 +5,15 @@
     <view style="margin:5% 0% 10% 0%">
       <view style="float:left;height:10px;width:33%">
         <text bindtap="Todistrictsta" style="padding:0% 10% 0% 40%;color:blue">{{checkInTimes}}</text>
-        <view bindtap="Todistrictsta" style="text-align:center">地区</view>
+        <view bindtap="Todistrictsta" style="text-align:center">去过</view>
       </view>
       <view style="float:left;height:10px;width:33%;">
         <text bindtap="Toplacesta" style="padding:0% 10% 0% 35%;color:blue">{{checkInPlaces}}</text>
-        <view bindtap="Toplacesta" style="padding:0% 10% 0% 25%">地点</view>
+        <view bindtap="Toplacesta" style="padding:0% 10% 0% 25%">POI</view>
       </view>
       <view style="float:left;top:20px;height:10px;width:33%;">
         <text bindtap="Tocategorysta" style="padding:0% 10% 0% 30%;color:blue">{{checkInCategories}}</text>
-        <view bindtap="Tocategorysta" style="padding:0% 0% 0% 20%">种类</view>
+        <view bindtap="Tocategorysta" style="padding:0% 0% 0% 20%">偏好</view>
       </view>
     </view>
   </view>
