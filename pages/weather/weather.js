@@ -109,6 +109,7 @@ Page({
     var that = this;
     var data = {};
     if (this.data.weatherCity == ""){
+      console.log('????')
       data = {
         openid: openid,
         latitude: latitude,
@@ -142,6 +143,7 @@ Page({
 
         var now = res.data.now;
         var air = res.data.air;
+        console.log(air)
         var city = res.data.basic.location;
         var day1_weather = {};
         var day2_weather = {};
