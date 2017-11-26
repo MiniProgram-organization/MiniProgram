@@ -40,7 +40,7 @@ Page({
       categories: line_catrgory,
 
       series: [{
-        name: '兴趣点',
+        name: 'POI',
         data: line_data,
         format: function (val) {
           return val.toFixed(0);
