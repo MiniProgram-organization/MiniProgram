@@ -38,3 +38,12 @@
 .item_view{
    border-bottom: 1px solid #eee;
 }
+.bg1{
+  background: #000
+}
+.bg2{
+  background: #fff
+}
+.bg3{
+  background: #000
+}
