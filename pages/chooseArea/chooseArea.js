@@ -26,6 +26,8 @@ Page({
           url: 'https://40525433.fudan-mini-program.com/cgi-bin/City',
           method: 'POST',
           data: {
+            openid: getApp().globalData.openid,
+            sessionid: getApp().globalData.sessionid,
             level:0
           },
           success: function (res) {
@@ -100,7 +102,9 @@ Page({
           method: 'POST',
           data: {
             level: tmplevel,
-            query: that.data.selectedName
+            query: that.data.selectedName,
+            openid: getApp().globalData.openid,
+            sessionid: getApp().globalData.sessionid,
           },
           success: function (res) {
             var tmpShowList = []
@@ -139,7 +143,9 @@ Page({
         method: 'POST',
         data: {
           level: 2,
-          query: that.data.selectedName
+          query: that.data.selectedName,
+          openid: getApp().globalData.openid,
+          sessionid: getApp().globalData.sessionid,
         },
         success: function (res) {
           var tmpShowList = []

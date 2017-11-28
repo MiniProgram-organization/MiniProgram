@@ -49,7 +49,9 @@ Page({
           "r": "0",
           "g": "255",
           "b": "0"
-        }
+        },
+        openid: getApp().globalData.openid,
+        sessionid: getApp().globalData.sessionid,
       },
       success: function (e) {
         that.setData({
