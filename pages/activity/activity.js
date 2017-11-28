@@ -119,7 +119,8 @@ Page({
         url: 'https://40525433.fudan-mini-program.com/cgi-bin/Scores',
         method: 'POST',
         data: {
-          openid: getApp().globalData.openid
+          openid: getApp().globalData.openid,
+          sessionid: getApp().globalData.sessionid,
         },
         success: function (res) {
           wx.setStorageSync('duration_checkin', res.data.duration_checkin);
@@ -373,7 +374,8 @@ Page({
       method: 'POST',
       data: {
         openid: getApp().globalData.openid,
-        place_num: 5
+        place_num: 5,
+        sessionid: getApp().globalData.sessionid,
       },
       success: function(res){
         if(res.data.status == "OK"){
@@ -399,7 +401,8 @@ Page({
       wx.request({
         url: 'https://40525433.fudan-mini-program.com/cgi-bin/History',
         data: {
-          openid: getApp().globalData.openid
+          openid: getApp().globalData.openid,
+          sessionid: getApp().globalData.sessionid,
         },
         method: 'POST',
         success: function (res) {
