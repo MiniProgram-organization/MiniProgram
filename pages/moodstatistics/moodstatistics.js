@@ -1,7 +1,7 @@
 // pages/moodstatistics/moodstatistics.js
 var wxCharts = require('../../utils/wxcharts.js');
 var app = getApp();
-var timeslot = ['今日','本周','本月','今年','全部']
+var timeslot = ['本周趋势(默认)','今日','本周','本月','今年','全部']
 var all_name = ['狂喜', '开心', '放松', '平静', '低落', '焦虑', '生气','其他']
 Page({
 
@@ -14,19 +14,24 @@ Page({
     timeslot:timeslot,
     categoryres:{},
     hint_text:"请选择时间",
-    index:0
+    index:0,
+    display_pie:'inline'
   },
   
   bindPickerChange: function (e) {
     this.setData({
       index: e.detail.value
     })
+    if (e.detail.value == 0){
+      this.week_mood_sta()
+    }
+    else{
     var that = this;
     wx.request({
       url: 'https://40525433.fudan-mini-program.com/cgi-bin/MoodCategory',
       data: {
         openid: app.globalData.openid,
-        time_type: parseInt(that.data.index)+1,
+        time_type: parseInt(that.data.index),
         sessionid: app.globalData.sessionid,
       },
       method: 'POST',
@@ -40,7 +45,8 @@ Page({
         {
           //显示此时间段无心情记录
           that.setData({
-            hint_text: timeslot[e.detail.value]+'无记录'
+            hint_text: timeslot[e.detail.value]+'无记录',
+            display_pie:'none'
           })
         }
         else {
@@ -49,7 +55,8 @@ Page({
             total_num = total_num + res.data.moods[i].check_num
           }
           that.setData({
-            hint_text: timeslot[e.detail.value] + '您记录了' + total_num+'条心情'
+            hint_text: timeslot[e.detail.value] + '您记录了' + total_num+'条心情',
+            display_pie: 'inline'
           })
           that.showCategory();
         }
@@ -57,6 +64,7 @@ Page({
       fail: function(res){
       }
     })
+    }
   },
   showCategoryLine: function(e){
 
@@ -149,7 +157,8 @@ Page({
         });
         if (res.data.mood_id_num == 0) {
           that.setData({
-            hint_text: '本周无记录'
+            hint_text: '本周无记录',
+            display_pie: 'none'
           })
         }
         else {
@@ -158,7 +167,8 @@ Page({
             total_num = total_num + res.data.moods[i].check_num
           }
           that.setData({
-            hint_text: '本周心情趋势:' + total_num+'条记录'
+            hint_text: '本周心情趋势:' + total_num+'条记录',
+            display_pie: 'inline'
           })
           that.showCategoryLine();
         }
@@ -175,7 +185,7 @@ Page({
       url: 'https://40525433.fudan-mini-program.com/cgi-bin/MoodCategory',
       data: {
         openid: app.globalData.openid,
-        time_type: parseInt(that.data.index)+1,
+        time_type: parseInt(that.data.index),
         sessionid: app.globalData.sessionid,
       },
       method: 'POST',
@@ -189,7 +199,8 @@ Page({
         {
           //显示此时间段无心情记录
           that.setData({
-            hint_text: timeslot[e.detail.value]+'无记录'
+            hint_text: timeslot[e.detail.value]+'无记录',
+            display_pie: 'none'
           })
         }
         else {
@@ -198,7 +209,8 @@ Page({
             total_num = total_num + res.data.moods[i].check_num
           }
           that.setData({
-            hint_text: timeslot[e.detail.value] + '您记录了' + total_num+'条心情'
+            hint_text: timeslot[e.detail.value] + '您记录了' + total_num+'条心情',
+            display_pie: 'inline'
           })
           that.showCategory();
         }

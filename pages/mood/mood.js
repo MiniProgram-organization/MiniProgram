@@ -72,14 +72,17 @@ Page({
     var tempClassifyByDate = [];
     var currentDate = '';
     var currentClass = {};
-    for (var i = 0; i < this.data.history_mood.length; i++) {
-      
-      var tempData = this.data.history_mood[i].datetime.substring(0,10);  
-      if (currentDate != tempData){
-        if (currentClass.date) tempClassifyByDate.push(currentClass);
+    for (var i = 0; i < this.data.history_mood.length; i++) { 
+      if (currentDate != this.data.history_mood[i].date){
+        console.log(currentDate)
+        console.log(this.data.history_mood[i].date)
+        if (currentClass.date){
+          tempClassifyByDate.push(currentClass);
+        } 
         currentClass = {};
-        currentClass.date = tempData;
-        currentDate = tempData;
+        currentClass.date = this.data.history_mood[i].date;
+        currentDate = this.data.history_mood[i].date;
+
         currentClass['moodList'] = [];
       }
       currentClass['moodList'].push(this.data.history_mood[i]);
@@ -173,8 +176,16 @@ Page({
     //获取历史数据
     var history_mood = wx.getStorageSync('history_mood');
     var that = this;
-    if (history_mood != "") {
+    var oldDatetmp = wx.getStorageSync('timestamp_mood');
+    var oldDate = 0;
+    var nowDate = (Date.parse(new Date()) / 1000);
+    if (oldDatetmp == "") oldDate = 0;
+    else oldDate = oldDatetmp;
+
+    if (history_mood != "" && ((nowDate - oldDate) < 86400)) {
       this.setData({history_mood: history_mood});
+      console.log('历史')
+      console.log(history_mood)
       this.classifyByDate();
     }
     else{
@@ -186,21 +197,34 @@ Page({
           },
           method: 'POST',
           success: function (res) {
-            console.log(res)
-            var temp_history_mood = [];
-            for (var i = 0; i < res.data.moods.length; i++){
-              var temp_table = {}
-              temp_table = res.data.moods[i];
-              temp_table['simpletime'] = res.data.moods[i].datetime.substring(11, 19)
-              temp_table['logoPath'] = '../images/mood/'+res.data.moods[i].mood_id+'.png';
-              temp_history_mood.push(temp_table);
+            if(res.data.status == 'ERROR'){
+              wx.showToast({
+                title: '获取历史心情失败',
+                icon:'loading'
+              })
             }
-            that.setData({
-              history_mood: temp_history_mood,
-            });
-            wx.setStorageSync('history_mood', temp_history_mood);
-            console.log(wx.getStorageSync('history_mood'))
-            that.classifyByDate();
+            else{
+              console.log(res)
+              wx.setStorageSync('timestamp_mood', (Date.parse(new Date()) / 1000));
+              var temp_history_mood = [];
+              for (var i = 0; i < res.data.moods.length; i++){
+              
+                res.data.moods[i].date = res.data.moods[i]['datetime'].split(" ")[0];
+                res.data.moods[i].time = res.data.moods[i]['datetime'].split(" ")[1];
+                var temp_table = {}
+                temp_table = res.data.moods[i];
+                temp_table['simpletime'] = res.data.moods[i].datetime.substring(11, 19)
+                temp_table['logoPath'] = '../images/mood/'+res.data.moods[i].mood_id+'.png';
+                temp_history_mood.push(temp_table);
+              }
+              that.setData({
+                history_mood: temp_history_mood,
+              });
+              wx.setStorageSync('history_mood', temp_history_mood);
+              console.log(wx.getStorageSync('history_mood'))
+              console.log(temp_history_mood)
+              that.classifyByDate();
+            }
           }
       })
     }

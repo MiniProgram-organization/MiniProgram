@@ -56,7 +56,7 @@
                       <text class="member-nickname">心情寄语:{{item.text}}</text>
                     </view>
                     <view>
-                      <text class="node-name">{{item.simpletime}}</text>
+                      <text class="node-name">{{item.time}}</text>
                     </view>
                   </view>
                 </view>

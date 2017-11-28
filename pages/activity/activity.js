@@ -287,11 +287,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getOpenId();
-    //this.getCheckIns();
-    console.log('activity........!!!!!!!!!!!!!')
-    console.log(this.data.checkins);
-    console.log(this.data.classifiedCheckIns); 
+   
   },
   getOpenId: function () {
     var that = this;
@@ -361,7 +357,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-   
+    if (app.globalData.openid == "") {
+      this.getOpenId();
+    }
+    else {
+      this.getCheckIns();
+    }
+    console.log('activity........!!!!!!!!!!!!!')
+    console.log(this.data.checkins);
+    console.log(this.data.classifiedCheckIns); 
   },
  getPlaces: function(){
     var that = this;
@@ -385,8 +389,18 @@ Page({
   getCheckIns: function(){
     //获取历史数据
     var checkins = wx.getStorageSync('checkins');
-    var that = this;
-    if (checkins != "") {
+    var oldDatetmp = wx.getStorageSync('timestamp_checkins');
+    var oldDate = 0;
+    var nowDate = (Date.parse(new Date())/1000);
+    if (oldDatetmp == "") oldDate = 0; 
+    else oldDate = oldDatetmp;
+    
+    var that = this; 
+    if (checkins != "" && ((nowDate - oldDate) < 86400) ){
+      console.log('时间差')
+      console.log(nowDate - oldDate)
+      console.log('...签到缓存')
+      console.log(checkins)
       this.setData({
         checkins: checkins
       });
@@ -402,31 +416,38 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          console.log("lsh返回的历史");
-          console.log(res);
-
-        // var tmpCheckins = [];
-          for (var i = 0; i < res.data.checkins.length; i++) {
-            var tmpCheckin = 
-            res.data.checkins[i].date = res.data.checkins[i]['datetime'].split(" ")[0];
-            res.data.checkins[i].time = res.data.checkins[i]['datetime'].split(" ")[1];
-            //需要自行设置logoPath
-            var category = res.data.checkins[i].category;
-            res.data.checkins[i].logoPath = '../images/location/' + app.globalData.locationMap[category.split(":")[0]] + '.png';
-            if(res.data.checkins[i].text != ""){
-              res.data.checkins[i]['height_p'] = 80;
-            }
-            else res.data.checkins[i]['height_p'] = 65;
+          if(res.data.status == "ERROR"){
+            wx.showToast({
+              title: '获取历史签到失败',
+              icon:'loading'
+            })
           }
+          else{
+            console.log("lsh返回的历史");
+            console.log(res);
+            wx.setStorageSync('timestamp_checkins', (Date.parse(new Date()) / 1000));
+            for (var i = 0; i < res.data.checkins.length; i++) {
+              res.data.checkins[i].date = res.data.checkins[i]['datetime'].split(" ")[0];
+              res.data.checkins[i].time = res.data.checkins[i]['datetime'].split(" ")[1];
+              //需要自行设置logoPath
+              var category = res.data.checkins[i].category;
+              res.data.checkins[i].logoPath = '../images/location/' + app.globalData.locationMap[category.split(":")[0]] + '.png';
+              if(res.data.checkins[i].text != ""){
+                res.data.checkins[i]['height_p'] = 80;
+              }
+              else res.data.checkins[i]['height_p'] = 65;
+            }
 
-          that.setData({
-            checkins: res.data.checkins
-          });
-          console.log(that.data.checkins)
-          wx.setStorageSync('checkins', res.data.checkins);
-          that.classifyByDate();
+            that.setData({
+              checkins: res.data.checkins
+            });
+            console.log(that.data.checkins)
+            wx.setStorageSync('checkins', res.data.checkins);
+            that.classifyByDate();
+          }
         }
       })
+      
     }
   },
 
@@ -444,8 +465,6 @@ Page({
     var checkInTimes = 0;
     var checkInCategories = 0;
     var checkInPlaces = 0;
-
-
 
     for (var i = 0; i < that.data.checkins.length; i++) {
 
