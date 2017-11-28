@@ -12,6 +12,7 @@ App({
     rawData:{},
     windowHeight: '',
     openid: '',
+    sessionid: '',
     checkins: [],
     rawData: {},
     latitude: 0.0,

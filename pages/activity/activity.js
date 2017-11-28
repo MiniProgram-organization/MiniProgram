@@ -347,6 +347,7 @@ Page({
                 longitude: getApp().globalData.longitude,
               },
               success: function (res) {
+                console.log(res)
                 if (res.data.status == "ERROR") {
                   console.log(res.data.message);
                   wx.navigateTo({
@@ -355,7 +356,7 @@ Page({
                   return;
                 }
                 getApp().globalData.openid = res.data.openid;
-                
+                getApp().globalData.sessionid = res.data.sessionid;
                 that.getCheckIns();
               }
             })
