@@ -57,10 +57,11 @@ Page({
       success: function (res) {
         cnt = cnt + 1
         var openid = app.globalData.openid;
+        var sessionid = app.globalData.sessionid
         //如果没有openId 需要加上一个判断
         var latitude = res.latitude;
         var longitude = res.longitude;
-        that.loadWeather(latitude, longitude, openid);
+        that.loadWeather(latitude, longitude, openid, sessionid);
       },
       fail: function (res) {
         cnt = cnt + 1
@@ -71,6 +72,7 @@ Page({
           var latitude = wx.getStorageSync('latitude')
           var longitude = wx.getStorageSync('longitude')
           var openid = app.globalData.openid;
+          var sessionid = app.globalData.sessionid
           if (latitude == ""){
             wx.showToast({
               title: '定位失败!请检查设置!',
@@ -86,7 +88,7 @@ Page({
             })
             console.log(latitude)
             console.log(longitude+'....')
-            that.loadWeather(latitude, longitude, openid);
+            that.loadWeather(latitude, longitude, openid,sessionid);
           }
         }
       }
@@ -104,7 +106,7 @@ Page({
     }
     this.getLocationResur(1);
   },
-  loadWeather: function (latitude, longitude, openid) {
+  loadWeather: function (latitude, longitude, openid, sessionid) {
 
     var that = this;
     var data = {};
@@ -112,6 +114,7 @@ Page({
       console.log('????')
       data = {
         openid: openid,
+        sessionid: sessionid,
         latitude: latitude,
         longitude: longitude
       }
@@ -119,6 +122,7 @@ Page({
     else{
       data = {
         openid: openid,
+        sessionid: sessionid,
         latitude: latitude,
         longitude: longitude,
         location: this.data.weatherCity ,

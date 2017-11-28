@@ -82,6 +82,7 @@ Page({
                 console.log(res.data.openid);
                 console.log(res.data.registered);
                 app.globalData.openid = res.data.openid;
+                app.globalData.sessionid = res.data.sessionid;
               }
             });
           }
@@ -112,6 +113,7 @@ Page({
           },
           created_by_user: false,
           openid: app.globalData.openid,
+          sessionid: app.globalData.sessionid,
           latitude: app.globalData.latitude,//用户所在纬度
           longitude: app.globalData.longitude,  //用户所在经度
           text: that.data.text

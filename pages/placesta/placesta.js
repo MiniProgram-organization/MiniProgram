@@ -68,6 +68,7 @@ Page({
       data: {
         place_num:5,
         openid: getApp().globalData.openid,
+        sessionid: getApp().globalData.sessionid,
       },
       success: function (res) {
         console.log(res.data)

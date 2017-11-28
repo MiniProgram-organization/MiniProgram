@@ -20,7 +20,8 @@ Page({
       url: 'https://40525433.fudan-mini-program.com/cgi-bin/Category',
       method: 'POST',
       data: {
-        openid: getApp().globalData.openid
+        openid: getApp().globalData.openid,
+        sessionid: getApp().globalData.sessionid,
       },
       success: function (res) {
         console.log("LLL");

@@ -45,6 +45,7 @@ Page({
         mood_id: that.data.mood_id,        //心情类型(0-7)
         mood_text: that.data.mood_text,    //心情类型对应的文字
         openid: app.globalData.openid,
+        sessionid: app.globalData.sessionid,
         text: that.data.text,
         latitude: app.globalData.latitude,//用户所在纬度
         longitude: app.globalData.longitude,  //用户所在经度

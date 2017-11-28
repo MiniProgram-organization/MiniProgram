@@ -22,6 +22,8 @@ Page({
       url: 'https://40525433.fudan-mini-program.com/cgi-bin/Recent',
       method: 'POST',
       data: {
+        openid: app.globalData.openid,
+        sessionid: app.globalData.sessionid,
         POI_id: that.data.POI_id,
         user_num: 10 //查看最近在这里签到的用户数
       },
@@ -69,8 +71,11 @@ Page({
       url: 'https://40525433.fudan-mini-program.com/cgi-bin/FrequentUsers',
       method: 'POST',
       data: {
+        openid: app.globalData.openid,
+        sessionid: app.globalData.sessionid,
         POI_id: that.data.POI_id,
-        user_num: 1
+        user_num: 1,
+        
       },
       success: function (res) {
         that.setData({

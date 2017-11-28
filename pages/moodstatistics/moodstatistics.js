@@ -27,6 +27,7 @@ Page({
       data: {
         openid: app.globalData.openid,
         time_type: parseInt(that.data.index)+1,
+        sessionid: app.globalData.sessionid,
       },
       method: 'POST',
       success: function (res) {
@@ -137,6 +138,7 @@ Page({
       data: {
         openid: app.globalData.openid,
         time_type: 2,
+        sessionid: app.globalData.sessionid,
       },
       method: 'POST',
       success: function (res) {
@@ -174,6 +176,7 @@ Page({
       data: {
         openid: app.globalData.openid,
         time_type: parseInt(that.data.index)+1,
+        sessionid: app.globalData.sessionid,
       },
       method: 'POST',
       success: function (res) {
