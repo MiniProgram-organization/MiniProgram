@@ -287,53 +287,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  },
-
-  // drawLine: function () {
-  //   console.log(this.data.checkins);
-    
-  //   for (var i = 0; i < this.data.checkins.length; i++) {
-  //     var POI_id = this.data.checkins[i].POI_id;
-  //     const ctx = wx.createCanvasContext(POI_id);
-  //     ctx.moveTo(30, 20);
-  //     ctx.setLineWidth(8);
-  //     ctx.setStrokeStyle('yellow');
-  //     ctx.lineTo(30, 100);
-  //     ctx.stroke();
-  //     ctx.draw();
-  //     console.log("ok!!");
-  //   };
-  // },
-
-
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
     this.getOpenId();
+    //this.getCheckIns();
     console.log('activity........!!!!!!!!!!!!!')
     console.log(this.data.checkins);
-    
-    console.log(this.data.classifiedCheckIns);
-    
-
+    console.log(this.data.classifiedCheckIns); 
   },
-
-  getOpenId: function(){
+  getOpenId: function () {
     var that = this;
     wx.login({
       success: function (res) {
         var code = res.code;
         wx.getUserInfo({
-          lang:'zh_CN',
+          lang: 'zh_CN',
           success: function (res) {
             getApp().globalData.rawData = JSON.parse(res.rawData);
             var iv = res.iv;
@@ -366,7 +332,37 @@ Page({
       }
     });
   },
+  // drawLine: function () {
+  //   console.log(this.data.checkins);
+    
+  //   for (var i = 0; i < this.data.checkins.length; i++) {
+  //     var POI_id = this.data.checkins[i].POI_id;
+  //     const ctx = wx.createCanvasContext(POI_id);
+  //     ctx.moveTo(30, 20);
+  //     ctx.setLineWidth(8);
+  //     ctx.setStrokeStyle('yellow');
+  //     ctx.lineTo(30, 100);
+  //     ctx.stroke();
+  //     ctx.draw();
+  //     console.log("ok!!");
+  //   };
+  // },
 
+
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+   
+  },
  getPlaces: function(){
     var that = this;
     wx.request({
