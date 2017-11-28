@@ -347,6 +347,7 @@ Page({
                 longitude: getApp().globalData.longitude,
               },
               success: function (res) {
+                console.log(res)
                 if (res.data.status == "ERROR") {
                   console.log(res.data.message);
                   wx.navigateTo({
