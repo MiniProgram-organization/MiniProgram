@@ -182,6 +182,7 @@ Page({
           url: 'https://40525433.fudan-mini-program.com/cgi-bin/MoodHistory',
           data:{
             openid: app.globalData.openid,
+            sessionid: app.globalData.sessionid,
           },
           method: 'POST',
           success: function (res) {
