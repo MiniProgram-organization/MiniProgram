@@ -16,7 +16,7 @@
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell">
       <view class="weui-cell__bd">
-        <textarea class="weui-textarea" bindinput="textChange" value="{{text}}" placeholder="请输入您的建议" style="height: 8.3em" />
+        <textarea class="weui-textarea" bindinput="textChange" value="{{text}}" placeholder="请输入您的建议"  style="height: 8.3em" />
         <view class="weui-textarea-counter"></view>
       </view>
     </view>

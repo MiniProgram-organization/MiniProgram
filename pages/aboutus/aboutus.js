@@ -35,6 +35,7 @@ Page({
         },
         success: function (res){
           console.log(res)
+          
           if (res.data.status == 'ERROR'){
             wx.showToast({
               title: '提交失败，未知错误!',
@@ -42,6 +43,10 @@ Page({
             })
           }
           else{
+            
+            that.setData({
+              text:''
+            });
             wx.showToast({
               title: '提交成功，感谢您的反馈!',
               icon: 'success'
