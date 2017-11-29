@@ -5,13 +5,15 @@
   <view  class="moodtext">
   <text >{{mood_text}}</text>
   </view>
+
+
   <view class= "input_box_margin">
   <view class="weui-cells__title" >{{mood_set}}</view>
    <view class= "input_box_margin2">
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell" >
       <view class="weui-cell__bd">
-        <textarea maxlength="140" class="weui-textarea" bindinput="textChange" value="{{text}}" placeholder="写点心情寄语吧!" style="height: 8.3em" />
+        <textarea maxlength="140" class="weui-textarea" bindinput="textChange" value="{{text}}" placeholder="写点心情寄语吧!" cursor="1" style="height: 8.3em" />
         <view class="weui-textarea-counter">0-140</view>
       </view>
     </view>
