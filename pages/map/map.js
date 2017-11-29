@@ -133,7 +133,9 @@ Page({
             var duration = e.data.duration;
 
             wx.setStorageSync('scores', scores);
-            wx.setStorageSync('duration_checkin', duration);
+            wx.setStorageSync('duration_checkin', {
+              data:duration
+            });
 
             if (!old_history) {
               console.log("没有缓存");

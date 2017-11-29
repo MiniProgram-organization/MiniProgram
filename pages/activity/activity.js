@@ -33,56 +33,69 @@ Page({
     })
   },
   setDuration: function (duration){
-    if ((duration % 7 == 0) && ((duration % 28) != 0)) {
-      if ((duration / 7) % 4 == 1) {
-        this.setData({
-          con_day: duration,
-          award_text_1: "连续签到",
-          award_text_2: "天了，真棒！\n又获得额外积分奖励啦~"
-        })
-      }
-      else if ((duration / 7) % 4 == 2) {
-        this.setData({
-          con_day: duration,
-          award_text_1: "连续签到",
-          award_text_2: "天了，exciting！\n又获得额外积分奖励啦~"
-        })
-      }
-      else if ((duration / 7) % 4 == 3) {
-        this.setData({
-          con_day: duration,
-          award_text_1: "连续签到",
-          award_text_2: "天了，amazing！\n又获得额外积分奖励啦~"
-        })
-      }
-    }
-    else if (duration % 28 == 0) {
+    console.log('duration')
+    console.log(duration)
+    if(duration == 0){
       this.setData({
         con_day: duration,
-        award_text_1: "连续签到",
-        award_text_2: "天了，天啦噜！一份超值额外积分大礼砸中了你~"
+        object_day: object_day,
+        less_day: object_day - duration,
+        award_text_1: "已连续签到",
+        award_text_2: "天了！还差" + 7 + "天就能获得额外积分奖励喔，加油~"
       })
     }
-    else if (duration % 7 != 0) {
-      var object_day = (parseInt(duration / 7) + 1) * 7;
-      console.log(object_day)
-      if (object_day % 28 == 0) {
+    else{
+      if ((duration % 7 == 0) && ((duration % 28) != 0)) {
+        if ((duration / 7) % 4 == 1) {
+          this.setData({
+            con_day: duration,
+            award_text_1: "连续签到",
+            award_text_2: "天了，真棒！\n又获得额外积分奖励啦~"
+          })
+        }
+        else if ((duration / 7) % 4 == 2) {
+          this.setData({
+            con_day: duration,
+            award_text_1: "连续签到",
+            award_text_2: "天了，exciting！\n又获得额外积分奖励啦~"
+          })
+        }
+        else if ((duration / 7) % 4 == 3) {
+          this.setData({
+            con_day: duration,
+            award_text_1: "连续签到",
+            award_text_2: "天了，amazing！\n又获得额外积分奖励啦~"
+          })
+        }
+      }
+      else if (duration % 28 == 0) {
         this.setData({
           con_day: duration,
-          object_day: object_day,
-          less_day: object_day - duration,
-          award_text_1: "已连续签到",
-          award_text_2: "天了！还差" + (object_day - duration) + "天就能获得连续28天超值额外积分奖励喔，加油~"
+          award_text_1: "连续签到",
+          award_text_2: "天了，天啦噜！一份超值额外积分大礼砸中了你~"
         })
       }
-      else {
-        this.setData({
-          con_day: duration,
-          object_day: object_day,
-          less_day: object_day - duration,
-          award_text_1: "已连续签到",
-          award_text_2: "天了！还差" + (object_day - duration) + "天就能获得额外积分奖励喔，加油~"
-        })
+      else if (duration % 7 != 0) {
+        var object_day = (parseInt(duration / 7) + 1) * 7;
+        console.log(object_day)
+        if (object_day % 28 == 0) {
+          this.setData({
+            con_day: duration,
+            object_day: object_day,
+            less_day: object_day - duration,
+            award_text_1: "已连续签到",
+            award_text_2: "天了！还差" + (object_day - duration) + "天就能获得连续28天超值额外积分奖励喔，加油~"
+          })
+        }
+        else {
+          this.setData({
+            con_day: duration,
+            object_day: object_day,
+            less_day: object_day - duration,
+            award_text_1: "已连续签到",
+            award_text_2: "天了！还差" + (object_day - duration) + "天就能获得额外积分奖励喔，加油~"
+          })
+        }
       }
     }
   },
@@ -111,10 +124,24 @@ Page({
       windowHeight: app.globalData.windowHeight
     });
 
+    var oldDatetmp = wx.getStorageSync('timestamp_duration');
+    var oldDate = 0;
+    var nowDate = (Date.parse(new Date()) / 1000);
+    if (oldDatetmp == "") oldDate = 0;
+    else oldDate = oldDatetmp;
+
+    console.log(nowDate)
+    console.log(oldDate)
     var duration = wx.getStorageSync('duration_checkin');
-    if (duration == ""){
+    console.log(duration.data)
+    console.log(nowDate-oldDate)
+    console.log(duration == "")
+    if (duration != "" && ((nowDate - oldDate) < 86400)){
+      console.log('用缓存')
+      this.setDuration(duration.data)
+    }
+    else{
       //如果没有缓存
-      
       wx.request({
         url: 'https://40525433.fudan-mini-program.com/cgi-bin/Scores',
         method: 'POST',
@@ -123,19 +150,29 @@ Page({
           sessionid: getApp().globalData.sessionid,
         },
         success: function (res) {
-          wx.setStorageSync('duration_checkin', res.data.duration_checkin);
-          wx.setStorageSync('duration_weather', res.data.duration_weather);
-          wx.setStorageSync('duration_mood', res.data.duration_mood);
-          wx.setStorageSync('scores', res.data.scores);
-          that.setDuration(res.data.duration_checkin)
+          console.log(res)
+          if(res.data.status == "ERROR"){
+            wx.showToast({
+              title: '获取连续天数失败！',
+              icon:'loading'
+            })
+          }
+          else{
+            wx.setStorageSync('timestamp_duration', (Date.parse(new Date()) / 1000));
+            wx.setStorageSync('duration_checkin', 
+            {
+              data:res.data.duration_checkin
+            });
+            wx.setStorageSync('duration_weather', res.data.duration_weather);
+            wx.setStorageSync('duration_mood', res.data.duration_mood);
+            wx.setStorageSync('scores', res.data.scores);
+            that.setDuration(res.data.duration_checkin)
+          }
         },
         fail: function(res){
 
         }
       })
-    }
-    else{
-      this.setDuration(duration)
     }
 
     
