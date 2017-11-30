@@ -17,7 +17,7 @@
       <view class='textarea_mood_type' style="width: {{windowWidth*0.5}}px; height:0px">
         <view class="weui-cells weui-cells_after-title">
           <view class="weui-cell" >
-            <input bindinput="bindMoodType" maxlength="6" />
+            <input bindinput="bindMoodType" maxlength="20" />
           </view>
         </view>
       </view>
