@@ -15,8 +15,8 @@ Page({
     gender: '',
     province: '',
     city: '',
-    latitude: '',
-    longitude: '',
+    latitude: 0,
+    longitude: 0,
     ip:'',
     qrcodeUrl: '',
     scores:0,
@@ -38,9 +38,10 @@ Page({
   getQRCode: function () {
     var that = this;
     wx.request({
-      url: 'https://40525433.fudan-mini-program.com/cgi-bin/QRCode',
+      url: 'https://40525433.fudan-mini-program.com/cgi-bin/qrcode.py',
       method: 'POST',
       data: {
+        /*
         scene: "lsh",
         path: "pages/map/map",
         width: 430,
@@ -49,11 +50,16 @@ Page({
           "r": "0",
           "g": "255",
           "b": "0"
-        },
+        },*/
+        latitude: that.data.latitude,
+        longitude: that.data.longitude,
         openid: getApp().globalData.openid,
         sessionid: getApp().globalData.sessionid,
       },
       success: function (e) {
+        console.log(e.data)
+        console.log('????')
+        console.log(that.latitude)
         that.setData({
           qrcodeUrl: e.data.url
         });

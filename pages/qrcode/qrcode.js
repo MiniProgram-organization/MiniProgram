@@ -29,6 +29,9 @@ Page({
     console.log(that.data.qrcodeUrl);
     wx.downloadFile({
       url: that.data.qrcodeUrl,
+      data: {
+
+      },
       success: function (res) {
         console.log(res);
         var filePath = res.tempFilePath;

@@ -1,5 +1,5 @@
 <!--pages/qrcode/qrcode.wxml-->
 <button bindtap="saveQRCode">保存到相册</button>
-<view class='qrimg'>
-<image style="width: {{windowWidth}} height: {{windowHeight}}" src="{{qrcodeUrl}}"></image>
+<view style="width: {{windowWidth}}px; height:{{windowHeight}}px" class='qrimg'>
+<image class='imgc' src="{{qrcodeUrl}}"></image>
 </view>
