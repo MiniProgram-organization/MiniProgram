@@ -54,8 +54,10 @@ Page({
         //添加到缓存
         var old_history = wx.getStorageSync('history_mood');
         var datetime = new Date();
-        var time = datetime.toLocaleTimeString();
-        var date = datetime.toLocaleDateString();
+        var time = e.data.time;
+        var date = e.data.date
+       // var time = datetime.toLocaleTimeString();
+       // var date = datetime.toLocaleDateString();
         var datetimestring = date + ' ' + time.substring(time.length - 8, time.length)
         var duration = e.data.duration;
         var award = e.data.award;
@@ -68,10 +70,12 @@ Page({
             mood_id: that.data.mood_id,
             mood_text: that.data.mood_text,    //心情类型对应的文字
             text: that.data.text,
-            datetime: datetimestring,
+            //datetime: datetimestring,
+            date: date,
+            time: time,
             latitude: app.globalData.latitude,//用户所在纬度
             longitude: app.globalData.longitude,  //用户所在经度
-            simpletime: time.substring(time.length - 8, time.length),
+            //simpletime: time.substring(time.length - 8, time.length),
             logoPath: '../images/mood/' + that.data.mood_id + '.png'
           }])
         }
@@ -80,10 +84,12 @@ Page({
             mood_id: that.data.mood_id,
             mood_text: that.data.mood_text,    //心情类型对应的文字
             text: that.data.text,
-            datetime: datetimestring,
+            //datetime: datetimestring,
             latitude: app.globalData.latitude,//用户所在纬度
             longitude: app.globalData.longitude,  //用户所在经度
-            simpletime: time.substring(time.length - 8, time.length),
+            date: date,
+            time: time,
+            //simpletime: time.substring(time.length - 8, time.length),
             logoPath: '../images/mood/' + that.data.mood_id + '.png'
           });
           wx.setStorageSync('history_mood', old_history);
