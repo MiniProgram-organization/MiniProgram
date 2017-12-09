@@ -42,7 +42,7 @@ Page({
           filePath: filePath,
           success: function (res) {
             wx.showModal({
-              title: '赶快分享你的图片吧~',
+              title: '保存成功!',
               content: '个性的小程序码已保存到手机相册!',
               success:function(){
                  wx.switchTab({
