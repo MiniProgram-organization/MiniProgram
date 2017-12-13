@@ -36,21 +36,18 @@
     "selectedColor": "#3cc51f",
     "borderStyle": "white",
     "backgroundColor": "#ffffff",
+    
     "list": [
       {
         "iconPath": "pages/images/icon/weather_icon.png",
         "pagePath": "pages/weather/weather",
         "text": "天气"
       },
+      
       {
         "iconPath": "pages/images/icon/activity_icon.png",
         "pagePath": "pages/activity/activity",
         "text": "活动"
-      },
-      {
-        "iconPath": "pages/images/icon/mood_icon.png",
-        "pagePath": "pages/mood/mood",
-        "text": "心情"
       },
       {
         "iconPath": "pages/images/icon/account_icon.png",
