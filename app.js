@@ -99,8 +99,8 @@ App({
     //发送一个请求到服务器
     //如果结果是1，表示可以使用心情功能
     //如果结果是0，表示不可以使用心情功能
-    var op = 0;
-    if (op == 0){
+    var op = 1;
+    if (op == 1){
       this.globalData.tabbar = {
         color: "#353535",
         selectedColor: "#3cc51f",
