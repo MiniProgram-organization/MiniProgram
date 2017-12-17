@@ -52,3 +52,4 @@
           background: red;position: relative;}
           
 #hexagon:before {content: "";position: absolute;top: -25px; left: 0;width: 0;height: 0;border-left: 50px solid transparent;border-right: 50px solid transparent;border-bottom: 25px solid red;}#hexagon:after {content: "";position: absolute;bottom: -25px; left: 0;width: 0;height: 0;border-left: 50px solid transparent;border-right: 50px solid transparent;border-top: 25px solid red;}
+@import "/pages/tabbar/tabbar.wxss"

@@ -1,4 +1,6 @@
 <view style="width: {{windowWidth}}px; height:{{windowHeight}}px" class="content"  >
+<import src="/pages/tabbar/tabbar.wxml"/>
+<template is="tabbar" data="{{tabbar}}"/>
     <view style="width: {{windowWidth}}px; height:{{windowHeight*0.05}}px"> </view>
     <view class="today" style=" height:{{windowHeight*0.4}}px" >
         <view class="main">

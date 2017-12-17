@@ -47,3 +47,4 @@
 .bg3{
   background: #000
 }
+@import "/pages/tabbar/tabbar.wxss"

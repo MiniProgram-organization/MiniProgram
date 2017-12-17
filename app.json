@@ -19,7 +19,8 @@
     "pages/placesta/placesta",
     "pages/chooseArea/chooseArea",
     "pages/otherMood/otherMood",
-    "pages/qrcode/qrcode"
+    "pages/qrcode/qrcode",
+    "pages/tabbar/tabbar"
   ],
   "window": {
     "window": {
@@ -30,31 +31,6 @@
       "backgroundTextStyle": "light"
     },
     "enablePullDownRefresh": "true"
-  },
-  "tabBar": {
-    "color": "#353535",
-    "selectedColor": "#3cc51f",
-    "borderStyle": "white",
-    "backgroundColor": "#ffffff",
-    
-    "list": [
-      {
-        "iconPath": "pages/images/icon/weather_icon.png",
-        "pagePath": "pages/weather/weather",
-        "text": "天气"
-      },
-      
-      {
-        "iconPath": "pages/images/icon/activity_icon.png",
-        "pagePath": "pages/activity/activity",
-        "text": "活动"
-      },
-      {
-        "iconPath": "pages/images/icon/account_icon.png",
-        "pagePath": "pages/account/account",
-        "text": "账号"
-      }
-    ]
   },
   "networkTimeout": {
     "request": 10000,

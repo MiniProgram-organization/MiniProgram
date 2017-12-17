@@ -59,3 +59,4 @@
 .item_view{
     border-bottom: 1px solid #eee;
 }
+@import "/pages/tabbar/tabbar.wxss"

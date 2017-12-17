@@ -115,7 +115,7 @@ Page({
             });
             wx.setStorageSync('history_mood', old_history);
           }
-          wx.switchTab({
+          wx.redirectTo({
             url: '../mood/mood',
             success: function (e) {
               if (award > 0) {
@@ -134,6 +134,26 @@ Page({
               }
             }
           })
+          /*
+          wx.switchTab({
+            url: '../mood/mood',
+            success: function (e) {
+              if (award > 0) {
+                wx.showToast({
+                  title: "记录成功：\n" + that.data.mood_text + '\n' + '+' + award + '分',
+                  icon: 'success',
+                  duration: 2000
+                });
+              }
+              else {
+                wx.showToast({
+                  title: "记录成功：\n" + that.data.mood_text,
+                  icon: 'success',
+                  duration: 2000
+                });
+              }
+            }
+          })*/
         }
       },
       fail: function (e) {
