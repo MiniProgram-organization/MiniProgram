@@ -86,97 +86,194 @@ App({
 
   
     wx.request({
-      url: 'https://40525433.fudan-mini-program.com/cgi-bin/text',
+      url: 'https://40525433.fudan-mini-program.com/cgi-bin/Version',
       method: 'GET',
       success: function (res) {
-        console.log(res)
-        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+        if (res.data.status == 'OK'){
+          if (res.data.version == 1){
+            that.globalData.tabbar = {
+              color: "#353535",
+              selectedColor: "#3cc51f",
+              borderStyle: "white",
+              backgroundColor: "#ffffff",
+              list: [
+                {
+                  pagePath: "/pages/weather/weather",
+                  text: "天气",
+                  iconPath: "/pages/images/icon/weather_icon.png",
+                  selectedIconPath: "/pages/images/icon/weather_icon.png",
+                  selected: false
+                },
+                {
+                  pagePath: "/pages/activity/activity",
+                  text: "活动",
+                  iconPath: "/pages/images/icon/activity_icon.png",
+                  selectedIconPath: "/pages/images/icon/activity_icon.png",
+                  selected: true
+                },
+                {
+                  pagePath: "/pages/mood/mood",
+                  text: "心情",
+                  iconPath: "/pages/images/icon/mood_icon.png",
+                  selectedIconPath: "/pages/images/icon/mood_icon.png",
+                  selected: false
+                },
+                {
+                  pagePath: "/pages/account/account",
+                  text: "账号",
+                  iconPath: "/pages/images/icon/account_icon.png",
+                  selectedIconPath: "/pages/images/icon/account_icon.png",
+                  selected: false
+                }
+              ],
+              position: "bottom"
+            }
+            console.log(that.globalData.tabbar)
+          }
+          else if(res.data.version == 0){
+            that.globalData.tabbar = {
+              color: "#353535",
+              selectedColor: "#3cc51f",
+              borderStyle: "white",
+              backgroundColor: "#ffffff",
+              list: [
+                {
+                  pagePath: "/pages/weather/weather",
+                  text: "天气",
+                  iconPath: "/pages/images/icon/weather_icon.png",
+                  selectedIconPath: "/pages/images/icon/weather_icon.png",
+                  selected: false
+                },
+                {
+                  pagePath: "/pages/activity/activity",
+                  text: "活动",
+                  iconPath: "/pages/images/icon/activity_icon.png",
+                  selectedIconPath: "/pages/images/icon/activity_icon.png",
+                  selected: true
+                },
+                {
+                  pagePath: "/pages/account/account",
+                  text: "账号",
+                  iconPath: "/pages/images/icon/account_icon.png",
+                  selectedIconPath: "/pages/images/icon/account_icon.png",
+                  selected: false
+                }
+              ],
+              position: "bottom"
+            }
+          }
+        }
+        else{
+          wx.showToast({
+            title: '读取版本错误!',
+          })
+        }
       },
       fail: function(res){
-        
+        wx.showToast({
+          title: '读取版本错误!',
+        })
       }
     })
     //发送一个请求到服务器
     //如果结果是1，表示可以使用心情功能
     //如果结果是0，表示不可以使用心情功能
-    var op = 1;
-    if (op == 1){
-      this.globalData.tabbar = {
-        color: "#353535",
-        selectedColor: "#3cc51f",
-        borderStyle: "white",
-        backgroundColor: "#ffffff",
-        list: [
-          {
-            pagePath: "/pages/weather/weather",
-            text: "天气",
-            iconPath: "/pages/images/icon/weather_icon.png",
-            selectedIconPath: "/pages/images/icon/weather_icon.png",
-            selected: false
-          },
-          {
-            pagePath: "/pages/activity/activity",
-            text: "活动",
-            iconPath: "/pages/images/icon/activity_icon.png",
-            selectedIconPath: "/pages/images/icon/activity_icon.png",
-            selected: true
-          },
-          {
-            pagePath: "/pages/mood/mood",
-            text: "心情",
-            iconPath: "/pages/images/icon/mood_icon.png",
-            selectedIconPath: "/pages/images/icon/mood_icon.png",
-            selected: false
-          },
-          {
-            pagePath: "/pages/account/account",
-            text: "账号",
-            iconPath: "/pages/images/icon/account_icon.png",
-            selectedIconPath: "/pages/images/icon/account_icon.png",
-            selected: false
-          }
-        ],
-        position: "bottom"
-      }
-    }
-    else if (op == 0){
-      this.globalData.tabbar = {
-        color: "#353535",
-        selectedColor: "#3cc51f",
-        borderStyle: "white",
-        backgroundColor: "#ffffff",
-        list: [
-          {
-            pagePath: "/pages/weather/weather",
-            text: "天气",
-            iconPath: "/pages/images/icon/weather_icon.png",
-            selectedIconPath: "/pages/images/icon/weather_icon.png",
-            selected: false
-          },
-          {
-            pagePath: "/pages/activity/activity",
-            text: "活动",
-            iconPath: "/pages/images/icon/activity_icon.png",
-            selectedIconPath: "/pages/images/icon/activity_icon.png",
-            selected: true
-          },
-          {
-            pagePath: "/pages/account/account",
-            text: "账号",
-            iconPath: "/pages/images/icon/account_icon.png",
-            selectedIconPath: "/pages/images/icon/account_icon.png",
-            selected: false
-          }
-        ],
-        position: "bottom"
-      }
-    }
   },
   /**
    * 当小程序启动，或从后台进入前台显示，会触发 onShow
    */
   onShow: function (options) {
-    //this.getOpenId()
+    var that = this;
+    wx.request({
+      url: 'https://40525433.fudan-mini-program.com/cgi-bin/Version',
+      method: 'GET',
+      success: function (res) {
+        if (res.data.status == 'OK') {
+          if (res.data.version == 1) {
+            that.globalData.tabbar = {
+              color: "#353535",
+              selectedColor: "#3cc51f",
+              borderStyle: "white",
+              backgroundColor: "#ffffff",
+              list: [
+                {
+                  pagePath: "/pages/weather/weather",
+                  text: "天气",
+                  iconPath: "/pages/images/icon/weather_icon.png",
+                  selectedIconPath: "/pages/images/icon/weather_icon.png",
+                  selected: false
+                },
+                {
+                  pagePath: "/pages/activity/activity",
+                  text: "活动",
+                  iconPath: "/pages/images/icon/activity_icon.png",
+                  selectedIconPath: "/pages/images/icon/activity_icon.png",
+                  selected: true
+                },
+                {
+                  pagePath: "/pages/mood/mood",
+                  text: "心情",
+                  iconPath: "/pages/images/icon/mood_icon.png",
+                  selectedIconPath: "/pages/images/icon/mood_icon.png",
+                  selected: false
+                },
+                {
+                  pagePath: "/pages/account/account",
+                  text: "账号",
+                  iconPath: "/pages/images/icon/account_icon.png",
+                  selectedIconPath: "/pages/images/icon/account_icon.png",
+                  selected: false
+                }
+              ],
+              position: "bottom"
+            }
+            console.log(that.globalData.tabbar)
+          }
+          else if (res.data.version == 0) {
+            that.globalData.tabbar = {
+              color: "#353535",
+              selectedColor: "#3cc51f",
+              borderStyle: "white",
+              backgroundColor: "#ffffff",
+              list: [
+                {
+                  pagePath: "/pages/weather/weather",
+                  text: "天气",
+                  iconPath: "/pages/images/icon/weather_icon.png",
+                  selectedIconPath: "/pages/images/icon/weather_icon.png",
+                  selected: false
+                },
+                {
+                  pagePath: "/pages/activity/activity",
+                  text: "活动",
+                  iconPath: "/pages/images/icon/activity_icon.png",
+                  selectedIconPath: "/pages/images/icon/activity_icon.png",
+                  selected: true
+                },
+                {
+                  pagePath: "/pages/account/account",
+                  text: "账号",
+                  iconPath: "/pages/images/icon/account_icon.png",
+                  selectedIconPath: "/pages/images/icon/account_icon.png",
+                  selected: false
+                }
+              ],
+              position: "bottom"
+            }
+          }
+        }
+        else {
+          wx.showToast({
+            title: '读取版本错误!',
+          })
+        }
+      },
+      fail: function (res) {
+        wx.showToast({
+          title: '读取版本错误!',
+        })
+      }
+    })
   },
   /**
    * 当小程序从前台进入后台，会触发 onHide
