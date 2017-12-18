@@ -27,6 +27,7 @@ Page({
     award_text_2:"",
   },
   redirectCheckIn: function () {
+    
     var that = this;
     wx.navigateTo({
       url: '../checkin/checkin?markers='
@@ -394,6 +395,23 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+
+    var ver_stor = wx.getStorageSync('first_tabbar')
+    console.log('first_tabbar')
+    console.log(ver_stor)
+    if (ver_stor != 'yes'){
+      wx.setStorageSync('first_tabbar', 'yes')
+      wx.redirectTo({
+        url: '../activity/activity',
+        success: function(){
+          console.log('跳转成功')
+        },
+        fail:function(e){
+          console.log('跳转失败')
+          console.log(e)
+        }
+      })
+    }
     app.editTabBar(); 
     if (app.globalData.openid == "") {
       this.getOpenId();
