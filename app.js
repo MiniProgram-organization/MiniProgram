@@ -87,8 +87,9 @@ App({
     wx.request({
       url: 'https://40525433.fudan-mini-program.com/cgi-bin/Version',
       method: 'POST',
+      
       data:{
-        
+        version_code:'0.85'
       },
       success: function (res) {
         if (res.data.status == 'OK'){
