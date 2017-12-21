@@ -94,7 +94,7 @@ Page({
           });
           wx.setStorageSync('history_mood', old_history);
         }
-        wx.switchTab({
+        wx.navigateTo({
           url: '../mood/mood',
           success: function (e) {
             if (award > 0) {
