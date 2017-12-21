@@ -65,8 +65,8 @@ Page({
     })
     if(this.data.level == 0){
       if (e.currentTarget.id == 0){
-        wx.switchTab({
-          url: '../weather/weather'
+        wx.redirectTo({
+          url: '../weather/weather',
         })
       }
       else this.queryCity();
@@ -81,8 +81,8 @@ Page({
   goToWeather: function(){
     var that = this;
     wx.setStorageSync('weatherCity', [this.data.selectedName, this.data.parent])
-    wx.switchTab({
-      url: '../weather/weather'
+    wx.navigateTo({
+      url: '../weather/weather',
     })
   },
   queryCity: function () {
