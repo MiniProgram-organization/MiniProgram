@@ -22,7 +22,7 @@
             </view>
         </view>
     </view>
-    <view style="width: {{windowWidth}}px; height:{{windowHeight*0.05}}px">
+    <view style="width: {{windowWidth}}px; height:{{windowHeight*0.03}}px">
      </view>
     <view class="forecast" style="height:160px" >
       <view style="height:40px" class='forecast_text' >

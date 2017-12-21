@@ -84,7 +84,7 @@
   font-size: 13px;
   color: #fff;
   position: fixed;
-  bottom: 10px;
+  bottom: 70px;
   width: 85%;
   margin: 0 auto;
 }
