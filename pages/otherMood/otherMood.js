@@ -38,6 +38,14 @@ Page({
   },
   recordMood: function (options) {
     var that = this;
+    if (that.data.mood_text == "")
+    {
+      wx.showToast({
+        title: '心情关键词不能为空！',
+        icon:'loading',
+      })
+      return;
+    }
     wx.request({
       url: 'https://40525433.fudan-mini-program.com/cgi-bin/Mood',
       method: 'POST',
@@ -94,25 +102,22 @@ Page({
           });
           wx.setStorageSync('history_mood', old_history);
         }
-        wx.navigateTo({
-          url: '../mood/mood',
-          success: function (e) {
-            if (award > 0) {
-              wx.showToast({
-                title: "记录成功：\n" + that.data.mood_text + '\n' + '+' + award + '分',
-                icon: 'success',
-                duration: 2000
-              });
-            }
-            else {
-              wx.showToast({
-                title: "记录成功：\n" + that.data.mood_text,
-                icon: 'success',
-                duration: 2000
-              });
-            }
-          }
-        })
+
+        if (award > 0) {
+          wx.showToast({
+            title: "记录成功：\n" + that.data.mood_text + '\n' + '+' + award + '分',
+            icon: 'success',
+            duration: 2000
+          });
+        }
+        else {
+          wx.showToast({
+            title: "记录成功：\n" + that.data.mood_text,
+            icon: 'success',
+            duration: 2000
+          });
+        }
+        wx.navigateBack();
       },
       fail: function (e) {
         wx.showToast({

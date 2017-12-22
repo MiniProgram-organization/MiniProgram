@@ -351,7 +351,7 @@ Page({
                 console.log(res)
                 if (res.data.status == "ERROR") {
                   console.log(res.data.message);
-                  wx.navigateTo({
+                  wx.redirectTo({
                     url: '/pages/error/error',
                   })
                   return;

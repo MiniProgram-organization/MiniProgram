@@ -81,7 +81,7 @@ Page({
   goToWeather: function(){
     var that = this;
     wx.setStorageSync('weatherCity', [this.data.selectedName, this.data.parent])
-    wx.navigateTo({
+    wx.redirectTo({
       url: '../weather/weather',
     })
   },

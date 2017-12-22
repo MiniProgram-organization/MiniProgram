@@ -89,7 +89,7 @@ App({
       method: 'POST',
       
       data:{
-        version_code:'0.85'
+        version_code:'0.86'
       },
       success: function (res) {
         if (res.data.status == 'OK'){
