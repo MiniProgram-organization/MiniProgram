@@ -65,9 +65,10 @@ Page({
     })
     if(this.data.level == 0){
       if (e.currentTarget.id == 0){
-        wx.redirectTo({
+    /*    wx.redirectTo({
           url: '../weather/weather',
-        })
+        })*/
+        wx.navigateBack();
       }
       else this.queryCity();
     }
@@ -76,14 +77,15 @@ Page({
     }
     else if(this.data.level == 2){
       this.goToWeather();
-    }
+    }ß
   },
   goToWeather: function(){
     var that = this;
     wx.setStorageSync('weatherCity', [this.data.selectedName, this.data.parent])
-    wx.redirectTo({
-      url: '../weather/weather',
-    })
+   /* wx.redirectTo({ß
+      url: '../weather/weater',
+    })*/
+    wx.navigateBack();
   },
   queryCity: function () {
     console.log(this.data.selectedName)
