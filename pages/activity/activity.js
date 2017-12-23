@@ -395,7 +395,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
     var ver_stor = wx.getStorageSync('first_tabbar')
     console.log('first_tabbar')
     console.log(ver_stor)

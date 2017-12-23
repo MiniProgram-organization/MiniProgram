@@ -76,6 +76,8 @@ App({
     this.globalData.windowWidth = res.windowWidth;
     this.globalData.windowHeight = res.windowHeight;
 
+    wx.setStorageSync('first_tabbar', 'no')
+
     //外部类
     this.globalData.qqmapsdk = new QQMapWX({
       key: 'A5EBZ-DCPK4-IFSU7-XIQGW-NJKPJ-2NFLM'
