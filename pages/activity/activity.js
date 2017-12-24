@@ -400,6 +400,7 @@ Page({
     console.log('first_tabbar')
     console.log(ver_stor)
     if (ver_stor != 'yes'){
+      app.editTabBar(); 
       wx.setStorageSync('first_tabbar', 'yes')
       wx.redirectTo({
         url: '../activity/activity',
@@ -412,6 +413,7 @@ Page({
         }
       })
     }
+    else{
     app.editTabBar(); 
     if (app.globalData.openid == "") {
       this.getOpenId();
@@ -422,6 +424,7 @@ Page({
     console.log('activity........!!!!!!!!!!!!!')
     console.log(this.data.checkins);
     console.log(this.data.classifiedCheckIns); 
+    }
   },
  getPlaces: function(){
     var that = this;
