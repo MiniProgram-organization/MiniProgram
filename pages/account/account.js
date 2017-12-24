@@ -144,13 +144,15 @@ Page({
     var gender = "";
     var province = "";
     var country = "";
+    console.log(app.globalData.rawData)
+    console.log('rawData!!!!!!!!!!')
     nickName = app.globalData.rawData.nickName;
     gender = genderChoose[app.globalData.rawData.gender];
     province = app.globalData.rawData.province;
     country = app.globalData.rawData.country;
     if (nickName == "") nickName = " ";
     if (gender == "") gender = " ";
-    if (province == "") provincee = " ";
+    if (province == "") province = " ";
     if (country == "") country = " ";
     var socresTemp = wx.getStorageSync('scores')
     var scores = 0;
