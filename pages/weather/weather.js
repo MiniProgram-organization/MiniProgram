@@ -16,6 +16,8 @@ Page({
     air:{},
     weatherCity:"",
     parent:"",
+    latitude:0,
+    longitude:0,
   },
   onLoad: function (options) {
     
@@ -62,6 +64,10 @@ Page({
         //如果没有openId 需要加上一个判断
         var latitude = res.latitude;
         var longitude = res.longitude;
+        that.setData({
+          latitude:latitude,
+          longitude:longitude
+        })
         that.loadWeather(latitude, longitude, openid, sessionid);
       },
       fail: function (res) {
@@ -98,17 +104,55 @@ Page({
   loadInfo: function () {
     var getSuccess = 0;
     var timer = 0
+    /*
     var inChina = wx.getStorageSync('inChina');
     if (inChina == 0){
        wx.showToast({
          title: '抱歉，您目前不在卿云Go的服务区!',
          icon: 'loading'
        })
-    }
+    }*/
+    /*
+    wx.request({
+      url: 'https://40525433.fudan-mini-program.com/cgi-bin/GetNation',
+      method: 'POST',
+      data:{30,30},
+      success: function (res) {
+        console.log("nation")
+        console.log(res.data)
+        if (res.data.status == "ERROR") {
+          wx.showToast({
+            title: '服务器功能未启用',
+            icon: 'loading'
+          })
+          return;
+        }
+      },
+      fail:function(res){
+        console.log(res)
+      }
+    })*/
     this.getLocationResur(1);
   },
   loadWeather: function (latitude, longitude, openid, sessionid) {
 
+    var data_nation = {}
+    data_nation = {
+      openid: openid,
+      sessionid: sessionid,
+      latitude: latitude,
+      longitude: longitude
+    }
+    wx.request({
+      url: 'https://40525433.fudan-mini-program.com/cgi-bin/GetNation',
+      method: 'POST',
+      data: data_nation,
+      success: function (res) {
+        console.log('nation')
+        console.log(res)
+        console.log(data_nation)
+      }
+    })
     var that = this;
     var data = {};
     if (this.data.weatherCity == ""){
