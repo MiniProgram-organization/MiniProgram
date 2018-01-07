@@ -103,7 +103,7 @@ App({
               backgroundColor: "#ffffff",
               list: [
                 {
-                  pagePath: "/pages/weather/weather",
+                  pagePath: "/pages/weather_new/weather_new",
                   text: "天气",
                   iconPath: "/pages/images/icon/weather_icon.png",
                   selectedIconPath: "/pages/images/icon/weather_icon.png",
@@ -143,7 +143,7 @@ App({
               backgroundColor: "#ffffff",
               list: [
                 {
-                  pagePath: "/pages/weather/weather",
+                  pagePath: "/pages/weather_new/weather_new",
                   text: "天气",
                   iconPath: "/pages/images/icon/weather_icon.png",
                   selectedIconPath: "/pages/images/icon/weather_icon.png",

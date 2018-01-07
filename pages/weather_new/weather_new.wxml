@@ -1,0 +1,29 @@
+<!--pages/weather_new/weather_new.wxml-->
+<view style="width: {{windowWidth}}px; height:{{windowHeight}}px" >
+<import src="/pages/tabbar/tabbar.wxml"/>
+<template is="tabbar" data="{{tabbar}}"/>
+
+
+<view class='.container1'>
+<view class='.day_container1'>
+<view>昨天</view>
+  <view>12.2</view>
+  </view>
+  
+  <view class='.day_container2'>
+  <view>昨天</view>
+  <view>12.2</view>
+  </view>
+
+    <view class='.day_container3'>
+  <view>昨天</view>
+  <view>12.2</view>
+  </view>
+
+    <view class='.day_container4'>
+  <view>昨天</view>
+  <view>12.2</view>
+  </view>
+</view>
+</view>
+

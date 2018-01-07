@@ -1,0 +1,28 @@
+/* pages/weather_new/weather_new.wxss */
+.container1{
+    height: 100%;
+    width:100%;
+    background-color:beige;
+    display:flex;
+}
+.day_container1{
+    height:100%;
+    width:25%;
+    background-color:#FFDAB9;
+}
+.day_container2{
+    height:100%;
+    width:25%;
+    background-color:#9BCD9B;
+}
+.day_container3{
+    height:100%;
+    width:25%;
+    background-color:#87CEFF;
+}
+.day_container4{
+    height:100%;
+    width:25%;
+    background-color:#F0E68C;
+}
+@import "/pages/tabbar/tabbar.wxss"
