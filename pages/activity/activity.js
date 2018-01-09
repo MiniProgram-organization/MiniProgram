@@ -186,6 +186,46 @@ Page({
         //存储一个缓存的经纬度,用于定位失败时使用
         wx.setStorageSync('latitude', res.latitude);
         wx.setStorageSync('longitude', res.longitude);
+
+        wx.request({
+          url: 'https://40525433.fudan-mini-program.com/cgi-bin/GetNation',
+          method:'POST',
+          data: {
+
+            latitude: res.latitude,
+            longitude: res.longitude,
+            openid: getApp().globalData.openid,
+            sessionid: getApp().globalData.sessionid,
+            
+          },
+          success: function (res) {
+            console.log('nation...')
+            console.log(res)
+            if (res.data.status == 'OK'){
+              if (res.data.nation == '中国'){
+                wx.setStorageSync('inChina', 1)
+              }
+              else{
+                wx.showToast({
+                  title: '抱歉，卿云Go签到功能对国外用户暂未开放!',
+                  icon: 'loading'
+                })
+                wx.setStorageSync('inChina', 0)
+              }
+            }
+            else{
+              wx.showToast({
+                title: '获取经纬度国家信息失败！请检查定位设置',
+              })
+            }
+          },
+          fail: function(res){
+            wx.showToast({
+              title: '获取经纬度国家信息失败！请检查定位设置',
+            })
+          }
+
+        })
         app.globalData.qqmapsdk.reverseGeocoder({
           location: {
             latitude: res.latitude,
@@ -194,14 +234,15 @@ Page({
           get_poi: 1,
           success: function (res) {
             if(res.result.pois == undefined){
+              /*
               wx.showToast({
                 title: '抱歉，您目前不在卿云Go的服务区!',
                 icon:'loading'
               })
-              wx.setStorageSync('inChina', 0)
+              wx.setStorageSync('inChina', 0)*/
               return;
             }
-            wx.setStorageSync('inChina', 1)
+            //wx.setStorageSync('inChina', 1)
             var coordinates = res.result.pois;
             //marker数组
             var tempMarkers = [];
