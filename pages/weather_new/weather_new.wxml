@@ -1,29 +1,47 @@
 <!--pages/weather_new/weather_new.wxml-->
-<view style="width: {{windowWidth}}px; height:{{windowHeight}}px" >
+<view class='back' style="width: {{windowWidth}}px; height:{{windowHeight}}px">
 <import src="/pages/tabbar/tabbar.wxml"/>
 <template is="tabbar" data="{{tabbar}}"/>
 
+  <view class='title_bar' style="width: {{windowWidth}}px; height:{{windowHeight*0.08}}px">
 
-<view class='.container1'>
-<view class='.day_container1'>
-<view>昨天</view>
-  <view>12.2</view>
-  </view>
-  
-  <view class='.day_container2'>
-  <view>昨天</view>
-  <view>12.2</view>
+    <view class='title_left'>
+      <image class="image_set" src="{{set_url}}"></image>
+    </view>
+
+    <view class='now_location' style="height:{{windowHeight*0.08}}px" >
+      <image class="image_location" src="{{location_url}}"></image>
+      <text class='text_location'>武汉市</text>
+    </view>
+
+    <view class='title_right'>
+         <image class="image_share" src="{{share_url}}"></image>
+    </view>
   </view>
 
-    <view class='.day_container3'>
-  <view>昨天</view>
-  <view>12.2</view>
+  <view class='today_whole' style="width: {{windowWidth}}px; height:{{windowHeight*0.4}}px">
   </view>
 
-    <view class='.day_container4'>
-  <view>昨天</view>
-  <view>12.2</view>
-  </view>
-</view>
+  <view class='forecast' style="width: {{windowWidth}}px; height:{{windowHeight*0.25}}px">
+      <view class='day_container1'>
+        <view>昨天</view>
+        <view>12.2</view>
+      </view>
+      
+      <view class='day_container2'>
+        <view>昨天</view>
+        <view>12sss.2</view>
+      </view>
+
+      <view class='day_container3'>
+        <view>昨天</view>
+        <view>12.2</view>
+      </view>
+
+      <view class='day_container4'>
+        <view>昨天</view>
+        <view>12.2</view>
+      </view>
+    </view>
 </view>
 

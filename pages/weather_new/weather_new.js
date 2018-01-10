@@ -6,7 +6,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    windowWidth: app.globalData.windowWidth,
+    windowHeight: app.globalData.windowHeight,
+    location_url: '../images/weather_new/ic_place_white_18dp.png',
+    set_url: '../images/weather_new/ic_view_headline_white_18dp.png',
+    share_url: '../images/weather_new/ic_open_in_new_white_18dp.png'
   },
 
   /**
