@@ -10,7 +10,13 @@ Page({
     windowHeight: app.globalData.windowHeight,
     location_url: '../images/weather_new/ic_place_white_18dp.png',
     set_url: '../images/weather_new/ic_view_headline_white_18dp.png',
-    share_url: '../images/weather_new/ic_open_in_new_white_18dp.png'
+    share_url: '../images/weather_new/ic_open_in_new_white_18dp.png',
+    wind_url:'../images/weather_new/ic_settings_input_antenna_white_18dp.png',
+    atmosphere_url:'../images/weather_new/ic_network_wifi_white_18dp.png',
+    tem_url:'../images/weather_new/ic_brightness_4_white_18dp.png',
+    award_text_1:'已经连续查看天气',
+    con_day:0,
+    award_text_2:'天,继续以获得更多积分奖励吧~'
   },
 
   /**
