@@ -4,12 +4,12 @@
 <template is="tabbar" data="{{tabbar}}"/>
 
   <view class='title_bar' style="width: {{windowWidth}}px; height:{{windowHeight*0.08}}px">
-    <view class='title_left'>
+    <view class='title_left' bindtap="toChooseArea" >
       <image class="image_set" src="{{set_url}}"></image>
     </view>
     <view class='now_location' style="height:{{windowHeight*0.08}}px" >
       <image class="image_location" src="{{location_url}}"></image>
-      <text class='text_location'>浦东新区</text>
+      <text class='text_location'>{{city}}</text>
     </view>
     <view class='title_right'>
          <image class="image_share" src="{{share_url}}"></image>
@@ -18,17 +18,17 @@
 
   <view class='today_whole' style="width: {{windowWidth}}px; height:{{windowHeight*0.47}}px">
     <view class='now_tem'  style="width: {{windowWidth}}px; height:{{windowHeight*0.18}}px">
-      <text>5℃</text>
+      <text>{{weather.tmp}}℃</text>
     </view>
     <view class='air_view' style="width: {{windowWidth}}px; height:{{windowHeight*0.05}}px">
-      <view class='air'>
-        <text>重度污染</text>
+      <view class='air' style="background-color:{{background_color}}">
+        <text>空气质量：{{air.qlty}}</text>
       </view>
     </view>
 
     <view class='today_weather_cat' style="width: {{windowWidth}}px; height:{{windowHeight*0.06}}px">
       <image class="image_forecast_cat" src="../images/weather/100.png"></image>
-      <text class='text_weather_cat'>晴</text>
+      <text class='text_weather_cat'>{{weather.cond_txt}}</text>
     </view>
 
     <view style="width: {{windowWidth}}px; height:{{windowHeight*0.01}}px">
@@ -54,8 +54,8 @@
       <view class='detail_wind'>             
         <image class="detail_icon" src="{{wind_url}}"></image>
          <view class='detail_text'>
-          <text class='text_location'>西北风\n</text>
-          <text class='text_location'>3-4级</text>
+          <text class='text_location'>{{weather.wind_dir}}\n</text>
+          <text class='text_location'>级别:{{weather.wind_sc}}</text>
         </view>
       </view>
 
@@ -63,7 +63,7 @@
         <image class="detail_icon" src="{{atmosphere_url}}"></image>
         <view class='detail_text'>
           <text class='text_location'>气压\n</text>
-          <text class='text_location'>1010 hPa</text>
+          <text class='text_location'>{{weather.pres}} hPa</text>
         </view>
       </view>
     </view>
@@ -76,23 +76,6 @@
   <view style="width: {{windowWidth}}px; height:{{windowHeight*0.01}}px"></view>
 
   <view class='forecast' style="width: {{windowWidth}}px; height:{{windowHeight*0.25}}px">
-      <view class='day_container1'>
-        <view class='xingqi'>
-          <text>昨天</text>
-        </view>
-        <view class='riqi'>
-          <text>01.09</text>
-        </view>
-        <view class='high_and_low'>
-         <text>-1 / 5°C</text>
-        </view>
-        <view class="forecast_cat_img">
-         <image class="image_forecast_cat" src="../images/weather/100.png"></image>
-        </view>
-        <view class="forecast_cat_text">
-          <text>晴</text>
-        </view>
-      </view>
       
       <view class='day_container2'>
        <view class='xingqi'>
@@ -117,34 +100,34 @@
           <text>明天</text>
         </view>
         <view class='riqi'>
-          <text>01.11</text>
+          <text>{{day1_weather.date}}</text>
         </view>
         <view class='high_and_low'>
-         <text>-1 / 5°C</text>
+         <text>{{day1_weather.low}} / {{day1_weather.high}}°C</text>
         </view>
         <view class="forecast_cat_img">
-         <image class="image_forecast_cat" src="../images/weather/100.png"></image>
+         <image class="image_forecast_cat" src="{{day1_weather.icon}}"></image>
         </view>
         <view class="forecast_cat_text">
-          <text>晴</text>
+          <text>{{day1_weather.category}}</text>
         </view>
       </view>
 
       <view class='day_container2'>
         <view class='xingqi'>
-          <text>星期五</text>
+          <text>{{day2_weather.xq}}</text>
         </view>
         <view class='riqi'>
-          <text>01.12</text>
+          <text>{{day2_weather.date}}</text>
         </view>
         <view class='high_and_low'>
-         <text>1 / 5°C</text>
+         <text>{{day2_weather.low}} / {{day2_weather.high}}°C</text>
         </view>
         <view class="forecast_cat_img">
-         <image class="image_forecast_cat" src="../images/weather/103.png"></image>
+         <image class="image_forecast_cat" src="{{day2_weather.icon}}"></image>
         </view>
         <view class="forecast_cat_text">
-          <text>晴转多云</text>
+          <text>{{day2_weather.category}}</text>
         </view>
       </view>
     </view>

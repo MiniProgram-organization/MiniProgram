@@ -213,6 +213,7 @@ Page({
         day1_weather['low'] = res.data.forecast[1].tmp_min;
         day2_weather['low'] = res.data.forecast[2].tmp_min;
 
+
         if (res.data.air.aqi == "") {
           that.setData({
             city: city,

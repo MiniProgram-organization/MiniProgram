@@ -1,8 +1,8 @@
 {
   "pages": [
     "pages/activity/activity",
+    "pages/weather_new/weather_new",
     "pages/map/map",
-    "pages/weather/weather",
     "pages/account/account",
     "pages/trace/trace",
     "pages/friends/friends",
@@ -20,8 +20,7 @@
     "pages/chooseArea/chooseArea",
     "pages/otherMood/otherMood",
     "pages/qrcode/qrcode",
-    "pages/tabbar/tabbar",
-    "pages/weather_new/weather_new"
+    "pages/tabbar/tabbar"
   ],
   "window": {
     "window": {
