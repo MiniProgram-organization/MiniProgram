@@ -46,8 +46,8 @@
       <view class='detail_tem'>
         <image class="detail_icon" src="{{tem_url}}"></image>
         <view class='detail_text'>
-          <text class='text_location'>温度\n</text>
-          <text class='text_location'>-1~6℃</text>
+          <text class='text_location'>体感温度\n</text>
+          <text class='text_location'>{{weather.fl}}℃</text>
         </view>
       </view>
 
