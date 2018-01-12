@@ -68,7 +68,6 @@
   text-align: center;
   color: #ffffff;
   font-size: 70px;
-  font-weight: lighter;
 }
 .today_weather_cat{
   display: flex;
@@ -76,7 +75,6 @@
   text-align: center;
   justify-content:center;
   color: #ffffff;
-  font-size: 18sp;
 }
 .air_view{
   display: flex;
@@ -87,9 +85,8 @@
 .air{
   text-align: center;
   color: #ffffff;
-  font-size: 12px;
   margin: auto 0;
-  width: 25%;
+  width: 30%;
   padding-left: 5px;
   padding-right: 5px;
   border-radius: 10px;
@@ -107,14 +104,13 @@
 }
 .detail_text{
   margin: auto 0;
-  font-size: 12px;
+  font-weight: 200;
 }
 .detail_wind{
   color: #ffffff;
   display: flex;
   margin-left: 10px;
   margin-right: 10px;
-  font-size: 12px;
 }
 .detail_tem{
   color: #ffffff;
@@ -136,22 +132,18 @@
     display:flex;
 }
 .xingqi{
-  font-size: 13px;
   text-align: center;
 }
 .riqi{
-  font-size: 13px;
   text-align: center;
 }
 .high_and_low{
-  font-size: 13px;
   text-align: center;
 }
 .forecast_cat_img{
   text-align: center;
 }
 .forecast_cat_text{
-  font-size: 15px;
   text-align: center;
 }
 .image_forecast_cat{
@@ -174,7 +166,6 @@
 .hint{
   margin: auto 0;
   color: #EBEBEB;
-  font-size: 10px;
   text-align: center;
 }
 .hint_text{

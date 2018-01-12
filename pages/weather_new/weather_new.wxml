@@ -21,20 +21,20 @@
       <text>{{weather.tmp}}℃</text>
     </view>
     <view class='air_view' style="width: {{windowWidth}}px; height:{{windowHeight*0.05}}px">
-      <view class='air' style="background-color:{{background_color}}">
+      <view class='air' style="background-color:{{background_color}}; font-size:{{air_text_font_size}}px">
         <text>空气质量：{{air.qlty}}</text>
       </view>
     </view>
 
     <view class='today_weather_cat' style="width: {{windowWidth}}px; height:{{windowHeight*0.06}}px">
-      <image class="image_forecast_cat" src="../images/weather/100.png"></image>
-      <text class='text_weather_cat'>{{weather.cond_txt}}</text>
+      <image class="image_forecast_cat" src="{{weathericonURL}}"></image>
+      <text class='text_weather_cat' style="font-size:{{now_cat_font_size}}px">{{weather.cond_txt}}</text>
     </view>
 
     <view style="width: {{windowWidth}}px; height:{{windowHeight*0.01}}px">
     </view>
 
-    <view class='hint' style="width: {{windowWidth}}px; height:{{windowHeight*0.05}}px">
+    <view class='hint' style="width: {{windowWidth}}px; height:{{windowHeight*0.05}}px; font-size:{{lifestyle_font_size}}px">
       <view class='hint_text'>
       <text>生活指数:天气较好，赶快投身大自然参与户外运动，尽情感受运动的快乐吧。</text>
       </view>
@@ -45,7 +45,7 @@
     <view class='weather_detail' style="width: {{windowWidth}}px; height:{{windowHeight*0.1}}px">
       <view class='detail_tem'>
         <image class="detail_icon" src="{{tem_url}}"></image>
-        <view class='detail_text'>
+        <view class='detail_text' style="font-size:{{weather_detail_font_size}}px">
           <text class='text_location'>体感温度\n</text>
           <text class='text_location'>{{weather.fl}}℃</text>
         </view>
@@ -53,7 +53,7 @@
 
       <view class='detail_wind'>             
         <image class="detail_icon" src="{{wind_url}}"></image>
-         <view class='detail_text'>
+         <view class='detail_text' style="font-size:{{weather_detail_font_size}}px">
           <text class='text_location'>{{weather.wind_dir}}\n</text>
           <text class='text_location'>级别:{{weather.wind_sc}}</text>
         </view>
@@ -61,7 +61,7 @@
 
       <view class='detail_atmosphere'>
         <image class="detail_icon" src="{{atmosphere_url}}"></image>
-        <view class='detail_text'>
+        <view class='detail_text' style="font-size:{{weather_detail_font_size}}px">
           <text class='text_location'>气压\n</text>
           <text class='text_location'>{{weather.pres}} hPa</text>
         </view>
@@ -78,55 +78,55 @@
   <view class='forecast' style="width: {{windowWidth}}px; height:{{windowHeight*0.25}}px">
       
       <view class='day_container2'>
-       <view class='xingqi'>
+       <view class='xingqi' style="font-size:{{ forecast_other_text_font_size}}px">
           <text>今天</text>
         </view>
-        <view class='riqi'>
+        <view class='riqi'  style="font-size:{{ forecast_other_text_font_size}}px">
           <text>01.10</text>
         </view>
-        <view class='high_and_low'>
+        <view class='high_and_low'  style="font-size:{{ forecast_other_text_font_size}}px">
          <text>-1 / 6°C</text>
         </view>
         <view class="forecast_cat_img">
          <image class="image_forecast_cat" src="../images/weather/100.png"></image>
         </view>
-        <view class="forecast_cat_text">
+        <view class="forecast_cat_text"  style="font-size:{{forecast_cat_text_font_size}}px">
           <text>晴</text>
         </view>
       </view>
 
       <view class='day_container2'>
-        <view class='xingqi'>
+        <view class='xingqi'  style="font-size:{{ forecast_other_text_font_size}}px">
           <text>明天</text>
         </view>
-        <view class='riqi'>
+        <view class='riqi'  style="font-size:{{ forecast_other_text_font_size}}px">
           <text>{{day1_weather.date}}</text>
         </view>
-        <view class='high_and_low'>
+        <view class='high_and_low'  style="font-size:{{ forecast_other_text_font_size}}px">
          <text>{{day1_weather.low}} / {{day1_weather.high}}°C</text>
         </view>
         <view class="forecast_cat_img">
          <image class="image_forecast_cat" src="{{day1_weather.icon}}"></image>
         </view>
-        <view class="forecast_cat_text">
+        <view class="forecast_cat_text"  style="font-size:{{forecast_cat_text_font_size}}px">
           <text>{{day1_weather.category}}</text>
         </view>
       </view>
 
       <view class='day_container2'>
-        <view class='xingqi'>
+        <view class='xingqi'  style="font-size:{{forecast_other_text_font_size}}px">
           <text>{{day2_weather.xq}}</text>
         </view>
-        <view class='riqi'>
+        <view class='riqi'  style="font-size:{{forecast_other_text_font_size}}px">
           <text>{{day2_weather.date}}</text>
         </view>
-        <view class='high_and_low'>
+        <view class='high_and_low'  style="font-size:{{forecast_other_text_font_size}}px">
          <text>{{day2_weather.low}} / {{day2_weather.high}}°C</text>
         </view>
         <view class="forecast_cat_img">
          <image class="image_forecast_cat" src="{{day2_weather.icon}}"></image>
         </view>
-        <view class="forecast_cat_text">
+        <view class="forecast_cat_text"  style="font-size:{{forecast_cat_text_font_size}}px">
           <text>{{day2_weather.category}}</text>
         </view>
       </view>

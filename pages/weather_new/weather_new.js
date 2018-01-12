@@ -13,9 +13,9 @@ Page({
     wind_url:'../images/weather_new/ic_settings_input_antenna_white_18dp.png',
     atmosphere_url:'../images/weather_new/ic_network_wifi_white_18dp.png',
     tem_url:'../images/weather_new/ic_brightness_4_white_18dp.png',
-    day1_weather: {},
-    day2_weather: {},
-    day3_weather:{},
+    day1_weather: {}, //今日天气
+    day2_weather: {}, //明日天气
+    day3_weather:{},  //后天天气
     con_day: 0,
     less_day: 7,
     object_day: 7,
@@ -26,7 +26,13 @@ Page({
     parent: "",
     latitude: 0,
     longitude: 0,
-    background_color:'#EE6A50'
+    background_color:'#EE6A50',
+    lifestyle_font_size:12,
+    weather_detail_font_size:12,
+    forecast_cat_text_font_size:15,
+    forecast_other_text_font_size:13,
+    air_text_font_size:12,
+    now_cat_font_size:13,
   },
 
   /**
@@ -56,9 +62,18 @@ Page({
     this.setData({
       weatherCity: tmpWeatherCity[0],
       parent: tmpWeatherCity[1],
+      lifestyle_font_size:((app.globalData.windowWidth % 32 == 0) ?
+        (app.globalData.windowWidth / 32) :
+        (parseInt(app.globalData.windowWidth / 32) + 1)),
+      weather_detail_font_size: ((app.globalData.windowWidth % 27 == 0) ?
+        (app.globalData.windowWidth / 27) :
+        (parseInt(app.globalData.windowWidth / 27) + 1)),
+      forecast_other_text_font_size: parseInt(app.globalData.windowWidth/24),
+      forecast_cat_text_font_size: parseInt(app.globalData.windowWidth / 21),
+      air_text_font_size: parseInt(app.globalData.windowWidth / 27),
+      now_cat_font_size: parseInt(app.globalData.windowWidth / 24),
+
     })
-    // console.log(this.data.weatherCity)
-    // console.log(this.data.parent)
     wx.setStorageSync('weatherCity', "")
     this.loadInfo();
 
