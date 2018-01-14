@@ -33,6 +33,7 @@ Page({
     forecast_other_text_font_size:13,
     air_text_font_size:12,
     now_cat_font_size:13,
+    inChina:1
   },
 
   /**
@@ -53,6 +54,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var inChina = wx.getStorageSync('inChina');
+    this.setData({
+      inChina:inChina
+    })
     app.editTabBar(); 
     // 页面显示
     // 页面初始化 options为页面跳转所带来的参数
@@ -114,7 +119,8 @@ Page({
           latitude: latitude,
           longitude: longitude
         })
-        that.loadWeather(latitude, longitude, openid, sessionid);
+        if(that.data.inChina == 1) that.loadWeather_inChina(latitude, longitude, openid, sessionid);
+        else that.loadWeather_inForeign(latitude, longitude, openid, sessionid);
       },
       fail: function (res) {
         cnt = cnt + 1
@@ -141,25 +147,17 @@ Page({
             })
             console.log(latitude)
             console.log(longitude + '....')
-            that.loadWeather(latitude, longitude, openid, sessionid);
+            if (that.data.inChina == 1) that.loadWeather_inChina(latitude, longitude, openid, sessionid);
+            else that.loadWeather_inForeign(latitude, longitude, openid, sessionid);
           }
         }
       }
     })
   },
-  loadWeather: function (latitude, longitude, openid, sessionid) {
-
-    var data_nation = {}
-    data_nation = {
-      openid: openid,
-      sessionid: sessionid,
-      latitude: latitude,
-      longitude: longitude
-    }
+  loadWeather_inForeign: function (latitude, longitude, openid, sessionid){
     var that = this;
     var data = {};
     if (this.data.weatherCity == "") {
-      console.log('????')
       data = {
         openid: openid,
         sessionid: sessionid,
@@ -176,10 +174,35 @@ Page({
         location: this.data.weatherCity,
         parent: this.data.parent
       }
-     // console.log(data)
     }
-    console.log(data)
-    console.log('??????!!!!!!')
+    /*
+    wx.request({
+      url: ,
+    })*/
+
+  },
+  loadWeather_inChina: function (latitude, longitude, openid, sessionid) {
+
+    var that = this;
+    var data = {};
+    if (this.data.weatherCity == "") {
+      data = {
+        openid: openid,
+        sessionid: sessionid,
+        latitude: latitude,
+        longitude: longitude
+      }
+    }
+    else {
+      data = {
+        openid: openid,
+        sessionid: sessionid,
+        latitude: latitude,
+        longitude: longitude,
+        location: this.data.weatherCity,
+        parent: this.data.parent
+      }
+    }
     wx.request({
       url: 'https://40525433.fudan-mini-program.com/cgi-bin/Weather',
       method: 'POST',
