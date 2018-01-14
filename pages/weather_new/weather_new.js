@@ -13,9 +13,9 @@ Page({
     wind_url:'../images/weather_new/ic_settings_input_antenna_white_18dp.png',
     atmosphere_url:'../images/weather_new/ic_network_wifi_white_18dp.png',
     tem_url:'../images/weather_new/ic_brightness_4_white_18dp.png',
+    day0_weather: {}, //今日天气
     day1_weather: {}, //今日天气
     day2_weather: {}, //明日天气
-    day3_weather:{},  //后天天气
     con_day: 0,
     less_day: 7,
     object_day: 7,
@@ -57,11 +57,21 @@ Page({
     // 页面显示
     // 页面初始化 options为页面跳转所带来的参数
     var tmpWeatherCity = wx.getStorageSync('weatherCity');
-    // console.log(tmpWeatherCity)
-    //  console.log('??')
+
+    if (tmpWeatherCity == ""){
+      console.log('空')
+      this.setData({
+        weatherCity: "",
+        parent: "",
+      })
+    }
+    else{
+      this.setData({
+        weatherCity: tmpWeatherCity[0],
+        parent: tmpWeatherCity[1],
+      })
+    }
     this.setData({
-      weatherCity: tmpWeatherCity[0],
-      parent: tmpWeatherCity[1],
       lifestyle_font_size:((app.globalData.windowWidth % 32 == 0) ?
         (app.globalData.windowWidth / 32) :
         (parseInt(app.globalData.windowWidth / 32) + 1)),
@@ -74,7 +84,7 @@ Page({
       now_cat_font_size: parseInt(app.globalData.windowWidth / 24),
 
     })
-    wx.setStorageSync('weatherCity', "")
+    wx.setStorageSync('weatherCity', ["",""])
     this.loadInfo();
 
   },
@@ -166,8 +176,10 @@ Page({
         location: this.data.weatherCity,
         parent: this.data.parent
       }
-      console.log(data)
+     // console.log(data)
     }
+    console.log(data)
+    console.log('??????!!!!!!')
     wx.request({
       url: 'https://40525433.fudan-mini-program.com/cgi-bin/Weather',
       method: 'POST',
@@ -189,6 +201,7 @@ Page({
         var city = res.data.basic.location;
         var day1_weather = {};
         var day2_weather = {};
+        var day0_weather = {};
         var award = res.data.award.award;
         var scores = res.data.award.scores;
         var duration = res.data.award.duration;
@@ -199,14 +212,19 @@ Page({
             title: '查看天气\n' + '+' + award + '分',
           })
         }
+        day0_weather['date'] = res.data.forecast[0].date.substring(5, 10); 
         day1_weather['date'] = res.data.forecast[1].date.substring(5,10); 
         day2_weather['date'] = res.data.forecast[2].date.substring(5, 10); 
+        day0_weather['category'] = res.data.forecast[0].cond_txt_d;
         day1_weather['category'] = res.data.forecast[1].cond_txt_d;
         day2_weather['category'] = res.data.forecast[2].cond_txt_d;
+        day0_weather['high'] = res.data.forecast[0].tmp_max;
         day1_weather['high'] = res.data.forecast[1].tmp_max;
         day2_weather['high'] = res.data.forecast[2].tmp_max;
+        day0_weather['low'] = res.data.forecast[0].tmp_min;
         day1_weather['low'] = res.data.forecast[1].tmp_min;
         day2_weather['low'] = res.data.forecast[2].tmp_min;
+        day0_weather['icon'] = "../images/weather/" + res.data.forecast[0].cond_code_d + ".png" 
         day1_weather['icon'] = "../images/weather/" + res.data.forecast[1].cond_code_d + ".png" 
         day2_weather['icon'] = "../images/weather/" + res.data.forecast[2].cond_code_d + ".png" 
 
@@ -224,6 +242,7 @@ Page({
             city: city,
             air: { aqi: '暂无', qlty: '暂无' },
             weather: now,
+            day0_weather: day0_weather,
             day1_weather: day1_weather,
             day2_weather: day2_weather,
             weathericonURL: "../images/weather/" + now.cond_code + ".png",
@@ -234,6 +253,7 @@ Page({
             city: city,
             air: air,
             weather: now,
+            day0_weather: day0_weather,
             day1_weather: day1_weather,
             day2_weather: day2_weather,
             weathericonURL: "../images/weather/" + now.cond_code + ".png",

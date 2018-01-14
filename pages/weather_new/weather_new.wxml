@@ -82,16 +82,16 @@
           <text>今天</text>
         </view>
         <view class='riqi'  style="font-size:{{ forecast_other_text_font_size}}px">
-          <text>01.10</text>
+          <text>{{day0_weather.date}}</text>
         </view>
         <view class='high_and_low'  style="font-size:{{ forecast_other_text_font_size}}px">
-         <text>-1 / 6°C</text>
+         <text>{{day0_weather.low}} / {{day0_weather.high}}°C</text>
         </view>
         <view class="forecast_cat_img">
-         <image class="image_forecast_cat" src="../images/weather/100.png"></image>
+         <image class="image_forecast_cat" src="{{day0_weather.icon}}"></image>
         </view>
         <view class="forecast_cat_text"  style="font-size:{{forecast_cat_text_font_size}}px">
-          <text>晴</text>
+          <text>{{day0_weather.category}}</text>
         </view>
       </view>
 
