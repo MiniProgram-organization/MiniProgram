@@ -355,8 +355,8 @@ Page({
         sessionid: sessionid,
         latitude: latitude,
         longitude: longitude,
-        location: this.data.weatherCity,
-        parent: this.data.parent
+        location: this.data.weatherCity.replace(' ','%20'),
+        parent: this.data.parent.replace(' ', '%20')
       }
     }
     wx.request({
@@ -373,10 +373,9 @@ Page({
           })
           return;
         }
-
         var now = res.data.now;
         var air = res.data.air;
-        var city = res.data.basic.location;
+        var city = res.data.basic.location.replace('%20',' ');
         var day1_weather = {};
         var day2_weather = {};
         var day0_weather = {};
