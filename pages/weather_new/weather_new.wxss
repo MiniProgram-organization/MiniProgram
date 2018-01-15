@@ -86,7 +86,7 @@
   text-align: center;
   color: #ffffff;
   margin: auto 0;
-  width: 30%;
+  width: 35%;
   padding-left: 5px;
   padding-right: 5px;
   border-radius: 10px;

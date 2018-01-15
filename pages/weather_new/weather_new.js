@@ -172,16 +172,20 @@ Page({
       data = {
         openid: openid,
         sessionid: sessionid,
-        latitude: 35.710934,
-        longitude: 139.729699,
+        //latitude: 35.710934,
+        //longitude: 139.729699,
+        latitude: latitude,
+        longitude: longitude,
       }
     }
     else {
       data = {
         openid: openid,
         sessionid: sessionid,
-        latitude: 35.710934,
-        longitude: 139.729699,
+        //latitude: 35.710934,
+        //longitude: 139.729699,
+        latitude: latitude,
+        longitude: longitude,
         location: this.data.weatherCity,
         parent: this.data.parent
       }
@@ -210,7 +214,7 @@ Page({
         var day1_weather = {};
         var day2_weather = {};
         var day0_weather = {};
-        /*
+        
         var award = res.data.award.award;
         var scores = res.data.award.scores;
         var duration = res.data.award.duration;
@@ -220,7 +224,7 @@ Page({
           wx.showToast({
             title: '查看天气\n' + '+' + award + '分',
           })
-        }*/
+        }
         var mp = {}
         mp['Jan'] = "01"; mp['Feb'] = "02"; mp['Mar'] = "03"; mp['Apr'] = "04";
         mp['Jun'] = "06"; mp['Jul'] = "07"; mp['Aug'] = "08"; mp['Sept'] = "09";
@@ -271,7 +275,61 @@ Page({
           lifestyle_font_size:0,
         })
         console.log(that.data.weather)
-        
+
+        if ((duration % 7 == 0) && ((duration % 28) != 0)) {
+          if ((duration / 7) % 4 == 1) {
+            that.setData({
+              con_day: duration,
+              award_text_1: "连续查看天气",
+              award_text_2: "天了，真棒！\n又获得额外积分奖励啦~"
+            })
+          }
+          else if ((duration / 7) % 4 == 2) {
+            that.setData({
+              con_day: duration,
+              award_text_1: "连续查看天气",
+              award_text_2: "天了，exciting！\n又获得额外积分奖励啦~"
+            })
+          }
+          else if ((duration / 7) % 4 == 3) {
+            that.setData({
+              con_day: duration,
+              award_text_1: "连续查看天气",
+              award_text_2: "天了，amazing！\n又获得额外积分奖励啦~"
+            })
+          }
+        }
+        else if (duration % 28 == 0) {
+          that.setData({
+            con_day: duration,
+            award_text_1: "连续查看天气",
+            award_text_2: "天了，天啦噜！一份超值额外积分大礼砸中了你~"
+          })
+        }
+        else if (duration % 7 != 0) {
+          var object_day = (parseInt(duration / 7) + 1) * 7;
+          console.log(object_day)
+
+
+          if (object_day % 28 == 0) {
+            that.setData({
+              con_day: duration,
+              object_day: object_day,
+              less_day: object_day - duration,
+              award_text_1: "已连续查看天气",
+              award_text_2: "天了！还差" + (object_day - duration) + "天就能获得连续28天超值额外积分奖励喔，加油~"
+            })
+          }
+          else {
+            that.setData({
+              con_day: duration,
+              object_day: object_day,
+              less_day: object_day - duration,
+              award_text_1: "已连续查看天气",
+              award_text_2: "天了！还差" + (object_day - duration) + "天就能获得额外积分奖励喔，加油~"
+            })
+          }
+        }
       },
       fail: function(res){
 
@@ -356,20 +414,21 @@ Page({
         if (day2_xq = 5) day2_weather['xq'] = '星期五'
         if (day2_xq = 6) day2_weather['xq'] = '星期六'
         if (day2_xq = 0) day2_weather['xq'] = '星期日'
-
-        /*
+        
         if (res.data.Lifestyle == "" || res.data.Lifestyle == true) {
+          
           that.setData({
             lifestyle_height: 0,
-            lifestyle_text = "",
+            lifestyle_text:"",
           })
         }
         else {
           that.setData({
-            lifestyle_height: that.windowHeight*0.5,
-            lifestyle_text = res.data.Lifestyle.txt,
+            lifestyle_height: that.data.windowHeight*0.05,
+            lifestyle_text:res.data.Lifestyle.txt,
           })
-        }*/
+        }
+        console.log(that.data.lifestyle_height)
 
         if (res.data.air.qlty == "") {
           that.setData({
@@ -403,8 +462,6 @@ Page({
             detail_2_unit: '级别:' + now.wind_sc,
             detail_3_unit: now.pres + ' hPa',
             weathericonURL: "../images/weather/" + now.cond_code + ".png",
-            lifestyle_height: that.windowHeight*0.25,
-            lifestyle_text:"",
           })
           
           if (res.data.air.qlty == '中度污染' || res.data.air.qlty == '重度污染'
