@@ -210,7 +210,7 @@ Page({
           method: 'POST',
           data: {
             in_china: in_china,
-            level: tmplevel,
+            level: 1,
             query: that.data.selectedName,
             openid: getApp().globalData.openid,
             sessionid: getApp().globalData.sessionid,

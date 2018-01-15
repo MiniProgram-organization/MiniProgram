@@ -203,7 +203,7 @@ Page({
             console.log(res)
             if (res.data.status == 'OK'){
               if (res.data.nation == '中国'){
-                wx.setStorageSync('inChina', 1)
+                wx.setStorageSync('inChina', 0)
               }
               else{
                 wx.showToast({

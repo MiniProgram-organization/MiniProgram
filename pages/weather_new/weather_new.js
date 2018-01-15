@@ -26,14 +26,22 @@ Page({
     parent: "",
     latitude: 0,
     longitude: 0,
-    background_color:'#EE6A50',
+    background_color:'#DAA520',
     lifestyle_font_size:12,
     weather_detail_font_size:12,
     forecast_cat_text_font_size:15,
     forecast_other_text_font_size:13,
     air_text_font_size:12,
     now_cat_font_size:13,
-    inChina:1
+    inChina:1,
+    detail_1_name:'',
+    detail_2_name:'',
+    detail_3_name:'',
+    detail_1_unit:'',
+    detail_2_unit:'',
+    detail_3_unit:'',
+    lifestyle_height:0,
+    lifestyle_text:'',
   },
 
   /**
@@ -119,8 +127,9 @@ Page({
           latitude: latitude,
           longitude: longitude
         })
-        if(that.data.inChina == 1) that.loadWeather_inChina(latitude, longitude, openid, sessionid);
-        else that.loadWeather_inForeign(latitude, longitude, openid, sessionid);
+        if (that.data.weatherCity == "" && that.data.inChina == 0 )
+          that.loadWeather_inForeign(latitude, longitude, openid, sessionid);
+        else that.loadWeather_hefeng(latitude, longitude, openid, sessionid);
       },
       fail: function (res) {
         cnt = cnt + 1
@@ -147,41 +156,130 @@ Page({
             })
             console.log(latitude)
             console.log(longitude + '....')
-            if (that.data.inChina == 1) that.loadWeather_inChina(latitude, longitude, openid, sessionid);
-            else that.loadWeather_inForeign(latitude, longitude, openid, sessionid);
+            if (that.data.weatherCity == "" && that.data.inChina == 0)
+              that.loadWeather_inForeign(latitude, longitude, openid, sessionid);
+            else that.loadWeather_hefeng(latitude, longitude, openid, sessionid);
           }
         }
       }
     })
   },
   loadWeather_inForeign: function (latitude, longitude, openid, sessionid){
+    console.log('国外')
     var that = this;
     var data = {};
     if (this.data.weatherCity == "") {
       data = {
         openid: openid,
         sessionid: sessionid,
-        latitude: latitude,
-        longitude: longitude
+        latitude: 35.710934,
+        longitude: 139.729699,
       }
     }
     else {
       data = {
         openid: openid,
         sessionid: sessionid,
-        latitude: latitude,
-        longitude: longitude,
+        latitude: 35.710934,
+        longitude: 139.729699,
         location: this.data.weatherCity,
         parent: this.data.parent
       }
     }
-    /*
+    
     wx.request({
-      url: ,
-    })*/
+      url: 'https://40525433.fudan-mini-program.com/cgi-bin/Weather_World',
+      method: 'POST',
+      data: data,
+      success: function (res) {
+        console.log(res.data)
+        if (res.data.status != true) {
+          wx.showToast({
+            title: '服务器功能未启用',
+            icon: 'loading'
+          })
+          return;
+        }
+        var city = res.data.results.channel.location.city;
+        var now = {}
+        var item = res.data.results.channel.item;
+        now['tmp'] = item.condition.temp;
+        now['cond_txt'] = item.condition.text;
+        now['cond_code'] = item.forecast[0].code;
+
+        var day1_weather = {};
+        var day2_weather = {};
+        var day0_weather = {};
+        /*
+        var award = res.data.award.award;
+        var scores = res.data.award.scores;
+        var duration = res.data.award.duration;
+        wx.setStorageSync('scores', scores);
+        wx.setStorageSync('duration_weather', duration);
+        if (award > 0) {
+          wx.showToast({
+            title: '查看天气\n' + '+' + award + '分',
+          })
+        }*/
+        var mp = {}
+        mp['Jan'] = "01"; mp['Feb'] = "02"; mp['Mar'] = "03"; mp['Apr'] = "04";
+        mp['Jun'] = "06"; mp['Jul'] = "07"; mp['Aug'] = "08"; mp['Sept'] = "09";
+        mp['Oct'] = "10"; mp['Nov'] = "11"; mp['Dec'] = "12";
+        var day0 = item.forecast[0].date.split(" ")
+        var day1 = item.forecast[1].date.split(" ")
+        var day2 = item.forecast[2].date.split(" ")
+        day0_weather['date'] = mp[day0[1]] + '-' + day0[0]
+        day1_weather['date'] = mp[day1[1]] + '-' + day1[0]
+        day2_weather['date'] = mp[day2[1]] + '-' + day2[0]
+
+        day0_weather['category'] = item.forecast[0].text;
+        day1_weather['category'] = item.forecast[1].text;
+        day2_weather['category'] = item.forecast[2].text;
+        day0_weather['high'] = item.forecast[0].high;
+        day1_weather['high'] = item.forecast[1].high;
+        day2_weather['high'] = item.forecast[2].high;
+        day0_weather['low'] = item.forecast[0].low;
+        day1_weather['low'] = item.forecast[1].low;
+        day2_weather['low'] = item.forecast[2].low;
+        day0_weather['icon'] = "../images/weather/" + item.forecast[0].code + ".png"
+        day1_weather['icon'] = "../images/weather/" + item.forecast[1].code + ".png"
+        day2_weather['icon'] = "../images/weather/" + item.forecast[2].code + ".png"
+
+        var day2_xq = new Date(parseInt(day0[0])).getDay();
+        if (day2_xq = 1) day2_weather['xq'] = '星期一'
+        if (day2_xq = 2) day2_weather['xq'] = '星期二'
+        if (day2_xq = 3) day2_weather['xq'] = '星期三'
+        if (day2_xq = 4) day2_weather['xq'] = '星期四'
+        if (day2_xq = 5) day2_weather['xq'] = '星期五'
+        if (day2_xq = 6) day2_weather['xq'] = '星期六'
+        if (day2_xq = 0) day2_weather['xq'] = '星期日'
+
+        that.setData({
+          city: city,
+          air: { aqi: '暂无', qlty: '暂无' },
+          weather: now,
+          day0_weather: day0_weather,
+          day1_weather: day1_weather,
+          day2_weather: day2_weather,
+          weathericonURL: "../images/weather/" + now.cond_code + ".png",
+          detail_1_name:'空气湿度',
+          detail_2_name:'风速 km/h',
+          detail_3_name:'气压 mb',
+          detail_1_unit:res.data.results.channel.atmosphere.humidity+'%',
+          detail_2_unit: res.data.results.channel.wind.speed,
+          detail_3_unit: parseInt(res.data.results.channel.atmosphere.pressure),
+          lifestyle_font_size:0,
+        })
+        console.log(that.data.weather)
+        
+      },
+      fail: function(res){
+
+      }
+    })
 
   },
-  loadWeather_inChina: function (latitude, longitude, openid, sessionid) {
+  loadWeather_hefeng: function (latitude, longitude, openid, sessionid) {
 
     var that = this;
     var data = {};
@@ -220,7 +318,6 @@ Page({
 
         var now = res.data.now;
         var air = res.data.air;
-        console.log(air)
         var city = res.data.basic.location;
         var day1_weather = {};
         var day2_weather = {};
@@ -260,6 +357,20 @@ Page({
         if (day2_xq = 6) day2_weather['xq'] = '星期六'
         if (day2_xq = 0) day2_weather['xq'] = '星期日'
 
+        /*
+        if (res.data.Lifestyle == "" || res.data.Lifestyle == true) {
+          that.setData({
+            lifestyle_height: 0,
+            lifestyle_text = "",
+          })
+        }
+        else {
+          that.setData({
+            lifestyle_height: that.windowHeight*0.5,
+            lifestyle_text = res.data.Lifestyle.txt,
+          })
+        }*/
+
         if (res.data.air.qlty == "") {
           that.setData({
             city: city,
@@ -268,6 +379,12 @@ Page({
             day0_weather: day0_weather,
             day1_weather: day1_weather,
             day2_weather: day2_weather,
+            detail_1_name: '体感温度',
+            detail_2_name: now.wind_dir,
+            detail_3_name: '气压',
+            detail_1_unit: now.fl +'℃',
+            detail_2_unit: '级别:'+now.wind_sc,
+            detail_3_unit: now.pres+' hPa',
             weathericonURL: "../images/weather/" + now.cond_code + ".png",
           })
         }
@@ -279,7 +396,15 @@ Page({
             day0_weather: day0_weather,
             day1_weather: day1_weather,
             day2_weather: day2_weather,
+            detail_1_name: '体感温度',
+            detail_2_name: now.wind_dir ,
+            detail_3_name: '气压',
+            detail_1_unit: now.fl + '℃',
+            detail_2_unit: '级别:' + now.wind_sc,
+            detail_3_unit: now.pres + ' hPa',
             weathericonURL: "../images/weather/" + now.cond_code + ".png",
+            lifestyle_height: that.windowHeight*0.25,
+            lifestyle_text:"",
           })
           
           if (res.data.air.qlty == '中度污染' || res.data.air.qlty == '重度污染'
@@ -333,6 +458,8 @@ Page({
         else if (duration % 7 != 0) {
           var object_day = (parseInt(duration / 7) + 1) * 7;
           console.log(object_day)
+
+
           if (object_day % 28 == 0) {
             that.setData({
               con_day: duration,

@@ -34,9 +34,9 @@
     <view style="width: {{windowWidth}}px; height:{{windowHeight*0.01}}px">
     </view>
 
-    <view class='hint' style="width: {{windowWidth}}px; height:{{windowHeight*0.05}}px; font-size:{{lifestyle_font_size}}px">
+    <view class='hint' style="width: {{windowWidth}}px; height:{{lifestyle_height}}px; font-size:{{lifestyle_font_size}}px">
       <view class='hint_text'>
-      <text>生活指数:天气较好，赶快投身大自然参与户外运动，尽情感受运动的快乐吧。</text>
+      <text>{{lifestyle_text}}</text>
       </view>
     </view>
 
@@ -46,24 +46,24 @@
       <view class='detail_tem'>
         <image class="detail_icon" src="{{tem_url}}"></image>
         <view class='detail_text' style="font-size:{{weather_detail_font_size}}px">
-          <text class='text_location'>体感温度\n</text>
-          <text class='text_location'>{{weather.fl}}℃</text>
+          <text class='text_location'>{{detail_1_name}}\n</text>
+          <text class='text_location'>{{detail_1_unit}}</text>
         </view>
       </view>
 
       <view class='detail_wind'>             
         <image class="detail_icon" src="{{wind_url}}"></image>
          <view class='detail_text' style="font-size:{{weather_detail_font_size}}px">
-          <text class='text_location'>{{weather.wind_dir}}\n</text>
-          <text class='text_location'>级别:{{weather.wind_sc}}</text>
+          <text class='text_location'>{{detail_2_name}}\n</text>
+          <text class='text_location'>{{detail_2_unit}}</text>
         </view>
       </view>
 
       <view class='detail_atmosphere'>
         <image class="detail_icon" src="{{atmosphere_url}}"></image>
         <view class='detail_text' style="font-size:{{weather_detail_font_size}}px">
-          <text class='text_location'>气压\n</text>
-          <text class='text_location'>{{weather.pres}} hPa</text>
+          <text class='text_location'>{{detail_3_name}}\n</text>
+          <text class='text_location'>{{detail_3_unit}}</text>
         </view>
       </view>
     </view>
