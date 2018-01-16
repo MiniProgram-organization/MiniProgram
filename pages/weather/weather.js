@@ -26,6 +26,7 @@ Page({
     parent: "",
     latitude: 0,
     longitude: 0,
+    forecast: {},
     background_color:'#DAA520',
     lifestyle_font_size:12,
     weather_detail_font_size:12,
@@ -103,6 +104,17 @@ Page({
   },
   getQRCodeWeather: function(){
     var that = this;
+    var data = {
+      latitude: that.data.latitude,
+      longitude: that.data.longitude,
+      openid: getApp().globalData.openid,
+      sessionid: getApp().globalData.sessionid,
+      weather: {
+        now: that.data.weather,
+        forecast: that.data.forecast
+      }
+    }
+    console.log(data)
     wx.request({
       url: 'https://40525433.fudan-mini-program.com/cgi-bin/qrcode.py',
       method: 'POST',
@@ -111,9 +123,14 @@ Page({
         longitude: that.data.longitude,
         openid: getApp().globalData.openid,
         sessionid: getApp().globalData.sessionid,
+        weather:{
+          now:that.data.weather,
+          forecast: that.data.forecast
+        }
       },
       success: function (e) {
         console.log(e.data)
+      //  console.log(data)
         console.log(that.latitude)
         that.setData({
           qrcodeUrl: e.data.url
@@ -398,6 +415,7 @@ Page({
         }
         var now = res.data.now;
         var air = res.data.air;
+        var forecast = res.data.forecast;
         var city = res.data.basic.location.replace('%20',' ');
         var day1_weather = {};
         var day2_weather = {};
@@ -457,6 +475,7 @@ Page({
             city: city,
             air: { aqi: '暂无', qlty: '暂无' },
             weather: now,
+            forecast: forecast,
             day0_weather: day0_weather,
             day1_weather: day1_weather,
             day2_weather: day2_weather,
@@ -474,6 +493,7 @@ Page({
             city: city,
             air: air,
             weather: now,
+            forecast: forecast,
             day0_weather: day0_weather,
             day1_weather: day1_weather,
             day2_weather: day2_weather,
