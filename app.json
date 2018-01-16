@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/activity/activity",
-    "pages/weather_new/weather_new",
+    "pages/weather/weather",
+    "pages/weather_qrcode/weather_qrcode",
     "pages/map/map",
     "pages/account/account",
     "pages/trace/trace",

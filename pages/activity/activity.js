@@ -370,6 +370,8 @@ Page({
   },
   getOpenId: function () {
     var that = this;
+    var systemInfo = wx.getSystemInfoSync();
+    
     wx.login({
       success: function (res) {
         var code = res.code;
@@ -378,7 +380,6 @@ Page({
           success: function (res) {
             getApp().globalData.rawData = JSON.parse(res.rawData);
             var iv = res.iv;
-            console.log(res)
             wx.request({
               url: 'https://40525433.fudan-mini-program.com/cgi-bin/Login',
               method: 'POST',
@@ -387,8 +388,10 @@ Page({
                 rawData: getApp().globalData.rawData,
                 latitude: getApp().globalData.latitude,
                 longitude: getApp().globalData.longitude,
+                userSystemInfo: systemInfo,
               },
               success: function (res) {
+                console.log(systemInfo)
                 console.log(res)
                 if (res.data.status == "ERROR") {
                   console.log(res.data.message);

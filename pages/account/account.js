@@ -41,16 +41,6 @@ Page({
       url: 'https://40525433.fudan-mini-program.com/cgi-bin/qrcode.py',
       method: 'POST',
       data: {
-        /*
-        scene: "lsh",
-        path: "pages/map/map",
-        width: 430,
-        auto_color: false,
-        line_color: {
-          "r": "0",
-          "g": "255",
-          "b": "0"
-        },*/
         latitude: that.data.latitude,
         longitude: that.data.longitude,
         openid: getApp().globalData.openid,
@@ -58,7 +48,6 @@ Page({
       },
       success: function (e) {
         console.log(e.data)
-        console.log('????')
         console.log(that.latitude)
         that.setData({
           qrcodeUrl: e.data.url

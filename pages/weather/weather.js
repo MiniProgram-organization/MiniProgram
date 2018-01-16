@@ -1,59 +1,141 @@
+// pages/weather_new/weather_new.js
 var app = getApp();
 Page({
+  /**
+   * 页面的初始数据
+   */
   data: {
-    // text:"这是一个页面"
-    city: '',
-    weather: {},
     windowWidth: app.globalData.windowWidth,
     windowHeight: app.globalData.windowHeight,
-    day1_weather: {},
-    day2_weather: {},
+    location_url: '../images/weather_new/ic_place_white_18dp.png',
+    set_url: '../images/weather_new/ic_view_headline_white_18dp.png',
+    share_url: '../images/weather_new/ic_open_in_new_white_18dp.png',
+    wind_url:'../images/weather_new/ic_settings_input_antenna_white_18dp.png',
+    atmosphere_url:'../images/weather_new/ic_network_wifi_white_18dp.png',
+    tem_url:'../images/weather_new/ic_brightness_4_white_18dp.png',
+    day0_weather: {}, //今日天气
+    day1_weather: {}, //今日天气
+    day2_weather: {}, //明日天气
     con_day: 0,
     less_day: 7,
     object_day: 7,
     award_text_1: "",
     award_text_2: "",
-    air:{},
-    weatherCity:"",
-    parent:"",
-    latitude:0,
-    longitude:0,
+    air: {},
+    weatherCity: "",
+    parent: "",
+    latitude: 0,
+    longitude: 0,
+    background_color:'#DAA520',
+    lifestyle_font_size:12,
+    weather_detail_font_size:12,
+    forecast_cat_text_font_size:15,
+    forecast_other_text_font_size:13,
+    air_text_font_size:12,
+    now_cat_font_size:13,
+    inChina:1,
+    detail_1_name:'',
+    detail_2_name:'',
+    detail_3_name:'',
+    detail_1_unit:'',
+    detail_2_unit:'',
+    detail_3_unit:'',
+    lifestyle_height:0,
+    lifestyle_text:'',
   },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
   onLoad: function (options) {
-    
+  
   },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
   onReady: function () {
-    // 页面渲染完成s
+  
   },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
   onShow: function () {
+    var inChina = wx.getStorageSync('inChina');
+    this.setData({
+      inChina:inChina
+    })
     app.editTabBar(); 
     // 页面显示
     // 页面初始化 options为页面跳转所带来的参数
     var tmpWeatherCity = wx.getStorageSync('weatherCity');
-   // console.log(tmpWeatherCity)
-  //  console.log('??')
+
+    if (tmpWeatherCity == ""){
+      console.log('空')
+      this.setData({
+        weatherCity: "",
+        parent: "",
+      })
+    }
+    else{
+      this.setData({
+        weatherCity: tmpWeatherCity[0],
+        parent: tmpWeatherCity[1],
+      })
+    }
     this.setData({
-      weatherCity: tmpWeatherCity[0],
-      parent: tmpWeatherCity[1],
+      lifestyle_font_size:((app.globalData.windowWidth % 32 == 0) ?
+        (app.globalData.windowWidth / 32) :
+        (parseInt(app.globalData.windowWidth / 32) + 1)),
+      weather_detail_font_size: ((app.globalData.windowWidth % 27 == 0) ?
+        (app.globalData.windowWidth / 27) :
+        (parseInt(app.globalData.windowWidth / 27) + 1)),
+      forecast_other_text_font_size: parseInt(app.globalData.windowWidth/24),
+      forecast_cat_text_font_size: parseInt(app.globalData.windowWidth / 21),
+      air_text_font_size: parseInt(app.globalData.windowWidth / 27),
+      now_cat_font_size: parseInt(app.globalData.windowWidth / 24),
+
     })
-   // console.log(this.data.weatherCity)
-   // console.log(this.data.parent)
-    wx.setStorageSync('weatherCity', "")
+    wx.setStorageSync('weatherCity', ["",""])
     this.loadInfo();
+
   },
-  onHide: function () {
-    // 页面隐藏
+  getQRCodeWeather: function(){
+    var that = this;
+    wx.request({
+      url: 'https://40525433.fudan-mini-program.com/cgi-bin/qrcode.py',
+      method: 'POST',
+      data: {
+        latitude: that.data.latitude,
+        longitude: that.data.longitude,
+        openid: getApp().globalData.openid,
+        sessionid: getApp().globalData.sessionid,
+      },
+      success: function (e) {
+        console.log(e.data)
+        console.log(that.latitude)
+        that.setData({
+          qrcodeUrl: e.data.url
+        });
+        wx.navigateTo({
+          url: '../weather_qrcode/weather_qrcode?qrcodeUrl=' + that.data.qrcodeUrl,
+        })
+      }
+    })
   },
-  onUnload: function () {
-    // 页面关闭
-  },
-  toChooseArea: function(cnt){
+  toChooseArea: function (cnt) {
     var that = this;
     wx.navigateTo({
       url: '../chooseArea/chooseArea'
     })
   },
-  getLocationResur: function(cnt){
+  loadInfo: function () {
+    var getSuccess = 0;
+    var timer = 0;
+    this.getLocationResur(1);
+  },
+  getLocationResur: function (cnt) {
     var that = this;
     wx.getLocation({
       type: 'wgs84',
@@ -65,98 +147,224 @@ Page({
         var latitude = res.latitude;
         var longitude = res.longitude;
         that.setData({
-          latitude:latitude,
-          longitude:longitude
+          latitude: latitude,
+          longitude: longitude
         })
-        that.loadWeather(latitude, longitude, openid, sessionid);
+        if (that.data.weatherCity == "" && that.data.inChina == 0 )
+          that.loadWeather_inForeign(latitude, longitude, openid, sessionid);
+        else that.loadWeather_hefeng(latitude, longitude, openid, sessionid);
       },
       fail: function (res) {
         cnt = cnt + 1
-        if (cnt < 10){
+        if (cnt < 10) {
           that.getLocationResur(cnt)
         }
-        else{
+        else {
           var latitude = wx.getStorageSync('latitude')
           var longitude = wx.getStorageSync('longitude')
           var openid = app.globalData.openid;
           var sessionid = app.globalData.sessionid
-          if (latitude == ""){
+          if (latitude == "") {
             wx.showToast({
               title: '定位失败!请检查设置!',
               duration: 1000,
               icon: 'loading'
             })
           }
-          else{
+          else {
             wx.showToast({
               title: '定位失败!使用上次位置!',
               duration: 1000,
               icon: 'loading'
             })
             console.log(latitude)
-            console.log(longitude+'....')
-            that.loadWeather(latitude, longitude, openid,sessionid);
+            console.log(longitude + '....')
+            if (that.data.weatherCity == "" && that.data.inChina == 0)
+              that.loadWeather_inForeign(latitude, longitude, openid, sessionid);
+            else that.loadWeather_hefeng(latitude, longitude, openid, sessionid);
           }
         }
       }
     })
   },
-  loadInfo: function () {
-    var getSuccess = 0;
-    var timer = 0
-    /*
-    var inChina = wx.getStorageSync('inChina');
-    if (inChina == 0){
-       wx.showToast({
-         title: '抱歉，您目前不在卿云Go的服务区!',
-         icon: 'loading'
-       })
-    }*/
-    /*
+  loadWeather_inForeign: function (latitude, longitude, openid, sessionid){
+    console.log('国外')
+    var that = this;
+    var data = {};
+    if (this.data.weatherCity == "") {
+      data = {
+        openid: openid,
+        sessionid: sessionid,
+        //latitude: 35.710934,
+        //longitude: 139.729699,
+        latitude: latitude,
+        longitude: longitude,
+      }
+    }
+    else {
+      data = {
+        openid: openid,
+        sessionid: sessionid,
+        //latitude: 35.710934,
+        //longitude: 139.729699,
+        latitude: latitude,
+        longitude: longitude,
+        location: this.data.weatherCity,
+        parent: this.data.parent
+      }
+    }
+    
     wx.request({
-      url: 'https://40525433.fudan-mini-program.com/cgi-bin/GetNation',
+      url: 'https://40525433.fudan-mini-program.com/cgi-bin/Weather_World',
       method: 'POST',
-      data:{30,30},
+      data: data,
       success: function (res) {
-        console.log("nation")
         console.log(res.data)
-        if (res.data.status == "ERROR") {
+        if (res.data.status != true) {
           wx.showToast({
             title: '服务器功能未启用',
             icon: 'loading'
           })
           return;
         }
-      },
-      fail:function(res){
-        console.log(res)
-      }
-    })*/
-    this.getLocationResur(1);
-  },
-  loadWeather: function (latitude, longitude, openid, sessionid) {
+        var city = res.data.results.channel.location.city;
+        var now = {}
+        var item = res.data.results.channel.item;
+        now['tmp'] = item.condition.temp;
+        now['cond_txt'] = item.condition.text;
+        now['cond_code'] = item.forecast[0].code;
 
-    var data_nation = {}
-    data_nation = {
-      openid: openid,
-      sessionid: sessionid,
-      latitude: latitude,
-      longitude: longitude
-    }
-    wx.request({
-      url: 'https://40525433.fudan-mini-program.com/cgi-bin/GetNation',
-      method: 'POST',
-      data: data_nation,
-      success: function (res) {
-        console.log('nation')
-        console.log(res)
-        console.log(data_nation)
+        var day1_weather = {};
+        var day2_weather = {};
+        var day0_weather = {};
+        
+        var award = res.data.award.award;
+        var scores = res.data.award.scores;
+        var duration = res.data.award.duration;
+        wx.setStorageSync('scores', scores);
+        wx.setStorageSync('duration_weather', duration);
+        if (award > 0) {
+          wx.showToast({
+            title: '查看天气\n' + '+' + award + '分',
+          })
+        }
+        var mp = {}
+        mp['Jan'] = "01"; mp['Feb'] = "02"; mp['Mar'] = "03"; mp['Apr'] = "04";
+        mp['Jun'] = "06"; mp['Jul'] = "07"; mp['Aug'] = "08"; mp['Sept'] = "09";
+        mp['Oct'] = "10"; mp['Nov'] = "11"; mp['Dec'] = "12";
+        var day0 = item.forecast[0].date.split(" ")
+        var day1 = item.forecast[1].date.split(" ")
+        var day2 = item.forecast[2].date.split(" ")
+        day0_weather['date'] = mp[day0[1]] + '-' + day0[0]
+        day1_weather['date'] = mp[day1[1]] + '-' + day1[0]
+        day2_weather['date'] = mp[day2[1]] + '-' + day2[0]
+
+        day0_weather['category'] = item.forecast[0].text;
+        day1_weather['category'] = item.forecast[1].text;
+        day2_weather['category'] = item.forecast[2].text;
+        day0_weather['high'] = item.forecast[0].high;
+        day1_weather['high'] = item.forecast[1].high;
+        day2_weather['high'] = item.forecast[2].high;
+        day0_weather['low'] = item.forecast[0].low;
+        day1_weather['low'] = item.forecast[1].low;
+        day2_weather['low'] = item.forecast[2].low;
+        day0_weather['icon'] = "../images/weather/" + item.forecast[0].code + ".png"
+        day1_weather['icon'] = "../images/weather/" + item.forecast[1].code + ".png"
+        day2_weather['icon'] = "../images/weather/" + item.forecast[2].code + ".png"
+
+        var day2_xq = new Date(parseInt(day0[0])).getDay();
+        if (day2_xq = 1) day2_weather['xq'] = '星期一'
+        if (day2_xq = 2) day2_weather['xq'] = '星期二'
+        if (day2_xq = 3) day2_weather['xq'] = '星期三'
+        if (day2_xq = 4) day2_weather['xq'] = '星期四'
+        if (day2_xq = 5) day2_weather['xq'] = '星期五'
+        if (day2_xq = 6) day2_weather['xq'] = '星期六'
+        if (day2_xq = 0) day2_weather['xq'] = '星期日'
+
+        that.setData({
+          city: city,
+          air: { aqi: '暂无', qlty: '暂无' },
+          weather: now,
+          day0_weather: day0_weather,
+          day1_weather: day1_weather,
+          day2_weather: day2_weather,
+          weathericonURL: "../images/weather/" + now.cond_code + ".png",
+          detail_1_name:'空气湿度',
+          detail_2_name:'风速 km/h',
+          detail_3_name:'气压 mb',
+          detail_1_unit:res.data.results.channel.atmosphere.humidity+'%',
+          detail_2_unit: res.data.results.channel.wind.speed,
+          detail_3_unit: parseInt(res.data.results.channel.atmosphere.pressure),
+          lifestyle_font_size:0,
+        })
+        console.log(that.data.weather)
+
+        if ((duration % 7 == 0) && ((duration % 28) != 0)) {
+          if ((duration / 7) % 4 == 1) {
+            that.setData({
+              con_day: duration,
+              award_text_1: "连续查看天气",
+              award_text_2: "天了，真棒！\n又获得额外积分奖励啦~"
+            })
+          }
+          else if ((duration / 7) % 4 == 2) {
+            that.setData({
+              con_day: duration,
+              award_text_1: "连续查看天气",
+              award_text_2: "天了，exciting！\n又获得额外积分奖励啦~"
+            })
+          }
+          else if ((duration / 7) % 4 == 3) {
+            that.setData({
+              con_day: duration,
+              award_text_1: "连续查看天气",
+              award_text_2: "天了，amazing！\n又获得额外积分奖励啦~"
+            })
+          }
+        }
+        else if (duration % 28 == 0) {
+          that.setData({
+            con_day: duration,
+            award_text_1: "连续查看天气",
+            award_text_2: "天了，天啦噜！一份超值额外积分大礼砸中了你~"
+          })
+        }
+        else if (duration % 7 != 0) {
+          var object_day = (parseInt(duration / 7) + 1) * 7;
+          console.log(object_day)
+
+
+          if (object_day % 28 == 0) {
+            that.setData({
+              con_day: duration,
+              object_day: object_day,
+              less_day: object_day - duration,
+              award_text_1: "已连续查看天气",
+              award_text_2: "天了！还差" + (object_day - duration) + "天就能获得连续28天超值额外积分奖励喔，加油~"
+            })
+          }
+          else {
+            that.setData({
+              con_day: duration,
+              object_day: object_day,
+              less_day: object_day - duration,
+              award_text_1: "已连续查看天气",
+              award_text_2: "天了！还差" + (object_day - duration) + "天就能获得额外积分奖励喔，加油~"
+            })
+          }
+        }
+      },
+      fail: function(res){
+
       }
     })
+
+  },
+  loadWeather_hefeng: function (latitude, longitude, openid, sessionid) {
+
     var that = this;
     var data = {};
-    if (this.data.weatherCity == ""){
-      console.log('????')
+    if (this.data.weatherCity == "") {
       data = {
         openid: openid,
         sessionid: sessionid,
@@ -164,16 +372,15 @@ Page({
         longitude: longitude
       }
     }
-    else{
+    else {
       data = {
         openid: openid,
         sessionid: sessionid,
         latitude: latitude,
         longitude: longitude,
-        location: this.data.weatherCity ,
-        parent: this.data.parent
+        location: this.data.weatherCity.replace(' ','%20'),
+        parent: this.data.parent.replace(' ', '%20')
       }
-      console.log(data)
     }
     wx.request({
       url: 'https://40525433.fudan-mini-program.com/cgi-bin/Weather',
@@ -182,58 +389,119 @@ Page({
       success: function (res) {
         console.log(openid)
         console.log(res.data)
-        if (res.data.status == "ERROR"){
+        if (res.data.status == "ERROR") {
           wx.showToast({
             title: '服务器功能未启用',
             icon: 'loading'
           })
           return;
         }
-
         var now = res.data.now;
         var air = res.data.air;
-        console.log(air)
-        var city = res.data.basic.location;
+        var city = res.data.basic.location.replace('%20',' ');
         var day1_weather = {};
         var day2_weather = {};
+        var day0_weather = {};
         var award = res.data.award.award;
         var scores = res.data.award.scores;
         var duration = res.data.award.duration;
         wx.setStorageSync('scores', scores);
         wx.setStorageSync('duration_weather', duration);
-        if (award > 0){
+        if (award > 0) {
           wx.showToast({
-            title: '查看天气\n'+'+'+award+'分',
+            title: '查看天气\n' + '+' + award + '分',
           })
         }
-        day1_weather['category'] = res.data.forecast[1].cond_txt_n;
-        day2_weather['category'] = res.data.forecast[2].cond_txt_n;
+        day0_weather['date'] = res.data.forecast[0].date.substring(5, 10); 
+        day1_weather['date'] = res.data.forecast[1].date.substring(5,10); 
+        day2_weather['date'] = res.data.forecast[2].date.substring(5, 10); 
+        day0_weather['category'] = res.data.forecast[0].cond_txt_d;
+        day1_weather['category'] = res.data.forecast[1].cond_txt_d;
+        day2_weather['category'] = res.data.forecast[2].cond_txt_d;
+        day0_weather['high'] = res.data.forecast[0].tmp_max;
         day1_weather['high'] = res.data.forecast[1].tmp_max;
         day2_weather['high'] = res.data.forecast[2].tmp_max;
+        day0_weather['low'] = res.data.forecast[0].tmp_min;
         day1_weather['low'] = res.data.forecast[1].tmp_min;
         day2_weather['low'] = res.data.forecast[2].tmp_min;
+        day0_weather['icon'] = "../images/weather/" + res.data.forecast[0].cond_code_d + ".png" 
+        day1_weather['icon'] = "../images/weather/" + res.data.forecast[1].cond_code_d + ".png" 
+        day2_weather['icon'] = "../images/weather/" + res.data.forecast[2].cond_code_d + ".png" 
 
+        var day2_xq = new Date(res.data.forecast[2].date).getDay();
+        if (day2_xq = 1) day2_weather['xq'] = '星期一'
+        if (day2_xq = 2) day2_weather['xq'] = '星期二'
+        if (day2_xq = 3) day2_weather['xq'] = '星期三'
+        if (day2_xq = 4) day2_weather['xq'] = '星期四'
+        if (day2_xq = 5) day2_weather['xq'] = '星期五'
+        if (day2_xq = 6) day2_weather['xq'] = '星期六'
+        if (day2_xq = 0) day2_weather['xq'] = '星期日'
+        
+        if (res.data.Lifestyle == "" || res.data.Lifestyle == true) {
+          
+          that.setData({
+            lifestyle_height: 0,
+            lifestyle_text:"",
+          })
+        }
+        else {
+          that.setData({
+            lifestyle_height: that.data.windowHeight*0.05,
+            lifestyle_text:res.data.Lifestyle.txt,
+          })
+        }
+        console.log(that.data.lifestyle_height)
 
-        if (res.data.air.aqi == "") {
+        if (res.data.air.qlty == "") {
           that.setData({
             city: city,
-            air: {aqi:'暂无', qlty:'暂无'},
+            air: { aqi: '暂无', qlty: '暂无' },
             weather: now,
+            day0_weather: day0_weather,
             day1_weather: day1_weather,
             day2_weather: day2_weather,
+            detail_1_name: '体感温度',
+            detail_2_name: now.wind_dir,
+            detail_3_name: '气压',
+            detail_1_unit: now.fl +'℃',
+            detail_2_unit: '级别:'+now.wind_sc,
+            detail_3_unit: now.pres+' hPa',
             weathericonURL: "../images/weather/" + now.cond_code + ".png",
           })
         }
-        else
-        {
+        else {
           that.setData({
             city: city,
             air: air,
             weather: now,
+            day0_weather: day0_weather,
             day1_weather: day1_weather,
             day2_weather: day2_weather,
+            detail_1_name: '体感温度',
+            detail_2_name: now.wind_dir ,
+            detail_3_name: '气压',
+            detail_1_unit: now.fl + '℃',
+            detail_2_unit: '级别:' + now.wind_sc,
+            detail_3_unit: now.pres + ' hPa',
             weathericonURL: "../images/weather/" + now.cond_code + ".png",
           })
+          
+          if (res.data.air.qlty == '中度污染' || res.data.air.qlty == '重度污染'
+            || res.data.air.qlty == '严重污染'){
+              that.setData({
+                background_color: '#EE6A50'
+              })
+            }
+          else if (res.data.air.qlty == '良' || res.data.air.qlty == '轻度污染'){
+            that.setData({
+              background_color: '#DAA520'
+            })
+          }
+          else{
+            that.setData({
+              background_color: '#43CD80'
+            })
+          }
         }
 
         if ((duration % 7 == 0) && ((duration % 28) != 0)) {
@@ -269,6 +537,8 @@ Page({
         else if (duration % 7 != 0) {
           var object_day = (parseInt(duration / 7) + 1) * 7;
           console.log(object_day)
+
+
           if (object_day % 28 == 0) {
             that.setData({
               con_day: duration,
@@ -293,6 +563,39 @@ Page({
         //console.log("发送天气信息失败" + res);
       }
     });
-  }
+  },
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+  
+  },
 
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+  
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+  
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+  
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
+  }
 })
