@@ -101,6 +101,29 @@ Page({
     this.loadInfo();
 
   },
+  getQRCodeWeather: function(){
+    var that = this;
+    wx.request({
+      url: 'https://40525433.fudan-mini-program.com/cgi-bin/qrcode.py',
+      method: 'POST',
+      data: {
+        latitude: that.data.latitude,
+        longitude: that.data.longitude,
+        openid: getApp().globalData.openid,
+        sessionid: getApp().globalData.sessionid,
+      },
+      success: function (e) {
+        console.log(e.data)
+        console.log(that.latitude)
+        that.setData({
+          qrcodeUrl: e.data.url
+        });
+        wx.navigateTo({
+          url: '../weather_qrcode/weather_qrcode?qrcodeUrl=' + that.data.qrcodeUrl,
+        })
+      }
+    })
+  },
   toChooseArea: function (cnt) {
     var that = this;
     wx.navigateTo({

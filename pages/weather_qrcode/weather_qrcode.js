@@ -1,13 +1,11 @@
-// pages/qrcode/qrcode.js
+// pages/weather_qrcode/weather_qrcode.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    qrcodeUrl: "",
-    windowWidth: getApp().globalData.windowWidth,
-    windowHeight: getApp().globalData.windowHeight 
+  
   },
 
   /**
@@ -18,7 +16,6 @@ Page({
       qrcodeUrl: options.qrcodeUrl
     });
   },
-
   saveQRCode: function () {
     var that = this;
     this.setData({
@@ -35,23 +32,21 @@ Page({
         var filePath = res.tempFilePath;
         console.log(filePath)
         console.log(filePath);
-        
+
         wx.saveImageToPhotosAlbum({
           filePath: filePath,
           success: function (res) {
             wx.showModal({
               title: '保存成功!',
-              content: '个性的小程序码已保存到手机相册!',
-              success:function(){
-                 wx.switchTab({
+              content: '您的专属天气小程序码已保存到手机相册!',
+              success: function () {
+                wx.switchTab({
                   url: '../account/account',
                 })
               },
-              });
+            });
           },
           fail: function (res) {
-            // console.log("HHHHH");
-            //console.log(res.errMsg);
             wx.openSetting({
               success: function (settingdata) {
                 console.log(settingdata)
