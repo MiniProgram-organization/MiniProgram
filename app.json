@@ -20,7 +20,8 @@
     "pages/chooseArea/chooseArea",
     "pages/otherMood/otherMood",
     "pages/qrcode/qrcode",
-    "pages/tabbar/tabbar"
+    "pages/tabbar/tabbar",
+    "pages/qrcode_weather"
   ],
   "window": {
     "window": {
