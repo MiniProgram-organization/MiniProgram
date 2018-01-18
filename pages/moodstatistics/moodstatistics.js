@@ -181,7 +181,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-        wx.request({
+    var that = this;
+    wx.request({
       url: 'https://40525433.fudan-mini-program.com/cgi-bin/MoodCategory',
       data: {
         openid: app.globalData.openid,
