@@ -176,7 +176,7 @@
 .awardtext{
   font-size: 10px;
   color: #fff;
-  bottom: 10%;
+  bottom: 0PX;
   text-align: center;
   margin-left: 10%;
   margin-right: 10%;

@@ -109,7 +109,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.editTabBar(); 
+    //app.editTabBar(); 
     var duration = wx.getStorageSync('duration_mood');
     if (duration == "") {
       this.setData({

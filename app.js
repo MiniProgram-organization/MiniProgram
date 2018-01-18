@@ -20,7 +20,7 @@ App({
     qqmapsdk: {},
     qrcodeUrl: "",
     weatherCity:"",
-    tabbar: {},
+    //tabbar: {},
     locationMap: {
       "房产小区": "resident",
       "教育学校": "school",
@@ -41,6 +41,7 @@ App({
     districtDict:{},
     placeDict:{},
   },
+  /*
   editTabBar: function () {
     var tabbar = this.globalData.tabbar,
       currentPages = getCurrentPages(),
@@ -54,7 +55,7 @@ App({
     _this.setData({
       tabbar: tabbar
     });
-  },
+  },*/
   onLaunch: function () {
     // wx.clearStorage();
     wx.getSetting({
@@ -85,7 +86,7 @@ App({
     console.log('手机高度为 ' + res.windowHeight);
     console.log('手机宽度为 ' + res.windowWidth);
     console.log("发送请求");
-
+    /*
     wx.request({
       url: 'https://40525433.fudan-mini-program.com/cgi-bin/Version',
       method: 'POST',
@@ -96,6 +97,7 @@ App({
       success: function (res) {
         if (res.data.status == 'OK'){
           if (res.data.version == 1){
+            
             that.globalData.tabbar = {
               color: "#353535",
               selectedColor: "#3cc51f",
@@ -179,7 +181,7 @@ App({
           title: '读取版本错误!',
         })
       }
-    })
+    })*/
     //发送一个请求到服务器
     //如果结果是1，表示可以使用心情功能
     //如果结果是0，表示不可以使用心情功能

@@ -439,7 +439,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    /*
     var ver_stor = wx.getStorageSync('first_tabbar')
     console.log('first_tabbar')
     console.log(ver_stor)
@@ -458,7 +458,8 @@ Page({
       })
     }
     else{
-    app.editTabBar(); 
+      */
+    //app.editTabBar(); 
     if (app.globalData.openid == "") {
       this.getOpenId();
     }
@@ -468,7 +469,7 @@ Page({
     console.log('activity........!!!!!!!!!!!!!')
     console.log(this.data.checkins);
     console.log(this.data.classifiedCheckIns); 
-    }
+    
   },
  getPlaces: function(){
     var that = this;

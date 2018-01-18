@@ -1,7 +1,8 @@
 <!--pages/mood/mood.wxml-->
 <view style="width: {{windowWidth}}px; height:{{windowHeight}}px">
-<import src="/pages/tabbar/tabbar.wxml"/>
+<!--<import src="/pages/tabbar/tabbar.wxml"/>
 <template is="tabbar" data="{{tabbar}}"/>
+-->
  <view class='middle_text'>
   <text >选择心情</text>
   </view>

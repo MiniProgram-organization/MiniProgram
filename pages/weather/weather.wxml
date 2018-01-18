@@ -1,8 +1,8 @@
 <!--pages/weather_new/weather_new.wxml-->
 <view class='back' style="width: {{windowWidth}}px; height:{{windowHeight}}px">
-<import src="/pages/tabbar/tabbar.wxml"/>
+<!--<import src="/pages/tabbar/tabbar.wxml"/>
 <template is="tabbar" data="{{tabbar}}"/>
-
+-->
   <view class='title_bar' style="width: {{windowWidth}}px; height:{{windowHeight*0.08}}px">
     <view class='title_left' bindtap="toChooseArea" >
       <image class="image_set" src="{{set_url}}"></image>
@@ -16,11 +16,11 @@
     </view>
   </view>
 
-  <view class='today_whole' style="width: {{windowWidth}}px; height:{{windowHeight*0.47}}px">
-    <view class='now_tem'  style="width: {{windowWidth}}px; height:{{windowHeight*0.18}}px">
+  <view class='today_whole' style="width: {{windowWidth}}px; height:{{windowHeight*0.50}}px">
+    <view class='now_tem'  style="width: {{windowWidth}}px; height:{{windowHeight*0.20}}px">
       <text>{{weather.tmp}}℃</text>
     </view>
-    <view class='air_view' style="width: {{windowWidth}}px; height:{{windowHeight*0.05}}px">
+    <view class='air_view' style="width: {{windowWidth}}px; height:{{windowHeight*0.06}}px">
       <view class='air' style="background-color:{{background_color}}; font-size:{{air_text_font_size}}px">
         <text>空气质量：{{air.qlty}}</text>
       </view>
