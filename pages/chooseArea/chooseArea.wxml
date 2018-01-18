@@ -13,6 +13,7 @@
   <view class='line'></view>   
 </view>
 <view>
+<view style="width: {{windowWidth}}px; height:15px"> </view>
 <block class='showList' wx:for="{{showList}}">
     <view class='areaLine' bindtap="listListener" id="{{item.id}}">
       <text class='name_text'>{{item.name}} </text>
