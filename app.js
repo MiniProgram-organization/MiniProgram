@@ -92,7 +92,7 @@ App({
       method: 'POST',
       
       data:{
-        version_code:'0.87'
+        version_code:'0.88'
       },
       success: function (res) {
         if (res.data.status == 'OK'){
@@ -145,7 +145,7 @@ App({
               backgroundColor: "#ffffff",
               list: [
                 {
-                  pagePath: "/pages/weather_new/weather_new",
+                  pagePath: "/pages/weather/weather",
                   text: "天气",
                   iconPath: "/pages/images/icon/weather_icon.png",
                   selectedIconPath: "/pages/images/icon/weather_icon.png",

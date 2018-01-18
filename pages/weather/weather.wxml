@@ -12,7 +12,7 @@
       <text class='text_location'>{{city}}</text>
     </view>
     <view class='title_right' >
-         
+        
     </view>
   </view>
 
