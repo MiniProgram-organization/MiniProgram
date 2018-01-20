@@ -28,6 +28,9 @@ Page({
         },{
           id: 1,
           name: '世界'
+        },{
+          id: 2,
+          name:'当前位置'
         }
       ]
     })
@@ -81,10 +84,12 @@ Page({
       selectedName: this.data.showList[e.currentTarget.id].name
     })
     if(this.data.level == 0){
+      /*
       if (e.currentTarget.id == 0){
         wx.navigateBack();
       }
-      else this.queryCity(this.data.in_china);
+      else */
+      this.queryCity(this.data.in_china);
     }
     else if(this.data.level == 1){
       this.queryArea(this.data.in_china);
@@ -108,10 +113,11 @@ Page({
             },
             success: function (res) {
               var tmpShowList = []
+              /*
               tmpShowList.push({
                 id: 0,
                 name: '默认位置'
-              })
+              })*/
               for (var i = 0; i < res.data.cities.length; i++) {
                 tmpShowList.push({
                   id: i + 1,
@@ -153,10 +159,11 @@ Page({
             success: function (res) {
               var tmpShowList = []
               console.log(res)
+              /*
               tmpShowList.push({
                 id: 0,
                 name: '默认位置'
-              })
+              })*/
               for (var i = 0; i < res.data.cities.length; i++) {
                 tmpShowList.push({
                   id: i + 1,
@@ -182,7 +189,11 @@ Page({
           })
         }
       }
+      else if (e.currentTarget.id == 2) {
+        wx.navigateBack();
+      }
     }
+
   },
   goToWeather: function(in_china){
     var that = this;
