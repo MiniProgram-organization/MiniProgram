@@ -234,15 +234,8 @@ Page({
           get_poi: 1,
           success: function (res) {
             if(res.result.pois == undefined){
-              /*
-              wx.showToast({
-                title: '抱歉，您目前不在卿云Go的服务区!',
-                icon:'loading'
-              })
-              wx.setStorageSync('inChina', 0)*/
               return;
             }
-            //wx.setStorageSync('inChina', 1)
             var coordinates = res.result.pois;
             //marker数组
             var tempMarkers = [];
@@ -347,8 +340,6 @@ Page({
 
               }
             });
-
-
           }
         }
       }
@@ -410,24 +401,6 @@ Page({
       }
     });
   },
-  // drawLine: function () {
-  //   console.log(this.data.checkins);
-    
-  //   for (var i = 0; i < this.data.checkins.length; i++) {
-  //     var POI_id = this.data.checkins[i].POI_id;
-  //     const ctx = wx.createCanvasContext(POI_id);
-  //     ctx.moveTo(30, 20);
-  //     ctx.setLineWidth(8);
-  //     ctx.setStrokeStyle('yellow');
-  //     ctx.lineTo(30, 100);
-  //     ctx.stroke();
-  //     ctx.draw();
-  //     console.log("ok!!");
-  //   };
-  // },
-
-
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -438,28 +411,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-    /*
-    var ver_stor = wx.getStorageSync('first_tabbar')
-    console.log('first_tabbar')
-    console.log(ver_stor)
-    if (ver_stor != 'yes'){
-      app.editTabBar(); 
-      wx.setStorageSync('first_tabbar', 'yes')
-      wx.redirectTo({
-        url: '../activity/activity',
-        success: function(){
-          console.log('跳转成功')
-        },
-        fail:function(e){
-          console.log('跳转失败')
-          console.log(e)
-        }
-      })
-    }
-    else{
-      */
-    //app.editTabBar(); 
+  onShow: function () { 
     if (app.globalData.openid == "") {
       this.getOpenId();
     }

@@ -72,9 +72,6 @@
         </view>
       </view>
     </view>
-    
-
-
 
     <!--
   
@@ -89,10 +86,15 @@
     </picker-view-column>
   </picker-view>
   -->
+
+  <view class='mood-line-view'>
+    <image class='mood-line' src="../images/mood/linemy.png"/>
   </view>
+  </view>
+  
 
 
-  <view style="padding:5% 10% 2% 10%">
+  <view style="padding:0% 10% 2% 10%">
     <view style="display: flex;flex-direction:row">
         <view style="flex:0.5" class='two_button_left'>
         <button bindtap="goToMoodStatistics" style="flex:1" class="weui-btn" type="primary">我的心情</button>
