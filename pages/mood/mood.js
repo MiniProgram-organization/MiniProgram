@@ -55,17 +55,45 @@ Page({
       url: '../moodstatistics/moodstatistics'
     })
   },
-  goToRecordMood: function(){
-    if (this.moodId == 7){
+  goToRecordMood_7: function(){
       wx.navigateTo({
-        url: '../otherMood/otherMood?moodId='+this.moodId
+        url: '../otherMood/otherMood?moodId=7'
       })
-    }
-    else{
+  },
+  goToRecordMood_0: function () {
       wx.navigateTo({
-        url: '../recordmood/recordmood?moodId='+this.moodId
+        url: '../recordmood/recordmood?moodId=0'
       })
-    }
+  },
+  goToRecordMood_1: function () {
+    wx.navigateTo({
+      url: '../recordmood/recordmood?moodId=1' 
+    })
+  },
+  goToRecordMood_2: function () {
+    wx.navigateTo({
+      url: '../recordmood/recordmood?moodId=2'
+    })
+  },
+  goToRecordMood_3: function () {
+    wx.navigateTo({
+      url: '../recordmood/recordmood?moodId=3'
+    })
+  },
+  goToRecordMood_4: function () {
+    wx.navigateTo({
+      url: '../recordmood/recordmood?moodId=4'
+    })
+  },
+  goToRecordMood_5: function () {
+    wx.navigateTo({
+      url: '../recordmood/recordmood?moodId=5'
+    })
+  },
+  goToRecordMood_6: function () {
+    wx.navigateTo({
+      url: '../recordmood/recordmood?moodId=6'
+    })
   },
   classifyByDate: function () {
     var that = this;

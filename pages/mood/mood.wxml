@@ -10,7 +10,7 @@
   <view class='bq' style="width:80%; height:40%; margin:5% 10% 5% 10%;">
     <view class='row1'>
       <view class='block1'> 
-        <view class='block1-item1'>
+        <view class='block1-item1' bindtap='goToRecordMood_0'>
           <view class='text1'>  
             <text >狂喜</text>
           </view>
@@ -18,13 +18,13 @@
         </view>
 
         <view class='block1-item2'>
-          <view class='block1-item2-item1'>
+          <view class='block1-item2-item1' bindtap='goToRecordMood_5'>
            <view class='text2'>  
             <text >焦虑</text>
           </view>
           </view>
 
-          <view class='block1-item2-item2'>
+          <view class='block1-item2-item2' bindtap='goToRecordMood_1'>
             <view class='text3'>  
               <text >开心</text>
             </view>
@@ -33,13 +33,13 @@
       </view>
 
       <view class='block2'>
-        <view class='block2-item1'>
+        <view class='block2-item1' bindtap='goToRecordMood_2'>
          <view class='text4'>  
             <text >放松</text>
           </view>
         </view>
 
-        <view class='block2-item2'>
+        <view class='block2-item2'bindtap='goToRecordMood_4'>
         <view class='text5'>  
             <text >低落</text>
           </view>
@@ -52,7 +52,7 @@
 
       <view class='block3'> 
         <view class='block3-1'>
-        <view class='block3-item1'> 
+        <view class='block3-item1' bindtap='goToRecordMood_3'> 
           <view class='text6'>  
             <text >平静</text>
           </view> 
@@ -60,7 +60,7 @@
         </view>
 
 
-        <view class='block3-item2'> 
+        <view class='block3-item2' bindtap='goToRecordMood_6'> 
           <view class='text7'>  
             <text >生气</text>
           </view>
@@ -68,7 +68,7 @@
       </view>
 
       <view class='block4'> 
-        <view class='block4-item1'> 
+        <view class='block4-item1' bindtap='goToRecordMood_7'> 
           <view class='text8'>  
             <text >其他</text>
           </view>
@@ -103,12 +103,10 @@
 
   <view style="padding:0% 10% 2% 10%">
     <view style="display: flex;flex-direction:row;;">
-        <view style="flex:0.5" class='two_button_left'>
+        <view style="flex:1" class='two_button_left'>
         <button class="button_my"bindtap="goToMoodStatistics" style="flex:1" >我的心情</button>
         </view>
-         <view style="flex:0.5" class='two_button_right'>
-        <button  class="button_my" bindtap="goToRecordMood" style="flex:1" >记录心情</button>
-        </view>
+        
     </view>
   </view>
  <view class='awardtext' style="padding:0% 10% 0% 10%">
