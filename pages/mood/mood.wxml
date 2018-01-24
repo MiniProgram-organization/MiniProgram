@@ -99,8 +99,6 @@
   
   </view>
   
-
-
   <view style="padding:0% 10% 2% 10%">
     <view style="display: flex;flex-direction:row;;">
         <view style="flex:1" class='two_button_left'>
