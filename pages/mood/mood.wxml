@@ -9,7 +9,6 @@
 
   <view class='bq' style="width:80%; height:40%; margin:5% 10% 5% 10%;">
     <view class='row1'>
-
       <view class='block1'> 
         <view class='block1-item1'>
           <view class='text1'>  
@@ -48,17 +47,21 @@
       </view>
 
     </view>
-
+  
     <view class='row2'>
+
       <view class='block3'> 
+        <view class='block3-1'>
         <view class='block3-item1'> 
           <view class='text6'>  
             <text >平静</text>
+          </view> 
           </view>
         </view>
 
+
         <view class='block3-item2'> 
-                <view class='text7'>  
+          <view class='text7'>  
             <text >生气</text>
           </view>
         </view>
@@ -71,7 +74,9 @@
           </view>
         </view>
       </view>
+  
     </view>
+    
 
     <!--
   
@@ -87,20 +92,22 @@
   </picker-view>
   -->
 
+  
   <view class='mood-line-view'>
-    <image class='mood-line' src="../images/mood/linemy.png"/>
+    <image class='mood-line' src="../images/mood/line2.png"/>
   </view>
+  
   </view>
   
 
 
   <view style="padding:0% 10% 2% 10%">
-    <view style="display: flex;flex-direction:row">
+    <view style="display: flex;flex-direction:row;;">
         <view style="flex:0.5" class='two_button_left'>
-        <button bindtap="goToMoodStatistics" style="flex:1" class="weui-btn" type="primary">我的心情</button>
+        <button class="button_my"bindtap="goToMoodStatistics" style="flex:1" >我的心情</button>
         </view>
          <view style="flex:0.5" class='two_button_right'>
-        <button bindtap="goToRecordMood" style="flex:1" class="weui-btn" type="primary">记录心情</button>
+        <button  class="button_my" bindtap="goToRecordMood" style="flex:1" >记录心情</button>
         </view>
     </view>
   </view>
