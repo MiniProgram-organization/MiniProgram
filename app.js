@@ -40,6 +40,7 @@ App({
     categoryDic:{},
     districtDict:{},
     placeDict:{},
+    checkinLastTime:{},
   },
   /*
   editTabBar: function () {
