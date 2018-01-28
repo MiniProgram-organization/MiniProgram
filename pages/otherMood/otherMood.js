@@ -38,6 +38,14 @@ Page({
   },
   recordMood: function (options) {
     var that = this;
+    if (that.data.mood_text == "")
+    {
+      wx.showToast({
+        title: '心情关键词不能为空！',
+        icon:'loading',
+      })
+      return;
+    }
     wx.request({
       url: 'https://40525433.fudan-mini-program.com/cgi-bin/Mood',
       method: 'POST',
@@ -45,6 +53,7 @@ Page({
         mood_id: that.data.mood_id,        //心情类型(0-7)
         mood_text: that.data.mood_text,    //心情类型对应的文字
         openid: app.globalData.openid,
+        sessionid: app.globalData.sessionid,
         text: that.data.text,
         latitude: app.globalData.latitude,//用户所在纬度
         longitude: app.globalData.longitude,  //用户所在经度
@@ -53,8 +62,10 @@ Page({
         //添加到缓存
         var old_history = wx.getStorageSync('history_mood');
         var datetime = new Date();
-        var time = datetime.toLocaleTimeString();
-        var date = datetime.toLocaleDateString();
+        var time = e.data.time;
+        var date = e.data.date
+       // var time = datetime.toLocaleTimeString();
+       // var date = datetime.toLocaleDateString();
         var datetimestring = date + ' ' + time.substring(time.length - 8, time.length)
         var duration = e.data.duration;
         var award = e.data.award;
@@ -67,10 +78,12 @@ Page({
             mood_id: that.data.mood_id,
             mood_text: that.data.mood_text,    //心情类型对应的文字
             text: that.data.text,
-            datetime: datetimestring,
+            //datetime: datetimestring,
+            date: date,
+            time: time,
             latitude: app.globalData.latitude,//用户所在纬度
             longitude: app.globalData.longitude,  //用户所在经度
-            simpletime: time.substring(time.length - 8, time.length),
+            //simpletime: time.substring(time.length - 8, time.length),
             logoPath: '../images/mood/' + that.data.mood_id + '.png'
           }])
         }
@@ -79,33 +92,32 @@ Page({
             mood_id: that.data.mood_id,
             mood_text: that.data.mood_text,    //心情类型对应的文字
             text: that.data.text,
-            datetime: datetimestring,
+            //datetime: datetimestring,
             latitude: app.globalData.latitude,//用户所在纬度
             longitude: app.globalData.longitude,  //用户所在经度
-            simpletime: time.substring(time.length - 8, time.length),
+            date: date,
+            time: time,
+            //simpletime: time.substring(time.length - 8, time.length),
             logoPath: '../images/mood/' + that.data.mood_id + '.png'
           });
           wx.setStorageSync('history_mood', old_history);
         }
-        wx.switchTab({
-          url: '../mood/mood',
-          success: function (e) {
-            if (award > 0) {
-              wx.showToast({
-                title: "记录成功：\n" + that.data.mood_text + '\n' + '+' + award + '分',
-                icon: 'success',
-                duration: 2000
-              });
-            }
-            else {
-              wx.showToast({
-                title: "记录成功：\n" + that.data.mood_text,
-                icon: 'success',
-                duration: 2000
-              });
-            }
-          }
-        })
+
+        if (award > 0) {
+          wx.showToast({
+            title: "记录成功：\n" + that.data.mood_text + '\n' + '+' + award + '分',
+            icon: 'success',
+            duration: 2000
+          });
+        }
+        else {
+          wx.showToast({
+            title: "记录成功：\n" + that.data.mood_text,
+            icon: 'success',
+            duration: 2000
+          });
+        }
+        wx.navigateBack();
       },
       fail: function (e) {
         wx.showToast({

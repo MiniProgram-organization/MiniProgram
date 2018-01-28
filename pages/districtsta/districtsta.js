@@ -23,8 +23,9 @@ Page({
       url: 'https://40525433.fudan-mini-program.com/cgi-bin/Area',
       method: 'POST',
       data: {
-        "openid": getApp().globalData.openid,
-        "area_type": 2
+        openid: getApp().globalData.openid,
+        sessionid: getApp().globalData.sessionid,
+        area_type: 2
       },
       success: function(res){
         if(res.data.status == "OK"){
@@ -65,8 +66,10 @@ Page({
         url: 'https://40525433.fudan-mini-program.com/cgi-bin/Area',
         method: 'POST',
         data: {
-          "openid": getApp().globalData.openid,
-          "area_type": 2
+          openid: getApp().globalData.openid,
+          sessionid: getApp().globalData.sessionid,
+          area_type: 2
+          
         },
         success: function (res) {
           if (res.data.status == "OK") {
@@ -103,8 +106,9 @@ Page({
         url: 'https://40525433.fudan-mini-program.com/cgi-bin/Area',
         method: 'POST',
         data: {
-          "openid": getApp().globalData.openid,
-          "area_type": 1
+          openid: getApp().globalData.openid,
+          sessionid: getApp().globalData.sessionid,
+          area_type: 1
         },
         success: function (res) {
           if (res.data.status == "OK") {

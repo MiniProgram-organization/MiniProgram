@@ -25,4 +25,5 @@
 }
 .input_box_margin2{
   margin-top: 10px;
+  text-align: left;
 }

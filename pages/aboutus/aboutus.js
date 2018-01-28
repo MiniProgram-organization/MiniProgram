@@ -31,12 +31,27 @@ Page({
         data: {
           openid: app.globalData.openid,
           opinion_text:that.data.text,
+          sessionid: app.globalData.sessionid,
         },
         success: function (res){
-          wx.showToast({
-            title: '提交成功，感谢您的反馈!',
-            icon: 'success'
-          })
+          console.log(res)
+          
+          if (res.data.status == 'ERROR'){
+            wx.showToast({
+              title: '提交失败，未知错误!',
+              icon: 'loading'
+            })
+          }
+          else{
+            
+            that.setData({
+              text:''
+            });
+            wx.showToast({
+              title: '提交成功，感谢您的反馈!',
+              icon: 'success'
+            })
+          }
         },
         fail: function(res){
           wx.showToast({

@@ -1,9 +1,85 @@
 <!--pages/mood/mood.wxml-->
 <view style="width: {{windowWidth}}px; height:{{windowHeight}}px">
+<!--<import src="/pages/tabbar/tabbar.wxml"/>
+<template is="tabbar" data="{{tabbar}}"/>
+-->
  <view class='middle_text'>
   <text >选择心情</text>
   </view>
-  <view style="width:80%; height:30%; margin:5% 10% 5% 10%">
+
+  <view class='bq' style="width:80%; height:40%; margin:5% 10% 5% 10%;">
+    <view class='row1'>
+      <view class='block1'> 
+        <view class='block1-item1' bindtap='goToRecordMood_0'>
+          <view class='text1'>  
+            <text >狂喜</text>
+          </view>
+
+        </view>
+
+        <view class='block1-item2'>
+          <view class='block1-item2-item1' bindtap='goToRecordMood_5'>
+           <view class='text2'>  
+            <text >焦虑</text>
+          </view>
+          </view>
+
+          <view class='block1-item2-item2' bindtap='goToRecordMood_1'>
+            <view class='text3'>  
+              <text >开心</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class='block2'>
+        <view class='block2-item1' bindtap='goToRecordMood_2'>
+         <view class='text4'>  
+            <text >放松</text>
+          </view>
+        </view>
+
+        <view class='block2-item2'bindtap='goToRecordMood_4'>
+        <view class='text5'>  
+            <text >低落</text>
+          </view>
+        </view>
+      </view>
+
+    </view>
+  
+    <view class='row2'>
+
+      <view class='block3'> 
+        <view class='block3-1'>
+        <view class='block3-item1' bindtap='goToRecordMood_3'> 
+          <view class='text6'>  
+            <text >平静</text>
+          </view> 
+          </view>
+        </view>
+
+
+        <view class='block3-item2' bindtap='goToRecordMood_6'> 
+          <view class='text7'>  
+            <text >生气</text>
+          </view>
+        </view>
+      </view>
+
+      <view class='block4'> 
+        <view class='block4-item1' bindtap='goToRecordMood_7'> 
+          <view class='text8'>  
+            <text >其他</text>
+          </view>
+        </view>
+      </view>
+  
+    </view>
+    
+
+    <!--
+  
   <picker-view indicator-style="height: 60px;" style="width: 100%; height: 200px;" value="{{value}}" bindchange="bindChange">
     <picker-view-column>
      <view class="moodlist" wx:for="{{mood}}" style="line-height: 30px">
@@ -14,17 +90,21 @@
      </view>
     </picker-view-column>
   </picker-view>
+  -->
+
+  
+  <view class='mood-line-view'>
+    <image class='mood-line' src="../images/mood/line2.png"/>
   </view>
-
-
-  <view style="padding:15% 10% 2% 10%">
-    <view style="display: flex;flex-direction:row">
-        <view style="flex:0.5" class='two_button_left'>
-        <button bindtap="goToMoodStatistics" style="flex:1" class="weui-btn" type="primary">我的心情</button>
+  
+  </view>
+  
+  <view style="padding:0% 10% 2% 10%">
+    <view style="display: flex;flex-direction:row;;">
+        <view style="flex:1" class='two_button_left'>
+        <button class="button_my"bindtap="goToMoodStatistics" style="flex:1" >我的心情</button>
         </view>
-         <view style="flex:0.5" class='two_button_right'>
-        <button bindtap="goToRecordMood" style="flex:1" class="weui-btn" type="primary">记录心情</button>
-        </view>
+        
     </view>
   </view>
  <view class='awardtext' style="padding:0% 10% 0% 10%">
@@ -56,7 +136,7 @@
                       <text class="member-nickname">心情寄语:{{item.text}}</text>
                     </view>
                     <view>
-                      <text class="node-name">{{item.simpletime}}</text>
+                      <text class="node-name">{{item.time}}</text>
                     </view>
                   </view>
                 </view>

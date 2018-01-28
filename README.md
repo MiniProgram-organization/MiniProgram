@@ -259,6 +259,13 @@
         "wind_sc": "微风",
         "wind_spd": "7"
     },
+    "lifestyle":[
+        {
+                    "brf": "舒适",
+                    "txt": "今天夜间不太热也不太冷，风力不大，相信您在这样的天气条件下，应会感到比较清爽和舒适。",
+                    "type": "comf"  //只需要type为comf的，也就是官方api列表中的第一个。
+        }
+    ],
     "forecast": [
         {
             "cond_code_d": "103",
@@ -815,7 +822,8 @@
 ```json
 { 
   "level":2,  //查询的级别，当level=1时，无需query值，接口返回所有1级城市。当level=2时，query指定一个1级城市，接口返回该城市的所有二级辖域。
-  "query":"上海" //当level=1时，无需该参数。
+  "query":"上海", //当level=1时，无需该参数。
+  "in_china":1  //国内or国外，1=国内,0=国外
 }
 ```
 
@@ -865,5 +873,200 @@
     "duration_mood":0,
 }
 ```
+
+
+
+#### 18.查询国家
+
+##### url: [https://40525433.fudan-mini-program.com/cgi-bin/GetNation](https://40525433.fudan-mini-program.com/cgi-bin/GetNation)
+
+##### method: POST
+
+##### 发送数据格式：
+
+```json
+{ 
+  "openid":"xfvsdgf", 
+  "latitude":31,
+  "longitude":121
+}
+```
+
+##### 接收数据格式：
+```json
+{
+    "status": "OK",
+    "nation":"中国"
+}
+```
+
+
+
+
+#### 19.查询世界天气
+
+##### url: [https://40525433.fudan-mini-program.com/cgi-bin/Weather_World](https://40525433.fudan-mini-program.com/cgi-bin/Weathre_World)
+
+##### method: POST
+
+##### 发送数据格式：
+
+```json
+{ 
+  "openid":"xfvsdgf", 
+  "latitude":31,
+  "longitude":121
+}
+```
+
+##### 接收数据格式：
+```json
+{
+    "status": true,
+    "result": {
+        "channel": {
+            "units": {
+                "distance": "km",
+                "pressure": "mb",
+                "speed": "km/h",
+                "temperature": "C"
+            },
+            "title": "Yahoo! Weather - Shanghai, Shanghai, CN",
+            "link": "http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-22726048/",
+            "description": "Yahoo! Weather for Shanghai, Shanghai, CN",
+            "language": "en-us",
+            "lastBuildDate": "Mon, 08 Jan 2018 09:37 PM CST",
+            "ttl": "60",
+            "location": {
+                "city": "Shanghai",
+                "country": "China",
+                "region": " Shanghai"
+            },
+            "wind": {
+                "chill": "27",
+                "direction": "290",
+                "speed": "35.40"
+            },
+            "atmosphere": {
+                "humidity": "54",
+                "pressure": "34608.91",
+                "rising": "0",
+                "visibility": "25.91"
+            },
+            "astronomy": {
+                "sunrise": "6:54 am",
+                "sunset": "5:8 pm"
+            },
+            "image": {
+                "title": "Yahoo! Weather",
+                "width": "142",
+                "height": "18",
+                "link": "http://weather.yahoo.com",
+                "url": "http://l.yimg.com/a/i/brand/purplelogo//uh/us/news-wea.gif"
+            },
+            "item": {
+                "title": "Conditions for Shanghai, Shanghai, CN at 09:00 PM CST",
+                "lat": "31.23488",
+                "long": "121.475403",
+                "link": "http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-22726048/",
+                "pubDate": "Mon, 08 Jan 2018 09:00 PM CST",
+                "condition": {
+                    "code": "33",
+                    "date": "Mon, 08 Jan 2018 09:00 PM CST",
+                    "temp": "1",
+                    "text": "Mostly Clear"
+                },
+                "forecast": [
+                    {
+                        "code": "5",
+                        "date": "08 Jan 2018",
+                        "day": "Mon",
+                        "high": "4",
+                        "low": "0",
+                        "text": "Rain And Snow"
+                    },
+                    {
+                        "code": "32",
+                        "date": "09 Jan 2018",
+                        "day": "Tue",
+                        "high": "5",
+                        "low": "-2",
+                        "text": "Sunny"
+                    },
+                    {
+                        "code": "32",
+                        "date": "10 Jan 2018",
+                        "day": "Wed",
+                        "high": "4",
+                        "low": "-2",
+                        "text": "Sunny"
+                    },
+                    {
+                        "code": "32",
+                        "date": "11 Jan 2018",
+                        "day": "Thu",
+                        "high": "4",
+                        "low": "-3",
+                        "text": "Sunny"
+                    },
+                    {
+                        "code": "32",
+                        "date": "12 Jan 2018",
+                        "day": "Fri",
+                        "high": "2",
+                        "low": "-3",
+                        "text": "Sunny"
+                    },
+                    {
+                        "code": "30",
+                        "date": "13 Jan 2018",
+                        "day": "Sat",
+                        "high": "6",
+                        "low": "-3",
+                        "text": "Partly Cloudy"
+                    },
+                    {
+                        "code": "30",
+                        "date": "14 Jan 2018",
+                        "day": "Sun",
+                        "high": "11",
+                        "low": "1",
+                        "text": "Partly Cloudy"
+                    },
+                    {
+                        "code": "30",
+                        "date": "15 Jan 2018",
+                        "day": "Mon",
+                        "high": "12",
+                        "low": "4",
+                        "text": "Partly Cloudy"
+                    },
+                    {
+                        "code": "39",
+                        "date": "16 Jan 2018",
+                        "day": "Tue",
+                        "high": "12",
+                        "low": "7",
+                        "text": "Scattered Showers"
+                    },
+                    {
+                        "code": "39",
+                        "date": "17 Jan 2018",
+                        "day": "Wed",
+                        "high": "10",
+                        "low": "7",
+                        "text": "Scattered Showers"
+                    }
+                ],
+                "description": "<![CDATA[<img src=\"http://l.yimg.com/a/i/us/we/52/33.gif\"/>\n<BR />\n<b>Current Conditions:</b>\n<BR />Mostly Clear\n<BR />\n<BR />\n<b>Forecast:</b>\n<BR /> Mon - Rain And Snow. High: 4Low: 0\n<BR /> Tue - Sunny. High: 5Low: -2\n<BR /> Wed - Sunny. High: 4Low: -2\n<BR /> Thu - Sunny. High: 4Low: -3\n<BR /> Fri - Sunny. High: 2Low: -3\n<BR />\n<BR />\n<a href=\"http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-22726048/\">Full Forecast at Yahoo! Weather</a>\n<BR />\n<BR />\n<BR />\n]]>",
+                "guid": {
+                    "isPermaLink": "false"
+                }
+            }
+        }
+    }
+}
+```
+
 
 

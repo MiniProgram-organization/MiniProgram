@@ -1,64 +1,141 @@
-<view style="width: {{windowWidth}}px; height:{{windowHeight}}px" class="content"  >
-    <view style="width: {{windowWidth}}px; height:{{windowHeight*0.1}}px"> </view>
-    <view class="today" style=" height:{{windowHeight*0.4}}px" >
-        <view class="main">
-            <view class="left">
-                <view class="tempnow">{{weather.tmp}}℃</view>
-                <view  bindtap="toChooseArea" class="weather">
-                    {{city}}
-                    {{weather.cond_txt}}
-                </view>
-                <view bindtap="toChooseArea" class="chooseArea">点击切换区域</view>
-                <image class="weathericon" src="{{weathericonURL}}"></image>
-            </view>
-            <view class="right">
-                <view class="kongqi">体感温度：{{weather.fl}}</view>
-                <view class="kongqi">相对湿度：{{weather.hum}}</view>
-                <view class="kongqi">空气质量：{{air.qlty}}</view>
-                <view class="kongqi">AQI：{{air.aqi}}</view>
-                <view class="kongqi">能见度：{{weather.vis}}</view>
-            </view>
-        </view>
+<!--pages/weather_new/weather_new.wxml-->
+<view class='back' style="width: {{windowWidth}}px; height:{{windowHeight}}px">
+<!--<import src="/pages/tabbar/tabbar.wxml"/>
+<template is="tabbar" data="{{tabbar}}"/>
+-->
+  <view class='title_bar' style="width: {{windowWidth}}px; height:{{windowHeight*0.08}}px">
+    <view class='title_left' bindtap="toChooseArea" >
+      <image class="image_set" src="{{set_url}}"></image>
     </view>
-    <view style="width: {{windowWidth}}px; height:{{windowHeight*0.05}}px">
-     </view>
-    <view class="forecast" style="height:160px" >
-      <view style="height:40px" class='forecast_text' >
-       <text>天气预报</text>
+    <view class='now_location' style="height:{{windowHeight*0.08}}px" >
+      <image class="image_location" src="{{location_url}}"></image>
+      <text class='text_location'>{{city}}</text>
+    </view>
+    <view class='title_right' >
+        
+    </view>
+  </view>
+
+  <view class='today_whole' style="width: {{windowWidth}}px; height:{{windowHeight*0.50}}px">
+    <view class='now_tem'  style="width: {{windowWidth}}px; height:{{windowHeight*0.20}}px">
+      <text>{{weather.tmp}}℃</text>
+    </view>
+    <view class='air_view' style="width: {{windowWidth}}px; height:{{windowHeight*0.06}}px">
+      <view class='air' style="background-color:{{background_color}}; font-size:{{air_text_font_size}}px">
+        <text>空气质量：{{air.qlty}}</text>
       </view>
-    <view style="height:60px" class='day1_view' >
-        <view style="float:left;width:31%;height:60px" class='forecast_day'>
+    </view>
+
+    <view class='today_weather_cat' style="width: {{windowWidth}}px; height:{{windowHeight*0.06}}px">
+      <image class="image_forecast_cat" src="{{weathericonURL}}"></image>
+      <text class='text_weather_cat' style="font-size:{{now_cat_font_size}}px">{{weather.cond_txt}}</text>
+    </view>
+
+    <view style="width: {{windowWidth}}px; height:{{windowHeight*0.01}}px">
+    </view>
+
+    <view class='hint' style="width: {{windowWidth}}px; height:{{lifestyle_height}}px; font-size:{{lifestyle_font_size}}px">
+      <view class='hint_text'>
+      <text>{{lifestyle_text}}</text>
+      </view>
+    </view>
+
+    <view style="width: {{windowWidth}}px; height:{{windowHeight*0.02}}px"></view>
+
+    <view class='weather_detail' style="width: {{windowWidth}}px; height:{{windowHeight*0.1}}px">
+      <view class='detail_tem'>
+        <image class="detail_icon" src="{{tem_url}}"></image>
+        <view class='detail_text' style="font-size:{{weather_detail_font_size}}px">
+          <text class='text_location'>{{detail_1_name}}\n</text>
+          <text class='text_location'>{{detail_1_unit}}</text>
+        </view>
+      </view>
+
+      <view class='detail_wind'>             
+        <image class="detail_icon" src="{{wind_url}}"></image>
+         <view class='detail_text' style="font-size:{{weather_detail_font_size}}px">
+          <text class='text_location'>{{detail_2_name}}\n</text>
+          <text class='text_location'>{{detail_2_unit}}</text>
+        </view>
+      </view>
+
+      <view class='detail_atmosphere'>
+        <image class="detail_icon" src="{{atmosphere_url}}"></image>
+        <view class='detail_text' style="font-size:{{weather_detail_font_size}}px">
+          <text class='text_location'>{{detail_3_name}}\n</text>
+          <text class='text_location'>{{detail_3_unit}}</text>
+        </view>
+      </view>
+    </view>
+    
+
+  </view>
+
+  <view class='line'></view>
+
+  <view style="width: {{windowWidth}}px; height:{{windowHeight*0.01}}px"></view>
+
+  <view class='forecast' style="width: {{windowWidth}}px; height:{{windowHeight*0.25}}px">
+      
+      <view class='day_container2'>
+       <view class='xingqi' style="font-size:{{ forecast_other_text_font_size}}px">
+          <text>今天</text>
+        </view>
+        <view class='riqi'  style="font-size:{{ forecast_other_text_font_size}}px">
+          <text>{{day0_weather.date}}</text>
+        </view>
+        <view class='high_and_low'  style="font-size:{{ forecast_other_text_font_size}}px">
+         <text>{{day0_weather.low}} / {{day0_weather.high}}°C</text>
+        </view>
+        <view class="forecast_cat_img">
+         <image class="image_forecast_cat" src="{{day0_weather.icon}}"></image>
+        </view>
+        <view class="forecast_cat_text"  style="font-size:{{forecast_cat_text_font_size}}px">
+          <text>{{day0_weather.category}}</text>
+        </view>
+      </view>
+
+      <view class='day_container2'>
+        <view class='xingqi'  style="font-size:{{ forecast_other_text_font_size}}px">
           <text>明天</text>
         </view>
-         <view style="float:left;width:23%;"  class='forcast_category'>
+        <view class='riqi'  style="font-size:{{ forecast_other_text_font_size}}px">
+          <text>{{day1_weather.date}}</text>
+        </view>
+        <view class='high_and_low'  style="font-size:{{ forecast_other_text_font_size}}px">
+         <text>{{day1_weather.low}} / {{day1_weather.high}}°C</text>
+        </view>
+        <view class="forecast_cat_img">
+         <image class="image_forecast_cat" src="{{day1_weather.icon}}"></image>
+        </view>
+        <view class="forecast_cat_text"  style="font-size:{{forecast_cat_text_font_size}}px">
           <text>{{day1_weather.category}}</text>
         </view>
-        <view style="float:left;width:23%;" class='forcast_temperature'>
-          <text>{{day1_weather.high}}</text>
-        </view>
-         <view style="float:left;width:23%;" class='forcast_temperature'>
-          <text>{{day1_weather.low}}</text>
-        </view>
-     </view>
+      </view>
 
-      <view style="height:60px" class='day1_view' >
-        <view style="float:left;width:31%;height:60px" class='forecast_day'>
-          <text>后天</text>
+      <view class='day_container2'>
+        <view class='xingqi'  style="font-size:{{forecast_other_text_font_size}}px">
+          <text>{{day2_weather.xq}}</text>
         </view>
-         <view style="float:left;width:23%;" class='forcast_category'>
-         <text>{{day2_weather.category}}</text>
+        <view class='riqi'  style="font-size:{{forecast_other_text_font_size}}px">
+          <text>{{day2_weather.date}}</text>
         </view>
-         <view style="float:left;width:23%;" class='forcast_temperature'>
-          <text>{{day2_weather.high}}</text>
+        <view class='high_and_low'  style="font-size:{{forecast_other_text_font_size}}px">
+         <text>{{day2_weather.low}} / {{day2_weather.high}}°C</text>
         </view>
-         <view style="float:left;width:23%;" class='forcast_temperature'>
-          <text>{{day2_weather.low}}</text>
+        <view class="forecast_cat_img">
+         <image class="image_forecast_cat" src="{{day2_weather.icon}}"></image>
+        </view>
+        <view class="forecast_cat_text"  style="font-size:{{forecast_cat_text_font_size}}px">
+          <text>{{day2_weather.category}}</text>
         </view>
       </view>
-      
-    <view style="height:40px" class='awardtext'>
-    {{award_text_1}}<span style="color: red">{{con_day}}</span>{{award_text_2}}
-   </view>
     </view>
-  
+
+    <view style="width: {{windowWidth}}px; height:40px">
+      <view class='awardtext'>
+        {{award_text_1}}<span style="color: red">{{con_day}}</span>{{award_text_2}}
+      </view>
+   </view>
 </view>
+

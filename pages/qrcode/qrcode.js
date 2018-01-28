@@ -19,8 +19,6 @@ Page({
     });
   },
 
-
-
   saveQRCode: function () {
     var that = this;
     this.setData({
@@ -29,6 +27,9 @@ Page({
     console.log(that.data.qrcodeUrl);
     wx.downloadFile({
       url: that.data.qrcodeUrl,
+      data: {
+
+      },
       success: function (res) {
         console.log(res);
         var filePath = res.tempFilePath;
@@ -38,9 +39,8 @@ Page({
         wx.saveImageToPhotosAlbum({
           filePath: filePath,
           success: function (res) {
-            //console.log(res);
             wx.showModal({
-              title: '可以将图片分享到朋友圈',
+              title: '保存成功!',
               content: '个性的小程序码已保存到手机相册!',
               success:function(){
                  wx.switchTab({

@@ -28,7 +28,6 @@ Page({
     return {
       title: '自定义转发标题',
       desc: '分享内容',
-      // path: '/pages/checkin/checkin?markers=' + JSON.stringify(that.data.markers),
       path: '/pages/activity/activity',
       success: function (res) {
         console.log(res);
@@ -184,9 +183,60 @@ Page({
   onShow: function () {
     this.fetchData();
   },
+  getChinaPOI: function (latitude, longitude ){
+    var that = this;
+    //如果查询经纬度成功，则开始搜索附近POI
+    app.globalData.qqmapsdk.reverseGeocoder({
+      location: {
+        latitude: latitude,
+        longitude: longitude
+      },
+      get_poi: 1,
+      success: function (res) {
+        console.log("附近POI");
+        console.log(res.result.pois);
+        var coordinates = res.result.pois;
+        //marker数组
+        var tempMarkers = [];
+        var tempIncludePoints = [];
 
+        for (var i = 0; i < coordinates.length; i++) {
+          var tempLatitude = coordinates[i].location.lat;
+          var tempLongitude = coordinates[i].location.lng;
+          var category = coordinates[i].category
+          var venue = coordinates[i].title;
+          var POI_id = coordinates[i].id;
+          var ad_info = coordinates[i].ad_info;
 
+          tempMarkers.push({
+            POI_id: POI_id,
+            latitude: tempLatitude,
+            longitude: tempLongitude,
+            iconPath: '../images/map/dot.jpg',
+            logoPath: '../images/location/' + app.globalData.locationMap[category.split(":")[0]] + '.png',
+            category: category,
+            venue: venue,
+            ad_info: ad_info,
+          });
+          tempIncludePoints.push({
+            latitude: tempLatitude,
+            longitude: tempLongitude,
+          });
+        }
+        that.setData({
+          markers: tempMarkers,
+          include_points: tempIncludePoints
+        });
 
+      },
+      fail: function () {
+        console.log('发送位置失败');
+      }
+    });
+  },
+  getForeignPOI: function (latitude, longitude){
+    
+  },
   fetchData: function () {
     var that = this;
     console.log("获取openid" + app.globalData.openid);
@@ -197,7 +247,6 @@ Page({
     console.log('当前宽度' + this.data.windowWidth);
     console.log('当前高度' + this.data.windowHeight);
 
-    
     wx.getLocation({
       type: 'wgs84', //返回可以用于wx.openLocation的经纬度
       success: function (res) {
@@ -208,59 +257,11 @@ Page({
           latitude: latitude,
           longitude: longitude,
         });
-
-        app.globalData.qqmapsdk.reverseGeocoder({
-          location: {
-            latitude: latitude,
-            longitude: longitude
-          },
-          get_poi: 1,
-          success: function (res) {
-            console.log("附近POI");
-            console.log(res.result.pois);
-            var coordinates = res.result.pois;
-            //marker数组
-            var tempMarkers = [];
-            var tempIncludePoints = [];
-
-            for (var i = 0; i < coordinates.length; i++) {
-              var tempLatitude = coordinates[i].location.lat;
-              var tempLongitude = coordinates[i].location.lng;
-              var category = coordinates[i].category
-              var venue = coordinates[i].title;
-              var POI_id = coordinates[i].id;
-              var ad_info = coordinates[i].ad_info;
-
-              tempMarkers.push({
-                POI_id: POI_id,
-                latitude: tempLatitude,
-                longitude: tempLongitude,
-                iconPath: '../images/map/dot.jpg',
-                logoPath: '../images/location/' + app.globalData.locationMap[category.split(":")[0]] + '.png',
-                category: category,
-                venue: venue,
-                ad_info: ad_info,
-              });
-              tempIncludePoints.push({
-                latitude: tempLatitude,
-                longitude: tempLongitude,
-              });
-            }
-
-            that.setData({
-              markers: tempMarkers,
-              include_points: tempIncludePoints
-            });
-
-          },
-          fail: function () {
-            console.log('发送位置失败');
-          }
-        });
+        var inChina = wx.getStorageSync('inChina');
+        if (inChina == 1) that.getChinaPOI(latitude, longitude);
+        else that.getForeignPOI(latitude, longitude);
       }
     });
-
-
 
     setTimeout(function () {
       that.setData({

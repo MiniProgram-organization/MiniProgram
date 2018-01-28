@@ -1,19 +1,34 @@
 <!--hotest.wxml-->
 <view style="width: {{windowWidth}}px; height:{{windowHeight}}px">
+<!--
+<import src="/pages/tabbar/tabbar.wxml"/>
+<template is="tabbar" data="{{tabbar}}"/>
+-->
+
   <view style="width:80%; height:30%; margin:5% 10% 10% 10%">
     <map bindmarkertap="markertap" latitude="{{latitude}}" longitude="{{longitude}}" include-points="{{include_points}}" markers="{{markers}}" style="width:100%" />
     <view style="margin:5% 0% 10% 0%">
       <view style="float:left;height:10px;width:33%">
-        <text bindtap="Todistrictsta" style="padding:0% 10% 0% 40%;color:blue">{{checkInTimes}}</text>
-        <view bindtap="Todistrictsta" style="text-align:center">地区</view>
+        <view style="text-align:center">
+        <text bindtap="Todistrictsta" style="padding:0% 0% 0% 0%;color:blue">{{checkInTimes}}</text>
+        </view>
+        <view bindtap="Todistrictsta" style="text-align:center">
+         <text>去过</text></view>
       </view>
-      <view style="float:left;height:10px;width:33%;">
-        <text bindtap="Toplacesta" style="padding:0% 10% 0% 35%;color:blue">{{checkInPlaces}}</text>
-        <view bindtap="Toplacesta" style="padding:0% 10% 0% 25%">地点</view>
+      <view  style="float:left;height:10px;width:33%;">
+      <view style="text-align:center">
+        <text bindtap="Toplacesta" style="color:blue">{{checkInPlaces}}</text>
+        </view>
+        <view bindtap="Toplacesta" style="text-align:center">
+        <text>POI</text></view>
       </view>
       <view style="float:left;top:20px;height:10px;width:33%;">
-        <text bindtap="Tocategorysta" style="padding:0% 10% 0% 30%;color:blue">{{checkInCategories}}</text>
-        <view bindtap="Tocategorysta" style="padding:0% 0% 0% 20%">种类</view>
+        <view style="text-align:center">
+        <text bindtap="Tocategorysta" style="color:blue">{{checkInCategories}}
+        </text>
+        </view>
+        <view bindtap="Tocategorysta" style="text-align:center">
+        <text>偏好</text></view>
       </view>
     </view>
   </view>
@@ -69,4 +84,6 @@
     </block>
 
   </view>
+
+  
 </view>

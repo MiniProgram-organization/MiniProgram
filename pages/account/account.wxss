@@ -12,13 +12,12 @@
 }
 .privacy
 {
-  position: fixed;
+  margin-top: 40px;
   text-align: center;
   width: 100%;
   font-size: 10sp;
-  bottom: 10px;
   color: #C5C1AA;
-  
+  margin-bottom: 5px;
 }
 .weui-cells__title_account
 {
@@ -28,6 +27,20 @@
   padding-right:15px;
   color:#999;
   font-size:13px
+}
+.share_text{
+  text-align: center;
+  font-size: 14px;
+}
+.headimg{
+  text-align: center;
+  width: 80px;
+  height: 80px;
+  margin: auto 0;
+}
+.head_view{
+  margin-top: 20px;
+   text-align: center;
 }
 .icon_view
 {
@@ -39,3 +52,4 @@
           background: red;position: relative;}
           
 #hexagon:before {content: "";position: absolute;top: -25px; left: 0;width: 0;height: 0;border-left: 50px solid transparent;border-right: 50px solid transparent;border-bottom: 25px solid red;}#hexagon:after {content: "";position: absolute;bottom: -25px; left: 0;width: 0;height: 0;border-left: 50px solid transparent;border-right: 50px solid transparent;border-top: 25px solid red;}
+@import "/pages/tabbar/tabbar.wxss"

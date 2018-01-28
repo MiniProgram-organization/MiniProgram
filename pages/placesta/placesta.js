@@ -40,7 +40,7 @@ Page({
       categories: line_catrgory,
 
       series: [{
-        name: '兴趣点',
+        name: 'POI',
         data: line_data,
         format: function (val) {
           return val.toFixed(0);
@@ -68,6 +68,7 @@ Page({
       data: {
         place_num:5,
         openid: getApp().globalData.openid,
+        sessionid: getApp().globalData.sessionid,
       },
       success: function (res) {
         console.log(res.data)

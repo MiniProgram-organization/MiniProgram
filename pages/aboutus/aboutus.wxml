@@ -2,11 +2,13 @@
 <view style="width: {{windowWidth}}px; height:{{windowHeight}}px">
 <view style="width:80%; height:90%; margin:5% 10% 5% 10%">
   <view class='title'>
-    <text>卿云 Go</text>
+    <text>卿云Go</text>
   </view>
   <view class='content'>
     <text>
-    卿云 Go是一款提供城市生活服务的小程序，主要功能模块分为查看实地天气，签到，心情记录三大块。其中，天气功能为您提供一键查看实时天气服务，签到功能将帮您生成您在城市中的足记，心情记录为您提供心情服务，帮助您在城市的高压中照顾好自己的心情。
+    卿云Go是一款提供城市生活服务的小程序，主要功能模块分为查看实地天气，签到，心情记录三大块。其中，天气功能为您提供一键查看实时天气服务，签到功能将帮您生成您在城市中的足记，心情记录为您提供心情服务，帮助您在城市的高压中照顾好自己的心情。
+
+    详情请查询卿云Go官方网站：http://www.fudan-mini-program.com
     </text>
   </view>
   <view class="input_title">
@@ -16,8 +18,8 @@
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell">
       <view class="weui-cell__bd">
-        <textarea class="weui-textarea" bindinput="textChange" value="{{text}}" placeholder="请输入文本" style="height: 8.3em" />
-        <view class="weui-textarea-counter">0/200</view>
+        <textarea class="weui-textarea" bindinput="textChange" value="{{text}}" placeholder="请输入您的建议"  style="height: 8.3em" />
+        <view class="weui-textarea-counter"></view>
       </view>
     </view>
   </view>

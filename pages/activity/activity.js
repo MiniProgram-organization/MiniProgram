@@ -27,62 +27,76 @@ Page({
     award_text_2:"",
   },
   redirectCheckIn: function () {
+    
     var that = this;
     wx.navigateTo({
       url: '../checkin/checkin?markers='
     })
   },
   setDuration: function (duration){
-    if ((duration % 7 == 0) && ((duration % 28) != 0)) {
-      if ((duration / 7) % 4 == 1) {
-        this.setData({
-          con_day: duration,
-          award_text_1: "连续签到",
-          award_text_2: "天了，真棒！\n又获得额外积分奖励啦~"
-        })
-      }
-      else if ((duration / 7) % 4 == 2) {
-        this.setData({
-          con_day: duration,
-          award_text_1: "连续签到",
-          award_text_2: "天了，exciting！\n又获得额外积分奖励啦~"
-        })
-      }
-      else if ((duration / 7) % 4 == 3) {
-        this.setData({
-          con_day: duration,
-          award_text_1: "连续签到",
-          award_text_2: "天了，amazing！\n又获得额外积分奖励啦~"
-        })
-      }
-    }
-    else if (duration % 28 == 0) {
+    console.log('duration')
+    console.log(duration)
+    if(duration == 0){
       this.setData({
         con_day: duration,
-        award_text_1: "连续签到",
-        award_text_2: "天了，天啦噜！一份超值额外积分大礼砸中了你~"
+        object_day: object_day,
+        less_day: object_day - duration,
+        award_text_1: "已连续签到",
+        award_text_2: "天了！还差" + 7 + "天就能获得额外积分奖励喔，加油~"
       })
     }
-    else if (duration % 7 != 0) {
-      var object_day = (parseInt(duration / 7) + 1) * 7;
-      console.log(object_day)
-      if (object_day % 28 == 0) {
+    else{
+      if ((duration % 7 == 0) && ((duration % 28) != 0)) {
+        if ((duration / 7) % 4 == 1) {
+          this.setData({
+            con_day: duration,
+            award_text_1: "连续签到",
+            award_text_2: "天了，真棒！\n又获得额外积分奖励啦~"
+          })
+        }
+        else if ((duration / 7) % 4 == 2) {
+          this.setData({
+            con_day: duration,
+            award_text_1: "连续签到",
+            award_text_2: "天了，exciting！\n又获得额外积分奖励啦~"
+          })
+        }
+        else if ((duration / 7) % 4 == 3) {
+          this.setData({
+            con_day: duration,
+            award_text_1: "连续签到",
+            award_text_2: "天了，amazing！\n又获得额外积分奖励啦~"
+          })
+        }
+      }
+      else if (duration % 28 == 0) {
         this.setData({
           con_day: duration,
-          object_day: object_day,
-          less_day: object_day - duration,
-          award_text_1: "已连续签到",
-          award_text_2: "天了！还差" + (object_day - duration) + "天就能获得连续28天超值额外积分奖励喔，加油~"
+          award_text_1: "连续签到",
+          award_text_2: "天了，天啦噜！一份超值额外积分大礼砸中了你~"
         })
       }
-      else {
-        this.setData({
-          con_day: duration,
-          object_day: object_day,
-          less_day: object_day - duration,
-          award_text_1: "已连续签到",
-          award_text_2: "天了！还差" + (object_day - duration) + "天就能获得额外积分奖励喔，加油~"
-        })
+      else if (duration % 7 != 0) {
+        var object_day = (parseInt(duration / 7) + 1) * 7;
+        console.log(object_day)
+        if (object_day % 28 == 0) {
+          this.setData({
+            con_day: duration,
+            object_day: object_day,
+            less_day: object_day - duration,
+            award_text_1: "已连续签到",
+            award_text_2: "天了！还差" + (object_day - duration) + "天就能获得连续28天超值额外积分奖励喔，加油~"
+          })
+        }
+        else {
+          this.setData({
+            con_day: duration,
+            object_day: object_day,
+            less_day: object_day - duration,
+            award_text_1: "已连续签到",
+            award_text_2: "天了！还差" + (object_day - duration) + "天就能获得额外积分奖励喔，加油~"
+          })
+        }
       }
     }
   },
@@ -111,30 +125,55 @@ Page({
       windowHeight: app.globalData.windowHeight
     });
 
+    var oldDatetmp = wx.getStorageSync('timestamp_duration');
+    var oldDate = 0;
+    var nowDate = (Date.parse(new Date()) / 1000);
+    if (oldDatetmp == "") oldDate = 0;
+    else oldDate = oldDatetmp;
+
+    console.log(nowDate)
+    console.log(oldDate)
     var duration = wx.getStorageSync('duration_checkin');
-    if (duration == ""){
+    console.log(duration.data)
+    console.log(nowDate-oldDate)
+    console.log(duration == "")
+    if (duration != "" && ((nowDate - oldDate) < 86400)){
+      console.log('用缓存')
+      this.setDuration(duration.data)
+    }
+    else{
       //如果没有缓存
-      
       wx.request({
         url: 'https://40525433.fudan-mini-program.com/cgi-bin/Scores',
         method: 'POST',
         data: {
-          openid: getApp().globalData.openid
+          openid: getApp().globalData.openid,
+          sessionid: getApp().globalData.sessionid,
         },
         success: function (res) {
-          wx.setStorageSync('duration_checkin', res.data.duration_checkin);
-          wx.setStorageSync('duration_weather', res.data.duration_weather);
-          wx.setStorageSync('duration_mood', res.data.duration_mood);
-          wx.setStorageSync('scores', res.data.scores);
-          that.setDuration(res.data.duration_checkin)
+          console.log(res)
+          if(res.data.status == "ERROR"){
+            wx.showToast({
+              title: '获取连续天数失败！',
+              icon:'loading'
+            })
+          }
+          else{
+            wx.setStorageSync('timestamp_duration', (Date.parse(new Date()) / 1000));
+            wx.setStorageSync('duration_checkin', 
+            {
+              data:res.data.duration_checkin
+            });
+            wx.setStorageSync('duration_weather', res.data.duration_weather);
+            wx.setStorageSync('duration_mood', res.data.duration_mood);
+            wx.setStorageSync('scores', res.data.scores);
+            that.setDuration(res.data.duration_checkin)
+          }
         },
         fail: function(res){
 
         }
       })
-    }
-    else{
-      this.setDuration(duration)
     }
 
     
@@ -147,6 +186,46 @@ Page({
         //存储一个缓存的经纬度,用于定位失败时使用
         wx.setStorageSync('latitude', res.latitude);
         wx.setStorageSync('longitude', res.longitude);
+
+        wx.request({
+          url: 'https://40525433.fudan-mini-program.com/cgi-bin/GetNation',
+          method:'POST',
+          data: {
+
+            latitude: res.latitude,
+            longitude: res.longitude,
+            openid: getApp().globalData.openid,
+            sessionid: getApp().globalData.sessionid,
+            
+          },
+          success: function (res) {
+            console.log('nation...')
+            console.log(res)
+            if (res.data.status == 'OK'){
+              if (res.data.nation == '中国'){
+                wx.setStorageSync('inChina', 1)
+              }
+              else{
+                wx.showToast({
+                  title: '抱歉，卿云Go签到功能对国外用户暂未开放!',
+                  icon: 'loading'
+                })
+                wx.setStorageSync('inChina', 0)
+              }
+            }
+            else{
+              wx.showToast({
+                title: '获取经纬度国家信息失败！请检查定位设置',
+              })
+            }
+          },
+          fail: function(res){
+            wx.showToast({
+              title: '获取经纬度国家信息失败！请检查定位设置',
+            })
+          }
+
+        })
         app.globalData.qqmapsdk.reverseGeocoder({
           location: {
             latitude: res.latitude,
@@ -155,14 +234,8 @@ Page({
           get_poi: 1,
           success: function (res) {
             if(res.result.pois == undefined){
-              wx.showToast({
-                title: '抱歉，您目前不在卿云Go的服务区!',
-                icon:'loading'
-              })
-              wx.setStorageSync('inChina', 0)
               return;
             }
-            wx.setStorageSync('inChina', 1)
             var coordinates = res.result.pois;
             //marker数组
             var tempMarkers = [];
@@ -267,8 +340,6 @@ Page({
 
               }
             });
-
-
           }
         }
       }
@@ -286,26 +357,50 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+   
   },
-
-  // drawLine: function () {
-  //   console.log(this.data.checkins);
+  getOpenId: function () {
+    var that = this;
+    var systemInfo = wx.getSystemInfoSync();
     
-  //   for (var i = 0; i < this.data.checkins.length; i++) {
-  //     var POI_id = this.data.checkins[i].POI_id;
-  //     const ctx = wx.createCanvasContext(POI_id);
-  //     ctx.moveTo(30, 20);
-  //     ctx.setLineWidth(8);
-  //     ctx.setStrokeStyle('yellow');
-  //     ctx.lineTo(30, 100);
-  //     ctx.stroke();
-  //     ctx.draw();
-  //     console.log("ok!!");
-  //   };
-  // },
-
-
-
+    wx.login({
+      success: function (res) {
+        var code = res.code;
+        wx.getUserInfo({
+          lang: 'zh_CN',
+          success: function (res) {
+            getApp().globalData.rawData = JSON.parse(res.rawData);
+            var iv = res.iv;
+            wx.request({
+              url: 'https://40525433.fudan-mini-program.com/cgi-bin/Login',
+              method: 'POST',
+              data: {
+                code: code,
+                rawData: getApp().globalData.rawData,
+                latitude: getApp().globalData.latitude,
+                longitude: getApp().globalData.longitude,
+                userSystemInfo: systemInfo,
+              },
+              success: function (res) {
+                console.log(systemInfo)
+                console.log(res)
+                if (res.data.status == "ERROR") {
+                  console.log(res.data.message);
+                  wx.redirectTo({
+                    url: '/pages/error/error',
+                  })
+                  return;
+                }
+                getApp().globalData.openid = res.data.openid;
+                getApp().globalData.sessionid = res.data.sessionid;
+                that.getCheckIns();
+              }
+            })
+          }
+        });
+      }
+    });
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -316,55 +411,18 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-    this.getOpenId();
+  onShow: function () { 
+    if (app.globalData.openid == "") {
+      this.getOpenId();
+    }
+    else {
+      this.getCheckIns();
+    }
     console.log('activity........!!!!!!!!!!!!!')
     console.log(this.data.checkins);
+    console.log(this.data.classifiedCheckIns); 
     
-    console.log(this.data.classifiedCheckIns);
-    
-
   },
-
-  getOpenId: function(){
-    var that = this;
-    wx.login({
-      success: function (res) {
-        var code = res.code;
-        wx.getUserInfo({
-          lang:'zh_CN',
-          success: function (res) {
-            getApp().globalData.rawData = JSON.parse(res.rawData);
-            var iv = res.iv;
-            console.log(res)
-            wx.request({
-              url: 'https://40525433.fudan-mini-program.com/cgi-bin/Login',
-              method: 'POST',
-              data: {
-                code: code,
-                rawData: getApp().globalData.rawData,
-                latitude: getApp().globalData.latitude,
-                longitude: getApp().globalData.longitude,
-              },
-              success: function (res) {
-                if (res.data.status == "ERROR") {
-                  console.log(res.data.message);
-                  wx.navigateTo({
-                    url: '/pages/error/error',
-                  })
-                  return;
-                }
-                getApp().globalData.openid = res.data.openid;
-                
-                that.getCheckIns();
-              }
-            })
-          }
-        });
-      }
-    });
-  },
-
  getPlaces: function(){
     var that = this;
     wx.request({
@@ -372,7 +430,8 @@ Page({
       method: 'POST',
       data: {
         openid: getApp().globalData.openid,
-        place_num: 5
+        place_num: 5,
+        sessionid: getApp().globalData.sessionid,
       },
       success: function(res){
         if(res.data.status == "OK"){
@@ -386,8 +445,18 @@ Page({
   getCheckIns: function(){
     //获取历史数据
     var checkins = wx.getStorageSync('checkins');
-    var that = this;
-    if (checkins != "") {
+    var oldDatetmp = wx.getStorageSync('timestamp_checkins');
+    var oldDate = 0;
+    var nowDate = (Date.parse(new Date())/1000);
+    if (oldDatetmp == "") oldDate = 0; 
+    else oldDate = oldDatetmp;
+    
+    var that = this; 
+    if (checkins != "" && ((nowDate - oldDate) < 86400) ){
+      console.log('时间差')
+      console.log(nowDate - oldDate)
+      console.log('...签到缓存')
+      console.log(checkins)
       this.setData({
         checkins: checkins
       });
@@ -398,35 +467,43 @@ Page({
       wx.request({
         url: 'https://40525433.fudan-mini-program.com/cgi-bin/History',
         data: {
-          openid: getApp().globalData.openid
+          openid: getApp().globalData.openid,
+          sessionid: getApp().globalData.sessionid,
         },
         method: 'POST',
         success: function (res) {
-          console.log("lsh返回的历史");
-          console.log(res);
-
-        // var tmpCheckins = [];
-          for (var i = 0; i < res.data.checkins.length; i++) {
-            var tmpCheckin = 
-            res.data.checkins[i].date = res.data.checkins[i]['datetime'].split(" ")[0];
-            res.data.checkins[i].time = res.data.checkins[i]['datetime'].split(" ")[1];
-            //需要自行设置logoPath
-            var category = res.data.checkins[i].category;
-            res.data.checkins[i].logoPath = '../images/location/' + app.globalData.locationMap[category.split(":")[0]] + '.png';
-            if(res.data.checkins[i].text != ""){
-              res.data.checkins[i]['height_p'] = 80;
-            }
-            else res.data.checkins[i]['height_p'] = 65;
+          if(res.data.status == "ERROR"){
+            wx.showToast({
+              title: '获取历史签到失败',
+              icon:'loading'
+            })
           }
+          else{
+            console.log("lsh返回的历史");
+            console.log(res);
+            wx.setStorageSync('timestamp_checkins', (Date.parse(new Date()) / 1000));
+            for (var i = 0; i < res.data.checkins.length; i++) {
+              res.data.checkins[i].date = res.data.checkins[i]['datetime'].split(" ")[0];
+              res.data.checkins[i].time = res.data.checkins[i]['datetime'].split(" ")[1];
+              //需要自行设置logoPath
+              var category = res.data.checkins[i].category;
+              res.data.checkins[i].logoPath = '../images/location/' + app.globalData.locationMap[category.split(":")[0]] + '.png';
+              if(res.data.checkins[i].text != ""){
+                res.data.checkins[i]['height_p'] = 80;
+              }
+              else res.data.checkins[i]['height_p'] = 65;
+            }
 
-          that.setData({
-            checkins: res.data.checkins
-          });
-          console.log(that.data.checkins)
-          wx.setStorageSync('checkins', res.data.checkins);
-          that.classifyByDate();
+            that.setData({
+              checkins: res.data.checkins
+            });
+            console.log(that.data.checkins)
+            wx.setStorageSync('checkins', res.data.checkins);
+            that.classifyByDate();
+          }
         }
       })
+      
     }
   },
 
@@ -444,8 +521,6 @@ Page({
     var checkInTimes = 0;
     var checkInCategories = 0;
     var checkInPlaces = 0;
-
-
 
     for (var i = 0; i < that.data.checkins.length; i++) {
 
