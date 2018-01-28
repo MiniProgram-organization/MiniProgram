@@ -124,7 +124,10 @@ Page({
           if (that.data.text != ""){
             height_p = 80;
           }
+          console.log("HHH");
+          console.log(e);
           var old_history = wx.getStorageSync('checkins');
+
           if (e.data.status == "OK") {
             var award = e.data.award;
             var scores = e.data.scores;
