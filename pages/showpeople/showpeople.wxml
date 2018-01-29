@@ -13,7 +13,7 @@
 
 <block wx:for="{{users}}">
   <view>
-    <view class="topic-item" catchtap="redictDetail">
+    <view id="{{item.openid}}" class="topic-item" catchtap="redictDetail">
       <image class="member-avatar" src="{{item.avatarUrl}}" background-size="cover"></image>
       <view class="topic-info">
         <view class="topic-inner">

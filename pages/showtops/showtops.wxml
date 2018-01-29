@@ -1,0 +1,52 @@
+<view style="width:{{windowWidth}}px;height:{{windowHeight}}px">
+  <!--<import src="/pages/tabbar/tabbar.wxml"/>
+
+<template is="tabbar" data="{{tabbar}}"/>
+-->
+  <view class='head_view'>
+
+    <image class='headimg' bindtap="redirectToQRCode" src="{{avatarUrl}}">
+    </image>
+  </view>
+
+  <view class="weui-cells weui-cells_after-title">
+
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">昵称</view>
+      </view>
+      <picker bindchange="bindOrganizationPickerChange" value="{{indexOrganization}}" range="{{arrayOrganizationName}}">
+        <text class="weui-input">{{nickName}}</text>
+      </picker>
+    </view>
+
+
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">性别</view>
+      </view>
+      <view class="weui-cell__bd">
+        <text class="weui-input">{{gender}}</text>
+      </view>
+    </view>
+
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">地区</view>
+      </view>
+      <view class="weui-cell__bd">
+        <text class="weui-input">{{country}} - {{province}}</text>
+      </view>
+    </view>
+
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">积分</view>
+      </view>
+      <view class="weui-cell__bd">
+        <text class="weui-input">{{score}} (详见官网)</text>
+      </view>
+    </view>
+
+  </view>
+</view>
