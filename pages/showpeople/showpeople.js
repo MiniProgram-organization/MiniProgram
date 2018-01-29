@@ -16,6 +16,14 @@ Page({
     king_user_num:0,
     POI_name:'',
   },
+  redictDetail: function (e) {
+    console.log(e.currentTarget);
+    var target_id = e.currentTarget.id;
+    var url = '../showtops/showtops?target_id=' + target_id;
+    wx.redirectTo({
+      url: url
+    })
+  },
   requestPoiHistory: function () {
     var that = this;
     wx.request({
