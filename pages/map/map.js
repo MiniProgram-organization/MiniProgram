@@ -96,7 +96,7 @@ Page({
       if (app.globalData.openid == ""){
         that.loginNoOpenId();
       }
-      var now_timestamp = (new Date()).valueOf();
+     /* var now_timestamp = (new Date()).valueOf();
       console.log(now_timestamp);
       var before_timestamp = 0;
       try{
@@ -115,7 +115,7 @@ Page({
         console.log('之前没签到过')
       }
 
-      console.log(before_timestamp)
+      console.log(before_timestamp)*/
       wx.request({
         url: 'https://40525433.fudan-mini-program.com/cgi-bin/CheckIn',
         method: 'POST',
@@ -147,8 +147,10 @@ Page({
           if (that.data.text != ""){
             height_p = 80;
           }
-          //checkinLastTimeTable[that.data.POI_id]
+          //console.log("HHH");
+          //console.log(e);
           var old_history = wx.getStorageSync('checkins');
+
           if (e.data.status == "OK") {
             app.globalData.checkinLastTimeTable[that.data.POI_id.toString()] = now_timestamp;
             console.log(app.globalData.checkinLastTimeTable)
