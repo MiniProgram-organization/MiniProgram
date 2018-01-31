@@ -922,148 +922,159 @@
 ##### 接收数据格式：
 ```json
 {
-    "status": true,
-    "result": {
+    "status": "OK",
+    "weatherWorld": {
         "channel": {
-            "units": {
-                "distance": "km",
-                "pressure": "mb",
-                "speed": "km/h",
-                "temperature": "C"
-            },
-            "title": "Yahoo! Weather - Shanghai, Shanghai, CN",
-            "link": "http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-22726048/",
-            "description": "Yahoo! Weather for Shanghai, Shanghai, CN",
-            "language": "en-us",
-            "lastBuildDate": "Mon, 08 Jan 2018 09:37 PM CST",
             "ttl": "60",
-            "location": {
-                "city": "Shanghai",
-                "country": "China",
-                "region": " Shanghai"
-            },
-            "wind": {
-                "chill": "27",
-                "direction": "290",
-                "speed": "35.40"
-            },
-            "atmosphere": {
-                "humidity": "54",
-                "pressure": "34608.91",
-                "rising": "0",
-                "visibility": "25.91"
-            },
-            "astronomy": {
-                "sunrise": "6:54 am",
-                "sunset": "5:8 pm"
-            },
-            "image": {
-                "title": "Yahoo! Weather",
-                "width": "142",
-                "height": "18",
-                "link": "http://weather.yahoo.com",
-                "url": "http://l.yimg.com/a/i/brand/purplelogo//uh/us/news-wea.gif"
-            },
             "item": {
-                "title": "Conditions for Shanghai, Shanghai, CN at 09:00 PM CST",
-                "lat": "31.23488",
-                "long": "121.475403",
-                "link": "http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-22726048/",
-                "pubDate": "Mon, 08 Jan 2018 09:00 PM CST",
-                "condition": {
-                    "code": "33",
-                    "date": "Mon, 08 Jan 2018 09:00 PM CST",
-                    "temp": "1",
-                    "text": "Mostly Clear"
+                "lat": "36.00388",
+                "guid": {
+                    "isPermaLink": "false"
                 },
+                "link": "http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-56574606/",
+                "long": "-78.938477",
+                "title": "Conditions for Durham, NC, US at 08:00 PM EST",
+                "pubDate": "Tue, 30 Jan 2018 08:00 PM EST",
                 "forecast": [
                     {
-                        "code": "5",
-                        "date": "08 Jan 2018",
-                        "day": "Mon",
-                        "high": "4",
-                        "low": "0",
+                        "day": "Tue",
+                        "low": "-2",
+                        "code": 405,
+                        "date": "30 Jan 2018",
+                        "high": "3",
                         "text": "Rain And Snow"
                     },
                     {
-                        "code": "32",
-                        "date": "09 Jan 2018",
-                        "day": "Tue",
-                        "high": "5",
-                        "low": "-2",
-                        "text": "Sunny"
-                    },
-                    {
-                        "code": "32",
-                        "date": "10 Jan 2018",
                         "day": "Wed",
-                        "high": "4",
-                        "low": "-2",
+                        "low": "-6",
+                        "code": 100,
+                        "date": "31 Jan 2018",
+                        "high": "8",
                         "text": "Sunny"
                     },
                     {
-                        "code": "32",
-                        "date": "11 Jan 2018",
                         "day": "Thu",
-                        "high": "4",
-                        "low": "-3",
-                        "text": "Sunny"
+                        "low": "0",
+                        "code": 104,
+                        "date": "01 Feb 2018",
+                        "high": "15",
+                        "text": "Partly Cloudy"
                     },
                     {
-                        "code": "32",
-                        "date": "12 Jan 2018",
                         "day": "Fri",
-                        "high": "2",
-                        "low": "-3",
-                        "text": "Sunny"
-                    },
-                    {
-                        "code": "30",
-                        "date": "13 Jan 2018",
-                        "day": "Sat",
-                        "high": "6",
-                        "low": "-3",
-                        "text": "Partly Cloudy"
-                    },
-                    {
-                        "code": "30",
-                        "date": "14 Jan 2018",
-                        "day": "Sun",
+                        "low": "-2",
+                        "code": 300,
+                        "date": "02 Feb 2018",
                         "high": "11",
-                        "low": "1",
+                        "text": "Rain"
+                    },
+                    {
+                        "day": "Sat",
+                        "low": "-7",
+                        "code": 104,
+                        "date": "03 Feb 2018",
+                        "high": "4",
                         "text": "Partly Cloudy"
                     },
                     {
-                        "code": "30",
-                        "date": "15 Jan 2018",
+                        "day": "Sun",
+                        "low": "0",
+                        "code": 405,
+                        "date": "04 Feb 2018",
+                        "high": "5",
+                        "text": "Rain And Snow"
+                    },
+                    {
                         "day": "Mon",
-                        "high": "12",
-                        "low": "4",
+                        "low": "0",
+                        "code": 405,
+                        "date": "05 Feb 2018",
+                        "high": "7",
+                        "text": "Rain And Snow"
+                    },
+                    {
+                        "day": "Tue",
+                        "low": "-3",
+                        "code": 104,
+                        "date": "06 Feb 2018",
+                        "high": "10",
                         "text": "Partly Cloudy"
                     },
                     {
-                        "code": "39",
-                        "date": "16 Jan 2018",
-                        "day": "Tue",
+                        "day": "Wed",
+                        "low": "1",
+                        "code": 302,
+                        "date": "07 Feb 2018",
                         "high": "12",
-                        "low": "7",
                         "text": "Scattered Showers"
                     },
                     {
-                        "code": "39",
-                        "date": "17 Jan 2018",
-                        "day": "Wed",
-                        "high": "10",
-                        "low": "7",
-                        "text": "Scattered Showers"
+                        "day": "Thu",
+                        "low": "3",
+                        "code": 104,
+                        "date": "08 Feb 2018",
+                        "high": "11",
+                        "text": "Partly Cloudy"
                     }
                 ],
-                "description": "<![CDATA[<img src=\"http://l.yimg.com/a/i/us/we/52/33.gif\"/>\n<BR />\n<b>Current Conditions:</b>\n<BR />Mostly Clear\n<BR />\n<BR />\n<b>Forecast:</b>\n<BR /> Mon - Rain And Snow. High: 4Low: 0\n<BR /> Tue - Sunny. High: 5Low: -2\n<BR /> Wed - Sunny. High: 4Low: -2\n<BR /> Thu - Sunny. High: 4Low: -3\n<BR /> Fri - Sunny. High: 2Low: -3\n<BR />\n<BR />\n<a href=\"http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-22726048/\">Full Forecast at Yahoo! Weather</a>\n<BR />\n<BR />\n<BR />\n]]>",
-                "guid": {
-                    "isPermaLink": "false"
-                }
-            }
+                "condition": {
+                    "code": "31",
+                    "date": "Tue, 30 Jan 2018 08:00 PM EST",
+                    "temp": "0",
+                    "text": "Clear"
+                },
+                "description": "<![CDATA[<img src=\"http://l.yimg.com/a/i/us/we/52/31.gif\"/>\n<BR />\n<b>Current Conditions:</b>\n<BR />Clear\n<BR />\n<BR />\n<b>Forecast:</b>\n<BR /> Tue - Rain And Snow. High: 3Low: -2\n<BR /> Wed - Sunny. High: 8Low: -6\n<BR /> Thu - Partly Cloudy. High: 15Low: 0\n<BR /> Fri - Rain. High: 11Low: -2\n<BR /> Sat - Partly Cloudy. High: 4Low: -7\n<BR />\n<BR />\n<a href=\"http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-56574606/\">Full Forecast at Yahoo! Weather</a>\n<BR />\n<BR />\n<BR />\n]]>"
+            },
+            "link": "http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-56574606/",
+            "wind": {
+                "chill": "23",
+                "speed": "22.53",
+                "direction": "330"
+            },
+            "image": {
+                "url": "http://l.yimg.com/a/i/brand/purplelogo//uh/us/news-wea.gif",
+                "link": "http://weather.yahoo.com",
+                "title": "Yahoo! Weather",
+                "width": "142",
+                "height": "18"
+            },
+            "title": "Yahoo! Weather - Durham, NC, US",
+            "units": {
+                "speed": "km/h",
+                "distance": "km",
+                "pressure": "mb",
+                "temperature": "C"
+            },
+            "language": "en-us",
+            "location": {
+                "city": "Durham",
+                "region": " NC",
+                "country": "United States"
+            },
+            "astronomy": {
+                "sunset": "5:41 pm",
+                "sunrise": "7:18 am"
+            },
+            "atmosphere": {
+                "rising": "0",
+                "humidity": "43",
+                "pressure": "34270.27",
+                "visibility": "25.91"
+            },
+            "description": "Yahoo! Weather for Durham, NC, US",
+            "lastBuildDate": "Tue, 30 Jan 2018 08:32 PM EST"
         }
+    },
+    "basic": {
+        "country": "United States",
+        "city": "Durham"
+    },
+    "award": {
+        "award": 0,
+        "scores": 60,
+        "duration": 3,
+        "bonus_7": 0,
+        "bonus_28": 0
     }
 }
 ```
