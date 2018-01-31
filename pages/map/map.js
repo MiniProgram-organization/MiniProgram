@@ -96,6 +96,26 @@ Page({
       if (app.globalData.openid == ""){
         that.loginNoOpenId();
       }
+      var now_timestamp = (new Date()).valueOf();
+      console.log(now_timestamp);
+      var before_timestamp = 0;
+      try{
+        console.log('???')
+        console.log(app.globalData.checkinLastTimeTable);
+        console.log(app.globalData.checkinLastTimeTable['16425516965336019729']);
+        before_timestamp = app.globalData.checkinLastTimeTable[String.valueOf(that.data.POI_id)];
+        console.log(before_timestamp)
+        console.log('before_timestamp')
+        var difference = now_timestamp - before_timestamp;
+        console.log(difference)
+        console.log('difference')
+        
+      }catch(e){
+        console.log(e)
+        console.log('之前没签到过')
+      }
+
+      console.log(before_timestamp)
       wx.request({
         url: 'https://40525433.fudan-mini-program.com/cgi-bin/CheckIn',
         method: 'POST',
@@ -119,6 +139,7 @@ Page({
           text: that.data.text
         },
         success: function (e) {
+
           var datetime = new Date();
           var time = e.data.time;
           var date = e.data.date
@@ -126,8 +147,11 @@ Page({
           if (that.data.text != ""){
             height_p = 80;
           }
+          //checkinLastTimeTable[that.data.POI_id]
           var old_history = wx.getStorageSync('checkins');
           if (e.data.status == "OK") {
+            app.globalData.checkinLastTimeTable[that.data.POI_id.toString()] = now_timestamp;
+            console.log(app.globalData.checkinLastTimeTable)
             var award = e.data.award;
             var scores = e.data.scores;
             var duration = e.data.duration;

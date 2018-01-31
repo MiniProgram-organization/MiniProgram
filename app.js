@@ -14,13 +14,11 @@ App({
     openid: '',
     sessionid: '',
     checkins: [],
-    rawData: {},
     latitude: 0.0,
     longitude: 0.0,
     qqmapsdk: {},
     qrcodeUrl: "",
     weatherCity:"",
-    //tabbar: {},
     locationMap: {
       "房产小区": "resident",
       "教育学校": "school",
@@ -40,7 +38,7 @@ App({
     categoryDic:{},
     districtDict:{},
     placeDict:{},
-    checkinLastTime:{},
+    checkinLastTimeTable:{},
   },
   /*
   editTabBar: function () {
