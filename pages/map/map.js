@@ -114,15 +114,22 @@ Page({
         console.log('difference')
         if ((difference/300)<5)
         {
-          wx.showToast({
+          wx.showModal({
+            title: '提示',
+            content: '您在这个地点签到过于频繁，请5分钟后再试。',
+            success: function (res) {
+              if (res.confirm) {
+              } else if (res.cancel) {
+              }
+            }
+          })  
+         /* wx.showToast({
             title: '此地签到太频繁',
             icon:'loading'
-          })
+          })*/
           return
         }
       }
-
-     // console.log(before_timestamp)
       wx.request({
         url: 'https://40525433.fudan-mini-program.com/cgi-bin/CheckIn',
         method: 'POST',
