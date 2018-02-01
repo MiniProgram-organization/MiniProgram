@@ -96,26 +96,33 @@ Page({
       if (app.globalData.openid == ""){
         that.loginNoOpenId();
       }
-     /* var now_timestamp = (new Date()).valueOf();
+      var now_timestamp = Date.parse(new Date());  
       console.log(now_timestamp);
       var before_timestamp = 0;
-      try{
-        console.log('???')
-        console.log(app.globalData.checkinLastTimeTable);
-        console.log(app.globalData.checkinLastTimeTable['16425516965336019729']);
-        before_timestamp = app.globalData.checkinLastTimeTable[String.valueOf(that.data.POI_id)];
-        console.log(before_timestamp)
-        console.log('before_timestamp')
-        var difference = now_timestamp - before_timestamp;
+      
+      console.log('输出字典')
+      console.log(app.globalData.checkinLastTimeTable);
+      console.log('一半')
+      console.log(that.data.POI_id + "")
+      before_timestamp = app.globalData.checkinLastTimeTable[that.data.POI_id+""];
+      if (before_timestamp == undefined){ //之前没有签到过
+        var gd = 1; //不执行操作
+      }
+      else{
+        var difference = (now_timestamp - before_timestamp)/1000;
         console.log(difference)
         console.log('difference')
-        
-      }catch(e){
-        console.log(e)
-        console.log('之前没签到过')
+        if ((difference/300)<5)
+        {
+          wx.showToast({
+            title: '此地签到太频繁',
+            icon:'loading'
+          })
+          return
+        }
       }
 
-      console.log(before_timestamp)*/
+     // console.log(before_timestamp)
       wx.request({
         url: 'https://40525433.fudan-mini-program.com/cgi-bin/CheckIn',
         method: 'POST',
@@ -147,8 +154,6 @@ Page({
           if (that.data.text != ""){
             height_p = 80;
           }
-          //console.log("HHH");
-          //console.log(e);
           var old_history = wx.getStorageSync('checkins');
 
           if (e.data.status == "OK") {
