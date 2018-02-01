@@ -43,7 +43,8 @@ Page({
       markers: [{
         latitude: options.target_latitude,
         longitude: options.target_longitude,
-        iconPath: '../images/' + options.target_category + '.jpg',
+        //iconPath: '../images/location/' + options.target_category + '.jpg',
+        //iconPath: '../images/location/' + 'undefined.png',
       }],
       in_china: options.in_china,
     });

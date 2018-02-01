@@ -4,7 +4,6 @@
       <view style="flex:0.3"></view>
       <view style="flex:0.4">
         <map bindmarkertap="markertap" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" />
-        
       </view>
       <view style="flex:0.3"></view>
   </view>
