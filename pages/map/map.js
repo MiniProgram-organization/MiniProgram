@@ -19,6 +19,8 @@ Page({
     text: '',
     ad_info:{},
     in_china:0,
+    check_in_last_time:0
+
   },
 
   /**
@@ -96,14 +98,30 @@ Page({
   },
 
   checkIn: function (e) {
+    console.log(this.data.check_in_last_time)
     var that = this;
       if (app.globalData.openid == ""){
         that.loginNoOpenId();
       }
       var now_timestamp = Date.parse(new Date());  
+      var d1 = (now_timestamp - that.data.check_in_last_time)/1000;
+      console.log(d1)
+      console.log('d1')
+      if((d1/60)<5){
+        that.setData({
+          check_in_last_time:now_timestamp,
+        })
+
+        return;
+
+      }
       console.log(now_timestamp);
       var before_timestamp = 0;
-      
+      wx.showToast({
+        title: '请等待',
+        icon:'loading',
+        duration:100000,
+      })
       console.log('输出字典')
       console.log(app.globalData.checkinLastTimeTable);
       console.log('一半')

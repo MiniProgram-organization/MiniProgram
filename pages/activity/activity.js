@@ -261,8 +261,8 @@ Page({
             console.log(res)
             if (res.data.status == 'OK'){
               if (res.data.nation == '中国'){
-                wx.setStorageSync('inChina', 1)
-                that.useMap(1, that.data.latitude, that.data.longitude);
+                wx.setStorageSync('inChina', 0)
+                that.useMap(0, that.data.latitude, that.data.longitude);
               }
               else{
                 wx.setStorageSync('inChina', 0)
