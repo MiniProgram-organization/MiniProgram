@@ -212,10 +212,10 @@ Page({
       data = {
         openid: openid,
         sessionid: sessionid,
-        latitude: 35.710934,
-        longitude: 139.729699,
-        //latitude: latitude,
-        //longitude: longitude,
+       // latitude: 35.710934,
+       // longitude: 139.729699,
+        latitude: latitude,
+        longitude: longitude,
       }
     }
     else {
@@ -289,14 +289,14 @@ Page({
         day1_weather['icon'] = "../images/weather/" + item.forecast[1].code + ".png"
         day2_weather['icon'] = "../images/weather/" + item.forecast[2].code + ".png"
 
-        var day2_xq = new Date(parseInt(day0[0])).getDay();
-        if (day2_xq = 1) day2_weather['xq'] = '星期一'
-        if (day2_xq = 2) day2_weather['xq'] = '星期二'
-        if (day2_xq = 3) day2_weather['xq'] = '星期三'
-        if (day2_xq = 4) day2_weather['xq'] = '星期四'
-        if (day2_xq = 5) day2_weather['xq'] = '星期五'
-        if (day2_xq = 6) day2_weather['xq'] = '星期六'
-        if (day2_xq = 0) day2_weather['xq'] = '星期日'
+        var day2_xq = new Date(""+String.valueOf(day2[2] + "-" + day2[0] + "-" + mp[day2[1]])).getDay();
+        if (day2_xq == 1) day2_weather['xq'] = '星期一'
+        if (day2_xq == 2) day2_weather['xq'] = '星期二'
+        if (day2_xq == 3) day2_weather['xq'] = '星期三'
+        if (day2_xq == 4) day2_weather['xq'] = '星期四'
+        if (day2_xq == 5) day2_weather['xq'] = '星期五'
+        if (day2_xq == 6) day2_weather['xq'] = '星期六'
+        if (day2_xq == 0) day2_weather['xq'] = '星期日'
 
         that.setData({
           city: city,
@@ -447,13 +447,15 @@ Page({
         day2_weather['icon'] = "../images/weather/" + res.data.forecast[2].cond_code_d + ".png" 
 
         var day2_xq = new Date(res.data.forecast[2].date).getDay();
-        if (day2_xq = 1) day2_weather['xq'] = '星期一'
-        if (day2_xq = 2) day2_weather['xq'] = '星期二'
-        if (day2_xq = 3) day2_weather['xq'] = '星期三'
-        if (day2_xq = 4) day2_weather['xq'] = '星期四'
-        if (day2_xq = 5) day2_weather['xq'] = '星期五'
-        if (day2_xq = 6) day2_weather['xq'] = '星期六'
-        if (day2_xq = 0) day2_weather['xq'] = '星期日'
+        console.log('xqggg')
+        console.log(day2_xq)
+        if (day2_xq == 1) day2_weather['xq'] = '星期一'
+        if (day2_xq == 2) day2_weather['xq'] = '星期二'
+        if (day2_xq == 3) day2_weather['xq'] = '星期三'
+        if (day2_xq == 4) day2_weather['xq'] = '星期四'
+        if (day2_xq == 5) day2_weather['xq'] = '星期五'
+        if (day2_xq == 6) day2_weather['xq'] = '星期六'
+        if (day2_xq == 0) day2_weather['xq'] = '星期日'
         
         if (res.data.Lifestyle == "" || res.data.Lifestyle == true) {
           
