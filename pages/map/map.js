@@ -18,6 +18,7 @@ Page({
     imgUrl: '',
     text: '',
     ad_info:{},
+    in_china:0,
   },
 
   /**
@@ -43,7 +44,8 @@ Page({
         latitude: options.target_latitude,
         longitude: options.target_longitude,
         iconPath: '../images/' + options.target_category + '.jpg',
-      }]
+      }],
+      in_china: options.in_china,
     });
   },
 
@@ -113,7 +115,7 @@ Page({
         var difference = (now_timestamp - before_timestamp)/1000;
         console.log(difference)
         console.log('difference')
-        if ((difference/300)<5)
+        if ((difference/60)<5)
         {
           wx.showModal({
             title: '提示',
@@ -151,7 +153,8 @@ Page({
           sessionid: app.globalData.sessionid,
           latitude: app.globalData.latitude,//用户所在纬度
           longitude: app.globalData.longitude,  //用户所在经度
-          text: that.data.text
+          text: that.data.text,
+          in_china: that.data.in_china,
         },
         success: function (e) {
 

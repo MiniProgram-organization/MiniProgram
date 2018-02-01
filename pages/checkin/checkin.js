@@ -113,7 +113,8 @@ Page({
       + '&target_adinfo_province=' + target_adinfo_province
       + '&target_adinfo_city=' + target_adinfo_city
       + '&target_adinfo_district=' + target_adinfo_district
-      + '&target_adinfo_country=' + target_adinfo_country;
+      + '&target_adinfo_country=' + target_adinfo_country 
+      + '&in_china=' + inChina ;
 
     wx.redirectTo({
       url: url
@@ -330,6 +331,7 @@ Page({
           longitude: longitude,
         });
         var inChina = wx.getStorageSync('inChina');
+        //var inChina = 0
         that.setData({
           inChina: inChina
         })
