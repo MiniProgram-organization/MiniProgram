@@ -116,7 +116,7 @@ Page({
         {
           wx.showModal({
             title: '提示',
-            content: '您在这个地点签到过于频繁，请5分钟后再试。',
+            content: '您在该地点签到过于频繁，请5分钟后再试。',
             success: function (res) {
               if (res.confirm) {
               } else if (res.cancel) {

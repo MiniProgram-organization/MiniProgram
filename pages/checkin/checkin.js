@@ -235,7 +235,9 @@ Page({
     });
   },
   getForeignPOI: function (latitude, longitude){
-    
+    /*wx.request({
+      url: ,
+    })*/
   },
   fetchData: function () {
     var that = this;
