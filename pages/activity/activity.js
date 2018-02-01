@@ -191,7 +191,6 @@ Page({
           url: 'https://40525433.fudan-mini-program.com/cgi-bin/GetNation',
           method:'POST',
           data: {
-
             latitude: res.latitude,
             longitude: res.longitude,
             openid: getApp().globalData.openid,
@@ -206,10 +205,10 @@ Page({
                 wx.setStorageSync('inChina', 1)
               }
               else{
-                wx.showToast({
+                /*wx.showToast({
                   title: '抱歉，卿云Go签到功能对国外用户暂未开放!',
                   icon: 'loading'
-                })
+                })*/
                 wx.setStorageSync('inChina', 0)
               }
             }

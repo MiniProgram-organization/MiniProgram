@@ -38,6 +38,7 @@ Page({
       ad_province: options.target_adinfo_province,
       ad_city: options.target_adinfo_city,
       ad_district: options.target_adinfo_district,
+      ad_country: options.target_adinfo_country,
       markers: [{
         latitude: options.target_latitude,
         longitude: options.target_longitude,
