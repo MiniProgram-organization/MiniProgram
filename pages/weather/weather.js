@@ -212,8 +212,8 @@ Page({
       data = {
         openid: openid,
         sessionid: sessionid,
-        //latitude: 35.710934,
-        //longitude: 139.729699,
+       // latitude: 35.710934,
+       // longitude: 139.729699,
         latitude: latitude,
         longitude: longitude,
       }
@@ -237,16 +237,16 @@ Page({
       data: data,
       success: function (res) {
         console.log(res.data)
-        if (res.data.status != true) {
+        if (res.data.status != 'OK') {
           wx.showToast({
             title: '服务器功能未启用',
             icon: 'loading'
           })
           return;
         }
-        var city = res.data.results.channel.location.city;
+        var city = res.data.weatherWorld.channel.location.city;
         var now = {}
-        var item = res.data.results.channel.item;
+        var item = res.data.weatherWorld.channel.item;
         now['tmp'] = item.condition.temp;
         now['cond_txt'] = item.condition.text;
         now['cond_code'] = item.forecast[0].code;
@@ -289,14 +289,14 @@ Page({
         day1_weather['icon'] = "../images/weather/" + item.forecast[1].code + ".png"
         day2_weather['icon'] = "../images/weather/" + item.forecast[2].code + ".png"
 
-        var day2_xq = new Date(parseInt(day0[0])).getDay();
-        if (day2_xq = 1) day2_weather['xq'] = '星期一'
-        if (day2_xq = 2) day2_weather['xq'] = '星期二'
-        if (day2_xq = 3) day2_weather['xq'] = '星期三'
-        if (day2_xq = 4) day2_weather['xq'] = '星期四'
-        if (day2_xq = 5) day2_weather['xq'] = '星期五'
-        if (day2_xq = 6) day2_weather['xq'] = '星期六'
-        if (day2_xq = 0) day2_weather['xq'] = '星期日'
+        var day2_xq = new Date(""+String.valueOf(day2[2] + "-" + day2[0] + "-" + mp[day2[1]])).getDay();
+        if (day2_xq == 1) day2_weather['xq'] = '星期一'
+        if (day2_xq == 2) day2_weather['xq'] = '星期二'
+        if (day2_xq == 3) day2_weather['xq'] = '星期三'
+        if (day2_xq == 4) day2_weather['xq'] = '星期四'
+        if (day2_xq == 5) day2_weather['xq'] = '星期五'
+        if (day2_xq == 6) day2_weather['xq'] = '星期六'
+        if (day2_xq == 0) day2_weather['xq'] = '星期日'
 
         that.setData({
           city: city,
@@ -309,9 +309,9 @@ Page({
           detail_1_name:'空气湿度',
           detail_2_name:'风速 km/h',
           detail_3_name:'气压 mb',
-          detail_1_unit:res.data.results.channel.atmosphere.humidity+'%',
-          detail_2_unit: res.data.results.channel.wind.speed,
-          detail_3_unit: parseInt(res.data.results.channel.atmosphere.pressure),
+          detail_1_unit: res.data.weatherWorld.channel.atmosphere.humidity+'%',
+          detail_2_unit: res.data.weatherWorld.channel.wind.speed,
+          detail_3_unit: parseInt(res.data.weatherWorld.channel.atmosphere.pressure),
           lifestyle_font_size:0,
         })
         console.log(that.data.weather)
@@ -447,13 +447,15 @@ Page({
         day2_weather['icon'] = "../images/weather/" + res.data.forecast[2].cond_code_d + ".png" 
 
         var day2_xq = new Date(res.data.forecast[2].date).getDay();
-        if (day2_xq = 1) day2_weather['xq'] = '星期一'
-        if (day2_xq = 2) day2_weather['xq'] = '星期二'
-        if (day2_xq = 3) day2_weather['xq'] = '星期三'
-        if (day2_xq = 4) day2_weather['xq'] = '星期四'
-        if (day2_xq = 5) day2_weather['xq'] = '星期五'
-        if (day2_xq = 6) day2_weather['xq'] = '星期六'
-        if (day2_xq = 0) day2_weather['xq'] = '星期日'
+        console.log('xqggg')
+        console.log(day2_xq)
+        if (day2_xq == 1) day2_weather['xq'] = '星期一'
+        if (day2_xq == 2) day2_weather['xq'] = '星期二'
+        if (day2_xq == 3) day2_weather['xq'] = '星期三'
+        if (day2_xq == 4) day2_weather['xq'] = '星期四'
+        if (day2_xq == 5) day2_weather['xq'] = '星期五'
+        if (day2_xq == 6) day2_weather['xq'] = '星期六'
+        if (day2_xq == 0) day2_weather['xq'] = '星期日'
         
         if (res.data.Lifestyle == "" || res.data.Lifestyle == true) {
           

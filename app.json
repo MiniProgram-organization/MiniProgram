@@ -22,8 +22,7 @@
     "pages/otherMood/otherMood",
     "pages/qrcode/qrcode",
     "pages/tabbar/tabbar",
-    "pages/showtops/showtops",
-    "pages/discover/discover"
+    "pages/showtops/showtops"
   ],
   "window": {
     "window": {
@@ -62,12 +61,6 @@
         "text": "心情",
         "iconPath": "/pages/images/icon/mood_icon.png",
         "selectedIconPath": "/pages/images/icon/mood_icon.png"
-      },
-      {
-        "pagePath": "pages/discover/discover",
-        "text": "发现",
-        "iconPath": "/pages/images/icon/discover_icon.png",
-        "selectedIconPath": "/pages/images/icon/discover_icon.png"
       },
       {
         "pagePath": "pages/account/account",

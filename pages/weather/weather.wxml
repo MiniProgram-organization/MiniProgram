@@ -115,7 +115,7 @@
 
       <view class='day_container2'>
         <view class='xingqi'  style="font-size:{{forecast_other_text_font_size}}px">
-          <text>{{day2_weather.xq}}</text>
+          <text>后天</text>
         </view>
         <view class='riqi'  style="font-size:{{forecast_other_text_font_size}}px">
           <text>{{day2_weather.date}}</text>

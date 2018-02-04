@@ -1,3 +1,4 @@
+
 // pages/account/showtops.js
 var app = getApp();
 var genderChoose = ['未知', '男', '女']
@@ -87,8 +88,46 @@ Page({
   onShow: function (options) {
     //app.editTabBar();
     console.log(options); 
-    
 
+  },
+  onShow: function () {
+    //app.editTabBar(); 
+    var that = this;
+    wx.request({
+      url: 'https://40525433.fudan-mini-program.com/cgi-bin/Login',
+      method: 'POST',
+      success: function(res){
+          // nickName = res.data.nickName;
+          // gender = genderChoose[res.data.gender];
+          // province = res.data.province;
+          // country = res.data.country;
+          // score = res.data.score;
+          // if (nickName == "") nickName = " ";
+          // if (gender == "") gender = " ";
+          // if (province == "") province = " ";
+          // if (country == "") country = " ";
+          // if (score == "") score = " ";
+          var nickName = 'hazelnut';
+          var gender = 1;
+          var country = 'China';
+          var score = 88;
+          var province = 'Shanghai';
+          that.setData({
+            nickName: nickName,
+            windowWidth: app.globalData.windowWidth,
+            windowHeight: app.globalData.windowHeight,
+            avatarUrl: app.globalData.rawData.avatarUrl,
+            gender: gender,
+            province: province,
+            country: country,
+            iconUrl: "../images/account/ic_chevron_right_black_48dp.png",
+            score: score
+          });
+      },
+      fail: function(res){
+        
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面隐藏

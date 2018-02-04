@@ -18,6 +18,9 @@ Page({
     imgUrl: '',
     text: '',
     ad_info:{},
+    in_china:0,
+    check_in_last_time:0
+
   },
 
   /**
@@ -38,11 +41,14 @@ Page({
       ad_province: options.target_adinfo_province,
       ad_city: options.target_adinfo_city,
       ad_district: options.target_adinfo_district,
+      ad_country: options.target_adinfo_country,
       markers: [{
         latitude: options.target_latitude,
         longitude: options.target_longitude,
-        iconPath: '../images/' + options.target_category + '.jpg',
-      }]
+        //iconPath: '../images/location/' + options.target_category + '.jpg',
+        //iconPath: '../images/location/' + 'undefined.png',
+      }],
+      in_china: options.in_china,
     });
   },
 
@@ -92,9 +98,64 @@ Page({
   },
 
   checkIn: function (e) {
+    //console.log(this.data.check_in_last_time)
     var that = this;
       if (app.globalData.openid == ""){
         that.loginNoOpenId();
+      }
+      var now_timestamp = Date.parse(new Date());  
+    /*  var d1 = (now_timestamp - that.data.check_in_last_time)/1000;
+      console.log(d1)
+      console.log('d1')
+      if((d1/60)<5){
+        that.setData({
+          check_in_last_time:now_timestamp,
+        })
+
+        return;
+
+      }*/
+      console.log(now_timestamp);
+      var before_timestamp = 0;
+      wx.showToast({
+        title: '请等待',
+        icon:'loading',
+        duration:100000,
+      })
+      console.log('输出字典')
+      console.log(app.globalData.checkinLastTimeTable);
+      console.log('一半')
+      console.log(that.data.POI_id + "")
+      before_timestamp = app.globalData.checkinLastTimeTable[that.data.POI_id+""];
+      if (before_timestamp == undefined){ //之前没有签到过
+        var gd = 1; //不执行操作
+      }
+      else{
+        var difference = (now_timestamp - before_timestamp)/1000;
+        console.log(difference)
+        console.log('difference')
+        if ((difference/60)<5)
+        {
+          wx.showModal({
+            title: '提示',
+            content: '您在该地点签到过于频繁，请5分钟后再试。',
+            success: function (res) {
+              if (res.confirm) {
+              } else if (res.cancel) {
+              }
+            }
+          })  
+          wx.showToast({
+            title: '请稍后再试',
+            icon: 'loading',
+            duration: 500,
+          })
+         /* wx.showToast({
+            title: '此地签到太频繁',
+            icon:'loading'
+          })*/
+          return
+        }
       }
       wx.request({
         url: 'https://40525433.fudan-mini-program.com/cgi-bin/CheckIn',
@@ -116,9 +177,11 @@ Page({
           sessionid: app.globalData.sessionid,
           latitude: app.globalData.latitude,//用户所在纬度
           longitude: app.globalData.longitude,  //用户所在经度
-          text: that.data.text
+          text: that.data.text,
+          in_china: that.data.in_china,
         },
         success: function (e) {
+
           var datetime = new Date();
           var time = e.data.time;
           var date = e.data.date
@@ -126,11 +189,11 @@ Page({
           if (that.data.text != ""){
             height_p = 80;
           }
-          console.log("HHH");
-          console.log(e);
           var old_history = wx.getStorageSync('checkins');
 
           if (e.data.status == "OK") {
+            app.globalData.checkinLastTimeTable[that.data.POI_id.toString()] = now_timestamp;
+            console.log(app.globalData.checkinLastTimeTable)
             var award = e.data.award;
             var scores = e.data.scores;
             var duration = e.data.duration;

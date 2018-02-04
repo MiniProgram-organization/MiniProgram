@@ -8,19 +8,26 @@ App({
    * @brief 先检查是否还处于登录状态，如果成功直接进入主页，否则进行登录流程
    */
   globalData: {
+    category_foreign__to_china:{
+      "food": 'restaurant',
+      "parks": 'living_service',
+      "travel": 'tourism',
+      "building": 'hotel',
+      "arts": 'entertainment',
+      "shopes": 'mall',
+      "nightlife" : 'nightlife'
+    },
     windowWidth: '',
     rawData:{},
     windowHeight: '',
     openid: '',
     sessionid: '',
     checkins: [],
-    rawData: {},
     latitude: 0.0,
     longitude: 0.0,
     qqmapsdk: {},
     qrcodeUrl: "",
     weatherCity:"",
-    //tabbar: {},
     locationMap: {
       "房产小区": "resident",
       "教育学校": "school",
@@ -40,7 +47,7 @@ App({
     categoryDic:{},
     districtDict:{},
     placeDict:{},
-    checkinLastTime:{},
+    checkinLastTimeTable: new Array(),
   },
   /*
   editTabBar: function () {

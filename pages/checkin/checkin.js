@@ -1,3 +1,4 @@
+
 // checkin.js
 var utils = require('../../utils/utils.js')
 var QQMapWX = require('../../utils/qqmap-wx-jssdk.js');
@@ -16,6 +17,7 @@ Page({
     markers: [],
     searchPOIVal: "",
     inputShowed: false,
+    inChina: 0
   },
 
   onShareAppMessage: function (res) {
@@ -79,8 +81,8 @@ Page({
 
   redictDetail: function (e) {
     var target_id = e.currentTarget.id;
-
-    var target_latitude, target_longitude, target_category, target_venue, target_logoPath, target_adinfo_province, target_adinfo_city, target_adinfo_district;
+    var inChina = this.data.inChina;
+    var target_latitude, target_longitude, target_category, target_venue, target_logoPath, target_adinfo_province, target_adinfo_city, target_adinfo_district, target_adinfo_country;
     for (var index = 0; index < this.data.markers.length; index++) {
       if (this.data.markers[index].POI_id == target_id) {
         target_latitude = this.data.markers[index].latitude;
@@ -88,10 +90,17 @@ Page({
         target_venue = this.data.markers[index].venue;
         target_category = this.data.markers[index].category;
         target_logoPath = this.data.markers[index].logoPath;
-        target_adinfo_province = this.data.markers[index].ad_info.province;
+        if (inChina == 1){
+          target_adinfo_province = this.data.markers[index].ad_info.province;
+          target_adinfo_country = '中国';
+          target_adinfo_district = this.data.markers[index].ad_info.district;
+        }
+        else if(inChina == 0){
+          target_adinfo_province = this.data.markers[index].ad_info.state;
+          target_adinfo_country = this.data.markers[index].ad_info.country;
+          target_adinfo_district = "";
+        }
         target_adinfo_city = this.data.markers[index].ad_info.city;
-        target_adinfo_district = this.data.markers[index].ad_info.district;
-        console.log(target_adinfo_province);
         break;
       }
     }
@@ -103,8 +112,10 @@ Page({
       + '&target_logoPath=' + target_logoPath
       + '&target_venue=' + target_venue
       + '&target_adinfo_province=' + target_adinfo_province
-    + '&target_adinfo_city=' + target_adinfo_city
-    + '&target_adinfo_district=' + target_adinfo_district;
+      + '&target_adinfo_city=' + target_adinfo_city
+      + '&target_adinfo_district=' + target_adinfo_district
+      + '&target_adinfo_country=' + target_adinfo_country 
+      + '&in_china=' + inChina ;
 
     wx.redirectTo({
       url: url
@@ -235,7 +246,72 @@ Page({
     });
   },
   getForeignPOI: function (latitude, longitude){
-    
+    var that = this;
+    wx.request({
+      url: 'https://40525433.fudan-mini-program.com/cgi-bin/SearchPOI',
+      method: 'POST',
+      data: {
+        latitude: latitude,
+        longitude: longitude,
+        //latitude: 35.710934,
+        //longitude: 139.729699,
+        openid: app.globalData.openid,
+        sessionid: app.globalData.sessionid,
+      },
+      success: function (res) {
+        console.log(res)
+        console.log('poi')
+        var items = res.data.response.groups[0].items
+        console.log(items)
+        var tempMarkers = [];
+        var tempIncludePoints = [];
+
+        for(var i = 0; i < items.length; i++){
+          var tempLatitude = items[i].venue.location.lat;
+          var tempLongitude = items[i].venue.location.lng;
+          var category = items[i].venue.categories[0].name;
+          var venue = items[i].venue.name;
+          var POI_id = items[i].venue.id;
+          var ad_info = {
+            "country":items[i].venue.location.country,
+            "city":items[i].venue.location.city,
+            "state":items[i].venue.location.state
+          };
+          var icon_init = items[i].venue.categories[0].icon.prefix.substring(39);
+          console.log(icon_init)
+          var icon = ""
+          for(var cc = 0; cc < icon_init.length; cc++){
+            if (icon_init[cc] != "_" && icon_init[cc] != "/"){
+              icon = icon + icon_init[cc];
+            }
+            else break;
+          }
+          console.log(icon)
+
+          tempMarkers.push({
+            POI_id: POI_id,
+            latitude: tempLatitude,
+            longitude: tempLongitude,
+            iconPath: '../images/map/dot.jpg',
+            logoPath: '../images/location/' + 
+             + '.png',
+            category: category,
+            venue: venue,
+            ad_info: ad_info,
+          });
+          tempIncludePoints.push({
+            latitude: tempLatitude,
+            longitude: tempLongitude,
+          });
+        }
+        
+        that.setData({
+          markers: tempMarkers,
+          include_points: tempIncludePoints
+        });
+
+      }
+    })
   },
   fetchData: function () {
     var that = this;
@@ -258,8 +334,14 @@ Page({
           longitude: longitude,
         });
         var inChina = wx.getStorageSync('inChina');
-        if (inChina == 1) that.getChinaPOI(latitude, longitude);
-        else that.getForeignPOI(latitude, longitude);
+        //var inChina = 0
+        that.setData({
+          inChina: inChina
+        })
+        // if (inChina == 1) 
+        //   that.getChinaPOI(latitude, longitude);
+        // else
+          that.getForeignPOI(latitude, longitude);
       }
     });
 

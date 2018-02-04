@@ -25,6 +25,7 @@ Page({
     object_day:7,
     award_text_1:"",
     award_text_2:"",
+    inChina:0
   },
   redirectCheckIn: function () {
     
@@ -118,6 +119,64 @@ Page({
       url: '../placesta/placesta'
     })
   },
+  useMap: function (inChina, latitude,  longitude){
+    var that = this;
+    if(inChina == 1){
+      app.globalData.qqmapsdk.reverseGeocoder({
+        location: {
+          latitude: latitude,
+          longitude: longitude,
+        },
+        get_poi: 1,
+        success: function (res) {
+          console.log(res)
+          if (res.result.pois == undefined) {
+            return;
+          }
+          var coordinates = res.result.pois;
+          //marker数组
+          var tempMarkers = [];
+          var tempIncludePoints = [];
+          
+          for (var i = 0; i < coordinates.length; i++) {
+            var tempLatitude = coordinates[i].location.lat;
+            var tempLongitude = coordinates[i].location.lng;
+            var category = coordinates[i].category
+            var venue = coordinates[i].title;
+            var POI_id = coordinates[i].id;
+            tempMarkers.push({
+              POI_id: POI_id,
+              latitude: tempLatitude,
+              longitude: tempLongitude,
+              iconPath: '../images/map/dot.jpg',
+              category: category,
+              venue: venue
+
+            });
+            tempIncludePoints.push({
+              latitude: tempLatitude,
+              longitude: tempLongitude,
+            });
+          }
+          that.setData({
+            markers: tempMarkers,
+            include_points: tempIncludePoints
+          });
+        },
+        fail: function (res) {
+          console.log(res)
+        }
+      });
+    }
+    else{
+      that.setData({
+        markers: [{
+          latitude: latitude,
+          longitude: longitude,
+        }],
+      });
+    }
+  },
   fetchData: function (cnt) {
     var that = this;
     this.setData({
@@ -171,12 +230,10 @@ Page({
           }
         },
         fail: function(res){
-
         }
       })
     }
 
-    
     wx.getLocation({
       type: 'wgs84', //返回可以用于wx.openLocation的经纬度
       success: function (res) {
@@ -186,17 +243,18 @@ Page({
         //存储一个缓存的经纬度,用于定位失败时使用
         wx.setStorageSync('latitude', res.latitude);
         wx.setStorageSync('longitude', res.longitude);
-
+        that.setData({
+          longitude: res.longitude,
+          latitude: res.latitude,
+        });
         wx.request({
           url: 'https://40525433.fudan-mini-program.com/cgi-bin/GetNation',
           method:'POST',
           data: {
-
             latitude: res.latitude,
             longitude: res.longitude,
             openid: getApp().globalData.openid,
             sessionid: getApp().globalData.sessionid,
-            
           },
           success: function (res) {
             console.log('nation...')
@@ -204,13 +262,11 @@ Page({
             if (res.data.status == 'OK'){
               if (res.data.nation == '中国'){
                 wx.setStorageSync('inChina', 1)
+                that.useMap(1, that.data.latitude, that.data.longitude);
               }
               else{
-                wx.showToast({
-                  title: '抱歉，卿云Go签到功能对国外用户暂未开放!',
-                  icon: 'loading'
-                })
                 wx.setStorageSync('inChina', 0)
+                that.useMap(0, that.data.latitude, that.data.longitude);
               }
             }
             else{
@@ -226,52 +282,6 @@ Page({
           }
 
         })
-        app.globalData.qqmapsdk.reverseGeocoder({
-          location: {
-            latitude: res.latitude,
-            longitude: res.longitude,
-          },
-          get_poi: 1,
-          success: function (res) {
-            if(res.result.pois == undefined){
-              return;
-            }
-            var coordinates = res.result.pois;
-            //marker数组
-            var tempMarkers = [];
-            var tempIncludePoints = [];
-
-            for (var i = 0; i < coordinates.length; i++) {
-              var tempLatitude = coordinates[i].location.lat;
-              var tempLongitude = coordinates[i].location.lng;
-              var category = coordinates[i].category
-              var venue = coordinates[i].title;
-              var POI_id = coordinates[i].id;
-              tempMarkers.push({
-                POI_id: POI_id,
-                latitude: tempLatitude,
-                longitude: tempLongitude,
-                iconPath: '../images/map/dot.jpg',
-                category: category,
-                venue: venue
-
-              });
-              tempIncludePoints.push({
-                latitude: tempLatitude,
-                longitude: tempLongitude,
-              });
-            }
-            console.log(tempMarkers);
-            that.setData({
-              markers: tempMarkers,
-              include_points: tempIncludePoints
-            });
-
-          },
-          fail: function () {
-            
-          }
-        });
       },
       fail: function(){
         cnt = cnt + 1
