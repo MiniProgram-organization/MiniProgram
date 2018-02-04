@@ -1,4 +1,5 @@
 
+
 // checkin.js
 var utils = require('../../utils/utils.js')
 var QQMapWX = require('../../utils/qqmap-wx-jssdk.js');
@@ -338,9 +339,9 @@ Page({
         that.setData({
           inChina: inChina
         })
-        // if (inChina == 1) 
-        //   that.getChinaPOI(latitude, longitude);
-        // else
+        if (inChina == 1) 
+          that.getChinaPOI(latitude, longitude);
+        else
           that.getForeignPOI(latitude, longitude);
       }
     });
