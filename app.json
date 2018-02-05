@@ -63,6 +63,12 @@
         "selectedIconPath": "/pages/images/icon/mood_icon.png"
       },
       {
+        "pagePath": "pages/friends/friends",
+        "text": "发现",
+        "iconPath": "/pages/images/icon/discover_unselected.png",
+        "selectedIconPath": "/pages/images/icon/discover_icon.png"
+      },
+      {
         "pagePath": "pages/account/account",
         "text": "账号",
         "iconPath": "/pages/images/icon/account_icon.png",

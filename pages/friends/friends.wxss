@@ -1,1 +1,10 @@
 /* friends.wxss */
+.friends-round-thumb{
+  border-radius: 100%
+}
+
+.friends-gender{
+  width: 16px;
+  height: 16px;
+  margin-left:5px;
+}
