@@ -1,12 +1,6 @@
 <view style="width:{{windowWidth}}px;height:{{windowHeight}}px">
-  <!--<import src="/pages/tabbar/tabbar.wxml"/>
-
-<template is="tabbar" data="{{tabbar}}"/>
--->
-  <view class='head_view'>
-
-    <image class='headimg' bindtap="redirectToQRCode" src="{{avatarUrl}}">
-    </image>
+  <view style='height:{{windowHeight*0.5}}px'>
+    <image class='bighead_view' style='height:70%;width:60%;margin:10% 20%' src="{{avatarUrl}}"></image>
   </view>
 
   <view class="weui-cells weui-cells_after-title">

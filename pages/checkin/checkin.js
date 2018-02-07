@@ -1,3 +1,5 @@
+
+
 // checkin.js
 var utils = require('../../utils/utils.js')
 var QQMapWX = require('../../utils/qqmap-wx-jssdk.js');
@@ -277,10 +279,11 @@ Page({
             "state":items[i].venue.location.state
           };
           var icon_init = items[i].venue.categories[0].icon.prefix.substring(39);
+          console.log(icon_init)
           var icon = ""
           for(var cc = 0; cc < icon_init.length; cc++){
             if (icon_init[cc] != "_" && icon_init[cc] != "/"){
-              icon = icon + icon_init[cc]
+              icon = icon + icon_init[cc];
             }
             else break;
           }
@@ -291,7 +294,8 @@ Page({
             latitude: tempLatitude,
             longitude: tempLongitude,
             iconPath: '../images/map/dot.jpg',
-            logoPath: '../images/location/undefined.png',
+            logoPath: '../images/location/' + 
+             + '.png',
             category: category,
             venue: venue,
             ad_info: ad_info,
@@ -335,8 +339,10 @@ Page({
         that.setData({
           inChina: inChina
         })
-        if (inChina == 1) that.getChinaPOI(latitude, longitude);
-        else that.getForeignPOI(latitude, longitude);
+        if (inChina == 1) 
+          that.getChinaPOI(latitude, longitude);
+        else
+          that.getForeignPOI(latitude, longitude);
       }
     });
 

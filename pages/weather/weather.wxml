@@ -11,8 +11,8 @@
       <image class="image_location" src="{{location_url}}"></image>
       <text class='text_location'>{{city}}</text>
     </view>
-    <view class='title_right' >
-        
+    <view class='title_right' bindtap="getQRCodeWeather" >
+        <image class="image_share" src="{{share_url}}"></image>
     </view>
   </view>
 

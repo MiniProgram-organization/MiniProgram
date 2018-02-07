@@ -109,35 +109,33 @@ Page({
       longitude: that.data.longitude,
       openid: getApp().globalData.openid,
       sessionid: getApp().globalData.sessionid,
+      in_china: this.data.inChina,
       weather: {
-        now: that.data.weather,
-        forecast: that.data.forecast
+        city: this.data.city,
+        today: this.data.weather,
+        day0_weather: this.data.day0_weather,
+        day1_weather: this.data.day1_weather,
+        day2_weather: this.data.day2_weather,
+        lifestyle_text: this.data.lifestyle_text
       }
     }
     console.log(data)
+    
     wx.request({
       url: 'https://40525433.fudan-mini-program.com/cgi-bin/qrcode.py',
       method: 'POST',
-      data: {
-        latitude: that.data.latitude,
-        longitude: that.data.longitude,
-        openid: getApp().globalData.openid,
-        sessionid: getApp().globalData.sessionid,
-        weather:{
-          now:that.data.weather,
-          forecast: that.data.forecast
-        }
-      },
+      data: data,
       success: function (e) {
         console.log(e.data)
       //  console.log(data)
+      /*
         console.log(that.latitude)
         that.setData({
           qrcodeUrl: e.data.url
         });
         wx.navigateTo({
           url: '../weather_qrcode/weather_qrcode?qrcodeUrl=' + that.data.qrcodeUrl,
-        })
+        })*/
       }
     })
   },

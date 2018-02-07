@@ -11,6 +11,11 @@
     display: flex;
     justify-content: space-between;
 }
+
+.bighead_view{
+  text-align: center;
+}
+
 .privacy
 {
   margin-top: 40px;

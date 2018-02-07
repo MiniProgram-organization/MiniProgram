@@ -1,3 +1,4 @@
+
 // pages/account/showtops.js
 var app = getApp();
 var genderChoose = ['未知', '男', '女']
@@ -28,7 +29,47 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options);
+    var openid_other = options.target_id;
+    var that = this;
+    wx.request({
+      url: 'https://40525433.fudan-mini-program.com/cgi-bin/Profile',
+      method: 'POST',
+      data: {
+        openid: app.globalData.openid,
+        sessionid: app.globalData.sessionid,
+        openid_other: openid_other,
+        latitude: app.globalData.latitude,
+        longitude: app.globalData.longitude
+      },
+      success: function (res) {
+        console.log(res.data);
+        var nickName = res.data.nickName;
+        var gender = genderChoose[res.data.gender];
+        var province = res.data.province;
+        var country = res.data.country;
+        var score = res.data.score;
+        if (nickName == "") nickName = " ";
+        if (gender == "") gender = " ";
+        if (province == "") province = " ";
+        if (country == "") country = " ";
+        if (score == "") score = " ";
+        that.setData({
+          nickName: nickName,
+          windowWidth: app.globalData.windowWidth,
+          windowHeight: app.globalData.windowHeight,
+          avatarUrl: app.globalData.rawData.avatarUrl,
+          gender: gender,
+          province: province,
+          country: country,
+          iconUrl: "../images/account/ic_chevron_right_black_48dp.png",
+          score: score
+        });
+      },
+      fail: function (res) {
 
+      }
+    })
   },
 
   
@@ -44,6 +85,11 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
+  onShow: function (options) {
+    //app.editTabBar();
+    console.log(options); 
+
+  },
   onShow: function () {
     //app.editTabBar(); 
     var that = this;
@@ -82,7 +128,6 @@ Page({
         
       }
     })
-    
   },
   /**
    * 生命周期函数--监听页面隐藏
