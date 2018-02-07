@@ -1,17 +1,22 @@
 <view class="page">
     <view class="page__bd">
         <view class="weui-panel weui-panel_access">
+          <view class="weui-panel__hd friends_no-friends" hidden="{{!noFriends}}">您周围暂时没有卿云GO用户~</view>
           <view class="weui-panel__bd">
-                <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" wx:for-items="{{friends_infos}}" wx:key="{{index}}">
+                <navigator url="../friends_showPeople/friends_showPeople?target_id={{item.openid}}&avatarUrl={{item.avatarUrl}}&gender={{item.gender}}&venue={{item.venue}}&nickName={{item.nickName}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" wx:for-items="{{friends_infos}}" wx:key="{{index}}">
                     <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                        <image class="weui-media-box__thumb friends-round-thumb" src="{{item.avatar_url}}" />
+                        <image class="weui-media-box__thumb friends-round-thumb" src="{{item.avatarUrl}}" />
                     </view>
                     <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                        <view class="weui-media-box__title">{{item.name}}<image class="friends-gender"src="{{item.isMale?icon_male:icon_female}}"></image></view>
-                        <view class="weui-media-box__desc">{{item.king_words}}</view>
+                        <view class="weui-media-box__title">{{item.nickName}}<image class="friends-gender" hidden="{{item.gender==0}}"src="{{(item.gender==1)?icon_male:icon_female}}"></image></view>
+                        <!--<view class="weui-media-box__desc">{{item.king_words}}</view>-->
+                        <view class="weui-media-box__info friends_poi-name-view">
+                            <view class="weui-media-box__info__meta friends_poi-container">最近在 <span class="friends_poi-name" >{{ item.venue }} </span> 签到过</view>
+                        </view>
                     </view>
                 </navigator>
             </view>
         </view>
+        
     </view>
 </view>

@@ -1,4 +1,5 @@
 // friends.js
+var app = getApp();
 Page({
 
   /**
@@ -7,36 +8,15 @@ Page({
   data: {
     icon_male:"../images/friends/male-48.png",
     icon_female:"../images/friends/female-48.png",
-  
+    friends_num:0,
+    haveRequested:false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    /* 向服务器发送请求信息 */
-    /* 收到服务的返回信息 */
-    /* 解析服务器返回的信息到list中 */
-    var friends_infos = [
-      {
-        name:"用户1",
-        avatar_url:"../images/test.png",
-        isMale:true,
-        king_number:0,
-        king_words:"他还没有当过地主"
-      },
-      {
-        name: "用户2",
-        avatar_url: "../images/test.png",
-        isMale: false,
-        king_number: 4,
-        king_words: "她是 4 个地方的地主~"
-      }
-    ];
-    this.setData({
-      friends_infos:friends_infos
-    });
-
+  
   },
 
   /**
@@ -50,6 +30,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    if(!this.data.haveRequested){
+      this.requestForFriends();
+    }
   
   },
 
@@ -86,5 +69,52 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+
+  /**
+   * 向服务器发送请求信息, 收到请求信息并设置页面data
+   */
+  requestForFriends:function (){
+    var that = this;
+    wx.request({
+      url: 'https://40525433.fudan-mini-program.com/cgi-bin/SearchNearby',
+      method: 'POST',
+      data: {
+        openid: app.globalData.openid,
+        sessionid: app.globalData.sessionid,
+        latitude: app.globalData.latitude,
+        longitude: app.globalData.longitude
+      },
+      success: function (res) {
+        console.log("[Friends] response:");
+        console.log(res.data);
+        if (res.data.status == "OK") {
+          var friends_num = res.data.user_num;
+          var friends_infos = res.data.users;
+          var noFriends = (friends_num == 0);
+
+          that.setData({
+            friends_num: friends_num,
+            friends_infos:friends_infos,
+            noFriends:noFriends,
+            haveRequested:true
+          });
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: '获取信息失败',
+            showCancel: false
+          });
+        }
+      },
+      fail: function () {
+        wx.showModal({
+          title: '提示',
+          content: '获取信息失败',
+          showCancel: false
+        });
+      }
+    });
+   
   }
 })

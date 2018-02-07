@@ -1,0 +1,28 @@
+<!--pages/friends_showPeople/friends_showPeople.wxml-->
+<view class="page">
+    <view class="page__bd friends_people-page-flex">
+        <view class="friends_people-avatar">
+          <image class="friends_people-avatar-img" src="{{avatarUrl}}" bindtap='previewImg'></image>
+        </view>
+        <view class="friends_people-nickName"><span class="friends_people-nickName-span">{{nickName}}</span><image class="friends-gender" hidden="{{item.gender==0}}" src="{{(gender==1)?icon_male:icon_female}}"></image>
+        </view>
+        <view class="friends_people-details">
+        <view class="friends_people-labels">
+          <view class="friends_people-label">所在地：</view>
+          <view class="friends_people-label">积分：</view>
+          <view class="friends_people-label">附近签到：</view>
+        </view>
+        <view class="friends_people-content">
+          <view class="friends_people-detail-cell">{{location}}</view>
+          <view class="friends_people-detail-cell">{{score}}</view>
+          <view class="friends_people-detail-cell">{{venue}}</view>
+        </view>
+        </view>
+        <view class="weui-footer friends_showPeople-footer weui-footer_fixed-bottom">
+            <view class="weui-footer__links">
+                <navigator url="../privacy/privacy" class="weui-footer__link">隐私条款</navigator>
+            </view>
+            <view class="weui-footer__text">Copyright © 2016-2017 卿云GO</view>
+        </view>       
+    </view>
+</view>

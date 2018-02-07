@@ -7,6 +7,7 @@
     "pages/account/account",
     "pages/trace/trace",
     "pages/friends/friends",
+    "pages/friends_showPeople/friends_showPeople",
     "pages/checkin/checkin",
     "pages/error/error",
     "pages/showpeople/showpeople",

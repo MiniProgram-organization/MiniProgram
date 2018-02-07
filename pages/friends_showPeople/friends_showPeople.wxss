@@ -1,0 +1,91 @@
+/* pages/friends_showPeople/friends_showPeople.wxss */
+.friends_people-page-flex{
+  display: flex;
+  flex-wrap:wrap;
+  align-items: center;
+}
+
+.friends_people-avatar{
+  width: 100%;
+  text-align: center;
+  padding: 100px;
+  padding-top: 100px;
+  padding-bottom: 20px;
+}
+
+.friends_people-avatar-img{
+  width: 120px;
+  height: 120px;
+  vertical-align: top;
+  border-radius: 100%;
+  border: 8px solid white;
+}
+
+.friends_people-nickName{
+  width:100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  word-break:break-all;
+  text-align: center;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.friends_people-nickName-span{
+  font-weight:400;
+  font-size:larger;
+
+}
+
+.friends-gender{
+  width:20px;
+  height:20px;
+  margin-left:5px;
+}
+
+.friends_people-details{
+  width: 100%;
+  padding-top: 50px;
+  display: flex;
+  display:-webkit-flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.friends_people-labels{
+  display:flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  height: 90px;
+  justify-content: space-between; 
+  align-items: flex-end;
+
+}
+
+.friends_people-label{
+  font-size:normal;
+  color:#4788CB;
+}
+
+.friends_people-content{
+  margin-left: 15px;
+  display:flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  height: 90px;
+  justify-content: space-between; 
+  align-items: flex-start;
+}
+
+.friends_people-detail-cell{
+  font-size:normal;
+  color: #999;
+}
+
+.friends_showPeople-footer{
+  width: 100%;
+}
