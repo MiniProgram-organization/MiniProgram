@@ -122,7 +122,7 @@ Page({
     console.log(data)
     
     wx.request({
-      url: 'https://40525433.fudan-mini-program.com/cgi-bin/qrcode.py',
+      url: 'https://40525433.fudan-mini-program.com/cgi-bin/WeatherImg.py',
       method: 'POST',
       data: data,
       success: function (e) {
