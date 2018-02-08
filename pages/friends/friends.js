@@ -30,6 +30,21 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var that = this;
+    var now_timestamp = Date.parse(new Date());
+    var before_timestamp = 0;
+    before_timestamp = app.globalData.discoverLastTime;
+    if (before_timestamp == undefined) { 
+      //之前没有按过发现，保持false
+    }else{
+      //之前按过发现，计算时间差，大于5min则重置haveRequested为false
+      var difference = (now_timestamp - before_timestamp) / 1000;
+      if ((difference / 60) >= 5){
+        this.setData({
+          haveRequested:false
+        });
+      }
+    }
     if(!this.data.haveRequested){
       this.requestForFriends();
     }

@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "Profile"
+  "navigationBarTitleText": "Profile",
+  "enablePullDownRefresh": false
 }

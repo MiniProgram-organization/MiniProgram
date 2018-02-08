@@ -11,6 +11,8 @@
 
 .friends_poi-name-view {
     padding-bottom: 0;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .friends_poi-container {
@@ -25,6 +27,8 @@
     background-color: #eee;
     margin-left: 10rpx;
     margin-right:10rpx;
+    white-space:nowrap;
+
 }
 
 .friends_no-friends{

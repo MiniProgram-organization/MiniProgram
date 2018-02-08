@@ -40,8 +40,8 @@
     "downloadFile": 10000
   },
   "tabBar": {
-    "color": "#353535",
-    "selectedColor": "#3cc51f",
+    "color": "#999",
+    "selectedColor": "#2196F3",
     "borderStyle": "white",
     "backgroundColor": "#ffffff",
     "list": [
@@ -66,7 +66,7 @@
       {
         "pagePath": "pages/friends/friends",
         "text": "发现",
-        "iconPath": "/pages/images/icon/discover_unselected.png",
+        "iconPath": "/pages/images/icon/discover_icon.png",
         "selectedIconPath": "/pages/images/icon/discover_icon.png"
       },
       {

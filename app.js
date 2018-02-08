@@ -48,6 +48,7 @@ App({
     districtDict:{},
     placeDict:{},
     checkinLastTimeTable: new Array(),
+    
   },
   /*
   editTabBar: function () {

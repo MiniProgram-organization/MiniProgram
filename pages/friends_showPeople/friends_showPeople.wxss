@@ -60,7 +60,7 @@
   display:flex;
   display: -webkit-flex;
   flex-direction: column;
-  height: 90px;
+  height: 70px;
   justify-content: space-between; 
   align-items: flex-end;
 
@@ -76,14 +76,18 @@
   display:flex;
   display: -webkit-flex;
   flex-direction: column;
-  height: 90px;
+  height: 70px;
   justify-content: space-between; 
   align-items: flex-start;
+  max-width: 60%;
 }
 
 .friends_people-detail-cell{
   font-size:normal;
   color: #999;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 25px;
 }
 
 .friends_showPeople-footer{

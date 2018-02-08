@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "周围的卿云GO用户"
+  "navigationBarTitleText": "周围的卿云Go用户",
+  "enablePullDownRefresh": false
 }

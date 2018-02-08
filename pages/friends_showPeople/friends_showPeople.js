@@ -12,8 +12,8 @@ Page({
     target_id:"",
     avatarUrl:"../images/showpeople/crown.png",
     nickName:"方睿钰",
-    gender:2,
-    location:"中国-上海",
+    gender:0,
+    location:"未知",
     score:8,
     venue:"琉璃厂西街"
   },
@@ -101,6 +101,7 @@ Page({
       success: function (res) {
         console.log("[Friends_showPeople] response data: ")
         console.log(res.data);
+        if(res.data.status=="OK"){
         var location = res.data.country;
         if(res.data.province!=""){
           location = location + "·" + res.data.province;
@@ -116,6 +117,13 @@ Page({
           location: location,
           score: score
         });
+        }else{
+          wx.showModal({
+            title: '提示',
+            content: '获取用户数据失败',
+            showCancel: false
+          });
+        }
       },
       fail: function (res) {
         wx.showModal({
