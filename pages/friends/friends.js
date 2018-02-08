@@ -92,7 +92,7 @@ Page({
   requestForFriends:function (){
     var that = this;
     wx.request({
-      url: 'https://40525433.fudan-mini-program.com/cgi-bin/SearchNearby',
+      url: 'https://40525433.fudan-mini-program.com/cgi-bin/Discover',
       method: 'POST',
       data: {
         openid: app.globalData.openid,
