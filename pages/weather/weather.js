@@ -43,6 +43,7 @@ Page({
     detail_3_unit:'',
     lifestyle_height:0,
     lifestyle_text:'',
+    qrcodeUrl:''
   },
 
   /**
@@ -127,6 +128,13 @@ Page({
       data: data,
       success: function (e) {
         console.log(e.data)
+        console.log(that.latitude)
+        that.setData({
+          qrcodeUrl: e.data.url
+        });
+        wx.navigateTo({
+          url: '../weather_qrcode/weather_qrcode?qrcodeUrl=' + that.data.qrcodeUrl,
+        })
       //  console.log(data)
       /*
         console.log(that.latitude)
