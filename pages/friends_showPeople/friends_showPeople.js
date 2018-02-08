@@ -10,12 +10,12 @@ Page({
     icon_female: "../images/friends/female-48.png",
 
     target_id:"",
-    avatarUrl:"../images/showpeople/crown.png",
-    nickName:"方睿钰",
+    avatarUrl:"../images/showpeople/discover_icon.png",
+    nickName:"猜猜我是谁",
     gender:0,
     location:"未知",
     score:8,
-    venue:"琉璃厂西街"
+    venue:"就在你周围"
   },
 
   /**
