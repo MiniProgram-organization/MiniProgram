@@ -127,23 +127,27 @@ Page({
       method: 'POST',
       data: data,
       success: function (e) {
-        console.log(e.data)
-        console.log(that.latitude)
-        that.setData({
-          qrcodeUrl: e.data.url
-        });
-        wx.navigateTo({
-          url: '../weather_qrcode/weather_qrcode?qrcodeUrl=' + that.data.qrcodeUrl,
+        if (e.data.status == "OK"){
+          console.log(e.data)
+          that.setData({
+            qrcodeUrl: e.data.url
+          });
+          wx.navigateTo({
+            url: '../weather_qrcode/weather_qrcode?qrcodeUrl=' + that.data.qrcodeUrl,
+          })
+        }
+        else{
+          wx.showToast({
+            title: '生成失败',
+            icon:'loading'
+          })
+        }
+      },
+      fail: function(e){
+        wx.showToast({
+          title: '生成失败',
+          icon: 'loading'
         })
-      //  console.log(data)
-      /*
-        console.log(that.latitude)
-        that.setData({
-          qrcodeUrl: e.data.url
-        });
-        wx.navigateTo({
-          url: '../weather_qrcode/weather_qrcode?qrcodeUrl=' + that.data.qrcodeUrl,
-        })*/
       }
     })
   },

@@ -34,47 +34,6 @@ Page({
         }
       ]
     })
-
-
-    /*
-      var preCityList = wx.getStorageSync('cityList');
-      var that = this;
-      if (preCityList == ""){
-        wx.request({
-          url: 'https://40525433.fudan-mini-program.com/cgi-bin/City',
-          method: 'POST',
-          data: {
-            //in_china:1,
-            openid: getApp().globalData.openid,
-            sessionid: getApp().globalData.sessionid,
-            level:0
-          },
-          success: function (res) {
-            var tmpShowList = []
-            tmpShowList.push({
-              id: 0,
-              name: '默认位置'
-            })
-            for (var i = 0; i < res.data.cities.length; i++){
-              tmpShowList.push({
-                id:i+1,
-                name: res.data.cities[i]
-              })
-            }
-            wx.setStorageSync('cityList', tmpShowList)
-            that.setData({
-              showList: tmpShowList
-            })
-          },
-          fail: function(res){
-          }
-        })
-      }
-      else{
-        that.setData({
-          showList: preCityList
-        })
-      }*/
   },
   listListener: function(e){
     console.log(this.data.level)
@@ -84,11 +43,6 @@ Page({
       selectedName: this.data.showList[e.currentTarget.id].name
     })
     if(this.data.level == 0){
-      /*
-      if (e.currentTarget.id == 0){
-        wx.navigateBack();
-      }
-      else */
       this.queryCity(this.data.in_china);
     }
     else if(this.data.level == 1){
@@ -113,14 +67,9 @@ Page({
             },
             success: function (res) {
               var tmpShowList = []
-              /*
-              tmpShowList.push({
-                id: 0,
-                name: '默认位置'
-              })*/
               for (var i = 0; i < res.data.cities.length; i++) {
                 tmpShowList.push({
-                  id: i + 1,
+                  id: i,
                   name: res.data.cities[i]
                 })
               }
@@ -159,14 +108,9 @@ Page({
             success: function (res) {
               var tmpShowList = []
               console.log(res)
-              /*
-              tmpShowList.push({
-                id: 0,
-                name: '默认位置'
-              })*/
               for (var i = 0; i < res.data.cities.length; i++) {
                 tmpShowList.push({
-                  id: i + 1,
+                  id: i,
                   name: res.data.cities[i]
                 })
               }
