@@ -6,15 +6,15 @@
         </view>
         <view class="friends_people-nickName"><span class="friends_people-nickName-span">{{nickName}}</span><image class="friends-gender" hidden="{{gender==0}}" src="{{(gender==1)?icon_male:icon_female}}"></image>
         </view>
-        <view class="friends_people-details" style="height:{{details_height}}px">
+        <view class="friends_people-details">
         <view class="friends_people-labels">
           <view class="friends_people-label">所在地：</view>
-          <view class="friends_people-label" wx:if="{{mayor_available}}">地主数：</view>
+          <!--<view class="friends_people-label">积分：</view>-->
           <view class="friends_people-label">附近签到：</view>
         </view>
         <view class="friends_people-content">
           <view class="friends_people-detail-cell">{{location}}</view>
-          <view class="friends_people-detail-cell" wx:if="{{mayor_available}}">{{mayor_count}}</view>
+          <!--<view class="friends_people-detail-cell">{{score}}</view>-->
           <view class="friends_people-detail-cell">{{venue}}</view>
         </view>
         </view>

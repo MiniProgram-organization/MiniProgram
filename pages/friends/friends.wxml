@@ -3,13 +3,13 @@
         <view class="weui-panel weui-panel_access">
           <view class="weui-panel__hd friends_no-friends" hidden="{{!noFriends}}">您周围暂时没有卿云Go用户~</view>
           <view class="weui-panel__bd">
-                <navigator url="../friends_showPeople/friends_showPeople?target_id={{item.openid}}&avatarUrl={{item.avatarUrl}}&gender={{item.gender}}&venue={{item.venue}}&nickName={{item.nickName}}&mayor_count={{item.mayor_count}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" wx:for-items="{{friends_infos}}" wx:key="{{index}}">
+                <navigator url="../friends_showPeople/friends_showPeople?target_id={{item.openid}}&avatarUrl={{item.avatarUrl}}&gender={{item.gender}}&venue={{item.venue}}&nickName={{item.nickName}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" wx:for-items="{{friends_infos}}" wx:key="{{index}}">
                     <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
                         <image class="weui-media-box__thumb friends-round-thumb" src="{{item.avatarUrl}}" />
                     </view>
                     <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
                         <view class="weui-media-box__title">{{item.nickName}}<image class="friends-gender" hidden="{{item.gender==0}}"src="{{(item.gender==1)?icon_male:icon_female}}"></image></view>
-                        <view class="weui-media-box__desc" wx:if="{{mayor_available}}">{{item.king_words}}</view>
+                        <!--<view class="weui-media-box__desc">{{item.king_words}}</view>-->
                         <view class="weui-media-box__info friends_poi-name-view">
                             <view class="weui-media-box__info__meta friends_poi-container"><span>最近在</span> <span class="friends_poi-name" >{{ item.venue }} </span> <span>签到过</span></view>
                         </view>
