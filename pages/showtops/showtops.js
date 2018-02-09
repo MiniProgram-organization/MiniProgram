@@ -22,7 +22,8 @@ Page({
     qrcodeUrl: '',
     scores: 0,
     latitude_text: '',
-    longitude_text: ''
+    longitude_text: '',
+    mayor_count:0,
   },
 
   /**
@@ -63,8 +64,17 @@ Page({
           province: province,
           country: country,
           iconUrl: "../images/account/ic_chevron_right_black_48dp.png",
-          score: score
+          score: score,
+          
         });
+
+        if (res.data.mayor_count >= 0) {
+          that.setData({
+            mayor_available: true,
+            mayor_count: res.data.mayor_count
+          });
+        } else {
+        }
       },
       fail: function (res) {
 
