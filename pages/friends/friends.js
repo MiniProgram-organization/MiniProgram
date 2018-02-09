@@ -9,7 +9,8 @@ Page({
     icon_male:"../images/friends/male-48.png",
     icon_female:"../images/friends/female-48.png",
     friends_num:0,
-    haveRequested:false
+    haveRequested:false,
+    mayor_available:false,
   },
 
   /**
@@ -107,12 +108,36 @@ Page({
           var friends_num = res.data.user_num;
           var friends_infos = res.data.users;
           var noFriends = (friends_num == 0);
+          var mayor_available = false;
+          if(!noFriends){
+            var first_mayor_count = friends_infos[0].mayor_count;
+            mayor_available = (first_mayor_count>=0);
+          }
+
+          console.log("[Friends] mayor_count available: "+mayor_available);
+
+          if(mayor_available){
+            for(var user in friends_infos){
+              var calling_name = "TA";
+              if(user.gender==1){
+                calling_name = "他";
+              }else if(user.gender==2){
+                calling_name = "她";
+              }
+              if(user.mayor_count==0){
+                user.king_words = calling_name +"现在不是任何地方的地主";
+              }else{
+                user.king_words = calling_name + "是 "+user.mayor_count+" 个地方的地主~";
+              }
+            }
+          }
 
           that.setData({
             friends_num: friends_num,
             friends_infos:friends_infos,
             noFriends:noFriends,
-            haveRequested:true
+            haveRequested:true,
+            mayor_available:mayor_available
           });
         } else {
           wx.showModal({
