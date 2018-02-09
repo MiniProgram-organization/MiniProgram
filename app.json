@@ -64,6 +64,12 @@
         "selectedIconPath": "/pages/images/icon/mood_icon.png"
       },
       {
+              "pagePath": "pages/friends/friends",
+              "text": "心情",
+              "iconPath": "/pages/images/icon/discover_icon.png",
+              "selectedIconPath": "/pages/images/icon/discover_icon.png"
+      },
+      {
         "pagePath": "pages/account/account",
         "text": "账号",
         "iconPath": "/pages/images/icon/account_icon.png",
