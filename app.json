@@ -65,7 +65,7 @@
       },
       {
               "pagePath": "pages/friends/friends",
-              "text": "心情",
+              "text": "发现",
               "iconPath": "/pages/images/icon/discover_icon.png",
               "selectedIconPath": "/pages/images/icon/discover_icon.png"
       },
