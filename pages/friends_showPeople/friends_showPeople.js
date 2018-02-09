@@ -10,12 +10,14 @@ Page({
     icon_female: "../images/friends/female-48.png",
 
     target_id:"",
-    avatarUrl:"../images/showpeople/discover_icon.png",
+    avatarUrl:"../images/icon/discover_icon.png",
     nickName:"猜猜我是谁",
     gender:0,
     location:"未知",
-    score:8,
-    venue:"就在你周围"
+    venue:"就在你周围",
+    mayor_available:false,
+
+    details_height:90
   },
 
   /**
@@ -27,8 +29,21 @@ Page({
       avatarUrl:options.avatarUrl,
       nickName:options.nickName,
       gender:options.gender,
-      venue:options.venue,
+      venue:options.venue
     });
+    
+    /*
+    if(options.mayor_count>=0){
+      this.setData({
+        mayor_available: true,
+        mayor_count : options.mayor_count
+      });
+    }else{
+      this.setData({
+        details_height:70
+      });
+    }*/
+
     this.requestForProfile();
 
   
@@ -102,22 +117,35 @@ Page({
         console.log("[Friends_showPeople] response data: ")
         console.log(res.data);
         if(res.data.status=="OK"){
-        var location = res.data.country;
-        if(res.data.province!=""){
-          location = location + "·" + res.data.province;
+          var location = res.data.country;
+          if(res.data.province!=""){
+            location = location + "·" + res.data.province;
+          }
+          if(res.data.city!=""){
+            location = location + "·" + res.data.city;
+          }
+          if(location==""){
+            location = "(神秘的人~)"
+          }
+
+          
+          that.setData({
+            location: location
+          });
+
+          if (res.data.mayor_count >= 0) {
+            that.setData({
+              mayor_available: true,
+              mayor_count: res.data.mayor_count
+            });
+          } else {
+            this.setData({
+              details_height: 70
+            });
+          }
+
         }
-        if(res.data.city!=""){
-          location = location + "·" + res.data.city;
-        }
-        if(location==""){
-          location = "(神秘的人~)"
-        }
-        var score = res.data.score;
-        that.setData({
-          location: location,
-          score: score
-        });
-        }else{
+        else{
           wx.showModal({
             title: '提示',
             content: '获取用户数据失败',
