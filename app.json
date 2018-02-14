@@ -33,7 +33,7 @@
       "backgroundColor": "#ffffff",
       "backgroundTextStyle": "light"
     },
-    "enablePullDownRefresh": "true"
+    "enablePullDownRefresh": true
   },
   "networkTimeout": {
     "request": 10000,
