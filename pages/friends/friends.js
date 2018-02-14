@@ -107,7 +107,22 @@ Page({
           var friends_num = res.data.user_num;
           var friends_infos = res.data.users;
           var noFriends = (friends_num == 0);
+          for(var i = 0; i < friends_infos.length; i++)
+          {
+            var prefix = "";
+            if (friends_infos[i].gender == 0) prefix = "她/他"
+            else if(friends_infos[i].gender == 1) prefix = "他"
+            else if (friends_infos[i].gender == 2) prefix="她"
 
+            console.log(prefix)
+            if (friends_infos[i]["mayor_count"] == -1) friends_infos[i]['king_words'] = ""
+            else if (friends_infos[i]["mayor_count"] == 0){
+                friends_infos[i]['king_words'] = prefix + "还没有当过地主~"
+            }
+            else{
+              friends_infos[i]['king_words'] = prefix + "是" + friends_infos[i]["mayor_count"]+"个地点的地主～"
+            }
+          }
           that.setData({
             friends_num: friends_num,
             friends_infos:friends_infos,
