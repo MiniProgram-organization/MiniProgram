@@ -33,7 +33,7 @@
       "backgroundColor": "#ffffff",
       "backgroundTextStyle": "light"
     },
-    "enablePullDownRefresh": "true"
+    "enablePullDownRefresh": true
   },
   "networkTimeout": {
     "request": 10000,
@@ -64,10 +64,10 @@
         "selectedIconPath": "/pages/images/icon/mood_icon.png"
       },
       {
-              "pagePath": "pages/friends/friends",
-              "text": "发现",
-              "iconPath": "/pages/images/icon/discover_icon.png",
-              "selectedIconPath": "/pages/images/icon/discover_icon.png"
+        "pagePath": "pages/friends/friends",
+        "text": "发现",
+        "iconPath": "/pages/images/icon/discover_icon.png",
+        "selectedIconPath": "/pages/images/icon/discover_icon.png"
       },
       {
         "pagePath": "pages/account/account",
