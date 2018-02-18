@@ -1,10 +1,5 @@
-<!--hotest.wxml-->
+<!--activity.wxml-->
 <view style="width: {{windowWidth}}px; height:{{windowHeight}}px">
-<!--
-<import src="/pages/tabbar/tabbar.wxml"/>
-<template is="tabbar" data="{{tabbar}}"/>
--->
-
   <view style="width:80%; height:30%; margin:5% 10% 10% 10%">
     <map bindmarkertap="markertap" latitude="{{latitude}}" longitude="{{longitude}}" include-points="{{include_points}}" markers="{{markers}}" style="width:100%" />
     <view style="margin:5% 0% 10% 0%">

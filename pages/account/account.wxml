@@ -1,10 +1,6 @@
 
 
 <view style="width:{{windowWidth}}px;height:{{windowHeight}}px">
-<!--<import src="/pages/tabbar/tabbar.wxml"/>
-
-<template is="tabbar" data="{{tabbar}}"/>
--->
   <view class='head_view'>
   
 <image class='headimg' bindtap="redirectToQRCode"  
