@@ -1,4 +1,4 @@
-// pages/weather_new/weather_new.js
+
 var app = getApp();
 Page({
   /**
@@ -7,12 +7,12 @@ Page({
   data: {
     windowWidth: app.globalData.windowWidth,
     windowHeight: app.globalData.windowHeight,
-    location_url: '../images/weather_new/ic_place_white_18dp.png',
-    set_url: '../images/weather_new/ic_view_headline_white_18dp.png',
-    share_url: '../images/weather_new/ic_open_in_new_white_18dp.png',
-    wind_url:'../images/weather_new/ic_settings_input_antenna_white_18dp.png',
-    atmosphere_url:'../images/weather_new/ic_network_wifi_white_18dp.png',
-    tem_url:'../images/weather_new/ic_brightness_4_white_18dp.png',
+    location_url: '../images/weather/ic_place_white_18dp.png',
+    set_url: '../images/weather/ic_view_headline_white_18dp.png',
+    share_url: '../images/weather/ic_open_in_new_white_18dp.png',
+    wind_url:'../images/weather/ic_settings_input_antenna_white_18dp.png',
+    atmosphere_url:'../images/weather/ic_network_wifi_white_18dp.png',
+    tem_url:'../images/weather/ic_brightness_4_white_18dp.png',
     day0_weather: {}, //今日天气
     day1_weather: {}, //今日天气
     day2_weather: {}, //明日天气

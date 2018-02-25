@@ -1,4 +1,4 @@
-<!--pages/weather_new/weather_new.wxml-->
+
 <view class='back' style="width: {{windowWidth}}px; height:{{windowHeight}}px">
 <!--<import src="/pages/tabbar/tabbar.wxml"/>
 <template is="tabbar" data="{{tabbar}}"/>
