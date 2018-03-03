@@ -12,4 +12,7 @@
 <view class='address'>
   <text>{{address}}</text>
 </view>
+
+
+<image bindtap='gps' class='gps_button' src="../images/map/map_button.png" background-size="cover"></image>
 </view>

@@ -48,7 +48,15 @@ Page({
     })
     console.log(this.data.markers)
   },
-
+  gps: function(){
+    wx.openLocation({
+      latitude: parseFloat(this.data.POI_lat),
+      longitude: parseFloat(this.data.POI_lng),
+      scale: 17,
+      name: this.data.title,
+      address: this.data.address
+    })  
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -60,7 +68,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log(this.data.longitude)
+    wx.openLocation({
+      latitude: parseFloat(this.data.POI_lat),
+      longitude: parseFloat(this.data.POI_lng),
+      scale: 17,
+      name: this.data.title,
+      address: this.data.address
+    })  
   },
 
   /**

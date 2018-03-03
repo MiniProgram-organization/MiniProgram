@@ -13,3 +13,10 @@
   margin-left: 10px;
   margin-right: 10px;
 }
+.gps_button{
+  position: fixed;
+  bottom: 30%;
+  right: 5%;
+  height: 70px;
+  width: 70px;
+}

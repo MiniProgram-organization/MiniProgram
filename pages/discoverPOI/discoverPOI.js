@@ -43,6 +43,7 @@ Page({
         break;
       }
     }
+    /*
     wx.navigateTo({
       url: '../discoverLocation/discoverLocation?title='+title
       +'&address='+address
@@ -51,7 +52,15 @@ Page({
       + '&id=' + e.currentTarget.id
 
 
-    })
+    })*/
+    wx.openLocation({
+      latitude:lat,
+      longitude:lng,
+      scale: 17,
+      name: title,
+      address: address
+    })  
+  
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
