@@ -1,7 +1,7 @@
 /* pages/discoverPOI/discoverPOI.wxss */
 .mark{
   margin-top: 10px;
-  font-size: 13px;
+  font-size: 14px;
   margin-left: 10px;
   margin-bottom: 10px;
 }
@@ -27,7 +27,7 @@
 .title{
   font-weight: bold;
   margin-top: 5px;
-  font-size:12px;
+  font-size:13px;
 }
 .icon{
   margin-right: 10px;
@@ -36,7 +36,7 @@
 }
 .address{
    margin-top: 5px;
-  font-size:12px;
+  font-size:13px;
   margin-bottom: 5px;
 }
 .item_view{

@@ -74,8 +74,8 @@ Page({
       success: function (res) {
         console.log(res);
         that.setData({
-          POI_list: res.data ,  
-          count:res.data.size       
+          POI_list: res.data,  
+          count:res.data.length    
         })
       },
       fail: function (res) {

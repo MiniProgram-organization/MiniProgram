@@ -1,1 +1,4 @@
 /* pages/discover/discover.wxss */
+.weui-input{
+  font-size: 19px;
+}
