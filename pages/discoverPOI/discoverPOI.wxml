@@ -1,0 +1,32 @@
+<!--pages/discoverPOI/discoverPOI.wxml-->
+<view style="width:{{windowWidth}}px;height:{{windowHeight}}px">
+
+
+<view class='mark'>
+  <text>为您找到距您最近的{{count}}个{{type_cn}}</text>
+</view>
+
+<block wx:for="{{POI_list}}">
+  <view class='out' >
+  <view class='row' bindtap="listListener" id="{{item.id}}">
+    <view class='left'>
+      <view class='title'>
+        <text> {{item.title}}</text>
+      </view>
+      <view class='address'>
+        <text> {{item.address}}</text>
+      </view>
+    </view>
+      
+    <view class='right'>
+            <image class='icon' src="../images/account/ic_chevron_right_black_48dp.png" background-size="cover"></image>
+      <view class='distance'>
+        <text class='distance_text'>距您{{item._distance}}米</text>
+      </view>
+    </view>
+  </view>
+
+  <view class='item_view'></view>
+</view>
+</block>
+</view>

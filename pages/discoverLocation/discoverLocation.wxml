@@ -1,0 +1,15 @@
+<!--pages/discoverLocation/discoverLocation.wxml-->
+<view style="width:{{windowWidth}}px;height:{{windowHeight}}px">
+
+<view class='map'>
+
+       <map bindmarkertap="markertap" scale="14" bindregionchange="regionchange" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" style="width: 100%; height: 100%;"/>
+</view>
+<view class='title'>
+  <text>{{title}}</text>
+</view>
+
+<view class='address'>
+  <text>{{address}}</text>
+</view>
+</view>

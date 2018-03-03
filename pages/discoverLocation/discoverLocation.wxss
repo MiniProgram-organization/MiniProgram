@@ -1,0 +1,14 @@
+/* pages/discoverLocation/discoverLocation.wxss */
+.map{
+  height: 90%;
+  width: 100%;
+}
+.title{
+  margin-top: 10px;
+  font-size: 20px;
+  margin-left: 10px;
+}
+.address{
+  font-size:15px;
+  margin-left: 10px;
+}

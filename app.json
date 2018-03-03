@@ -8,6 +8,8 @@
     "pages/trace/trace",
     "pages/friends/friends",
     "pages/friends_showPeople/friends_showPeople",
+    "pages/discover/discover",
+    "pages/discoverPOI/discoverPOI",
     "pages/checkin/checkin",
     "pages/error/error",
     "pages/showpeople/showpeople",
@@ -23,7 +25,8 @@
     "pages/otherMood/otherMood",
     "pages/qrcode/qrcode",
     "pages/tabbar/tabbar",
-    "pages/showtops/showtops"
+    "pages/showtops/showtops",
+    "pages/discoverLocation/discoverLocation"
   ],
   "window": {
     "window": {
@@ -64,7 +67,7 @@
         "selectedIconPath": "/pages/images/icon/mood_icon.png"
       },
       {
-        "pagePath": "pages/friends/friends",
+        "pagePath": "pages/discover/discover",
         "text": "发现",
         "iconPath": "/pages/images/icon/discover_icon.png",
         "selectedIconPath": "/pages/images/icon/discover_icon.png"
