@@ -43,7 +43,7 @@ Page({
   },
   findToilet: function () {
     wx.navigateTo({
-      url: '../discoverPOI/discoverPOI?type_en=toilet&type_cn=厕所'
+      url: '../discoverPOI/discoverPOI?type_en=toilet&type_cn=洗手间'
     })
   },
   /**
@@ -55,6 +55,21 @@ Page({
         app.globalData.latitude = res.latitude;
         app.globalData.longitude = res.longitude;
       },
+    })
+    wx.request({
+      url: 'https://40525433.fudan-mini-program.com/cgi-bin/DiscoverAll',
+      method: 'POST',
+      data: {
+        openid: app.globalData.openid,
+        sessionid: app.globalData.sessionid,
+        latitude: app.globalData.latitude,
+        longitude: app.globalData.longitude,
+        poi_type:''
+      },
+      success: function (res) {
+        console.log(res)
+        if (res.data.status != 'OK') console.log('记录log失败')
+      }
     })
   },
   /**

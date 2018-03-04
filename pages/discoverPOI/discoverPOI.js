@@ -24,8 +24,7 @@ Page({
     })
     wx.setNavigationBarTitle({
       title: '附近的' + options.type_cn,
-      success: function (res) {
-      }
+      success: function (res) {}
     })
   },
   listListener: function(e){
@@ -43,16 +42,6 @@ Page({
         break;
       }
     }
-    /*
-    wx.navigateTo({
-      url: '../discoverLocation/discoverLocation?title='+title
-      +'&address='+address
-      +'&POI_lat='+lat
-      +'&POI_lng=' + lng
-      + '&id=' + e.currentTarget.id
-
-
-    })*/
     wx.openLocation({
       latitude:lat,
       longitude:lng,
@@ -74,6 +63,21 @@ Page({
    */
   onShow: function () {
     var that = this;
+    wx.request({
+      url: 'https://40525433.fudan-mini-program.com/cgi-bin/DiscoverAll',
+      method: 'POST',
+      data: {
+        openid: app.globalData.openid,
+        sessionid: app.globalData.sessionid,
+        latitude: app.globalData.latitude,
+        longitude: app.globalData.longitude,
+        poi_type: that.data.type_en
+      },
+      success: function (res) {
+        console.log(res)
+        if (res.data.status != 'OK') console.log('记录log失败')
+      }
+    })
     app.globalData.qqmapsdk.search({
       keyword: this.data.type_cn,
       location:{
