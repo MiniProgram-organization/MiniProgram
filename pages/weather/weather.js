@@ -43,7 +43,59 @@ Page({
     detail_3_unit:'',
     lifestyle_height:0,
     lifestyle_text:'',
-    qrcodeUrl:''
+    qrcodeUrl:'',
+    map_weather_to_pic: {
+      "100": "100",
+      "101": "101",
+      "102": "101",
+      "103": "103",
+      "104": "104",
+      "200": "200",
+      "201": "201",
+      "202": "200",
+      "203": "200",
+      "204": "200",
+      "205": "205",
+      "206": "205",
+      "207": "205",
+      "208": "205",
+      "209": "209",
+      "210": "209",
+      "211": "209",
+      "212": "209",
+      "213": "209",
+      "300": "300",
+      "301": "301",
+      "302": "302",
+      "303": "303",
+      "304": "304",
+      "305": "305",
+      "306": "306",
+      "307": "307",
+      "308": "307",
+      "309": "309",
+      "310": "307",
+      "311": "311",
+      "312": "312",
+      "313": "313",
+      "400": "400",
+      "401": "401",
+      "402": "402",
+      "403": "401",
+      "404": "404",
+      "405": "405",
+      "406": "406",
+      "407": "407",
+      "500": "500",
+      "501": "501",
+      "502": "502",
+      "503": "503",
+      "504": "504",
+      "507": "507",
+      "508": "508",
+      "900": "900",
+      "901": "901"
+    }
   },
 
   /**
@@ -452,12 +504,12 @@ Page({
         day0_weather['low'] = res.data.forecast[0].tmp_min;
         day1_weather['low'] = res.data.forecast[1].tmp_min;
         day2_weather['low'] = res.data.forecast[2].tmp_min;
-        day0_weather['icon'] = "../images/weather/" + res.data.forecast[0].cond_code_d + ".png" 
-        day1_weather['icon'] = "../images/weather/" + res.data.forecast[1].cond_code_d + ".png" 
-        day2_weather['icon'] = "../images/weather/" + res.data.forecast[2].cond_code_d + ".png" 
-
+        day0_weather['icon'] = "../images/weather/" + that.data.map_weather_to_pic[res.data.forecast[0].cond_code_d] + ".png" 
+        day1_weather['icon'] = "../images/weather/" + that.data.map_weather_to_pic[res.data.forecast[1].cond_code_d] + ".png" 
+        day2_weather['icon'] = "../images/weather/" + that.data.map_weather_to_pic[res.data.forecast[2].cond_code_d] + ".png" 
+        console.log(res.data.forecast)
         var day2_xq = new Date(res.data.forecast[2].date).getDay();
-        console.log('xqggg')
+        
         console.log(day2_xq)
         if (day2_xq == 1) day2_weather['xq'] = '星期一'
         if (day2_xq == 2) day2_weather['xq'] = '星期二'
@@ -497,7 +549,7 @@ Page({
             detail_1_unit: now.fl +'℃',
             detail_2_unit: '级别:'+now.wind_sc,
             detail_3_unit: now.pres+' hPa',
-            weathericonURL: "../images/weather/" + now.cond_code + ".png",
+            weathericonURL: "../images/weather/" + that.data.map_weather_to_pic[now.cond_code] + ".png",
           })
         }
         else {
