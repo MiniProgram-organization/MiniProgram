@@ -1,0 +1,39 @@
+<!--pages/discover/discover.wxml-->
+<view style="width:{{windowWidth}}px;height:{{windowHeight}}px">
+
+<view class="weui-cells weui-cells_after-title">
+
+      <view bindtap="goToFriends" class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+          <text class="weui-input">周围的卿云Go用户</text>
+        </view>
+      </view>
+
+
+      <view bindtap="findToilet" class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+          <text class="weui-input">周围的洗手间</text>
+        </view>
+      </view>
+
+      <view bindtap="findSchool" class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+          <text class="weui-input">周围的学校</text>
+        </view>
+      </view>
+
+       <view bindtap="findMall" class="weui-cell weui-cell_input">
+         <view class="weui-cell__bd">
+          <text class="weui-input">周围的商场</text>
+        </view>
+        </view>
+      
+       <view bindtap="findRestaurant" class="weui-cell weui-cell_input">
+         <view class="weui-cell__bd">
+          <text class="weui-input">周围的餐饮</text>
+        </view>
+      </view>
+
+      
+    </view>
+    </view>
