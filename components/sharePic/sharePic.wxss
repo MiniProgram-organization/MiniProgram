@@ -1,0 +1,74 @@
+/* component/sharePic/sharePic.wxss */
+.sharePic-mask{
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.7);
+}
+.sharePic-body{
+  position: fixed;
+  z-index: 5000;
+  width: 80%;
+  max-width: 600rpx;
+  top: 40%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background-color: #FFFFFF;
+  text-align: center;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.sharePic-img{
+    width: 100%;
+}
+
+.sharePic-btn_area{
+    display: flex;
+    align-items: center;
+    position: relative;
+    line-height: 45px;
+    font-size: 17px;
+}
+.sharePic-btn{
+    -webkit-flex: 1;
+    flex: 1;
+    -webkit-tap-highlight-color: rgba(255, 0, 0, 0);
+    position: relative;
+    color:#2c2c2c;
+    text-align: center;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    align-items: center;
+    background-color:#FFFFFF;
+
+}
+.sharePic-btn::after{
+  border: none;
+}
+
+.sharePic-icon{
+  left:50%;
+  width: 17px;
+  height: 17px;
+  margin-right:5px;
+}
+
+.sharePic-cancel{
+  position: fixed;
+  z-index: 5000;
+  width: 25px;
+  bottom: 20%;
+  left: 45%;
+  text-align: center;
+  overflow: hidden;
+}
+
+.sharePic-cancelIcon{
+  width: 100%;
+}
