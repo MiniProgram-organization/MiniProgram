@@ -46,6 +46,16 @@ Page({
       url: '../discoverPOI/discoverPOI?type_en=toilet&type_cn=洗手间'
     })
   },
+  findSubway: function(){
+    wx.navigateTo({
+      url: '../discoverPOI/discoverPOI?type_en=subway&type_cn=地铁站'
+    })
+  },
+  findScenic: function () {
+    wx.navigateTo({
+      url: '../discoverPOI/discoverPOI?type_en=scenic&type_cn=景区'
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */

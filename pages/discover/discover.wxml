@@ -34,6 +34,17 @@
         </view>
       </view>
 
+      <view bindtap="findSubway" class="weui-cell weui-cell_input">
+         <view class="weui-cell__bd">
+          <text class="weui-input">周围的地铁站</text>
+        </view>
+      </view>
+
+      <view bindtap="findScenic" class="weui-cell weui-cell_input">
+         <view class="weui-cell__bd">
+          <text class="weui-input">周围的景区</text>
+        </view>
+      </view>
       
     </view>
     </view>
