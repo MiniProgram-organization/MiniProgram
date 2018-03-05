@@ -1,0 +1,18 @@
+<!--component/sharePic/sharePic.wxml-->
+<view class='sharePic_container' hidden='{{!isShow}}'>
+    <view class='sharePic-mask'></view>
+    <view class='sharePic-body'>
+        <image class="sharePic-img" src="{{imgUrl}}" mode='widthFix'></image>
+        <view class='sharePic-btn_area'>
+          <button class='sharePic-btn' catchtap='_downloadEvent'>
+            <image class="sharePic-icon" src="../../pages/images/shareDialog/download.png" mode='aspectFit'></image>
+            下载</button>
+          <button  open-type="share" class='sharePic-btn' catchtap='_shareEvent'>
+            <image class="sharePic-icon" src="../../pages/images/shareDialog/wechat.png" mode='aspectFit'></image>
+            分享</button>
+        </view>
+    </view>
+    <view class='sharePic-cancel' catchtap='_cancelEvent'>
+    <image class='sharePic-cancelIcon' src="../../pages/images/shareDialog/cancel.png" mode='widthFix'></image>
+    </view>
+</view>

@@ -95,7 +95,10 @@ Page({
       "508": "508",
       "900": "900",
       "901": "901"
-    }
+    },
+    generatePicSuccess:false,
+    downloadPicSuccess:false,
+    canvasHidden:true
   },
 
   /**
@@ -109,7 +112,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    this.shareDialog = this.selectComponent("#shareDialog");
   },
 
   /**
@@ -153,55 +156,116 @@ Page({
     })
     wx.setStorageSync('weatherCity', ["",""])
     this.loadInfo();
+    console.log("send message generate program");
+  },
+
+  //分享弹窗下载事件
+  _downloadEvent() {
+    var that = this;
+    wx.showLoading({
+      title: '保存中',
+      mask: true,
+    });
+    //将生成好的图片保存到本地，需要延迟一会，绘制期间耗时
+  
+      //生成图片保留本地
+      wx.canvasToTempFilePath({
+        canvasId: 'sharePicCanvas',
+        success: function (res) {
+          wx.saveImageToPhotosAlbum({
+            filePath: res.tempFilePath,
+            success: function (res) {
+              console.log(res);
+              wx.hideLoading();
+              wx.showModal({
+                title: '已成功保存到相册',
+                content: '可以发到朋友圈或转发给朋友啦！',
+                showCancel: false,
+                confirmText: "好哒"
+              });
+            },
+            fail: function (res) {
+              wx.hideLoading();
+              console.log(res)
+              wx.showModal({
+                title: '提示',
+                content: '保存分享图片失败！',
+              });
+            }
+          })
+        },
+        fail: function (res) {
+          wx.hideLoading();
+          console.log(res);
+          wx.showModal({
+            title: '提示',
+            content: '保存分享图片失败！',
+          })
+        }
+      });
+    
+  },
+
+
+  _saveToAlbum() {
+    var that = this;
+    wx.saveImageToPhotosAlbum({
+      filePath: that.data.qrcodeUrl,
+      success: function (res) {
+        wx.showModal({
+          title: '已成功保存到相册',
+          content: '可以发到朋友圈或转发给朋友啦！',
+          showCancel: false,
+          confirmText:"好哒"
+        });
+      },
+      fail: function (res) {
+        wx.openSetting({
+          success: function (settingdata) {
+            console.log(settingdata)
+            if (settingdata.authSetting['scope.writePhotosAlbum']) {
+              console.log('获取权限成功，给出再次点击图片保存到相册的提示。')
+            }
+            else {
+              console.log('获取权限失败，给出不给权限就无法正常使用的提示')
+            }
+          }
+        });
+      }
+    });
+  },
+  //分享事件
+  _shareEvent() {
+    var that = this;
+    this.onShareAppMessage();
+
 
   },
-  getQRCodeWeather: function(){
-    var that = this;
-    var data = {
-      latitude: that.data.latitude,
-      longitude: that.data.longitude,
-      openid: getApp().globalData.openid,
-      sessionid: getApp().globalData.sessionid,
-      in_china: this.data.inChina,
-      weather: {
-        city: this.data.city,
-        today: this.data.weather,
-        day0_weather: this.data.day0_weather,
-        day1_weather: this.data.day1_weather,
-        day2_weather: this.data.day2_weather,
-        lifestyle_text: this.data.lifestyle_text
-      }
-    }
-    console.log(data)
-    
-    wx.request({
-      url: 'https://40525433.fudan-mini-program.com/cgi-bin/WeatherImg.py',
-      method: 'POST',
-      data: data,
-      success: function (e) {
-        if (e.data.status == "OK"){
-          console.log(e.data)
-          that.setData({
-            qrcodeUrl: e.data.url
-          });
-          wx.navigateTo({
-            url: '../weather_qrcode/weather_qrcode?qrcodeUrl=' + that.data.qrcodeUrl,
-          })
-        }
-        else{
-          wx.showToast({
-            title: '生成失败',
-            icon:'loading'
-          })
-        }
-      },
-      fail: function(e){
-        wx.showToast({
-          title: '生成失败',
-          icon: 'loading'
-        })
-      }
+  //关闭对话框事件
+  _cancelEvent(){
+    this.setData({
+      canvasHidden:true
     })
+    this.shareDialog.hideDialog();
+
+  },
+
+  getQRCodeWeather: function(){
+    this.setData({
+      canvasHidden:false
+    })
+    var that = this;
+    if(that.data.generatePicSuccess){
+      that.shareDialog.showDialog(that.data.qrcodeUrl);
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '服务器繁忙，请稍后再试',
+        showCancel: false
+      });
+      
+    }
+    
   },
   toChooseArea: function (cnt) {
     var that = this;
@@ -266,6 +330,93 @@ Page({
       }
     })
   },
+  /**
+   * 这一步把信息传给服务器，让服务器生成图片，获取url
+   * 将url对应的图片下载到本地，加快加载速度
+   * 
+   * 注意：这一步只有在loadWeather_inXXX成功回调之后才使用
+   */
+  generate_sharePic:function(e){
+    var that = this;
+    var data = {
+      latitude: that.data.latitude,
+      longitude: that.data.longitude,
+      openid: getApp().globalData.openid,
+      sessionid: getApp().globalData.sessionid,
+      in_china: this.data.inChina,
+      weather: {
+        city: this.data.city,
+        today: this.data.weather,
+        day0_weather: this.data.day0_weather,
+        day1_weather: this.data.day1_weather,
+        day2_weather: this.data.day2_weather
+      }
+    }
+    console.log("[WEATHER]generate_sharePic:data sent to server");
+    console.log(data);
+
+    wx.request({
+      url: 'https://40525433.fudan-mini-program.com/cgi-bin/WeatherImg.py',
+      method: 'POST',
+      data: data,
+      success: function (e) {
+        if (e.data.status == "OK") {
+          console.log(e.data)
+          //得到了生成图片的网络地址，在页面数据中记录generatePicSuccess为true
+          that.setData({
+            qrcodeUrl: e.data.url,
+            generatePicSuccess:true
+          });
+          //得到了生成的图片的网络地址，调用download接口把图片暂时存储到本地，仅此次启动可以使用
+          wx.downloadFile({
+            url: e.data.url,
+            success: function (res) {
+              console.log("[WEATHER]generate_sharePic:download weather share message");
+              console.log(res);
+              if(res.statusCode==200){
+                //成功缓存了图片，使用本地缓存地址
+                that.setData({
+                  qrcodeUrl:res.tempFilePath,
+                  downloadPicSuccess:true
+                });
+              }
+              //如果没有成功缓存图片，则还是使用网络地址
+              that._drawCanvas();
+            },
+            fail:function(){
+              that._drawCanvas();
+            }
+          });
+          
+
+        }
+        else {
+          //如果没有成功生成图片，则在页面数据中记录这个结果(默认false不用修改)
+        }
+      },
+      fail: function (e) {
+        //如果没有成功生成图片，则在页面数据中记录这个结果（默认false不用修改）
+      }
+    });
+    
+  },
+
+  _drawCanvas(){
+    var that = this;
+    var context = wx.createCanvasContext('sharePicCanvas');
+    context.setFillStyle("#ffffff");
+    context.fillRect(0, 0, 900, 1023);
+    //画两张图，一张分享图，一张小程序码
+    context.drawImage(that.data.qrcodeUrl, 30, 30, 840, 672);
+    context.drawImage("../images/miniProgram.jpeg", 30, 750, 267, 237);
+    //写一行字，“/* 卿云Go */”
+    context.setFontSize(40);
+    context.setFillStyle("#0b5782");
+    context.fillText("/* 卿云Go */", 572, 880);
+    context.stroke();
+    context.draw();
+  },
+
   loadWeather_inForeign: function (latitude, longitude, openid, sessionid){
     console.log('国外')
     var that = this;
@@ -432,6 +583,8 @@ Page({
             })
           }
         }
+        //得到具体数据成功，向服务器发送请求生成分享图片
+        that.generate_sharePic();
       },
       fail: function(res){
 
@@ -642,6 +795,8 @@ Page({
             })
           }
         }
+        //得到具体数据成功，向服务器发送请求生成分享图片
+        that.generate_sharePic();
       },
       fail: function (res) {
         //console.log("发送天气信息失败" + res);
@@ -679,7 +834,19 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
 
+  onShareAppMessage: function () {
+    var that = this;
+    return {
+      title: '卿云Go 伴你走过一年四季~',
+      path: '/pages/weather/weather',
+      imageUrl:that.data.qrcodeUrl,
+      success: function (res) {
+        // 转发成功
+      },
+      fail: function (res) {
+        // 转发失败
+      }
+    }
   }
 })

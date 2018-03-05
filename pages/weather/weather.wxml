@@ -137,5 +137,11 @@
         {{award_text_1}}<span style="color: red">{{con_day}}</span>{{award_text_2}}
       </view>
    </view>
+
+   <shareDialog id='shareDialog' 
+      bind:downloadEvent="_downloadEvent"  
+      bind:shareEvent="_shareEvent" bind:cancelEvent="_cancelEvent">
+</shareDialog>
+<canvas   hidden="{{canvasHidden}}" style="width: 900px;height: 1023px;" canvas-id="sharePicCanvas"/>
 </view>
 
