@@ -103,6 +103,9 @@ Page({
       success: function (res) {
         console.log("[Friends] response:");
         console.log(res.data);
+        
+        
+
         if (res.data.status == "OK") {
           var friends_num = res.data.user_num;
           var friends_infos = res.data.users;

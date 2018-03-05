@@ -23,7 +23,7 @@ Page({
       type_cn: options.type_cn
     })
     wx.setNavigationBarTitle({
-      title: '附近的' + options.type_cn,
+      title: '周围的' + options.type_cn,
       success: function (res) {}
     })
   },
