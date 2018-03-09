@@ -1,5 +1,7 @@
 //app.js
+
 var app = getApp();
+var aldstat = require("./utils/ald-stat.js");
 var utils = require('./utils/utils.js');
 var QQMapWX = require('./utils/qqmap-wx-jssdk.js');
 
