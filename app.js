@@ -102,9 +102,11 @@ App({
       method: 'POST',
       
       data:{
-        version_code:'0.88'
+        version_code:'0.96'
       },
       success: function (res) {
+        console.log(res)
+        console.log('....')
         if (res.data.status == 'OK'){
           if (res.data.version == 1){
             
