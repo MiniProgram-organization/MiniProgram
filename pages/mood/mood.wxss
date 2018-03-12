@@ -277,3 +277,4 @@
   margin-top: 10%;
   margin-left: 0%;
 }
+@import "/pages/tabbar/tabbar.wxss"

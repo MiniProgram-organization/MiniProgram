@@ -52,7 +52,7 @@ App({
     checkinLastTimeTable: new Array(),
     
   },
-  /*
+  
   editTabBar: function () {
     var tabbar = this.globalData.tabbar,
       currentPages = getCurrentPages(),
@@ -66,9 +66,8 @@ App({
     _this.setData({
       tabbar: tabbar
     });
-  },*/
+  },
   onLaunch: function () {
-    // wx.clearStorage();
     wx.getSetting({
       success(res) {
         if (!res.authSetting['scope.writePhotosAlbum']) {
@@ -97,7 +96,7 @@ App({
     console.log('手机高度为 ' + res.windowHeight);
     console.log('手机宽度为 ' + res.windowWidth);
     console.log("发送请求");
-    /*
+    
     wx.request({
       url: 'https://40525433.fudan-mini-program.com/cgi-bin/Version',
       method: 'POST',
@@ -137,6 +136,13 @@ App({
                   selected: false
                 },
                 {
+                  pagePath: "/pages/discover/discover",
+                  text: "发现",
+                  iconPath: "/pages/images/icon/discover_icon.png",
+                  selectedIconPath: "/pages/images/icon/discover_icon.png",
+                  selected: false
+                },
+                {
                   pagePath: "/pages/account/account",
                   text: "账号",
                   iconPath: "/pages/images/icon/account_icon.png",
@@ -170,6 +176,13 @@ App({
                   selected: true
                 },
                 {
+                  pagePath: "/pages/discover/discover",
+                  text: "发现",
+                  iconPath: "/pages/images/icon/discover_icon.png",
+                  selectedIconPath: "/pages/images/icon/discover_icon.png",
+                  selected: false
+                },
+                {
                   pagePath: "/pages/account/account",
                   text: "账号",
                   iconPath: "/pages/images/icon/account_icon.png",
@@ -192,7 +205,7 @@ App({
           title: '读取版本错误!',
         })
       }
-    })*/
+    })
     //发送一个请求到服务器
     //如果结果是1，表示可以使用心情功能
     //如果结果是0，表示不可以使用心情功能

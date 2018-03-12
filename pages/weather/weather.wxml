@@ -1,8 +1,7 @@
-
-<view class='back' style="width: {{windowWidth}}px; height:{{windowHeight}}px">
-<!--<import src="/pages/tabbar/tabbar.wxml"/>
+<import src="/pages/tabbar/tabbar.wxml"/>
 <template is="tabbar" data="{{tabbar}}"/>
--->
+<view class='back' style="width: {{windowWidth}}px; height:{{windowHeight}}px">
+
   <view class='title_bar' style="width: {{windowWidth}}px; height:{{windowHeight*0.08}}px">
     <view class='title_left' bindtap="toChooseArea" >
       <image class="image_set" src="{{set_url}}"></image>

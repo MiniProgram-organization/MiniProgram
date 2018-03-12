@@ -367,7 +367,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   
+   // app.editTabBar(); 
   },
   getOpenId: function () {
     var that = this;
@@ -422,15 +422,28 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () { 
-    if (app.globalData.openid == "") {
-      this.getOpenId();
+
+    //app.editTabBar(); 
+    var first_tabbar = wx.getStorageSync('first_tabbar')
+    if (first_tabbar != 'yes'){
+      app.editTabBar();
+      wx.setStorageSync('first_tabbar', 'yes')	       
+      wx.redirectTo({
+        url: '../activity/activity', 
+      })
     }
-    else {
-      this.getCheckIns();
+    else{
+      app.editTabBar(); 
+      if (app.globalData.openid == "") {
+        this.getOpenId();
+      }
+      else {
+        this.getCheckIns();
+      }
+      console.log('activity........!!!!!!!!!!!!!')
+      console.log(this.data.checkins);
+      console.log(this.data.classifiedCheckIns); 
     }
-    console.log('activity........!!!!!!!!!!!!!')
-    console.log(this.data.checkins);
-    console.log(this.data.classifiedCheckIns); 
     
   },
  getPlaces: function(){

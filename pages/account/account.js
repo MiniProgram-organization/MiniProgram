@@ -127,7 +127,7 @@ Page({
     })
   },
   onShow: function () {
-    //app.editTabBar(); 
+    app.editTabBar(); 
     var that = this;
     var nickName = "";
     var gender = "";

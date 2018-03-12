@@ -2,3 +2,4 @@
 .weui-input{
   font-size: 19px;
 }
+@import "/pages/tabbar/tabbar.wxss"
