@@ -21,11 +21,18 @@ Page({
   onReady: function () {
   
   },
+
   goToFriends: function () {
     wx.navigateTo({
       url: '../friends/friends'
     })
   },
+  findATM: function () {
+    wx.navigateTo({
+      url: '../discoverPOI/discoverPOI?type_en=atm&type_cn=ATM机'
+    })
+  },
+  
   findRestaurant: function(){
     wx.navigateTo({
       url: '../discoverPOI/discoverPOI?type_en=restaurant&type_cn=餐饮'

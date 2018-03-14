@@ -259,6 +259,9 @@ Page({
     if(that.data.generatePicSuccess){
       that.shareDialog.showDialog(that.data.qrcodeUrl);
     }else{
+      this.setData({
+        canvasHidden: true
+      })
       wx.showModal({
         title: '提示',
         content: '服务器繁忙，请稍后再试',
