@@ -102,7 +102,10 @@
   <view style="padding:0% 10% 2% 10%">
     <view style="display: flex;flex-direction:row;;">
         <view style="flex:1" class='two_button_left'>
-        <button class="button_my"bindtap="goToMoodStatistics" style="flex:1" >我的心情</button>
+        <button class="button_my"bindtap="goToMoodStatistics" style="flex:1">心情统计</button>
+        </view>
+        <view style="flex:1" class='two_button_right'>
+        <button class="button_my"bindtap="goToMoodCalender" style="flex:1" >心情日历</button>
         </view>
         
     </view>
@@ -111,39 +114,4 @@
     {{award_text_1}}<span style="color: blue">{{con_day}}</span>{{award_text_2}}
   </view>
   
-  <view>
-    <text style="font-size:150%; position:relative;left:5%; color:blue">
-    Timeline
-    </text>
-  </view>
-
-  <view class='topic-main'>
-    <block wx:for="{{classifiedMoods}}" wx:key="date">
-      <view class="date" style="text-align:right">
-        <text class='datetext'>{{item.date}}</text>
-      </view>
-    <block wx:for="{{item.moodList}}">
-      <view class='item_view' style="width:{{windowWidth*0.9}}px">
-            <view class="topic-item" catchtap="redictDetail">
-              <image class="member-square" src="{{item.logoPath}}" background-size="cover"></image>
-              <view class="topic-info">
-                <view class="topic-inner">
-                  <view class="topic-left">
-                    <view class="topic-title">
-                      <text>{{item.mood_text}}</text>
-                    </view>
-                    <view>
-                      <text class="member-nickname">心情寄语:{{item.text}}</text>
-                    </view>
-                    <view>
-                      <text class="node-name">{{item.time}}</text>
-                    </view>
-                  </view>
-                </view>
-              </view>
-            </view>
-          </view>
-    </block>
-    </block>
-  </view>
 </view>

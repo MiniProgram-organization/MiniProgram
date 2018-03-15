@@ -24,7 +24,8 @@
     "pages/otherMood/otherMood",
     "pages/qrcode/qrcode",
     "pages/tabbar/tabbar",
-    "pages/showtops/showtops"
+    "pages/showtops/showtops",
+    "pages/moodcalender/moodcalender"
   ],
   "window": {
     "window": {

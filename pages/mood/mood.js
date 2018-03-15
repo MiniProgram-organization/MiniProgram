@@ -55,6 +55,11 @@ Page({
       url: '../moodstatistics/moodstatistics'
     })
   },
+  goToMoodCalender: function(){
+    wx.navigateTo({
+      url: '../moodcalender/moodcalender',
+    })
+  },
   goToRecordMood_7: function(){
       wx.navigateTo({
         url: '../otherMood/otherMood?moodId=7'
@@ -95,31 +100,7 @@ Page({
       url: '../recordmood/recordmood?moodId=6'
     })
   },
-  classifyByDate: function () {
-    var that = this;
-    var tempClassifyByDate = [];
-    var currentDate = '';
-    var currentClass = {};
-    for (var i = 0; i < this.data.history_mood.length; i++) { 
-      if (currentDate != this.data.history_mood[i].date){
-        console.log(currentDate)
-        console.log(this.data.history_mood[i].date)
-        if (currentClass.date){
-          tempClassifyByDate.push(currentClass);
-        } 
-        currentClass = {};
-        currentClass.date = this.data.history_mood[i].date;
-        currentDate = this.data.history_mood[i].date;
-
-        currentClass['moodList'] = [];
-      }
-      currentClass['moodList'].push(this.data.history_mood[i]);
-      console.log(currentClass+'..')
-    }
-    tempClassifyByDate.push(currentClass);
-    console.log(tempClassifyByDate)
-    this.setData({classifiedMoods: tempClassifyByDate,});
-  },
+  
   /**
    * 生命周期函数--监听页面加载
    */
@@ -203,60 +184,6 @@ Page({
       }
     }
     //获取历史数据
-    var history_mood = wx.getStorageSync('history_mood');
-    var that = this;
-    var oldDatetmp = wx.getStorageSync('timestamp_mood');
-    var oldDate = 0;
-    var nowDate = (Date.parse(new Date()) / 1000);
-    if (oldDatetmp == "") oldDate = 0;
-    else oldDate = oldDatetmp;
-
-    if (history_mood != "" && ((nowDate - oldDate) < 86400)) {
-      this.setData({history_mood: history_mood});
-      console.log('历史')
-      console.log(history_mood)
-      this.classifyByDate();
-    }
-    else{
-      wx.request({
-          url: 'https://40525433.fudan-mini-program.com/cgi-bin/MoodHistory',
-          data:{
-            openid: app.globalData.openid,
-            sessionid: app.globalData.sessionid,
-          },
-          method: 'POST',
-          success: function (res) {
-            if(res.data.status == 'ERROR'){
-              wx.showToast({
-                title: '获取历史心情失败',
-                icon:'loading'
-              })
-            }
-            else{
-              console.log(res)
-              wx.setStorageSync('timestamp_mood', (Date.parse(new Date()) / 1000));
-              var temp_history_mood = [];
-              for (var i = 0; i < res.data.moods.length; i++){
-              
-                res.data.moods[i].date = res.data.moods[i]['datetime'].split(" ")[0];
-                res.data.moods[i].time = res.data.moods[i]['datetime'].split(" ")[1];
-                var temp_table = {}
-                temp_table = res.data.moods[i];
-                temp_table['simpletime'] = res.data.moods[i].datetime.substring(11, 19)
-                temp_table['logoPath'] = '../images/mood/'+res.data.moods[i].mood_id+'.png';
-                temp_history_mood.push(temp_table);
-              }
-              that.setData({
-                history_mood: temp_history_mood,
-              });
-              wx.setStorageSync('history_mood', temp_history_mood);
-              console.log(wx.getStorageSync('history_mood'))
-              console.log(temp_history_mood)
-              that.classifyByDate();
-            }
-          }
-      })
-    }
   },
   /**
    * 生命周期函数--监听页面隐藏

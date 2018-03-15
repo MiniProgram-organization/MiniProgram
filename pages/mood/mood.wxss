@@ -39,6 +39,9 @@
 .two_button_left{
   margin-right: 20rpx;
 }
+.two_button_right{
+  margin-right: 20rpx;
+}
 .button_my{
     color: black;
     border: 1px solid #D1D1D1; 

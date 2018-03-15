@@ -178,6 +178,13 @@ App({
                   selected: true
                 },
                 {
+                  pagePath: "/pages/mood/mood",
+                  text: "心情",
+                  iconPath: "/pages/images/icon/mood_icon.png",
+                  selectedIconPath: "/pages/images/icon/mood_icon.png",
+                  selected: false
+                },
+                {
                   pagePath: "/pages/discover/discover",
                   text: "发现",
                   iconPath: "/pages/images/icon/discover_icon.png",
