@@ -114,12 +114,193 @@ Page({
   onReady: function () {
     this.shareDialog = this.selectComponent("#shareDialog");
   },
+  getOpenId: function () {
+    var that = this;
+    var systemInfo = wx.getSystemInfoSync();
 
+    wx.login({
+      success: function (res) {
+        var code = res.code;
+        wx.getUserInfo({
+          lang: 'zh_CN',
+          success: function (res) {
+            getApp().globalData.rawData = JSON.parse(res.rawData);
+            var iv = res.iv;
+            wx.request({
+              url: 'https://40525433.fudan-mini-program.com/cgi-bin/Login',
+              method: 'POST',
+              data: {
+                code: code,
+                rawData: getApp().globalData.rawData,
+                latitude: getApp().globalData.latitude,
+                longitude: getApp().globalData.longitude,
+                userSystemInfo: systemInfo,
+              },
+              success: function (res) {
+                console.log(systemInfo)
+                console.log(res)
+                if (res.data.status == "ERROR") {
+                  console.log(res.data.message);
+                  wx.redirectTo({
+                    url: '/pages/error/error',
+                  })
+                  return;
+                }
+                getApp().globalData.openid = res.data.openid;
+                getApp().globalData.sessionid = res.data.sessionid;
+                that.activity_to_weather_get_location(1);
+              }
+            })
+          }
+        });
+      }
+    });
+  },
   /**
    * 生命周期函数--监听页面显示
    */
+  activity_to_weather_get_location: function(cnt){
+    var that = this;
+    wx.getLocation({
+      type: 'wgs84', //返回可以用于wx.openLocation的经纬度
+      success: function (res) {
+        cnt = cnt + 1
+        app.globalData.latitude = res.latitude;
+        app.globalData.longitude = res.longitude;
+        //存储一个缓存的经纬度,用于定位失败时使用
+        wx.setStorageSync('latitude', res.latitude);
+        wx.setStorageSync('longitude', res.longitude);
+        that.setData({
+          longitude: res.longitude,
+          latitude: res.latitude,
+        });
+        wx.request({
+          url: 'https://40525433.fudan-mini-program.com/cgi-bin/GetNation',
+          method: 'POST',
+          data: {
+            latitude: res.latitude,
+            longitude: res.longitude,
+            openid: getApp().globalData.openid,
+            sessionid: getApp().globalData.sessionid,
+          },
+          success: function (res) {
+            console.log('nation...')
+            console.log(res)
+            if (res.data.status == 'OK') {
+              if (res.data.nation == '中国') {
+                wx.setStorageSync('inChina', 1)
+              }
+              else {
+                wx.setStorageSync('inChina', 0)
+              }
+              that.afterOnShow();
+            }
+            else {
+              wx.showToast({
+                title: '获取经纬度国家信息失败！请检查定位设置',
+              })
+            }
+          },
+          fail: function (res) {
+            wx.showToast({
+              title: '获取经纬度国家信息失败！请检查定位设置',
+            })
+          }
+
+        })
+      },
+      fail: function () {
+        cnt = cnt + 1
+        if (cnt < 10) that.fetchData(cnt)
+        else {
+          var latitude = wx.getStorageSync('latitude')
+          var longitude = wx.getStorageSync('longitude')
+          if (latitude == "") {
+            wx.showToast({
+              title: '定位失败!请检查设置!',
+              duration: 1000,
+              icon: 'loading'
+            })
+          }
+          else {
+            wx.showToast({
+              title: '定位失败!使用上次位置!',
+              duration: 1000,
+              icon: 'loading'
+            })
+            //使用缓存定位
+            app.globalData.latitude = latitude;
+            app.globalData.longitude = longitude;
+          }
+        }
+      }
+    });
+    setTimeout(function () {
+      that.setData({
+        hidden: true
+      })
+    }, 300)
+  },
+  afterOnShow:function(){
+    var inChina = wx.getStorageSync('inChina');
+    this.setData({
+      inChina: inChina
+    })
+    // 页面显示
+    // 页面初始化 options为页面跳转所带来的参数
+    var tmpWeatherCity = wx.getStorageSync('weatherCity');
+
+    if (tmpWeatherCity == "") {
+      console.log('空')
+      this.setData({
+        weatherCity: "",
+        parent: "",
+      })
+    }
+    else {
+      this.setData({
+        weatherCity: tmpWeatherCity[0],
+        parent: tmpWeatherCity[1],
+      })
+    }
+    this.setData({
+      lifestyle_font_size: ((app.globalData.windowWidth % 32 == 0) ?
+        (app.globalData.windowWidth / 32) :
+        (parseInt(app.globalData.windowWidth / 32) + 1)),
+      weather_detail_font_size: ((app.globalData.windowWidth % 27 == 0) ?
+        (app.globalData.windowWidth / 27) :
+        (parseInt(app.globalData.windowWidth / 27) + 1)),
+      forecast_other_text_font_size: parseInt(app.globalData.windowWidth / 24),
+      forecast_cat_text_font_size: parseInt(app.globalData.windowWidth / 21),
+      air_text_font_size: parseInt(app.globalData.windowWidth / 27),
+      now_cat_font_size: parseInt(app.globalData.windowWidth / 24),
+
+    })
+    wx.setStorageSync('weatherCity', ["", ""])
+    this.loadInfo();
+    console.log("send message generate program");
+  },
   onShow: function () {
-    app.editTabBar(); 
+    var first_tabbar = wx.getStorageSync('first_tabbar')
+    if (first_tabbar != 'yes') {
+      app.editTabBar();
+      wx.setStorageSync('first_tabbar', 'yes')
+      wx.redirectTo({
+        url: '../weather/weather',
+      })
+    }
+    else {
+      app.editTabBar();
+      if (app.globalData.openid == "") {
+        this.getOpenId();
+      }
+      else{
+        this.activity_to_weather_get_location(1);
+      }
+    }
+
+  /*
+   // app.editTabBar(); 
     var inChina = wx.getStorageSync('inChina');
     this.setData({
       inChina:inChina
@@ -157,7 +338,7 @@ Page({
     })
     wx.setStorageSync('weatherCity', ["",""])
     this.loadInfo();
-    console.log("send message generate program");
+    console.log("send message generate program");*/
   },
 
   //分享弹窗下载事件
