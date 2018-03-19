@@ -170,6 +170,7 @@ App({
                   selectedIconPath: "/pages/images/icon/weather_icon.png",
                   selected: false
                 },
+                /*
                 {
                   pagePath: "/pages/activity/activity",
                   text: "活动",
@@ -183,7 +184,7 @@ App({
                   iconPath: "/pages/images/icon/discover_icon.png",
                   selectedIconPath: "/pages/images/icon/discover_icon.png",
                   selected: false
-                },
+                },*/
                 {
                   pagePath: "/pages/account/account",
                   text: "账号",
