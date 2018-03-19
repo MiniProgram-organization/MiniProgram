@@ -1,5 +1,37 @@
 /* pages/discover/discover.wxss */
-.weui-input{
-  font-size: 19px;
+.discover_title{
+  width: 100%;
+  height: 120px;
+  text-align: center;
+  line-height: 120px;
+  font-size: xx-large;
+}
+
+
+
+.discovery_spot{
+  display:flex;
+  flex-direction: column;
+}
+
+.discover_container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.dicover_button{
+  
+  width: 43%;
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+  background: #0b5782;
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size:large;
+  color: white;
+  opacity: 0.6;
 }
 @import "/pages/tabbar/tabbar.wxss"
