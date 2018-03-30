@@ -1,8 +1,7 @@
 {
   "pages": [
-    "pages/weather/weather",
     "pages/activity/activity",
-
+    "pages/weather/weather",
     "pages/map/map",
     "pages/account/account",
     "pages/trace/trace",
@@ -40,6 +39,45 @@
   "networkTimeout": {
     "request": 10000,
     "downloadFile": 10000
+  },
+  "tabBar": {
+    "color": "#999",
+    "selectedColor": "#2196F3",
+    "borderStyle": "white",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/weather/weather",
+        "text": "天气",
+        "iconPath": "/pages/images/icon/weather_icon.png",
+        "selectedIconPath": "/pages/images/icon/weather_icon.png"
+      },
+      {
+        "pagePath": "pages/activity/activity",
+        "text": "活动",
+        "iconPath": "/pages/images/icon/activity_icon.png",
+        "selectedIconPath": "/pages/images/icon/activity_icon.png"
+      },
+      {
+        "pagePath": "pages/mood/mood",
+        "text": "心情",
+        "iconPath": "/pages/images/icon/mood_icon.png",
+        "selectedIconPath": "/pages/images/icon/mood_icon.png"
+      },
+      {
+        "pagePath": "pages/discover/discover",
+        "text": "发现",
+        "iconPath": "/pages/images/icon/discover_icon.png",
+        "selectedIconPath": "/pages/images/icon/discover_icon.png"
+      },
+      {
+        "pagePath": "pages/account/account",
+        "text": "账号",
+        "iconPath": "/pages/images/icon/account_icon.png",
+        "selectedIconPath": "/pages/images/icon/account_icon.png"
+      }
+    ],
+    "position": "bottom"
   },
   "debug": true
 }

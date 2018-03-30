@@ -1,6 +1,6 @@
 <!--pages/mood/mood.wxml-->
-<import src="/pages/tabbar/tabbar.wxml"/>
-<template is="tabbar" data="{{tabbar}}"/>
+<!--<import src="/pages/tabbar/tabbar.wxml"/>
+<template is="tabbar" data="{{tabbar}}"/>-->
 <view style="width: {{windowWidth}}px; height:{{windowHeight}}px">
 
  <view class='middle_text'>

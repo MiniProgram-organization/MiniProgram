@@ -97,6 +97,7 @@ App({
     console.log('手机宽度为 ' + res.windowWidth);
     console.log("发送请求");
     
+    /*
     wx.request({
       url: 'https://40525433.fudan-mini-program.com/cgi-bin/Version',
       method: 'POST',
@@ -184,7 +185,7 @@ App({
                   iconPath: "/pages/images/icon/discover_icon.png",
                   selectedIconPath: "/pages/images/icon/discover_icon.png",
                   selected: false
-                },*/
+                },
                 {
                   pagePath: "/pages/account/account",
                   text: "账号",
@@ -208,7 +209,7 @@ App({
           title: '读取版本错误!',
         })
       }
-    })
+    })*/
     //发送一个请求到服务器
     //如果结果是1，表示可以使用心情功能
     //如果结果是0，表示不可以使用心情功能

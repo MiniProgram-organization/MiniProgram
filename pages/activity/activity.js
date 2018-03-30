@@ -424,6 +424,7 @@ Page({
   onShow: function () { 
 
     //app.editTabBar(); 
+    /*
     var first_tabbar = wx.getStorageSync('first_tabbar')
     if (first_tabbar != 'yes'){
       app.editTabBar();
@@ -443,7 +444,17 @@ Page({
       console.log('activity........!!!!!!!!!!!!!')
       console.log(this.data.checkins);
       console.log(this.data.classifiedCheckIns); 
+    }*/
+    
+    if (app.globalData.openid == "") {
+      this.getOpenId();
     }
+    else {
+      this.getCheckIns();
+    }
+    console.log('activity........!!!!!!!!!!!!!')
+    console.log(this.data.checkins);
+    console.log(this.data.classifiedCheckIns); 
     
   },
  getPlaces: function(){

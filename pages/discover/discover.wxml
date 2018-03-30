@@ -1,6 +1,6 @@
 <!--pages/discover/discover.wxml-->
-<import src="/pages/tabbar/tabbar.wxml"/>
-<template is="tabbar" data="{{tabbar}}"/>
+<!--<import src="/pages/tabbar/tabbar.wxml"/>
+<template is="tabbar" data="{{tabbar}}"/>-->
 <view class="page">
 
 <view class="discover_title">发现你周围的</view>
