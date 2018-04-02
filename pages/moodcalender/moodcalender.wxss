@@ -160,6 +160,7 @@ page {
 }
 
 .week {
+  font-size: 20px;
 	text-align: center;
 }
 
@@ -318,4 +319,10 @@ page {
 .picker-view {
 	color: #ff7ca0;
 	text-align: center;
+}
+.button_my{
+    color: black;
+    border: 1px solid #D1D1D1; 
+    height: 40px;
+    font-size: 15px;
 }
