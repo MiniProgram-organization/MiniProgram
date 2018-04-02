@@ -174,7 +174,7 @@ page {
 .day {
 	width: 60rpx;
 	height: 60rpx;
-	color: #88d2ac;
+  color: black;
 	font-size: 26rpx;
 	font-weight: 200;
 }
@@ -209,6 +209,21 @@ page {
   background-color: #784344;
 }
 
+.orange-bg {
+  background-color: #D2691E;
+}
+
+.red-bg {
+  background-color: #DC143C;
+}
+
+.grey-bg {
+  background-color: #CDC9C9;
+}
+
+.blue-bg {
+  background-color: #5CACEE;
+}
 
 .right-triangle::after {
 	content: "";

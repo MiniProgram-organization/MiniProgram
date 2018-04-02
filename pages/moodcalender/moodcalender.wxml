@@ -1,31 +1,34 @@
 <view class="flex box box-tb box-align-center">
-  <view class="calendar pink-color box box-tb">
+  <view class="calendar box box-tb">
     <view class="top-handle fs36 box box-lr box-align-center box-pack-center">
       <view class="prev box box-rl" bindtap="handleCalendar" data-handle="prev">
         <view class="prev-handle box box-lr box-align-center box-pack-center">《</view>
       </view>
-      <view bindtap="chooseYearAndMonth" class="date-area box box-lr box-align-center box-pack-center">{{curYear || "--"}} 年 {{curMonth || "--"}} 月</view>
+      <view bindtap="chooseYearAndMonth" style="font-weight:bold" class="date-area box box-lr box-align-center box-pack-center">{{curYear || "--"}} 年 {{curMonth || "--"}} 月</view>
       <view class="next box box-lr" bindtap="handleCalendar" data-handle="next">
         <view class="next-handle box box-lr box-align-center box-pack-center">》</view>
       </view>
     </view>
-    <view class="weeks box box-lr box-pack-center box-align-center">
+    <view style="font-weight:900" class="weeks box box-lr box-pack-center box-align-center">
       <view class="flex week fs28" wx:for="{{weeksCh}}" wx:key="{{index}}" data-idx="{{index}}">{{item}}</view>
     </view>
     <view class="days box box-lr box-wrap">
       <view wx:if="{{hasEmptyGrid}}" class="grid white-color box box-align-center box-pack-center" wx:for="{{empytGrids}}" wx:key="{{index}}" data-idx="{{index}}">
       </view>
       <view class="grid white-color box box-align-center box-pack-center" wx:for="{{days}}" wx:key="{{index}}" data-idx="{{index}}" bindtap="tapDayItem">
-        <view class="day border_radius {{mood_logo_dic[item.choosed]}} box box-align-center box-pack-center">{{item.day}}</view>
+        <view class="{{mood_logo_dic[item.choosed]}} day border_radius box box-align-center box-pack-center">{{item.day}}</view>
       </view>
     </view>
   </view>
-  <view style="display: inline-flex; width:400px; height: 100px; align-item:center">
-    <view style="background: red; width:70px; height: 50px">{{item.day}}</view>
-    <view style="background: pink; width:70px; height: 50px">{{item.day}}</view>
-    <view style="background: brown; width:70px; height: 50px">{{item.day}}</view>
-    <view style="background: yellow; width:70px; height: 50px">{{item.day}}</view>
-    <view style="background: blue; width:70px; height: 50px">{{item.day}}</view>
+  <view style="font-weight:bold; display: inline-flex; width:400px; height: 100px; align-item:center; margin:20px">
+    <view style="width:130px; height: 50px"></view>
+    <view style="background: red; width:35px; height: 22px">生气</view>
+    <view style="background: pink; width:35px; height: 22px">开心</view>
+    <view style="background: green; width:35px; height: 22px">放松</view>
+    <view style="background: brown; width:35px; height: 22px">焦虑</view>
+    <view style="background: yellow; width:35px; height: 22px">狂喜</view>
+    <view style="background: blue; width:35px; height: 22px">平静</view>
+    <view style="background: grey; width:35px; height: 22px">低落</view>
   </view>
 </view>
 

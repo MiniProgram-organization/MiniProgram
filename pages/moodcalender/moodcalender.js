@@ -1,21 +1,28 @@
 
 let chooseYear = null;
 let chooseMonth = null;
+var app = getApp();
 const conf = {
   data: {
     hasEmptyGrid: false,
     showPicker: false,
     classifiedMoods: {},
     mood_logo_dic: {
-      0: 'white-bg',
-      1: 'pink-bg',
-      2: 'brown-bg',
-      3: 'green-pg',
-      4: 'purple-pg'
+      
+      0: 'orange-bg', //橙色
+      1: 'pink-bg', //粉红色
+      2: 'green-bg', //绿色
+      3: 'blue-bg', //平静
+      4: 'grey-bg',// 灰色
+      5: 'brown-bg',//棕色
+      6: 'red-bg', //生气
+      100: ''//无色
     }
     
   },
   onLoad() {
+  },
+  onShow(){
     const date = new Date();
     const curYear = date.getFullYear();
     const curMonth = date.getMonth() + 1;
@@ -29,7 +36,6 @@ const conf = {
       weeksCh
     });
   },
-  
   fetchHistory(){
     var history_mood = wx.getStorageSync('history_mood');
     var that = this;
@@ -119,7 +125,7 @@ const conf = {
       console.log(this.data.classifiedMoods);
       var mood = this.data.classifiedMoods[full_date];
       if (!mood)
-        return 0;
+        return 100;
       console.log(full_date);
       console.log(mood.moodList[0].mood_id);
       return mood.moodList[0].mood_id;
@@ -210,7 +216,7 @@ const conf = {
     const curMonth = this.data.curMonth;
     let pickerYear = [];
     let pickerMonth = [];
-    for (let i = 1900; i <= 2100; i++) {
+    for (let i = 2000; i <= 2100; i++) {
       pickerYear.push(i);
     }
     for (let i = 1; i <= 12; i++) {
