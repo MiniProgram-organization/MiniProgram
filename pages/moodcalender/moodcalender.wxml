@@ -4,7 +4,8 @@
       <view class="prev box box-rl" bindtap="handleCalendar" data-handle="prev">
         <view class="prev-handle box box-lr box-align-center box-pack-center">《</view>
       </view>
-      <view bindtap="chooseYearAndMonth" style="font-weight:bold" class="date-area box box-lr box-align-center box-pack-center">{{curYear || "--"}} 年 {{curMonth || "--"}} 月</view>
+      <view style="font-weight:bold; font-size: 30px; background-color: #b4ddf5">{{curYear || "--"}} 年 {{curMonth || "--"}} 月</view>
+
       <view class="next box box-lr" bindtap="handleCalendar" data-handle="next">
         <view class="next-handle box box-lr box-align-center box-pack-center">》</view>
       </view>
@@ -20,17 +21,22 @@
       </view>
     </view>
   </view>
-  <view style="font-weight:bold; display: inline-flex; width:400px; height: 100px; align-item:center; margin:20px">
-    <view style="width:130px; height: 50px"></view>
-    <view style="background: red; width:35px; height: 22px">生气</view>
-    <view style="background: pink; width:35px; height: 22px">开心</view>
-    <view style="background: green; width:35px; height: 22px">放松</view>
-    <view style="background: brown; width:35px; height: 22px">焦虑</view>
-    <view style="background: yellow; width:35px; height: 22px">狂喜</view>
-    <view style="background: blue; width:35px; height: 22px">平静</view>
-    <view style="background: grey; width:35px; height: 22px">低落</view>
+  <view style="font-weight:bold; display: inline-flex; width:400px; height: 100px; align-item:left; margin:20px">
+    <view style="width:65px; height: 50px"></view>
+    <view style="text-align:center; background: red; width:40px; height: 22px">生气</view>
+    <view style="text-align:center; background: pink; width:40px; height: 22px">开心</view>
+    <view style="text-align:center; background: green; width:40px; height: 22px">放松</view>
+    <view style="text-align:center; background: brown; width:40px; height: 22px">焦虑</view>
+    <view style="text-align:center; background: yellow; width:40px; height: 22px">狂喜</view>
+    <view style="text-align:center; background: blue; width:40px; height: 22px">平静</view>
+    <view style="text-align:center; background: grey; width:40px; height: 22px">低落</view>
   </view>
+  <i class="weui_icon_msg weui_icon_success"></i>
+
+  <button type="primary" bindtap="chooseYearAndMonth">选择月份查看</button>
 </view>
+
+
 
 
 <view wx:if="{{showPicker}}" class="box box-tb">
