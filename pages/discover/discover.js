@@ -56,6 +56,11 @@ Page({
       url: '../discoverPOI/discoverPOI?type_en=scenic&type_cn=景区'
     })
   },
+  findATM: function(){
+    wx.navigateTo({
+      url: '../discoverPOI/discoverPOI?type_en=atm&type_cn=ATM'
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */
