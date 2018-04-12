@@ -1,3 +1,4 @@
+
 {
   "pages": [
     "pages/activity/activity",
@@ -79,5 +80,6 @@
     ],
     "position": "bottom"
   },
-  "debug": true
+  "debug": true,
+  "enablePullDownRefresh": true
 }

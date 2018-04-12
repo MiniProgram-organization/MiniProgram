@@ -180,6 +180,13 @@ App({
                   selected: true
                 },
                 {
+                  pagePath: "/pages/mood/mood",
+                  text: "心情",
+                  iconPath: "/pages/images/icon/mood_icon.png",
+                  selectedIconPath: "/pages/images/icon/mood_icon.png",
+                  selected: false
+                },
+                {
                   pagePath: "/pages/discover/discover",
                   text: "发现",
                   iconPath: "/pages/images/icon/discover_icon.png",
@@ -214,9 +221,7 @@ App({
     //如果结果是1，表示可以使用心情功能
     //如果结果是0，表示不可以使用心情功能
   },
-  /**
-   * 当小程序启动，或从后台进入前台显示，会触发 onShow
-   */
+
   onShow: function (options) {
   },
   /**
