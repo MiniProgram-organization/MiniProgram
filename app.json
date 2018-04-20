@@ -28,54 +28,52 @@
     "pages/showtops/showtops"
   ],
   "window": {
-    "window": {
-      "navigationBarBackgroundColor": "#FFFFFF",
-      "navigationBarTextStyle": "black",
-      "navigationBarTitleText": "微信接口功能演示",
+      "navigationBarBackgroundColor": "#0E7EE6",
+      "navigationBarTextStyle": "white",
+      "navigationBarTitleText": "卿云Go",
       "backgroundColor": "#ffffff",
-      "backgroundTextStyle": "light"
-    },
-    "enablePullDownRefresh": true
+      "backgroundTextStyle": "light",
+      "enablePullDownRefresh": true
   },
   "networkTimeout": {
     "request": 10000,
     "downloadFile": 10000
   },
   "tabBar": {
-    "color": "#999",
-    "selectedColor": "#2196F3",
-    "borderStyle": "white",
+    "color": "#CBCBCB",
+    "selectedColor": "#0E7EE6",
+    "borderStyle": "black",
     "backgroundColor": "#ffffff",
     "list": [
       {
         "pagePath": "pages/weather/weather",
         "text": "天气",
-        "iconPath": "/pages/images/icon/weather_icon.png",
-        "selectedIconPath": "/pages/images/icon/weather_icon.png"
+        "iconPath": "/pages/images/icon/weather.png",
+        "selectedIconPath": "/pages/images/icon/weather_blue.png"
       },
       {
         "pagePath": "pages/activity/activity",
         "text": "活动",
-        "iconPath": "/pages/images/icon/activity_icon.png",
-        "selectedIconPath": "/pages/images/icon/activity_icon.png"
+        "iconPath": "/pages/images/icon/flag.png",
+        "selectedIconPath": "/pages/images/icon/flag_blue.png"
       },
       {
         "pagePath": "pages/mood/mood",
         "text": "心情",
-        "iconPath": "/pages/images/icon/mood_icon.png",
-        "selectedIconPath": "/pages/images/icon/mood_icon.png"
+        "iconPath": "/pages/images/icon/heart.png",
+        "selectedIconPath": "/pages/images/icon/heart_blue.png"
       },
       {
         "pagePath": "pages/discover/discover",
         "text": "发现",
-        "iconPath": "/pages/images/icon/discover_icon.png",
-        "selectedIconPath": "/pages/images/icon/discover_icon.png"
+        "iconPath": "/pages/images/icon/discover.png",
+        "selectedIconPath": "/pages/images/icon/discover_blue.png"
       },
       {
         "pagePath": "pages/account/account",
         "text": "账号",
-        "iconPath": "/pages/images/icon/account_icon.png",
-        "selectedIconPath": "/pages/images/icon/account_icon.png"
+        "iconPath": "/pages/images/icon/account.png",
+        "selectedIconPath": "/pages/images/icon/account_blue.png"
       }
     ],
     "position": "bottom"

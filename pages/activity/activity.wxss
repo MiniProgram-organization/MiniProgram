@@ -22,7 +22,7 @@
     background-color: #eee;
 }
 .datetext{
-  color:green;
+  color:#888;
   margin-right: 20rpx;
 }
 .awardtext{
@@ -46,5 +46,66 @@
 }
 .bg3{
   background: #000
+}
+
+
+
+.checkin-map{
+  top:85%;
+  height:45px;
+width:40%;
+position:relative;
+margin:auto;
+background-color:#0E7EE6;
+color:white;
+text-align:center;
+line-height:45px;
+border-radius:5px;
+font-size:large;
+display: flex;
+display: -webkit-flex;
+align-items: center;
+justify-content: center;
+}
+
+.map-pin{
+  width: 20px;
+  height: 20px;
+}
+
+.checkin-word{
+  width: 60px;
+}
+
+.buy-map{
+  top:75%;
+  height:40px;
+width:40px;
+position:absolute;
+left:85%;
+background-color:white;
+border-color: gainsboro;
+color:#62BDD5;
+text-align:center;
+line-height:50px;
+border-radius:25px;
+font-size:large;
+}
+
+.buy-map-shadow{
+  position:absolute;
+  top:77%;
+  left:87%;
+  width: 43px;
+  height: 43px;
+}
+
+.bookmark{
+  width: 20px;
+  height: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top:10px;
+
 }
 @import "/pages/tabbar/tabbar.wxss"

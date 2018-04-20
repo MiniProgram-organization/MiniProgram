@@ -27,11 +27,11 @@
   height: 60px;
   text-align: center;
   line-height: 60px;
-  background: #0b5782;
+  background: #348CAD;
   margin-left: 5px;
   margin-right: 5px;
   font-size:large;
   color: white;
-  opacity: 0.6;
+  opacity: 1;
 }
 @import "/pages/tabbar/tabbar.wxss"

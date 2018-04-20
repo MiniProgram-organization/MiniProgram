@@ -2,44 +2,57 @@
 <!-- <import src="/pages/tabbar/tabbar.wxml"/> -->
 <template is="tabbar" data="{{tabbar}}"/>
 <view style="width: {{windowWidth}}px; height:{{windowHeight}}px">
-  <view style="width:80%; height:30%; margin:5% 10% 10% 10%">
-    <map bindmarkertap="markertap" latitude="{{latitude}}" longitude="{{longitude}}" include-points="{{include_points}}" markers="{{markers}}" style="width:100%" />
-    <view style="margin:5% 0% 10% 0%">
+  <map bindmarkertap="markertap" latitude="{{latitude}}" longitude="{{longitude}}" include-points="{{include_points}}" markers="{{markers}}" style="width:100%;height:80%;position:relative;">
+  
+  <cover-view class="checkin-map" bindtap='redirectCheckIn'>
+  <cover-image class="map-pin" src="../images/pin.png"></cover-image>
+  <cover-view class="checkin-word">签  到</cover-view>
+  </cover-view>
+  
+  <cover-image class="buy-map-shadow" src="../images/shadow.png"></cover-image>
+  <cover-view class="buy-map" bindtap=''>
+  <cover-image class="bookmark" src="../images/bookmark.png"></cover-image>
+  </cover-view>
+  </map>
+  <view style="width:80%; margin:5% 10% 10% 10%">
+    
+
+  <view style="margin:5% 0% 10% 0%">
       <view style="float:left;height:10px;width:33%">
         <view style="text-align:center">
-        <text bindtap="Todistrictsta" style="padding:0% 0% 0% 0%;color:blue">{{checkInTimes}}</text>
+        <text bindtap="Todistrictsta" style="padding:0% 0% 0% 0%;color:#2C343B">{{checkInTimes}}</text>
         </view>
         <view bindtap="Todistrictsta" style="text-align:center">
-         <text>去过</text></view>
+         <text style='color:#708396'>去过</text></view>
       </view>
       <view  style="float:left;height:10px;width:33%;">
       <view style="text-align:center">
-        <text bindtap="Toplacesta" style="color:blue">{{checkInPlaces}}</text>
+        <text bindtap="Toplacesta" style="color:#2C343B">{{checkInPlaces}}</text>
         </view>
         <view bindtap="Toplacesta" style="text-align:center">
-        <text>POI</text></view>
+        <text style='color:#708396'>POI</text></view>
       </view>
       <view style="float:left;top:20px;height:10px;width:33%;">
         <view style="text-align:center">
-        <text bindtap="Tocategorysta" style="color:blue">{{checkInCategories}}
+        <text bindtap="Tocategorysta" style="color:#2C343B">{{checkInCategories}}
         </text>
         </view>
         <view bindtap="Tocategorysta" style="text-align:center">
-        <text>偏好</text></view>
+        <text style='color:#708396'>偏好</text></view>
       </view>
     </view>
   </view>
 
-  <view style="padding:15% 10% 2% 10%">
+  <!--<view style="padding:15% 10% 2% 10%">
     <button bindtap="redirectCheckIn" type="primary">签到</button>
   </view>
   <view class='awardtext' style="padding:0% 10% 0% 10%">
     {{award_text_1}}
     <span style="color: blue">{{con_day}}</span>{{award_text_2}}
-  </view>
+  </view>-->
 
   <view>
-    <text style="font-size:150%; position:relative;left:5%; color:blue">
+    <text style="font-size:150%; position:relative;left:5%; color:#055BB0">
     Timeline
     </text>
   </view>
@@ -53,7 +66,7 @@
       <block wx:for="{{item.checkInList}}">
         <view class='item_view' index="{{index}}" id="{{item.POI_id}}" style="display: flex;flex-direction:row">
           <view style="width:{{windowWidth*0.1}}px;position:relative;left:5%;">
-            <image class="timeline" style="height:{{item.height_p}}%" src="../images/activity/yellow_line.png"></image>
+            <image class="timeline" style="height:{{item.height_p}}%" src="../images/activity/blue_line.png"></image>
           </view>
           <view style="width:{{windowWidth*0.9}}px">
             <view class="topic-item" catchtap="redictDetail">
@@ -61,8 +74,8 @@
               <view class="topic-info">
                 <view class="topic-inner">
                   <view class="topic-left">
-                    <view class="topic-title">
-                      <text>{{item.venue}}</text>
+                    <view class="topic-title" >
+                      <text sytle="color:#95E4F7">{{item.venue}}</text>
                     </view>
                     <view>
                       <text class="member-nickname">{{item.time}}</text>
