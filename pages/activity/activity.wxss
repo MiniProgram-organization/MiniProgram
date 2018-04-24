@@ -94,8 +94,8 @@ font-size:large;
 
 .buy-map-shadow{
   position:absolute;
-  top:77%;
-  left:87%;
+  top:76%;
+  left:86%;
   width: 43px;
   height: 43px;
 }

@@ -40,7 +40,7 @@
     "downloadFile": 10000
   },
   "tabBar": {
-    "color": "#CBCBCB",
+    "color": "#BFBFBF",
     "selectedColor": "#0E7EE6",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
