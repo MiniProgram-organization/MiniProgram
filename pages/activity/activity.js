@@ -284,7 +284,19 @@ Page({
 
         })
       },
-      fail: function(){
+      fail: function(res){
+        console.log(res)
+        if (res.errMsg == 'getLocation:fail auth deny')
+        {
+          wx.showModal({
+            title: '提示',
+            content: '不授权位置信息将无法正常使用卿云go!',
+          })
+          wx.openSetting({
+            
+          })
+          return 
+        }
         cnt = cnt + 1
         if (cnt < 10) that.fetchData(cnt)
         else {
@@ -373,7 +385,6 @@ Page({
         //存储一个缓存的经纬度,用于定位失败时使用
         wx.setStorageSync('latitude', res.latitude);
         wx.setStorageSync('longitude', res.longitude);
-
 
         that.setData({
           longitude: res.longitude,
@@ -466,6 +477,41 @@ Page({
    */
   onShow: function () { 
 
+    wx.getSetting({
+      success(res) {
+        console.log(res)
+        if (!res.authSetting['scope.userLocation'] )
+        {
+          
+          wx.authorize({
+            scope: 'scope.userLocation',
+            success() {
+              console.log('授权成功')
+            },
+            fail(res) {
+              wx.showModal({
+                title: '提示',
+                content: '不授权位置信息将无法正常使用卿云go!',
+              })
+              wx.openSetting({
+              })
+            }
+          });
+        }
+        else if (res.authSetting['scope.userLocation']　== false)
+        {
+          wx.showToast({
+            title: '提示:不授权位置信息将无法正常使用卿云go!',
+          })
+          wx.openSetting({
+          })
+        }
+        else {
+          console.log("yijingshouquan");
+        }
+      }
+    })
+    
     //app.editTabBar(); 
     /*
     var first_tabbar = wx.getStorageSync('first_tabbar')
@@ -492,12 +538,13 @@ Page({
     /*var refresh_activity = wx.getStorageSync('refresh_activity')
     if (refresh_activity == 'yes')
     {*/
+      
       if (app.globalData.openid == "") {
-        console.log(wx.getStorageSync('refresh_activity') + '???now')
+        //console.log(wx.getStorageSync('refresh_activity') + '???now')
         this.getOpenId();
       }
       else {
-        console.log(wx.getStorageSync('refresh_activity') + '????now')
+        //console.log(wx.getStorageSync('refresh_activity') + '????now')
         this.getCheckIns();
       }
   /*  }
