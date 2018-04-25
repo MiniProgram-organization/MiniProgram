@@ -124,8 +124,8 @@ Page({
     if(inChina == 1){
       app.globalData.qqmapsdk.reverseGeocoder({
         location: {
-         latitude: 31.193927764892578,
-         longitude: 121.59264373779297,
+          latitude: that.data.latitude,
+          longitude: that.data.longitude,
         },
         coord_type:1,
         get_poi: 1,
@@ -142,8 +142,6 @@ Page({
             longitude: that.data.longitude,
             iconPath: '../images/map/location.png',
           });
-          console.log(tempMarkers)
-
           for (var i = 0; i < coordinates.length; i++) {
             var tempLatitude = coordinates[i].location.lat;
             var tempLongitude = coordinates[i].location.lng;
@@ -243,8 +241,11 @@ Page({
     }
 
     wx.getLocation({
-      type: 'wgs84', //返回可以用于wx.openLocation的经纬度
+      type: 'gcj02', //返回可以用于wx.openLocation的经纬度
       success: function (res) {
+
+        console.log('位置信息')
+        console.log(res)
         cnt = cnt + 1
         app.globalData.latitude = res.latitude;
         app.globalData.longitude = res.longitude; 
@@ -344,14 +345,13 @@ Page({
                   iconPath: '../images/map/location.png',
                 });
 
-
                 for (var i = 0; i < coordinates.length; i++) {
                   var tempLatitude = coordinates[i].location.lat;
                   var tempLongitude = coordinates[i].location.lng;
                   var category = coordinates[i].category
                   var venue = coordinates[i].title;
                   var POI_id = coordinates[i].id;
-                /*
+                
                   tempMarkers.push({
                     POI_id: POI_id,
                     latitude: tempLatitude,
@@ -359,13 +359,12 @@ Page({
                     iconPath: '../images/map/dot.jpg',
                     category: category,
                     venue: venue
-                  });*/
+                  });
                   tempIncludePoints.push({
                     latitude: tempLatitude,
                     longitude: tempLongitude,
                   });
                 }
-                console.log(tempMarkers);
                 that.setData({
                   markers: tempMarkers,
                   include_points: tempIncludePoints
