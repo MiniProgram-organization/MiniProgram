@@ -130,7 +130,6 @@ Page({
         coord_type:1,
         get_poi: 1,
         success: function (res) {
-       //   console.log(res)
           if (res.result.pois == undefined) {
             return;
           }
@@ -138,7 +137,13 @@ Page({
           //marker数组
           var tempMarkers = [];
           var tempIncludePoints = [];
-          
+          tempMarkers.push({
+            latitude: that.data.latitude,
+            longitude: that.data.longitude,
+            iconPath: '../images/map/location.png',
+          });
+          console.log(tempMarkers)
+
           for (var i = 0; i < coordinates.length; i++) {
             var tempLatitude = coordinates[i].location.lat;
             var tempLongitude = coordinates[i].location.lng;
@@ -149,17 +154,19 @@ Page({
               POI_id: POI_id,
               latitude: tempLatitude,
               longitude: tempLongitude,
-              iconPath: '../images/map/dot.jpg',
+              iconPath: '../images/map/placeholder.png',
               category: category,
               venue: venue
             });
+
+            console.log(tempMarkers)
             tempIncludePoints.push({
               latitude: tempLatitude,
               longitude: tempLongitude,
             });
           }
           that.setData({
-          //  markers: tempMarkers,
+            markers: tempMarkers,
             include_points: tempIncludePoints
           });
         },
@@ -331,6 +338,12 @@ Page({
                 //marker数组
                 var tempMarkers = [];
                 var tempIncludePoints = [];
+                tempMarkers.push({
+                  latitude: that.data.latitude,
+                  longitude: that.data.longitude,
+                  iconPath: '../images/map/location.png',
+                });
+
 
                 for (var i = 0; i < coordinates.length; i++) {
                   var tempLatitude = coordinates[i].location.lat;
@@ -338,7 +351,7 @@ Page({
                   var category = coordinates[i].category
                   var venue = coordinates[i].title;
                   var POI_id = coordinates[i].id;
-
+                /*
                   tempMarkers.push({
                     POI_id: POI_id,
                     latitude: tempLatitude,
@@ -346,7 +359,7 @@ Page({
                     iconPath: '../images/map/dot.jpg',
                     category: category,
                     venue: venue
-                  });
+                  });*/
                   tempIncludePoints.push({
                     latitude: tempLatitude,
                     longitude: tempLongitude,
@@ -354,7 +367,7 @@ Page({
                 }
                 console.log(tempMarkers);
                 that.setData({
-                  //markers: tempMarkers,
+                  markers: tempMarkers,
                   include_points: tempIncludePoints
                 });
 
