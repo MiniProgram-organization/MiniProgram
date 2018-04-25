@@ -92,10 +92,34 @@ border-radius:25px;
 font-size:large;
 }
 
+
+
 .buy-map-shadow{
   position:absolute;
   top:76%;
   left:86%;
+  width: 43px;
+  height: 43px;
+}
+
+.choose-location{
+  top:75%;
+  height:40px;
+width:40px;
+position:absolute;
+right:85%;
+background-color:white;
+border-color: gainsboro;
+color:#62BDD5;
+text-align:center;
+line-height:50px;
+border-radius:25px;
+font-size:large;
+}
+.choose-location-shadow{
+  position:absolute;
+  top:76%;
+  right:86%;
   width: 43px;
   height: 43px;
 }

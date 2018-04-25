@@ -1,7 +1,7 @@
 // pages/activity/activity.js
 var utils = require('../../utils/utils.js');
 var app = getApp();
-
+//var getlocation = require('../../utils/geolocation.min.js');
 Page({
 
   /**
@@ -35,8 +35,8 @@ Page({
     })
   },
   setDuration: function (duration){
-    console.log('duration')
-    console.log(duration)
+   // console.log('duration')
+   // console.log(duration)
     if(duration == 0){
       this.setData({
         con_day: duration,
@@ -79,7 +79,7 @@ Page({
       }
       else if (duration % 7 != 0) {
         var object_day = (parseInt(duration / 7) + 1) * 7;
-        console.log(object_day)
+       // console.log(object_day)
         if (object_day % 28 == 0) {
           this.setData({
             con_day: duration,
@@ -124,12 +124,13 @@ Page({
     if(inChina == 1){
       app.globalData.qqmapsdk.reverseGeocoder({
         location: {
-          latitude: latitude,
-          longitude: longitude,
+         latitude: 31.193927764892578,
+         longitude: 121.59264373779297,
         },
+        coord_type:1,
         get_poi: 1,
         success: function (res) {
-          console.log(res)
+       //   console.log(res)
           if (res.result.pois == undefined) {
             return;
           }
@@ -151,7 +152,6 @@ Page({
               iconPath: '../images/map/dot.jpg',
               category: category,
               venue: venue
-
             });
             tempIncludePoints.push({
               latitude: tempLatitude,
@@ -159,22 +159,23 @@ Page({
             });
           }
           that.setData({
-            markers: tempMarkers,
+          //  markers: tempMarkers,
             include_points: tempIncludePoints
           });
         },
         fail: function (res) {
-          console.log(res)
+        //  console.log(res)
         }
       });
     }
     else{
+      /*
       that.setData({
         markers: [{
           latitude: latitude,
           longitude: longitude,
         }],
-      });
+      });*/
     }
   },
   fetchData: function (cnt) {
@@ -190,12 +191,12 @@ Page({
     if (oldDatetmp == "") oldDate = 0;
     else oldDate = oldDatetmp;
 
-    console.log(nowDate)
-    console.log(oldDate)
+   // console.log(nowDate)
+   // console.log(oldDate)
     var duration = wx.getStorageSync('duration_checkin');
-    console.log(duration.data)
+    /*console.log(duration.data)
     console.log(nowDate-oldDate)
-    console.log(duration == "")
+    console.log(duration == "")*/
     if (duration != "" && ((nowDate - oldDate) < 86400)){
       console.log('用缓存')
       this.setDuration(duration.data)
@@ -341,7 +342,7 @@ Page({
                 }
                 console.log(tempMarkers);
                 that.setData({
-                  markers: tempMarkers,
+                  //markers: tempMarkers,
                   include_points: tempIncludePoints
                 });
 
@@ -359,15 +360,57 @@ Page({
         hidden: true
       })
     }, 300)
+
+
   },
+  chooseLocation: function(options){
+    var that = this;
+    wx.chooseLocation({
+      success: function (res) {
+        console.log(res)
+        app.globalData.latitude = res.latitude;
+        app.globalData.longitude = res.longitude;
+        //存储一个缓存的经纬度,用于定位失败时使用
+        wx.setStorageSync('latitude', res.latitude);
+        wx.setStorageSync('longitude', res.longitude);
 
 
+        that.setData({
+          longitude: res.longitude,
+          latitude: res.latitude,
+        });
+        wx.setStorageSync('refresh_activity', 'no')
+        console.log(wx.getStorageSync('refresh_activity')+'choose_now')
+      },
+      fail: function () {
+        // fail
+      },
+      complete: function () {
+        // complete
+      }
+    })
+
+  },
+  getLngLat: function(options){
+
+  },
+  regionchange(e) {
+    // 地图发生变化的时候，获取中间点，也就是用户选择的位置
+    if (e.type == 'end') {
+      this.getLngLat()
+    }
+  }, 
+  markertap(e) {
+    console.log(e)
+
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
    // app.editTabBar(); 
+
   },
   getOpenId: function () {
     var that = this;
@@ -446,15 +489,23 @@ Page({
       console.log(this.data.classifiedCheckIns); 
     }*/
     
-    if (app.globalData.openid == "") {
-      this.getOpenId();
-    }
-    else {
-      this.getCheckIns();
-    }
-    console.log('activity........!!!!!!!!!!!!!')
-    console.log(this.data.checkins);
-    console.log(this.data.classifiedCheckIns); 
+    /*var refresh_activity = wx.getStorageSync('refresh_activity')
+    if (refresh_activity == 'yes')
+    {*/
+      if (app.globalData.openid == "") {
+        console.log(wx.getStorageSync('refresh_activity') + '???now')
+        this.getOpenId();
+      }
+      else {
+        console.log(wx.getStorageSync('refresh_activity') + '????now')
+        this.getCheckIns();
+      }
+  /*  }
+    else if (refresh_activity == 'no'){
+      //wx.setStorageSync('refresh_activity','yes')
+      //console.log(wx.getStorageSync('refresh_activity')+'now')
+    }*/
+    
     
   },
  getPlaces: function(){
@@ -487,17 +538,17 @@ Page({
     
     var that = this; 
     if (checkins != "" && ((nowDate - oldDate) < 86400) ){
-      console.log('时间差')
+      /*console.log('时间差')
       console.log(nowDate - oldDate)
       console.log('...签到缓存')
-      console.log(checkins)
+      console.log(checkins)*/
       this.setData({
         checkins: checkins
       });
       that.classifyByDate();
     } else {
-      console.log("向lsh请求历史");
-      console.log(getApp().globalData.openid);
+      /*console.log("向lsh请求历史");
+      console.log(getApp().globalData.openid);*/
       wx.request({
         url: 'https://40525433.fudan-mini-program.com/cgi-bin/History',
         data: {
@@ -513,8 +564,8 @@ Page({
             })
           }
           else{
-            console.log("lsh返回的历史");
-            console.log(res);
+           /* console.log("lsh返回的历史");
+            console.log(res);*/
             wx.setStorageSync('timestamp_checkins', (Date.parse(new Date()) / 1000));
             for (var i = 0; i < res.data.checkins.length; i++) {
               res.data.checkins[i].date = res.data.checkins[i]['datetime'].split(" ")[0];
@@ -531,7 +582,7 @@ Page({
             that.setData({
               checkins: res.data.checkins
             });
-            console.log(that.data.checkins)
+           // console.log(that.data.checkins)
             wx.setStorageSync('checkins', res.data.checkins);
             that.classifyByDate();
           }
@@ -575,7 +626,7 @@ Page({
       //统计签到地点数，种类数，并将当前签到记录塞入
       checkInTimes += 1;
       if (!categoryDic[that.data.checkins[i].category.split(":")[0]]) {
-        console.log("LLL");
+        //console.log("LLL");
         checkInCategories += 1;
         categoryDic[that.data.checkins[i].category.split(":")[0]] = 1;
       }else{

@@ -88,7 +88,7 @@ App({
     this.globalData.windowHeight = res.windowHeight;
 
     wx.setStorageSync('first_tabbar', 'no')
-
+    wx.setStorageSync('refresh_activity', 'yes')
     //外部类
     this.globalData.qqmapsdk = new QQMapWX({
       key: 'A5EBZ-DCPK4-IFSU7-XIQGW-NJKPJ-2NFLM'

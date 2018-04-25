@@ -2,17 +2,32 @@
 <!-- <import src="/pages/tabbar/tabbar.wxml"/> -->
 <template is="tabbar" data="{{tabbar}}"/>
 <view style="width: {{windowWidth}}px; height:{{windowHeight}}px">
-  <map bindmarkertap="markertap" latitude="{{latitude}}" longitude="{{longitude}}" include-points="{{include_points}}" markers="{{markers}}" style="width:100%;height:80%;position:relative;">
+  <map 
+  id="map4select"
+  bindmarkertap="markertap" 
+  latitude="{{latitude}}" 
+  longitude="{{longitude}}" 
+  include-points="{{include_points}}" 
+  markers="{{markers}}" 
+  controls="{{controls}}
+  bindregionchange="regionchange"
+  style="width:100%;height:80%;position:relative;">
   
   <cover-view class="checkin-map" bindtap='redirectCheckIn'>
   <cover-image class="map-pin" src="../images/pin.png"></cover-image>
   <cover-view class="checkin-word">签  到</cover-view>
   </cover-view>
-  
+
   <cover-image class="buy-map-shadow" src="../images/shadow.png"></cover-image>
+  
   <cover-view class="buy-map" bindtap=''>
   <cover-image class="bookmark" src="../images/bookmark.png"></cover-image>
   </cover-view>
+
+  <cover-view class="choose-location" bindtap='chooseLocation'>
+  <cover-image class="bookmark" src="../images/location.png"></cover-image>
+  </cover-view>
+
   </map>
   <view style="width:80%; margin:5% 10% 10% 10%">
     

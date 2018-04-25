@@ -200,8 +200,10 @@ Page({
     //如果查询经纬度成功，则开始搜索附近POI
     app.globalData.qqmapsdk.reverseGeocoder({
       location: {
-        latitude: latitude,
-        longitude: longitude
+   //     latitude: latitude,
+    //    longitude: longitude,
+        latitude: 31.193927764892578,
+        longitude: 121.59264373779297,
       },
       get_poi: 1,
       success: function (res) {
