@@ -126,7 +126,13 @@ Page({
     var that = this;
     app.globalData.qqmapsdk.search({
       keyword: that.data.searchPOIVal,
+      location: {
+        latitude: that.data.latitude,
+        longitude: that.data.longitude
+      },
       success: function (res) {
+        console.log(that.data.latitude)
+        console.log(that.data.longitude)
         console.log("搜索");
         console.log(res.data);
         var coordinates = res.data;
@@ -200,10 +206,8 @@ Page({
     //如果查询经纬度成功，则开始搜索附近POI
     app.globalData.qqmapsdk.reverseGeocoder({
       location: {
-   //     latitude: latitude,
-    //    longitude: longitude,
-        latitude: 31.193927764892578,
-        longitude: 121.59264373779297,
+        latitude: latitude,
+        longitude: longitude,
       },
       get_poi: 1,
       success: function (res) {
@@ -327,7 +331,7 @@ Page({
     console.log('当前高度' + this.data.windowHeight);
 
     wx.getLocation({
-      type: 'wgs84', //返回可以用于wx.openLocation的经纬度
+      type: 'gcj02', //返回可以用于wx.openLocation的经纬度
       success: function (res) {
         console.log(res);
         var latitude = res.latitude;

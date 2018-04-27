@@ -24,9 +24,11 @@
   <cover-image class="bookmark" src="../images/bookmark.png"></cover-image>
   </cover-view>
 
+<!--
   <cover-view class="choose-location" bindtap='chooseLocation'>
   <cover-image class="bookmark" src="../images/location.png"></cover-image>
   </cover-view>
+  -->
 
   </map>
   <view style="width:80%; margin:5% 10% 10% 10%">
