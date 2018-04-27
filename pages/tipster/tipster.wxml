@@ -1,0 +1,36 @@
+<view style="width: {{windowWidth}}px; height:{{windowHeight}}px;">
+
+  <view style="display: flex;flex-direction:row; height:{{windowHeight*0.35}}px;margin:5% 0% 0% 0%">
+      <view style="flex:0.3"></view>
+      <view style="flex:0.4">
+        <map bindmarkertap="markertap" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" />
+      </view>
+      <view style="flex:0.3"></view>
+  </view>
+  <view class='venuetext'>
+  <text>{{venue}}</text>
+  </view>
+  
+  <view class="weui-cells__title">请输入举报的原因</view>
+  <view class= "input_box_margin">
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <textarea maxlength="140" class="weui-textarea" bindinput="textChange" value="{{text}}" placeholder="请输入文本" style="height: 8.3em" />
+        <view class="weui-textarea-counter">0-140</view>
+      </view>
+    </view>
+  </view>
+  </view>
+
+
+  <view style="margin:{{windowHeight*0.1}}px 0px 0px 0px">
+    <view style="display: flex;flex-direction:row">
+      <view style="flex:0.2"></view>
+        <view style="flex:0.6">
+        <button bindtap="submitTipster" style="flex:1" class="weui-btn" type="primary">提交</button>
+        </view>
+      <view style="flex:0.2"></view>  
+    </view>
+  </view>
+</view>

@@ -34,6 +34,14 @@ Page({
       url: '../checkin/checkin?markers='
     })
   },
+
+  redirectBuySite: function(){
+    wx.navigateTo({
+      url: '../buysite/buysite?markers='
+    })
+  },
+
+
   setDuration: function (duration){
    // console.log('duration')
    // console.log(duration)
@@ -232,6 +240,7 @@ Page({
             wx.setStorageSync('duration_weather', res.data.duration_weather);
             wx.setStorageSync('duration_mood', res.data.duration_mood);
             wx.setStorageSync('scores', res.data.scores);
+            app.globalData.scores = res.data.scores;
             that.setDuration(res.data.duration_checkin)
           }
         },
@@ -458,8 +467,8 @@ Page({
                 userSystemInfo: systemInfo,
               },
               success: function (res) {
-                console.log(systemInfo)
-                console.log(res)
+                console.log(systemInfo);
+                console.log(res);
                 if (res.data.status == "ERROR") {
                   console.log(res.data.message);
                   wx.redirectTo({

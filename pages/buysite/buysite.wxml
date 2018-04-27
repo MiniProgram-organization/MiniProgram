@@ -1,0 +1,60 @@
+<view style="width: {{windowWidth}}px; height:{{windowHeight*0.1}}px">
+  <view style="display: flex;flex-direction:row">
+   <view style="flex:1">
+       </view>
+      <view style="flex:1">
+      <view class="page__title" style="font-size:150%;margin:10px 0px 0px 0px;color:green">买地</view>
+      </view>
+       <view style="flex:1">
+       </view>
+  </view>    
+</view>
+
+<view class="page__bd">
+  <view class="weui-search-bar">
+    <view class="weui-search-bar__form">
+      <view class="weui-search-bar__box">
+        <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+        <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{searchPOIVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+        <view class="weui-icon-clear" wx:if="{{searchPOIVal.length > 0}}" bindtap="clearInput">
+          <icon type="clear" size="14"></icon>
+        </view>
+      </view>
+      <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+                    <icon class="weui-icon-search" type="search" size="14"></icon>
+                    <view class="weui-search-bar__text">搜索</view>
+                </label>
+    </view>
+    <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+  </view>
+</view>
+
+<view>
+  <scroll-view scroll-y>
+    <view style="width: {{windowWidth}}px; height:{{windowHeight*1}}px">
+      <view class="topic-main">
+
+        <block wx:for="{{markers}}">
+          <view bindtap="redictDetail" class="topic-item" index="{{index}}" id="{{item.POI_id}}">
+            <image sytle="margin:0px 0px 0px 30px" class="member-avatar" src="{{item.logoPath}}" background-size="cover"></image>
+            <view style="margin:0px 0px 0px 30px">
+              <view>
+                <view><text style='font-size:20px'>{{item.venue}}</text></view>
+                <view>
+                  <text>冠名人：{{item.ownerName}}</text>
+                </view>
+              </view>
+            </view>
+            <view style='margin:40px 0px 0px 30px'>
+              <button bindtap="tipsterNaming" style='width:60px; height:35px;'>
+                <text style='font-size:15px'>举报</text>
+              </button>
+            </view>
+          </view>
+        </block>
+      </view>
+
+
+    </view>
+  </scroll-view>
+</view>

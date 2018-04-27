@@ -1,4 +1,3 @@
-
 {
   "pages": [
     "pages/activity/activity",
@@ -25,15 +24,18 @@
     "pages/otherMood/otherMood",
     "pages/qrcode/qrcode",
     "pages/tabbar/tabbar",
-    "pages/showtops/showtops"
+    "pages/showtops/showtops",
+    "pages/buysite/buysite",
+    "pages/tipster/tipster",
+    "pages/buynaming/buynaming"
   ],
   "window": {
-      "navigationBarBackgroundColor": "#0E7EE6",
-      "navigationBarTextStyle": "white",
-      "navigationBarTitleText": "卿云Go",
-      "backgroundColor": "#ffffff",
-      "backgroundTextStyle": "light",
-      "enablePullDownRefresh": true
+    "navigationBarBackgroundColor": "#0E7EE6",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "卿云Go",
+    "backgroundColor": "#ffffff",
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": true
   },
   "networkTimeout": {
     "request": 10000,

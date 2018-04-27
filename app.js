@@ -50,7 +50,7 @@ App({
     districtDict:{},
     placeDict:{},
     checkinLastTimeTable: new Array(),
-    
+    scores: 30
   },
   
   editTabBar: function () {

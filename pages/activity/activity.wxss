@@ -53,19 +53,37 @@
 .checkin-map{
   top:85%;
   height:45px;
-width:40%;
-position:relative;
-margin:auto;
-background-color:#0E7EE6;
-color:white;
-text-align:center;
-line-height:45px;
-border-radius:5px;
-font-size:large;
-display: flex;
-display: -webkit-flex;
-align-items: center;
-justify-content: center;
+  width:40%;
+  position:relative;
+  margin:auto;
+  background-color:#0E7EE6;
+  color:white;
+  text-align:center;
+  line-height:45px;
+  border-radius:5px;
+  font-size:large;
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buy-site{
+  top:75%;
+  height:30px;
+  width:60%;
+  position:relative;
+  margin:auto;
+  background-color:#0E7EE6;
+  color:white;
+  text-align:center;
+  line-height:45px;
+  border-radius:5px;
+  font-size:large;
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .map-pin{
