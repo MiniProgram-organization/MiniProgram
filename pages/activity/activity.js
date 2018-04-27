@@ -165,7 +165,7 @@ Page({
               venue: venue
             });
 
-            console.log(tempMarkers)
+            //console.log(tempMarkers)
             tempIncludePoints.push({
               latitude: tempLatitude,
               longitude: tempLongitude,
@@ -211,7 +211,7 @@ Page({
     console.log(nowDate-oldDate)
     console.log(duration == "")*/
     if (duration != "" && ((nowDate - oldDate) < 86400)){
-      console.log('用缓存')
+      //console.log('用缓存')
       this.setDuration(duration.data)
     }
     else{
@@ -224,7 +224,7 @@ Page({
           sessionid: getApp().globalData.sessionid,
         },
         success: function (res) {
-          console.log(res)
+          //console.log(res)
           if(res.data.status == "ERROR"){
             wx.showToast({
               title: '获取连续天数失败！',
@@ -253,8 +253,8 @@ Page({
       type: 'gcj02', //返回可以用于wx.openLocation的经纬度
       success: function (res) {
 
-        console.log('位置信息')
-        console.log(res)
+        //console.log('位置信息')
+        //console.log(res)
         cnt = cnt + 1
         app.globalData.latitude = res.latitude;
         app.globalData.longitude = res.longitude; 
