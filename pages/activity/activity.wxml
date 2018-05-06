@@ -1,5 +1,5 @@
 <!--activity.wxml-->
-<!-- <import src="/pages/tabbar/tabbar.wxml"/> -->
+<import src="/pages/tabbar/tabbar.wxml"/>
 <template is="tabbar" data="{{tabbar}}"/>
 <view style="width: {{windowWidth}}px; height:{{windowHeight}}px">
   <map 
@@ -34,20 +34,22 @@
   <view style="width:80%; margin:5% 10% 10% 10%">
     
 
-  <view style="margin:5% 0% 10% 0%">
+  <view style="margin:5% 0% 0% 0%">
       <view style="float:left;height:10px;width:33%">
         <view style="text-align:center">
         <text bindtap="Todistrictsta" style="padding:0% 0% 0% 0%;color:#2C343B">{{checkInTimes}}</text>
         </view>
         <view bindtap="Todistrictsta" style="text-align:center">
-         <text style='color:#708396'>去过</text></view>
+         <text style="color:#708396">去过</text></view>
       </view>
       <view  style="float:left;height:10px;width:33%;">
+
+      
       <view style="text-align:center">
         <text bindtap="Toplacesta" style="color:#2C343B">{{checkInPlaces}}</text>
         </view>
         <view bindtap="Toplacesta" style="text-align:center">
-        <text style='color:#708396'>POI</text></view>
+        <text style="color:#708396">POI</text></view>
       </view>
       <view style="float:left;top:20px;height:10px;width:33%;">
         <view style="text-align:center">

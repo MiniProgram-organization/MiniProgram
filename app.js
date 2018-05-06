@@ -84,13 +84,13 @@ App({
     console.log('手机宽度为 ' + res.windowWidth);
     console.log("发送请求");
     
-    /*
+    
     wx.request({
       url: 'https://40525433.fudan-mini-program.com/cgi-bin/Version',
       method: 'POST',
       
       data:{
-        version_code:'0.96'
+        version_code:'0.97'
       },
       success: function (res) {
         console.log(res)
@@ -99,44 +99,45 @@ App({
           if (res.data.version == 1){
             
             that.globalData.tabbar = {
-              color: "#353535",
-              selectedColor: "#3cc51f",
-              borderStyle: "white",
+              color: "#BFBFBF",
+              selectedColor: "#0E7EE6",
+              borderStyle: "black",
               backgroundColor: "#ffffff",
+
               list: [
                 {
                   pagePath: "/pages/weather/weather",
                   text: "天气",
-                  iconPath: "/pages/images/icon/weather_icon.png",
-                  selectedIconPath: "/pages/images/icon/weather_icon.png",
+                  iconPath: "/pages/images/icon/weather.png",
+                  selectedIconPath: "/pages/images/icon/weather_blue.png",
                   selected: false
                 },
                 {
                   pagePath: "/pages/activity/activity",
                   text: "活动",
-                  iconPath: "/pages/images/icon/activity_icon.png",
-                  selectedIconPath: "/pages/images/icon/activity_icon.png",
+                  iconPath: "/pages/images/icon/flag.png",
+                  selectedIconPath: "/pages/images/icon/flag_blue.png",
                   selected: true
                 },
                 {
                   pagePath: "/pages/mood/mood",
                   text: "心情",
-                  iconPath: "/pages/images/icon/mood_icon.png",
-                  selectedIconPath: "/pages/images/icon/mood_icon.png",
+                  iconPath: "/pages/images/icon/heart.png",
+                  selectedIconPath: "/pages/images/icon/heart_blue.png",
                   selected: false
                 },
                 {
                   pagePath: "/pages/discover/discover",
                   text: "发现",
-                  iconPath: "/pages/images/icon/discover_icon.png",
-                  selectedIconPath: "/pages/images/icon/discover_icon.png",
+                  iconPath: "/pages/images/icon/discover.png",
+                  selectedIconPath: "/pages/images/icon/discover_blue.png",
                   selected: false
                 },
                 {
                   pagePath: "/pages/account/account",
                   text: "账号",
-                  iconPath: "/pages/images/icon/account_icon.png",
-                  selectedIconPath: "/pages/images/icon/account_icon.png",
+                  iconPath: "/pages/images/icon/account.png",
+                  selectedIconPath: "/pages/images/icon/account_blue.png",
                   selected: false
                 }
               ],
@@ -146,16 +147,16 @@ App({
           }
           else if(res.data.version == 0){
             that.globalData.tabbar = {
-              color: "#353535",
-              selectedColor: "#3cc51f",
-              borderStyle: "white",
+              color: "#BFBFBF",
+              selectedColor: "#0E7EE6",
+              borderStyle: "black",
               backgroundColor: "#ffffff",
               list: [
                 {
                   pagePath: "/pages/weather/weather",
                   text: "天气",
-                  iconPath: "/pages/images/icon/weather_icon.png",
-                  selectedIconPath: "/pages/images/icon/weather_icon.png",
+                  iconPath: "/pages/images/icon/weather.png",
+                  selectedIconPath: "/pages/images/icon/weather_blue.png",
                   selected: false
                 },
                 /*
@@ -186,7 +187,7 @@ App({
                   iconPath: "/pages/images/icon/account_icon.png",
                   selectedIconPath: "/pages/images/icon/account_icon.png",
                   selected: false
-                }
+                }*/
               ],
               position: "bottom"
             }
@@ -203,7 +204,7 @@ App({
           title: '读取版本错误!',
         })
       }
-    })*/
+    })
     //发送一个请求到服务器
     //如果结果是1，表示可以使用心情功能
     //如果结果是0，表示不可以使用心情功能

@@ -282,7 +282,6 @@ Page({
   },
   onShow: function () {
 
-    /*
     var first_tabbar = wx.getStorageSync('first_tabbar')
     if (first_tabbar != 'yes') {
       app.editTabBar();
@@ -299,17 +298,19 @@ Page({
       else{
         this.activity_to_weather_get_location(1);
       }
-    }*/
+    }
 
+  /*
     if (app.globalData.openid == "") {
       this.getOpenId();
     }
     else {
       this.activity_to_weather_get_location(1);
-    }
+    }*/
 
-  /*
+  
    // app.editTabBar(); 
+   /*
     var inChina = wx.getStorageSync('inChina');
     this.setData({
       inChina:inChina

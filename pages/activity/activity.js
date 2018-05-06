@@ -533,8 +533,8 @@ Page({
       }
     })
     
-    //app.editTabBar(); 
-    /*
+    app.editTabBar(); 
+    
     var first_tabbar = wx.getStorageSync('first_tabbar')
     if (first_tabbar != 'yes'){
       app.editTabBar();
@@ -554,12 +554,15 @@ Page({
       console.log('activity........!!!!!!!!!!!!!')
       console.log(this.data.checkins);
       console.log(this.data.classifiedCheckIns); 
-    }*/
+    }
     
     /*var refresh_activity = wx.getStorageSync('refresh_activity')
     if (refresh_activity == 'yes')
     {*/
       
+      /*
+
+      pre....need....
       if (app.globalData.openid == "") {
         //console.log(wx.getStorageSync('refresh_activity') + '???now')
         this.getOpenId();
@@ -568,6 +571,9 @@ Page({
         //console.log(wx.getStorageSync('refresh_activity') + '????now')
         this.getCheckIns();
       }
+
+
+      */
   /*  }
     else if (refresh_activity == 'no'){
       //wx.setStorageSync('refresh_activity','yes')
