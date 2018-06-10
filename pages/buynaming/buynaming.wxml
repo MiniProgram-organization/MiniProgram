@@ -2,22 +2,20 @@
   <view style='text-align:center;'>
     <image style="width: 256rpx;height: 256rpx;" class="member-avatar" src='{{iconPath}}'></image>
   </view>
-  <view style='border-bottom:1px dashed #000;text-align:center;font-size:30px'>{{venue}}</view>
+  <view style='border-bottom:1px dashed #000;text-align:center;font-size:30px'>{{title}}</view>
+  <view style='border-bottom:1px dashed #000;text-align:center;font-size:15px'>原名:{{venue}}</view>
   <view style='font-size:15px;text-align:center;border-bottom:1px dashed #000;text-align:center;'>冠名积分价: {{price}}</view>
   <view></view>
 
-  <view style='margin:5px 0 0 20%'>请输入新冠名</view>
+  <view style='margin:5px 0 0 20%'>请输入新名称 (请务必包含原名哦~)</view>
   <view>
-    <input style="margin:0 0 0 20%; width:60%; height:50%; border: 1px solid lightgray;border-radius: 25px" bindinput="newNamingtextChange" value="{{new_naming}}"></input>
+    <input style="margin:0 0 0 20%; width:60%; height:50%; border: 1px solid lightgray;border-radius: 25px" bindinput="newNamingtextChange" ></input>
   </view>
   <view style='margin:5px 0 0 20%'>请输入冠名人昵称</view>
   <view>
-    <input style="margin:0 0 0 20%;width:60%; height:50%; border: 1px solid lightgray;border-radius: 25px" bindinput="newNicknametextChange" value="{{new_nickname}}"></input>
+    <input style="margin:0 0 0 20%;width:60%; height:50%; border: 1px solid lightgray;border-radius: 25px" bindinput="newNicknametextChange"></input>
   </view>
-  <view style='margin:5px 0 0 20%'>请输入冠名人价格</view>
-  <view>
-    <input style="margin:0 0 0 20%; width:60%; height:50%; border: 1px solid lightgray;border-radius: 25px" bindinput="newPricetextChange" value="{{new_price}}"></input>
-  </view>
+  
   <view style="text-align:center">
     <button bindtap="submitNaming" style="margin:10% 20%; width:60%; background-color:#0E7EE6;color:white;">确认冠名</button>
   </view>

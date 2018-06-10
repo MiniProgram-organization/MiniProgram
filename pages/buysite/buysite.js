@@ -81,10 +81,15 @@ Page({
   },
 
   redictDetail: function (e) {
+    console.log(e)
     var target_id = e.currentTarget.id;
+
+    //console.log(target_id)
+    //console.log('target')
     var inChina = this.data.inChina;
     var target_latitude, target_longitude, target_category, target_venue, target_logoPath,
-    target_price, target_adinfo_province, target_adinfo_city, target_adinfo_district, target_adinfo_country;
+      target_price, target_adinfo_province, target_adinfo_city, target_adinfo_district, target_adinfo_country, target_ownerName, target_title;
+    console.log(this.data.markers)
     for (var index = 0; index < this.data.markers.length; index++) {
       if (this.data.markers[index].POI_id == target_id) {
         target_latitude = this.data.markers[index].latitude;
@@ -92,6 +97,8 @@ Page({
         target_venue = this.data.markers[index].venue;
         target_category = this.data.markers[index].category;
         target_logoPath = this.data.markers[index].logoPath;
+        target_ownerName = this.data.markers[index].ownerName
+        target_title = this.data.markers[index].title;
         if (inChina == 1) {
           target_adinfo_province = this.data.markers[index].ad_info.province;
           target_adinfo_country = '中国';
@@ -119,7 +126,9 @@ Page({
       + '&target_adinfo_district=' + target_adinfo_district
       + '&target_adinfo_country=' + target_adinfo_country
       + '&target_price=' + target_price
-      + '&in_china=' + inChina;
+      + '&in_china=' + inChina
+      + '&target_ownerName=' + target_ownerName
+      + '&target_title=' + target_title;
 
     wx.redirectTo({
       url: url
@@ -144,7 +153,6 @@ Page({
           var venue = coordinates[i].title;
           var POI_id = coordinates[i].id;
           var ad_info = coordinates[i].ad_info;
-          // console.log(options.ad_info );
           tempMarkers.push({
             POI_id: POI_id,
             latitude: tempLatitude,
@@ -153,6 +161,7 @@ Page({
             category: category,
             venue: venue,
             ad_info: ad_info,
+            price:20,
           });
           tempIncludePoints.push({
             latitude: tempLatitude,
@@ -209,10 +218,10 @@ Page({
     //如果查询经纬度成功，则开始搜索附近POI
     app.globalData.qqmapsdk.reverseGeocoder({
       location: {
-        //     latitude: latitude,
-        //    longitude: longitude,
-        latitude: 31.193927764892578,
-        longitude: 121.59264373779297,
+        latitude: latitude,
+        longitude: longitude,
+        //latitude: 31.19395637512207,
+        //longitude: 121.59271240234375,
       },
       get_poi: 1,
       success: function (res) {
@@ -239,7 +248,10 @@ Page({
             logoPath: '../images/location/' + app.globalData.locationMap[category.split(":")[0]] + '.png',
             category: category,
             venue: venue,
+            title: venue,
             ad_info: ad_info,
+            ownerName: '暂无',
+            price: 20,
           });
           poi_list.push(POI_id);
           tempIncludePoints.push({
@@ -249,7 +261,7 @@ Page({
         }
         
         wx.request({
-          url: 'https://40525433.fudan-mini-program.com/cgi-bin/SearchPOI',
+          url: 'https://40525433.fudan-mini-program.com/cgi-bin/POITitle',
           method: 'POST',
           data: {
             openid: app.globalData.openid,
@@ -262,20 +274,11 @@ Page({
             console.log(res);
 
             //mock
-            for (var i = 0; i < tempMarkers.length; i++) {
-                tempMarkers[i].venue = "我是临时喊";
-                tempMarkers[i].price = 33;
-                tempMarkers[i].ownerName = "sgz";
-            }
-
-            if(res.data.status == 'OK'){
-              for (var i = 0; i < tempMarkers.length; i++) {
-                if (res.data.POIs[i].available == true){
-                  tempMarkers[i].venue = res.data.POIs[i].title;
-                  tempMarkers[i].prize = res.data.POIs[i].prize;
-                  tempMarkers[i].ownerName = res.data.POIs[i].ownerName;
-                }
-              }
+            for (var i = 0; i < res.data.POIs.length; i++) {
+             // tempMarkers[i].venue = res.data.POIs[i].venue;
+              tempMarkers[i].title = res.data.POIs[i].title;
+              tempMarkers[i].price = res.data.POIs[i].price;
+              tempMarkers[i].ownerName = res.data.POIs[i].ownerName;
             }
             that.setData({
               markers: tempMarkers,
@@ -300,8 +303,6 @@ Page({
       data: {
         latitude: latitude,
         longitude: longitude,
-        //latitude: 35.710934,
-        //longitude: 139.729699,
         openid: app.globalData.openid,
         sessionid: app.globalData.sessionid,
       },
@@ -345,13 +346,14 @@ Page({
             category: category,
             venue: venue,
             ad_info: ad_info,
+            price: 20,
+
           });
           tempIncludePoints.push({
             latitude: tempLatitude,
             longitude: tempLongitude,
           });
         }
-
         that.setData({
           markers: tempMarkers,
           include_points: tempIncludePoints

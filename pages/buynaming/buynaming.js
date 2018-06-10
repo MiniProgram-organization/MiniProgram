@@ -7,12 +7,15 @@ Page({
    */
   data: {
     venue: '',
+    title:'',
     price: 0,
     iconPath: '',
+    ownerName: '',
     new_nickname: '',
     new_price: 0,
     new_naming: '',
-    POI_id: ""
+    POI_id: "",
+    
   },
 
   /**
@@ -20,14 +23,27 @@ Page({
    */
   onLoad: function (options) {
     console.log(options);
+
+    var show_price = 0;
+    var show_title = '';
+    if (options.target_ownerName == '暂无')
+    {
+      show_price = parseInt(options.target_price);
+      show_title = options.target_venue;
+    } 
+    else{
+      show_price = parseInt(options.target_price) + 1;
+      show_title = options.target_title;
+    }
     this.setData({
       venue: options.target_venue,
       iconPath: options.target_logoPath,
-      price :options.target_price,
-      POI_id: options.target_id
+      price: show_price,
+      POI_id: options.target_id,
+      ownerName: options.target_ownerName,
+      title: show_title,
     });
 
-    
     console.log(this.data);
   },
 
@@ -61,38 +77,63 @@ Page({
 
   submitNaming: function(e){
     var that = this;
-    var old_price = parseInt(this.data.price);
-    var new_price = parseInt(this.data.new_price);
+    /*var old_price = parseInt(this.data.price);
+    var new_price = parseInt(this.data.new_price);*/
+    var show_price = parseInt(this.data.price);
     var score = wx.getStorageSync('scores');
-    if (new_price <= old_price){
+
+    console.log(score)
+    if (score < show_price){
       wx.showToast({
-        title: '请出更高的价格',
-      })
-      return 0;
-    }
-    console.log(old_price, new_price, score);
-    if(score < new_price){
-      wx.showToast({
+        icon: 'loading',
         title: '积分余额不足',
       })
-      return 0;
+     
     }
-    wx.showToast({
-      title: '成功冠名' + that.data.new_naming,
-    })
-    // wx.request({ 
-    //   url: "Fake URL",
-    //   data: {
-    //     openid: getApp().globalData.openid,
-    //     sessionid: getApp().globalData.sessionid,
-    //     POI_id: that.data.POI_id,
-    //     title: that.data.new_naming,
-    //     price: price
-    //   },
-    //   success: function(){
+    else if (that.data.new_naming.indexOf(this.data.venue) < 0)
+    {
+      var ss='上海中医药大学1'
+      console.log(ss.indexOf("上海中医药大学"))
+      wx.showToast({
+        icon:'loading',
+        title: '需要包含原名!',
+      })
+      
+    }
+    else{
+      wx.request({
+       url: 'https://40525433.fudan-mini-program.com/cgi-bin/BuyTitle',
+       method: 'POST',
+       data: {
+         openid: getApp().globalData.openid,
+         sessionid: getApp().globalData.sessionid,
+         POI_id: that.data.POI_id,
+         title: that.data.new_naming,
+         price: show_price,
+         latitude: app.globalData.latitude,
+         longitude: app.globalData.longitude,
+       },
+       success: function(res){
+         console.log(res)
+         if (res.data.status != 'ERROR')
+         {
+          wx.showToast({
+            title: '冠名成功!',
+          }) 
+          wx.navigateBack({
+            
+          })
+         }
+         else{
+           wx.showToast({
+             title: '冠名失败!',
+           }) 
+         }
 
-    //   }
-    // });
+       }
+     });
+    }
+
   },
 
   /**

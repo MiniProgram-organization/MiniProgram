@@ -1,1 +1,22 @@
 /* pages/buysite/buysite.wxss */
+.item_view{
+   border-bottom: 1px solid #eee;
+}
+.checkin-word{
+  width: 60px;
+}
+.report_button{
+  width:60px;
+  height:25px;
+  font-size: 13px;
+}
+.right{
+  width: 30%;
+  height: 100%;
+  flex-direction: row-reverse;
+}
+.row{
+  display: flex;  
+  flex-direction: row;  
+  justify-content:space-between;
+}

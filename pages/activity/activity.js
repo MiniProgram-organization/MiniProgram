@@ -266,6 +266,26 @@ Page({
           latitude: res.latitude,
         });
         wx.request({
+          url: 'https://40525433.fudan-mini-program.com/cgi-bin/CheckinImg.py',
+          method: 'POST',
+          data: {
+            latitude: res.latitude,
+            longitude: res.longitude,
+            openid: getApp().globalData.openid,
+            sessionid: getApp().globalData.sessionid,
+          },
+          success: function (res) {
+            console.log("测试！！！！！")
+            console.log(res)
+            
+
+          },
+          fail: function(res){
+            console.log("测试！shibai！！！！")
+            console.log(res)
+          }
+        })
+        wx.request({
           url: 'https://40525433.fudan-mini-program.com/cgi-bin/GetNation',
           method:'POST',
           data: {

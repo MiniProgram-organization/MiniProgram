@@ -3,7 +3,7 @@
 <view class='back' style="width: {{windowWidth}}px; height:{{windowHeight}}px">
 
   <view class='title_bar' style="width: {{windowWidth}}px; height:{{windowHeight*0.08}}px">
-    <view class='title_left' bindtap="toChooseArea" >
+   <!-- <view class='title_left' bindtap="toChooseArea" >
       <image class="image_set" src="{{set_url}}"></image>
     </view>
     <view class='now_location' style="height:{{windowHeight*0.08}}px" >
@@ -13,6 +13,7 @@
     <view class='title_right' bindtap="getQRCodeWeather" >
         <image class="image_share" src="{{share_url}}"></image>
     </view>
+    -->
   </view>
 
   <view class='today_whole' style="width: {{windowWidth}}px; height:{{windowHeight*0.50}}px">
