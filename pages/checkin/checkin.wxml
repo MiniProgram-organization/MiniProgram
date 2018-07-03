@@ -41,6 +41,7 @@
               <view class="topic-inner">
                 <view class="topic-left">
                   <view class="topic-title"><text>{{item.venue}}</text></view>
+                  <view class="topic-title-buy"><text>{{item.second_title}}</text></view>
                   <view>
                     <text class="node-name">{{item.category}}</text>
                   </view>

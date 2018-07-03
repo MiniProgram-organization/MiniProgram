@@ -1,1 +1,10 @@
 /* checkin.wxss */
+.topic-title-buy
+{
+    font-size:110%;
+    height:40rpx;
+    line-height: 1.4;
+    box-sizing: border-box;
+    padding-top: 10rpx;
+    overflow:hidden;
+}

@@ -220,8 +220,6 @@ Page({
       location: {
         latitude: latitude,
         longitude: longitude,
-        //latitude: 31.19395637512207,
-        //longitude: 121.59271240234375,
       },
       get_poi: 1,
       success: function (res) {
@@ -270,16 +268,21 @@ Page({
           },
           success: function(res){
             console.log("LLLLLL");
-            console.log(poi_list);
             console.log(res);
 
-            //mock
-            for (var i = 0; i < res.data.POIs.length; i++) {
-             // tempMarkers[i].venue = res.data.POIs[i].venue;
-              tempMarkers[i].title = res.data.POIs[i].title;
-              tempMarkers[i].price = res.data.POIs[i].price;
-              tempMarkers[i].ownerName = res.data.POIs[i].ownerName;
+            for (var i = 0; i < tempMarkers.length; i++)
+            {
+                for (var j = 0; j < res.data.POIs.length; j++)
+                {
+                  if (res.data.POIs[j].POI_id == tempMarkers[i].POI_id)
+                  {
+                    tempMarkers[i].title = res.data.POIs[j].title;
+                    tempMarkers[i].price = res.data.POIs[j].price;
+                    tempMarkers[i].ownerName = res.data.POIs[j].ownerName;
+                  }
+                }
             }
+            console.log(tempMarkers)
             that.setData({
               markers: tempMarkers,
               include_points: tempIncludePoints

@@ -18,6 +18,7 @@ Page({
     markers: [],
     searchPOIVal: "",
     inputShowed: false,
+    title_list:[],
     inChina: 0
   },
 
@@ -139,13 +140,14 @@ Page({
         //marker数组
         var tempMarkers = [];
         var tempIncludePoints = [];
-
+        var poi_list = [];
         for (var i = 0; i < coordinates.length; i++) {
           var tempLatitude = coordinates[i].location.lat;
           var tempLongitude = coordinates[i].location.lng;
           var category = coordinates[i].category;
           var venue = coordinates[i].title;
           var POI_id = coordinates[i].id;
+          poi_list.push(coordinates[i].id);
           var ad_info = coordinates[i].ad_info;
           // console.log(options.ad_info );
           tempMarkers.push({
@@ -162,6 +164,8 @@ Page({
             longitude: tempLongitude,
           });
         }
+
+
         console.log(tempMarkers);
 
         that.setData({
@@ -217,13 +221,14 @@ Page({
         //marker数组
         var tempMarkers = [];
         var tempIncludePoints = [];
-
+        var poi_list = [];
         for (var i = 0; i < coordinates.length; i++) {
           var tempLatitude = coordinates[i].location.lat;
           var tempLongitude = coordinates[i].location.lng;
           var category = coordinates[i].category
           var venue = coordinates[i].title;
           var POI_id = coordinates[i].id;
+          poi_list.push(POI_id);
           var ad_info = coordinates[i].ad_info;
 
           tempMarkers.push({
@@ -235,16 +240,57 @@ Page({
             category: category,
             venue: venue,
             ad_info: ad_info,
+            ownerName: '暂无',
+            title: venue,
+            price: 20,
+            second_title:''
           });
           tempIncludePoints.push({
             latitude: tempLatitude,
             longitude: tempLongitude,
           });
-        }
-        that.setData({
-          markers: tempMarkers,
-          include_points: tempIncludePoints
-        });
+        } 
+
+        wx.request({
+          url: 'https://40525433.fudan-mini-program.com/cgi-bin/POITitle',
+          method: 'POST',
+          data: {
+            openid: app.globalData.openid,
+            sessionid: app.globalData.sessionid,
+            POI_ids: poi_list
+          },
+          success: function (res) {
+            console.log("LLLLLL");
+            console.log(res);
+            
+            for (var i = 0; i < tempMarkers.length; i++) {
+              for (var j = 0; j < res.data.POIs.length; j++) {
+                if (res.data.POIs[j].POI_id == tempMarkers[i].POI_id) {
+                  tempMarkers[i].title = res.data.POIs[j].title;
+                  tempMarkers[i].price = res.data.POIs[j].price;
+                  tempMarkers[i].ownerName = res.data.POIs[j].ownerName;
+                }
+              }
+            }
+            for (var i = 0; i < tempMarkers.length; i++)
+            {
+              if(tempMarkers[i].ownerName == '暂无')
+              {
+                tempMarkers[i].second_title = '暂无冠名人';
+              }
+              else {
+                tempMarkers[i].second_title = tempMarkers[i].title + ' - ' + tempMarkers[i].ownerName;      
+              }
+            }
+            console.log("wxn");
+            console.log(tempMarkers);
+            that.setData({
+              markers: tempMarkers,
+              include_points: tempIncludePoints
+            });
+          }
+        })
+
 
       },
       fail: function () {
@@ -260,8 +306,6 @@ Page({
       data: {
         latitude: latitude,
         longitude: longitude,
-        //latitude: 35.710934,
-        //longitude: 139.729699,
         openid: app.globalData.openid,
         sessionid: app.globalData.sessionid,
       },

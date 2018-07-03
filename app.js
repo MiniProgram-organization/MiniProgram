@@ -96,7 +96,7 @@ App({
         console.log(res)
         console.log('....')
         if (res.data.status == 'OK'){
-          if (res.data.version == 1){
+          if (res.data.version == 0){
             
             that.globalData.tabbar = {
               color: "#BFBFBF",
