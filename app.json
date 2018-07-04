@@ -60,12 +60,6 @@
         "selectedIconPath": "/pages/images/icon/flag_blue.png"
       },
       {
-        "pagePath": "pages/mood/mood",
-        "text": "心情",
-        "iconPath": "/pages/images/icon/heart.png",
-        "selectedIconPath": "/pages/images/icon/heart_blue.png"
-      },
-      {
         "pagePath": "pages/discover/discover",
         "text": "发现",
         "iconPath": "/pages/images/icon/discover.png",
