@@ -1,82 +1,40 @@
 <!--<import src="/pages/tabbar/tabbar.wxml"/>
 <template is="tabbar" data="{{tabbar}}"/>
 -->
-<view style="width:{{windowWidth}}px;height:{{windowHeight}}px">
-  <view class='head_view'>
-  
-<image class='headimg' bindtap="redirectToQRCode"  
-        src="{{avatarUrl}}">
-        </image>
-</view>
-<view bindtap="redirectToQRCode" class='.share_text'>
-  <view>点击头像分享</view>
-</view>
 
- <view class="weui-cells__title" style="text-align:center;font-size:30px">个人信息</view>
- 
-<view class="weui-cells weui-cells_after-title">
-
-      <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-          <view class="weui-label">昵称</view>
-        </view>
-         <picker bindchange="bindOrganizationPickerChange" value="{{indexOrganization}}" range="{{arrayOrganizationName}}">
-            <text class="weui-input">{{nickName}}</text>
-         </picker>
-      </view>
-
-
-      <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-          <view class="weui-label">性别</view>
-        </view>
-        <view class="weui-cell__bd">
-          <text class="weui-input">{{gender}}</text>
-        </view>
-      </view>
-
-      <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-          <view class="weui-label">地区</view>
-        </view>
-        <view class="weui-cell__bd">
-          <text class="weui-input">{{country}} - {{province}}</text>
-        </view>
-      </view>
-
-  <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-          <view class="weui-label">积分</view>
-        </view>
-        <view class="weui-cell__bd">
-          <text class="weui-input">{{scores}} (详见官网)</text>
-        </view>
-      </view>
-
-      
-
-        <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-          <view class="weui-label">经纬度</view>
-        </view>
-        <view class="weui-cell__bd">
-          <text class="weui-input">{{latitude_text}}，{{longitude_text}}</text>
-        </view>
-      </view>
-
-     
-      <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-          <view class="weui-label">关于我们</view>
-        </view>
-        <view class="weui-cell__bd" bindtap="goToAboutUs">
-          <image style="width:48rpx; height:48rpx;margin:5% 0% 0% 0%" src="{{iconUrl}}"></image>
-        </view>
-      </view>
-      
+<view class="account-card-wrapper">
+  <view class='account-card'>
+    <image src="{{avatarUrl}}"></image>
+    <view class="account-detail">
+      <view class='account-name'>{{nickName}}</view>
+      <view class='account-location'>{{country}} - {{province}}</view>
     </view>
-  <view class='privacy'>
-  <text bindtap="goToPrivacy">隐私条款
-  </text>
   </view>
 </view>
+
+<view class='account-item-wrapper'>
+  <view class='account-item'>
+    <view class='item-main'>{{scores}}</view>
+    <view class='item-sub'>积分</view>
+  </view>
+  <view class='item-helper'></view>
+  <view class='item-helper' id='second-helper'></view>
+  <view class='account-item' >
+    <view class='item-main' id='gender'>{{gender}}</view>
+    <view class='item-sub'>性别</view>
+  </view>
+</view>
+
+
+<view class="account-slides-wrapper">
+  <view class='slides-item'>
+  <view></view>
+  <view class='slides-text'></view>
+  </view>
+  <view class='slides-item'>
+  <view></view>
+  <view class='slides-text'></view>
+  </view>
+</view>
+
+
