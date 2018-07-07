@@ -18,7 +18,7 @@
     <view class='item-sub'>积分</view>
   </view>
   <view class='item-helper'></view>
-  <view class='item-helper' id='second-helper '></view>
+  <view class='item-helper' id='second-helper'></view>
   <view class='account-item' >
     <view class='item-main' id='gender'>{{gender}}</view>
     <view class='item-sub'>性别</view>

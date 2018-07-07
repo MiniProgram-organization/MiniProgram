@@ -31,15 +31,21 @@ page{
 
 .account-detail{
   margin-left: 20px;
+  overflow: hidden;
+  max-width: 70%;
 }
 .account-name{
   color: white;
   font-size: 20px;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .account-location{
   color:aliceblue;
   font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .account-item-wrapper{
