@@ -15,7 +15,7 @@
     "pages/mood/mood",
     "pages/moodstatistics/moodstatistics",
     "pages/privacy/privacy",
-    "pages/aboutus/abd11tus",
+    "pages/aboutus/aboutus",
     "pages/recordmood/recordmood",
     "pages/categorysta/categorysta",
     "pages/districtsta/districtsta",
@@ -41,7 +41,39 @@
     "request": 10000,
     "downloadFile": 10000
   },
-  
+  "tabBar": {
+    "color": "#BFBFBF",
+    "selectedColor": "#0E7EE6",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/weather/weather",
+        "text": "天气",
+        "iconPath": "/pages/images/icon/weather.png",
+        "selectedIconPath": "/pages/images/icon/weather_blue.png"
+      },
+      {
+        "pagePath": "pages/activity/activity",
+        "text": "活动",
+        "iconPath": "/pages/images/icon/flag.png",
+        "selectedIconPath": "/pages/images/icon/flag_blue.png"
+      },
+      {
+        "pagePath": "pages/discover/discover",
+        "text": "发现",
+        "iconPath": "/pages/images/icon/discover.png",
+        "selectedIconPath": "/pages/images/icon/discover_blue.png"
+      },
+      {
+        "pagePath": "pages/account/account",
+        "text": "账号",
+        "iconPath": "/pages/images/icon/account.png",
+        "selectedIconPath": "/pages/images/icon/account_blue.png"
+      }
+    ],
+    "position": "bottom"
+  },
   "debug": true,
   "enablePullDownRefresh": true
 }

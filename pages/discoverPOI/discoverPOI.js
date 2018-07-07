@@ -86,8 +86,9 @@ Page({
       },
       success: function (res) {
         console.log(res);
+        var location_list = that.bubbleSort(res.data);
         that.setData({
-          POI_list: res.data,  
+          POI_list: location_list,  
           count:res.data.length    
         })
       },
@@ -99,6 +100,19 @@ Page({
       },
     });
   },
+
+ bubbleSort:function (list){
+    for(var i= 0; i<list.length; i++){
+      for (var j = 0; j < list.length - i - 1; j++) {
+        if (list[j]._distance > list[j + 1]._distance) {
+          var tmp = list[j + 1];
+          list[j + 1] = list[j];
+          list[j] = tmp;
+        }
+      }
+    }
+    return list;
+ },
 
   /**
    * 生命周期函数--监听页面隐藏

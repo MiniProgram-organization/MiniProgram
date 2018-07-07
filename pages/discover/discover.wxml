@@ -1,48 +1,47 @@
 <!--pages/discover/discover.wxml-->
-<import src="/pages/tabbar/tabbar.wxml"/>
-<template is="tabbar" data="{{tabbar}}"/>
-<view class="page">
 
-<view class="discover_title">发现你周围的</view>
+<view class="discover-friend-wrapper">
+  <view class="friend-icon-wrapper">
+    <view class="friend-icon-wrapper2">
+      <view class="friend-icon" bindtap='goToFriends'>
+        <view class="fa icon-users"></view>
+      </view>
+    </view>
+  </view>
+  <view class="friend-text">卿云GO用户</view>
+</view>
 
-
-<view class="discover_spot">
-<view class='discover_container'>
-  <view class="dicover_button" bindtap="goToFriends">
-  卿云Go用户
+<view class='discover-item-wrapper'>
+  <view class="item-wrapper" bindtap='findATM'>
+    <view class="item-icon" style='border-color:#FC7F3A;'><view class="fa icon-bank" style='color:#FC7F3A;'/></view>
+    <view class="item-text">ATM机</view>
   </view>
-  <view class="dicover_button" bindtap="findATM">
-  ATM机
+  <view class="item-wrapper" bindtap='findToilet'>
+    <view class="item-icon" style='border-color:#4E8AF0;'><view class="fa icon-toilet" style='color:#4E8AF0;'/></view>
+    <view class="item-text">洗手间</view>
   </view>
-</view>
-<view class='discover_container'>
-  <view class="dicover_button" bindtap="findToilet">
-  洗手间
-  </view>
-  <view class="dicover_button" bindtap="findSchool">
-  学校
-  </view>
-</view>
-<view class='discover_container'>
-  <view class="dicover_button" bindtap="findMall">
-  商场
-  </view>
-  <view class="dicover_button" bindtap="findRestaurant">
-  餐饮
-  </view>
-</view>
-<view class='discover_container'>
-  <view class="dicover_button" bindtap="findSubway">
-  地铁站
-  </view>
-  <view class="dicover_button" bindtap="findScenic">
-  景区
+  <view class="item-wrapper" bindtap='findSchool'>
+    <view class="item-icon" style='border-color:#178E45;'><view class="fa icon-college" style='color:#178E45;'/></view>
+    <view class="item-text">学校</view>
   </view>
 </view>
 
+<view class='discover-item-wrapper'>
+  <view class="item-wrapper" bindtap='findMall'>
+    <view class="item-icon" style='border-color:#6368F8;'><view class="fa icon-grocery-store" style='color:#6368F8;'/></view>
+    <view class="item-text">商场</view>
+  </view>
+  <view class="item-wrapper" bindtap='findRestaurant'>
+    <view class="item-icon" style='border-color:#FC7F3A;'><view class="fa icon-restaurant" style='color:#FC7F3A;'/></view>
+    <view class="item-text">餐饮</view>
+  </view>
+  <view class="item-wrapper" bindtap='findSubway'>
+    <view class="item-icon" style='border-color:#4E8AF0;'><view class="fa icon-belowground-rail" style='color:#4E8AF0;'/></view>
+    <view class="item-text">地铁站</view>
+  </view>
 </view>
 
 
-</view>
+
 
 

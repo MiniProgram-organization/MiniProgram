@@ -1,55 +1,143 @@
-.section {
-    width: 100%;
-    padding: 0 10px;
-}
-.discover-image {
-    display: flex;
-    margin-bottom: 10px;
-}
-.discover-image-two {
-    display: flex;
-    justify-content: space-between;
-}
-.privacy
-{
-  margin-top: 40px;
-  text-align: center;
+page{
+  height: 100%;
   width: 100%;
-  font-size: 10sp;
-  color: #C5C1AA;
-  margin-bottom: 5px;
 }
-.weui-cells__title_account
-{
-  margin-top:10rpx;
-  margin-bottom:10rpx;
-  padding-left:15px;
-  padding-right:15px;
-  color:#999;
-  font-size:13px
+
+.account-card-wrapper{
+  width: 100%;
+  height: 170px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
 }
-.share_text{
-  text-align: center;
-  font-size: 14px;
+
+.account-card{
+  width: 90%;
+  height: 120px;
+  background: linear-gradient(to right,#0E7EE6,#65B1F5) ;
+  border-radius: 20px;
+  box-shadow: 0px 5px 5px #BBB;
+  display: flex;
+  align-items: center;
 }
-.headimg{
-  text-align: center;
+
+.account-card image{
   width: 80px;
   height: 80px;
-  margin: auto 0;
+  border-radius: 40px;
+  margin-left: 20px;
 }
-.head_view{
+
+.account-detail{
+  margin-left: 20px;
+  overflow: hidden;
+  max-width: 70%;
+}
+.account-name{
+  color: white;
+  font-size: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.account-location{
+  color:aliceblue;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.account-item-wrapper{
+  width: 100%;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.account-item{
+  height:80px;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.item-helper{
+  width: 10%;
+  height: 50px;
+}
+
+#second-helper{
+  border-left:1px solid #BBB;
+}
+
+.item-main{
+  font-size: 23px;
+  font-weight: bold;
+  color: #0E7EE6;
+}
+
+#gender{
+  font-size: 21px;
+}
+
+.item-sub{
+  font-size: 13px;
+  color: #BBB;
+  font-weight: lighter;
+}
+
+.account-slides-wrapper{
+  width: 100%;
   margin-top: 20px;
-   text-align: center;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.icon_view
-{
-   line-height:2.58823529em;
-   position: fixed;
-   right: 0px;
+
+.slides-item{
+  width: 100%;
+  height: 45px;
+  display: flex;
+  align-items: center;
 }
-#hexagon {width: 100px;height: 55px;
-          background: red;position: relative;}
-          
-#hexagon:before {content: "";position: absolute;top: -25px; left: 0;width: 0;height: 0;border-left: 50px solid transparent;border-right: 50px solid transparent;border-bottom: 25px solid red;}#hexagon:after {content: "";position: absolute;bottom: -25px; left: 0;width: 0;height: 0;border-left: 50px solid transparent;border-right: 50px solid transparent;border-top: 25px solid red;}
+
+.slide-helper{
+  width: 78%;
+  height: 1px;
+  
+}
+
+#slide-helper1{
+ border-bottom: 1px solid #EFEFEF;
+}
+
+.slides-item .fa{
+  font-size: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.slides-text-wrapper{
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.slides-text{
+  font-size: 14px;
+}
+
+.slides-text-wrapper .fa{
+  font-size:20px;
+  color: #AFAFAF;
+}
+
+
+
 @import "/pages/tabbar/tabbar.wxss"

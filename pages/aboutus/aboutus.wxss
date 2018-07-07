@@ -15,3 +15,8 @@
   margin-top: 10px;
   margin-bottom: 5px;
 }
+
+.button{
+  color: white;
+  background-color: #0E7EE6;
+}

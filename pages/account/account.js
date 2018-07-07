@@ -31,6 +31,12 @@ Page({
 
   },
 
+  previewImg: function (e) {
+    wx.previewImage({
+      urls: [this.data.avatarUrl],
+    })
+  },
+
   redirectToQRCode: function () {
     this.getQRCode();
   },

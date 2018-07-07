@@ -1,6 +1,6 @@
 <!--activity.wxml-->
-<import src="/pages/tabbar/tabbar.wxml"/>
-<template is="tabbar" data="{{tabbar}}"/>
+<!--<import src="/pages/tabbar/tabbar.wxml"/>
+<template is="tabbar" data="{{tabbar}}"/>-->
 <view style="width: {{windowWidth}}px; height:{{windowHeight}}px">
   <map 
   id="map4select"
@@ -18,11 +18,11 @@
   <cover-view class="checkin-word">签  到</cover-view>
   </cover-view>
 
-  <cover-image class="buy-map-shadow" src="../images/shadow.png"></cover-image>
+  <!--<cover-image class="buy-map-shadow" src="../images/shadow.png"></cover-image>
   
   <cover-view class="buy-map" bindtap='redirectBuySite'>
   <cover-image class="bookmark" src="../images/bookmark.png"></cover-image>
-  </cover-view>
+  </cover-view>-->
 
 <!--
   <cover-view class="choose-location" bindtap='chooseLocation'>

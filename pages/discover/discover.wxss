@@ -1,37 +1,92 @@
 /* pages/discover/discover.wxss */
-.discover_title{
+page{
+  height: 100%;
   width: 100%;
-  height: 120px;
-  text-align: center;
-  line-height: 120px;
-  font-size: xx-large;
 }
-
-
-
-.discovery_spot{
-  display:flex;
+.discover-friend-wrapper{
+  width: 100%;
+  height: 60%;
+  background: #0E7EE6;
+  display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 10px #0E7EE6;
 }
 
-.discover_container{
-  width: 100%;
+.friend-icon-wrapper{
+  height: 170px;
+  width: 170px;
+  border-radius: 85px;
+  background: rgb(46, 146, 240);
+  text-align:center;
+}
+
+.friend-icon-wrapper2{
+  height: 140px;
+  width: 140px;
+  border-radius: 70px;
+  background: rgb(101, 177, 245);
+  margin: 15px;  
   display: flex;
   justify-content: center;
-  margin-top: 10px;
+  align-items: center;
 }
 
-.dicover_button{
-  
-  width: 43%;
-  height: 60px;
+.friend-icon{
+  height: 110px;
+  width: 110px;
+  border-radius: 55px;
+  background: rgb(159, 208, 249);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-users{
+  font-size: 50px;
+  color:white;
+}
+
+.friend-text{
+  margin-top: 20px;
+  font-size:medium;
+  color:white;
+}
+
+.discover-item-wrapper{
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+item-wrapper{
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.item-icon{
+  height: 45px;
+  width: 45px;
+  border-radius: 30px;
+  border: 2px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.item-icon .fa{
+  font-size: 25px;
+}
+
+.item-text{
+  margin-top: 10px;
   text-align: center;
-  line-height: 60px;
-  background: #348CAD;
-  margin-left: 5px;
-  margin-right: 5px;
-  font-size:large;
-  color: white;
-  opacity: 1;
+  font-size: 13px;
 }
 @import "/pages/tabbar/tabbar.wxss"
