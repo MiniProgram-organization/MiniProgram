@@ -67,19 +67,23 @@ App({
       tabbar: tabbar
     });
   },
+
   onLaunch: function () {
     
     var res = wx.getSystemInfoSync();
     var that = this;
+
     this.globalData.windowWidth = res.windowWidth;
     this.globalData.windowHeight = res.windowHeight;
 
     wx.setStorageSync('first_tabbar', 'no')
     wx.setStorageSync('refresh_activity', 'yes')
-    //外部类
+    
+
     this.globalData.qqmapsdk = new QQMapWX({
       key: 'A5EBZ-DCPK4-IFSU7-XIQGW-NJKPJ-2NFLM'
     });
+
     console.log('手机高度为 ' + res.windowHeight);
     console.log('手机宽度为 ' + res.windowWidth);
     console.log("发送请求");
@@ -93,8 +97,9 @@ App({
         version_code:'0.97'
       },
       success: function (res) {
-        console.log(res)
-        console.log('....')
+        console.log("[App] Launch ");
+        console.log(res);
+        
         if (res.data.status == 'OK'){
           if (res.data.version == 0){
             
