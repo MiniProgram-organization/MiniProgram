@@ -555,7 +555,9 @@ Page({
     
     app.editTabBar(); 
     
-    var first_tabbar = wx.getStorageSync('first_tabbar')
+    var first_tabbar = wx.getStorageSync('first_tabbar');
+    console.log("[Acitivity] OnShow: first_tabbar = ");
+    console.log(first_tabbar);
     if (first_tabbar != 'yes'){
       app.editTabBar();
       wx.setStorageSync('first_tabbar', 'yes')	       
@@ -574,7 +576,7 @@ Page({
       console.log('activity........!!!!!!!!!!!!!')
       console.log(this.data.checkins);
       console.log(this.data.classifiedCheckIns); 
-    }
+   }
     
     /*var refresh_activity = wx.getStorageSync('refresh_activity')
     if (refresh_activity == 'yes')

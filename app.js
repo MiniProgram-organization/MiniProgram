@@ -54,6 +54,7 @@ App({
   },
   
   editTabBar: function () {
+    /*
     var tabbar = this.globalData.tabbar,
       currentPages = getCurrentPages(),
       _this = currentPages[currentPages.length - 1],
@@ -65,7 +66,7 @@ App({
     }
     _this.setData({
       tabbar: tabbar
-    });
+    });*/
   },
 
   onLaunch: function () {
@@ -76,7 +77,7 @@ App({
     this.globalData.windowWidth = res.windowWidth;
     this.globalData.windowHeight = res.windowHeight;
 
-    wx.setStorageSync('first_tabbar', 'no')
+    wx.setStorageSync('first_tabbar', 'yes')
     wx.setStorageSync('refresh_activity', 'yes')
     
 
