@@ -1,15 +1,13 @@
 // pages/activity/activity.js
 var utils = require('../../utils/utils.js');
 var app = getApp();
-//var getlocation = require('../../utils/geolocation.min.js');
-Page({
 
-  /**
-   * 页面的初始数据
-   */
+Page({
   data: {
+    // 手机屏幕数据
     windowWidth: app.globalData.windowWidth,
     windowHeight: app.globalData.windowHeight,
+    // 位置信息
     latitude: "",
     longitude: "",
     hidden: false,

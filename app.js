@@ -10,6 +10,22 @@ App({
    * @brief 先检查是否还处于登录状态，如果成功直接进入主页，否则进行登录流程
    */
   globalData: {
+    // 手机信息，屏幕宽高
+    windowWidth: '',
+    windowHeight: '',
+
+    // 身份id，对话id
+    openid: '',
+    sessionid: '',
+
+    // 位置信息   
+    latitude: 0.0,
+    longitude: 0.0,
+
+    // api信息
+    qqmapsdk: {},
+
+
     category_foreign__to_china:{
       "food": 'restaurant',
       "parks": 'living_service',
@@ -19,15 +35,13 @@ App({
       "shopes": 'mall',
       "nightlife" : 'nightlife'
     },
-    windowWidth: '',
+    
     rawData:{},
-    windowHeight: '',
-    openid: '',
-    sessionid: '',
+    
+    
     checkins: [],
-    latitude: 0.0,
-    longitude: 0.0,
-    qqmapsdk: {},
+    
+    
     qrcodeUrl: "",
     weatherCity:"",
     locationMap: {
@@ -50,7 +64,9 @@ App({
     districtDict:{},
     placeDict:{},
     checkinLastTimeTable: new Array(),
-    scores: 30
+    scores: 30,
+
+    version:-1
   },
   
   editTabBar: function () {
@@ -69,25 +85,24 @@ App({
     });*/
   },
 
+
   onLaunch: function () {
-    
-    var res = wx.getSystemInfoSync();
     var that = this;
 
-    this.globalData.windowWidth = res.windowWidth;
-    this.globalData.windowHeight = res.windowHeight;
+    // 获取手机屏幕信息
+    var sysInfo = wx.getSystemInfoSync();
+    this.globalData.windowWidth = sysInfo.windowWidth;
+    this.globalData.windowHeight = sysInfo.windowHeight;
 
+  
     wx.setStorageSync('first_tabbar', 'yes')
     wx.setStorageSync('refresh_activity', 'yes')
     
 
+    // 设置公共接口sdk
     this.globalData.qqmapsdk = new QQMapWX({
       key: 'A5EBZ-DCPK4-IFSU7-XIQGW-NJKPJ-2NFLM'
     });
-
-    console.log('手机高度为 ' + res.windowHeight);
-    console.log('手机宽度为 ' + res.windowWidth);
-    console.log("发送请求");
     
     
     wx.request({
@@ -103,121 +118,28 @@ App({
         
         if (res.data.status == 'OK'){
           if (res.data.version == 0){
-            
-            that.globalData.tabbar = {
-              color: "#BFBFBF",
-              selectedColor: "#0E7EE6",
-              borderStyle: "black",
-              backgroundColor: "#ffffff",
-
-              list: [
-                {
-                  pagePath: "/pages/weather/weather",
-                  text: "天气",
-                  iconPath: "/pages/images/icon/weather.png",
-                  selectedIconPath: "/pages/images/icon/weather_blue.png",
-                  selected: false
-                },
-                {
-                  pagePath: "/pages/activity/activity",
-                  text: "活动",
-                  iconPath: "/pages/images/icon/flag.png",
-                  selectedIconPath: "/pages/images/icon/flag_blue.png",
-                  selected: true
-                },
-                {
-                  pagePath: "/pages/mood/mood",
-                  text: "心情",
-                  iconPath: "/pages/images/icon/heart.png",
-                  selectedIconPath: "/pages/images/icon/heart_blue.png",
-                  selected: false
-                },
-                {
-                  pagePath: "/pages/discover/discover",
-                  text: "发现",
-                  iconPath: "/pages/images/icon/discover.png",
-                  selectedIconPath: "/pages/images/icon/discover_blue.png",
-                  selected: false
-                },
-                {
-                  pagePath: "/pages/account/account",
-                  text: "账号",
-                  iconPath: "/pages/images/icon/account.png",
-                  selectedIconPath: "/pages/images/icon/account_blue.png",
-                  selected: false
-                }
-              ],
-              position: "bottom"
-            }
-            console.log(that.globalData.tabbar)
-          }
-          else if(res.data.version == 0){
-            that.globalData.tabbar = {
-              color: "#BFBFBF",
-              selectedColor: "#0E7EE6",
-              borderStyle: "black",
-              backgroundColor: "#ffffff",
-              list: [
-                {
-                  pagePath: "/pages/weather/weather",
-                  text: "天气",
-                  iconPath: "/pages/images/icon/weather.png",
-                  selectedIconPath: "/pages/images/icon/weather_blue.png",
-                  selected: false
-                },
-                /*
-                {
-                  pagePath: "/pages/activity/activity",
-                  text: "活动",
-                  iconPath: "/pages/images/icon/activity_icon.png",
-                  selectedIconPath: "/pages/images/icon/activity_icon.png",
-                  selected: true
-                },
-                {
-                  pagePath: "/pages/mood/mood",
-                  text: "心情",
-                  iconPath: "/pages/images/icon/mood_icon.png",
-                  selectedIconPath: "/pages/images/icon/mood_icon.png",
-                  selected: false
-                },
-                {
-                  pagePath: "/pages/discover/discover",
-                  text: "发现",
-                  iconPath: "/pages/images/icon/discover_icon.png",
-                  selectedIconPath: "/pages/images/icon/discover_icon.png",
-                  selected: false
-                },
-                {
-                  pagePath: "/pages/account/account",
-                  text: "账号",
-                  iconPath: "/pages/images/icon/account_icon.png",
-                  selectedIconPath: "/pages/images/icon/account_icon.png",
-                  selected: false
-                }*/
-              ],
-              position: "bottom"
-            }
+            that.globalData.version = 0;
+          }else if(res.data.version == 1){
+            that.globalData.version = 1; 
           }
         }
         else{
           wx.showToast({
             title: '读取版本错误!',
-          })
+          });
         }
       },
       fail: function(res){
         wx.showToast({
           title: '读取版本错误!',
-        })
+        });
       }
     })
-    //发送一个请求到服务器
-    //如果结果是1，表示可以使用心情功能
-    //如果结果是0，表示不可以使用心情功能
   },
 
   onShow: function (options) {
   },
+
   /**
    * 当小程序从前台进入后台，会触发 onHide
    */
@@ -231,10 +153,6 @@ App({
   onError: function (msg) {
 
   }
-  /**
-   * 
-   */
-
 
 })
 

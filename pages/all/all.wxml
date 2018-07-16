@@ -1,0 +1,27 @@
+<view class='page__bd'>
+  <view wx:if="{{current_page=='天气'}}" class='page-view page__bd'>
+    天气
+  </view>
+  <view wx:if="{{current_page=='活动'}}" class='page-view page__bd'>
+    活动
+  </view>
+  <view wx:if="{{current_page=='心情'}}" class='page-view page__bd'>
+    心情
+  </view>
+  <view wx:if="{{current_page=='发现'}}" class='page-view page__bd'>
+    发现
+  </view>
+  <view wx:if="{{current_page=='账号'}}" class='page-view page__bd'>
+    账号
+  </view>
+</view>
+
+<view class="tabbar_box" style="background-color:{{tabbar.backgroundColor}}; border-top-color:{{tabbar.borderStyle}}; {{tabbar.position == 'top' ? 'top:0' : 'bottom:0'}}">
+        <block wx:for="{{tabbar.list}}" wx:for-item="item" wx:key="index" >
+            <view class="tabbar_nav" style="width:{{1/tabbar.list.length*100}}%; color:{{item.selected ? tabbar.selectedColor : tabbar.color}}" bindtap='changePage' id="{{index}}">
+                <image class="tabbar_icon" src="{{item.selected ? item.selectedIconPath : item.iconPath}}"></image>
+                <text>{{item.text}}</text>
+            </view>
+        </block>
+    </view>
+

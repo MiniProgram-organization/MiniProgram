@@ -27,7 +27,8 @@
     "pages/showtops/showtops",
     "pages/buysite/buysite",
     "pages/tipster/tipster",
-    "pages/buynaming/buynaming"
+    "pages/buynaming/buynaming",
+    "pages/all/all"
   ],
   "window": {
     "navigationBarBackgroundColor": "#0E7EE6",
