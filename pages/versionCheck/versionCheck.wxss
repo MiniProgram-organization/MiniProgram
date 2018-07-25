@@ -1,0 +1,2 @@
+/* pages/versionCheck/versionCheck.wxss */
+@import '../activity/activity.wxss'

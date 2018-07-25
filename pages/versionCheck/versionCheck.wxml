@@ -1,0 +1,14 @@
+<!--pages/versionCheck/versionCheck.wxml-->
+<import src="../../utils/wxml/loading.wxml" />
+<import src="../../utils/wxml/tabbar.wxml" />
+<block wx:if="{{loading}}">
+  <view hidden="{{currentPage!='天气'}}">天气</view>
+  <view hidden="{{currentPage!='活动'}}">
+  <include src="../activity/activity.wxml"/>
+  </view>
+  <view hidden="{{currentPage!='心情'}}">心情</view>
+  <view hidden="{{currentPage!='发现'}}">发现</view>
+  <view hidden="{{currentPage!='账号'}}">账号</view>
+  <template is="tabbar" data="{{tabbar}}" />
+</block>
+<template wx:else is="loading" />

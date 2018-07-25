@@ -1,6 +1,3 @@
-<!--activity.wxml-->
-<!--<import src="/pages/tabbar/tabbar.wxml"/>
-<template is="tabbar" data="{{tabbar}}"/>-->
 <view style="width: {{windowWidth}}px; height:{{windowHeight}}px">
   <map 
   id="map4select"

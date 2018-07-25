@@ -93,10 +93,6 @@ App({
     var sysInfo = wx.getSystemInfoSync();
     this.globalData.windowWidth = sysInfo.windowWidth;
     this.globalData.windowHeight = sysInfo.windowHeight;
-
-  
-    wx.setStorageSync('first_tabbar', 'yes')
-    wx.setStorageSync('refresh_activity', 'yes')
     
 
     // 设置公共接口sdk
@@ -105,36 +101,7 @@ App({
     });
     
     
-    wx.request({
-      url: 'https://40525433.fudan-mini-program.com/cgi-bin/Version',
-      method: 'POST',
-      
-      data:{
-        version_code:'0.97'
-      },
-      success: function (res) {
-        console.log("[App] Launch ");
-        console.log(res);
-        
-        if (res.data.status == 'OK'){
-          if (res.data.version == 0){
-            that.globalData.version = 0;
-          }else if(res.data.version == 1){
-            that.globalData.version = 1; 
-          }
-        }
-        else{
-          wx.showToast({
-            title: '读取版本错误!',
-          });
-        }
-      },
-      fail: function(res){
-        wx.showToast({
-          title: '读取版本错误!',
-        });
-      }
-    })
+    
   },
 
   onShow: function (options) {

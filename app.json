@@ -28,7 +28,8 @@
     "pages/buysite/buysite",
     "pages/tipster/tipster",
     "pages/buynaming/buynaming",
-    "pages/all/all"
+    "pages/all/all",
+    "pages/versionCheck/versionCheck"
   ],
   "window": {
     "navigationBarBackgroundColor": "#0E7EE6",

@@ -1,0 +1,38 @@
+@keyframes cnloading{
+	0%{ transform: translateY(0rpx)}
+	50%{ transform: translateY(20rpx)}
+	100%{ transform: translateY(0rpx)}
+}
+
+.cntloading{padding: 50rpx 0;text-align: center;color: #888;font-size: 26rpx;}
+.cntloading view{display: inline-block;vertical-align: baseline;height: 30rpx;overflow: hidden;margin-left: 10rpx;}
+.cntloading text{width: 5rpx;height: 30rpx;background-color: #0E7EE6;position: relative;display: inline-block;margin-right: 6rpx;
+border-radius: 3rpx;animation: cnloading .9s linear infinite; transform-origin: center bottom;}
+.cntloading .cl2{ animation-delay: -.6s}
+.cntloading .cl3{animation-delay: -.3s}
+
+.tabbar_box{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+    width: 100%;
+    height: 120rpx; 
+}
+
+.tabbar_nav{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 28rpx;
+    height: 100%;
+}
+
+.tabbar_icon{
+    width: 55rpx;
+    height: 55rpx;
+}

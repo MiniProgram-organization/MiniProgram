@@ -150,4 +150,3 @@ font-size:large;
   margin-top:10px;
 
 }
-@import "/pages/tabbar/tabbar.wxss"
