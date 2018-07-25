@@ -1,4 +1,39 @@
 /* pages/activity/activity.wxss */
+.userInfo_mask{
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: rgb(255, 255, 255);
+}
+
+.userInfo_icon{
+  position: fixed;
+  z-index: 5000;
+  width: 150px;
+  height: 150px;
+  top:30%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+
+}
+
+.userInfo_button{
+  position: fixed;
+  z-index: 5000;
+  max-width: 600rpx;
+  top: 60%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+  overflow: hidden;
+  color:white;
+  background-color: #0E7EE6;
+}
 #child {
   position: absolute;
   top: 0;

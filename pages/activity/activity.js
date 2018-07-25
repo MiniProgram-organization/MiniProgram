@@ -1,6 +1,6 @@
 var app = getApp();
 
-Page({
+var activityObj = {
   data: {
     // 手机屏幕数据
     windowWidth: app.globalData.windowWidth,
@@ -30,57 +30,84 @@ Page({
     //用户周围的poi，主要用于地图渲染
     markers: [],
     include_points: [],
+
+    // 用户授权按钮隐藏
+    userInfoHidden: true,
   },
 
   /* 得到用户的位置，得到用户的账户信息，进行服务器登录，获取签到历史记录*/
   onShow: function () {
 
-    wx.getSetting({
-      success(res) {
-        console.log(res)
-        if (!res.authSetting['scope.userLocation']) {
-
-          wx.authorize({
-            scope: 'scope.userLocation',
-            success() {
-              console.log('授权成功')
-            },
-            fail(res) {
-              wx.showModal({
-                title: '提示',
-                content: '不授权位置信息将无法正常使用卿云go!',
-              })
-              wx.openSetting({
-              })
-            }
-          });
-        }
-        else if (res.authSetting['scope.userLocation'] 　== false) {
-          wx.showToast({
-            title: '提示:不授权位置信息将无法正常使用卿云go!',
-          })
-          wx.openSetting({
-          })
-        }
-        else {
-          console.log("yijingshouquan");
-        }
-      }
-    })
-
-    
-    if (app.globalData.openid == "") {
-      this.getOpenId();
-    } else {
-      this.getCheckIns();
-    }
-
-    console.log('activity........!!!!!!!!!!!!!')
-    console.log(this.data.checkins);
-    console.log(this.data.classifiedCheckIns);
+  
   },
 
+  /**
+     * 版本1.4特有的部分：获取用户的身份信息
+     */
   getOpenId: function () {
+    console.log("[Activity] getOpenId");
+    var that = this;
+    var userInfoAuthorized = false;
+
+    // 检查是否已经授权
+    wx.getSetting({
+      success(res) {
+        console.log("[Auth Setting]");
+        console.log(res);
+        userInfoAuthorized = res.authSetting['scope.userInfo'];
+        if (userInfoAuthorized == true) {
+          // 已经授权了，进行服务器登录
+          that.serverLogin();
+        } else {
+          // 还未授权或者拒绝授权，显示授权按钮
+          wx.showModal({
+            title: '提醒',
+            content: '卿云GO申请使用您的昵称、头像等信息',
+            confirmText: "同意",
+            cancelText: "拒绝",
+            success(res) {
+              if (res.confirm) {
+                // 同意了授权，显示真正的授权按钮
+                that.setData({
+                  userInfoHidden: false
+                });
+              } else {
+                // 拒绝了授权，显示提示
+                console.log("用户拒绝了身份信息授权");
+                wx.showToast({
+                  title: '为了您更好的体验,请先同意授权',
+                  icon: 'none',
+                  duration: 2000
+                });
+              }
+            }
+          })
+        }
+      }
+    });
+
+
+
+
+  },
+
+  /**
+   * 版本1.4中特有的部分：授权按钮的反应
+   */
+  getUserInfo: function (e) {
+    // 确认授权后，得到用户信息，进行登录
+    console.log(e);
+    this.serverLogin();
+    this.setData({
+      userInfoHidden: true
+    });
+
+  },
+
+  /**
+   * 版本1.4中特有的部分：拿到用户的rawData之后进行服务器登录
+   */
+  serverLogin: function () {
     var that = this;
     var systemInfo = wx.getSystemInfoSync();
 
@@ -114,8 +141,6 @@ Page({
                 }
                 getApp().globalData.openid = res.data.openid;
                 getApp().globalData.sessionid = res.data.sessionid;
-
-                //获取openid，sessionid后，向服务器请求签到历史
                 that.getCheckIns();
               }
             })
@@ -689,9 +714,57 @@ Page({
       }
     })
   },
+};
+
+export default activityObj;
+
+activityObj["onShow"] = function(){
+  /* 得到用户的位置，得到用户的账户信息，进行服务器登录，获取签到历史记录*/
+  wx.getSetting({
+    success(res) {
+      console.log(res)
+      if (!res.authSetting['scope.userLocation']) {
+
+        wx.authorize({
+          scope: 'scope.userLocation',
+          success() {
+            console.log('授权成功')
+          },
+          fail(res) {
+            wx.showModal({
+              title: '提示',
+              content: '不授权位置信息将无法正常使用卿云go!',
+            })
+            wx.openSetting({
+            })
+          }
+        });
+      }
+      else if (res.authSetting['scope.userLocation'] == false) {
+        wx.showToast({
+          title: '提示:不授权位置信息将无法正常使用卿云go!',
+        })
+        wx.openSetting({
+        })
+      }
+      else {
+        console.log("yijingshouquan");
+      }
+    }
+  })
 
 
- 
+  if (app.globalData.openid == "") {
+    this.getOpenId();
+  } else {
+    this.getCheckIns();
+  }
 
-  
-})
+  console.log('activity........!!!!!!!!!!!!!')
+  console.log(this.data.checkins);
+  console.log(this.data.classifiedCheckIns);
+};
+
+Page(activityObj);
+
+

@@ -1,5 +1,5 @@
-
-Page({
+var app = getApp();
+var versionCheck = {
 
   data: {
     loading:false,
@@ -44,9 +44,6 @@ Page({
       ],
       position: "bottom"
     }
-
-    
-  
   },
 
   onLoad: function (options) {
@@ -120,6 +117,7 @@ Page({
       });
     }
 
+    // 页面加载完毕
     this.setData({
       loading: true
     });
@@ -146,5 +144,76 @@ Page({
     });
     
   },
+};
 
-})
+import activityObj from '../activity/activity.js';
+
+var extend = function (o, n) {
+  for (var p in n) {
+    // 如果是新的，就放进来；如果冲突，则保留原来的
+    if (n.hasOwnProperty(p) && (!o.hasOwnProperty(p)))
+      o[p] = n[p];
+  }
+}; 
+
+//把这些页面的object的data合并，方法合并，但是通用方法必须要单独写
+var data = versionCheck.data;
+var activityData = activityObj.data;
+extend(data,activityData);
+versionCheck.data = data;
+
+extend(versionCheck,activityObj);
+
+versionCheck["onShow"] = function(){
+  wx.getSetting({
+    success(res) {
+      console.log(res)
+      if (!res.authSetting['scope.userLocation']) {
+
+        wx.authorize({
+          scope: 'scope.userLocation',
+          success() {
+            console.log('授权成功')
+          },
+          fail(res) {
+            wx.showModal({
+              title: '提示',
+              content: '不授权位置信息将无法正常使用卿云go!',
+            })
+            wx.openSetting({
+            })
+          }
+        });
+      }
+      else if (res.authSetting['scope.userLocation'] == false) {
+        wx.showToast({
+          title: '提示:不授权位置信息将无法正常使用卿云go!',
+        })
+        wx.openSetting({
+        })
+      }
+      else {
+        console.log("yijingshouquan");
+      }
+    }
+  })
+
+
+  if (app.globalData.openid == "") {
+    this.getOpenId();
+  } else {
+    this.getCheckIns();
+  }
+
+  console.log('activity........!!!!!!!!!!!!!')
+  console.log(this.data.checkins);
+  console.log(this.data.classifiedCheckIns);
+};
+
+Page(versionCheck);
+
+
+
+
+
+
