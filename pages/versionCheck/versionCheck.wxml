@@ -7,8 +7,12 @@
   <include src="../activity/activity.wxml"/>
   </view>
   <view hidden="{{currentPage!='心情'}}">心情</view>
-  <view hidden="{{currentPage!='发现'}}">发现</view>
-  <view hidden="{{currentPage!='账号'}}">账号</view>
+  <view hidden="{{currentPage!='发现'}}">
+  <include src="../discover/discover.wxml"/>
+  </view>
+  <view hidden="{{currentPage!='账号'}}">
+  <include src="../account/account.wxml"/>
+  </view>
   <template is="tabbar" data="{{tabbar}}" />
 </block>
 <template wx:else is="loading" />

@@ -89,4 +89,3 @@ item-wrapper{
   text-align: center;
   font-size: 13px;
 }
-@import "/pages/tabbar/tabbar.wxss"

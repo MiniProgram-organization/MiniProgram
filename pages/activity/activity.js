@@ -5,6 +5,7 @@ var activityObj = {
     // 手机屏幕数据
     windowWidth: app.globalData.windowWidth,
     windowHeight: app.globalData.windowHeight,
+    
     // 位置信息
     latitude: "",
     longitude: "",
@@ -716,8 +717,6 @@ var activityObj = {
   },
 };
 
-export default activityObj;
-
 activityObj["onShow"] = function(){
   /* 得到用户的位置，得到用户的账户信息，进行服务器登录，获取签到历史记录*/
   wx.getSetting({
@@ -766,5 +765,7 @@ activityObj["onShow"] = function(){
 };
 
 Page(activityObj);
+
+export default activityObj;
 
 

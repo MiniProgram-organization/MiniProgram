@@ -113,7 +113,8 @@ var versionCheck = {
       var tabbar = this.data.tabbar;
       tabbar.list = list;
       this.setData({
-        tabbar:tabbar
+        tabbar:tabbar,
+        currentPage:'天气'
       });
     }
 
@@ -123,30 +124,16 @@ var versionCheck = {
     });
   },
 
-  switchTab:function(e){
-    var page_name = e.currentTarget.dataset.t;
-    //更改tabbar显示 
-    //更改currentPage
-    var tabbar_list = this.data.tabbar.list;
-    for(var i = 0,length = tabbar_list.length;i<length;i++){
-      if(tabbar_list[i].text == page_name){
-        tabbar_list[i].selected = true;
-      }else{
-        tabbar_list[i].selected = false;
-      }
-    }
-    var tabbar = this.data.tabbar;
-    tabbar.list = tabbar_list;
-
-    this.setData({
-      tabbar:tabbar,
-      currentPage:page_name
-    });
-    
+  onShow:function(){
+    // 这里占个空位，便于后面合并不被其他页面的onShow替代
   },
+
+
 };
 
 import activityObj from '../activity/activity.js';
+import accountObj from '../account/account.js';
+import discoverObj from '../discover/discover.js';
 
 var extend = function (o, n) {
   for (var p in n) {
@@ -156,59 +143,85 @@ var extend = function (o, n) {
   }
 }; 
 
-//把这些页面的object的data合并，方法合并，但是通用方法必须要单独写
+//把这些页面的object的data合并
 var data = versionCheck.data;
 var activityData = activityObj.data;
+var accountData = accountObj.data;
+var discoverData = discoverObj.data;
+
 extend(data,activityData);
+extend(data,accountData);
+extend(data,discoverData);
 versionCheck.data = data;
 
+//把这些方法的 Onshow 都单独提取出来，在调用到switchTab的时候单独调用
+var activityOnShow = activityObj.onShow;
+var accountOnShow = accountObj.onShow;
+var discoverOnShow = accountObj.onShow;
+
 extend(versionCheck,activityObj);
+extend(versionCheck,accountObj);
+extend(versionCheck,discoverObj);
 
+versionCheck["activityOnShow"] = activityOnShow;
+versionCheck["accountOnShow"] = accountOnShow;
+versionCheck["discoverOnShow"] = discoverOnShow;
+
+
+//重写页面的OnShow，根据版本号决定调用哪一个onShow
 versionCheck["onShow"] = function(){
-  wx.getSetting({
-    success(res) {
-      console.log(res)
-      if (!res.authSetting['scope.userLocation']) {
+  // 这里需要写一个阻塞函数，直到接受到版本号为止才能决定调用谁
+  this.activityOnShow();
+};
 
-        wx.authorize({
-          scope: 'scope.userLocation',
-          success() {
-            console.log('授权成功')
-          },
-          fail(res) {
-            wx.showModal({
-              title: '提示',
-              content: '不授权位置信息将无法正常使用卿云go!',
-            })
-            wx.openSetting({
-            })
-          }
-        });
-      }
-      else if (res.authSetting['scope.userLocation'] == false) {
-        wx.showToast({
-          title: '提示:不授权位置信息将无法正常使用卿云go!',
-        })
-        wx.openSetting({
-        })
-      }
-      else {
-        console.log("yijingshouquan");
-      }
+//重写页面的switchtab，在每次切换tab的时候调用对应的OnSHow
+versionCheck["switchTab"] = function(e){
+  var page_name = e.currentTarget.dataset.t;
+  console.log(page_name);
+  //更改tabbar显示 
+  //更改currentPage
+  var tabbar_list = this.data.tabbar.list;
+  for (var i = 0, length = tabbar_list.length; i < length; i++) {
+    if (tabbar_list[i].text == page_name) {
+      tabbar_list[i].selected = true;
+    } else {
+      tabbar_list[i].selected = false;
     }
-  })
+  }
+  var tabbar = this.data.tabbar;
+  tabbar.list = tabbar_list;
 
+  this.setData({
+    tabbar: tabbar,
+    currentPage: page_name
+  });
 
-  if (app.globalData.openid == "") {
-    this.getOpenId();
-  } else {
-    this.getCheckIns();
+  //根据点击tab的不同调用不同的OnShow
+  if(page_name == "天气"){
+
+  }else if(page_name == "活动"){
+    this.activityOnShow();
+  } else if (page_name == "心情"){
+
+  } else if (page_name == "发现") {
+    this.discoverOnShow();
+  } else if (page_name == "账号") {
+    this.accountOnShow();
   }
 
-  console.log('activity........!!!!!!!!!!!!!')
-  console.log(this.data.checkins);
-  console.log(this.data.classifiedCheckIns);
+  
+
 };
+
+/* 下面是一些界面的特殊处理 */
+//发现页面的发现周围卿云GO用户，根据版本号不同显示不同
+var discoverGoToFriend = discoverObj.goToFriends;
+versionCheck["trueGoToFriends"] = discoverGoToFriend;
+versionCheck["goToFriends"] = function(){
+  if(this.data.version == 1){
+    this.trueGoToFriends();
+  }
+}
 
 Page(versionCheck);
 

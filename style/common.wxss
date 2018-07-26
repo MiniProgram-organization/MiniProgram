@@ -28,11 +28,11 @@ border-radius: 3rpx;animation: cnloading .9s linear infinite; transform-origin: 
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: 28rpx;
+    font-size: 25rpx;
     height: 100%;
 }
 
 .tabbar_icon{
-    width: 55rpx;
-    height: 55rpx;
+    width: 53rpx;
+    height: 53rpx;
 }
