@@ -129,6 +129,7 @@ Page({
               duration: 2000
             });
           }
+          app.globalData.mood_refresh = true;
           wx.navigateBack();
           /*
           wx.switchTab({

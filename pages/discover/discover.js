@@ -6,7 +6,8 @@ var discoverObj = {
    * 页面的初始数据
    */
   data: {
-
+    windowWidth: app.globalData.windowWidth,
+    windowHeight: app.globalData.windowHeight,
   },
 
   goToFriends: function () {
@@ -51,7 +52,7 @@ var discoverObj = {
   },
 
   onShow: function () {
-    app.editTabBar(); 
+    console.log("[发现] onShow");
     wx.getLocation({
       success: function (res) {
         app.globalData.latitude = res.latitude;

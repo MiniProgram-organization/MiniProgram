@@ -65,7 +65,7 @@ var accountObj = {
   },
 
   onShow: function () {
-    console.log(app.globalData.rawData);
+    console.log("[账号] onShow");
     var that = this;
     var nickName = "";
     var gender = "";

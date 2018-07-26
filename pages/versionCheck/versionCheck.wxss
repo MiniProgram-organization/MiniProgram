@@ -1,4 +1,0 @@
-/* pages/versionCheck/versionCheck.wxss */
-@import '../activity/activity.wxss';
-@import '../account/account.wxss';
-@import '../discover/discover.wxss';

@@ -38,7 +38,51 @@ var activityObj = {
 
   /* 得到用户的位置，得到用户的账户信息，进行服务器登录，获取签到历史记录*/
   onShow: function () {
+    console.log("[活动] onShow");
+    /* 得到用户的位置，得到用户的账户信息，进行服务器登录，获取签到历史记录*/
+    wx.getSetting({
+      success(res) {
+        console.log(res)
+        if (!res.authSetting['scope.userLocation']) {
 
+          wx.authorize({
+            scope: 'scope.userLocation',
+            success() {
+              console.log('授权成功')
+            },
+            fail(res) {
+              wx.showModal({
+                title: '提示',
+                content: '不授权位置信息将无法正常使用卿云go!',
+              })
+              wx.openSetting({
+              })
+            }
+          });
+        }
+        else if (res.authSetting['scope.userLocation'] == false) {
+          wx.showToast({
+            title: '提示:不授权位置信息将无法正常使用卿云go!',
+          })
+          wx.openSetting({
+          })
+        }
+        else {
+          console.log("yijingshouquan");
+        }
+      }
+    })
+
+
+    if (app.globalData.openid == "") {
+      this.getOpenId();
+    } else {
+      this.getCheckIns();
+    }
+
+    console.log('activity........!!!!!!!!!!!!!')
+    console.log(this.data.checkins);
+    console.log(this.data.classifiedCheckIns);
   
   },
 
@@ -628,6 +672,7 @@ var activityObj = {
 
   
   //去那3个统计页面
+  
   Todistrictsta: function () {
     var that = this;
     wx.navigateTo({
@@ -646,6 +691,7 @@ var activityObj = {
       url: '../placesta/placesta'
     })
   },
+  
   
   
   chooseLocation: function(options){
@@ -685,6 +731,7 @@ var activityObj = {
     }
   }, 
 
+  
   getLngLat: function (options) {
 
   },
@@ -717,52 +764,6 @@ var activityObj = {
   },
 };
 
-activityObj["onShow"] = function(){
-  /* 得到用户的位置，得到用户的账户信息，进行服务器登录，获取签到历史记录*/
-  wx.getSetting({
-    success(res) {
-      console.log(res)
-      if (!res.authSetting['scope.userLocation']) {
-
-        wx.authorize({
-          scope: 'scope.userLocation',
-          success() {
-            console.log('授权成功')
-          },
-          fail(res) {
-            wx.showModal({
-              title: '提示',
-              content: '不授权位置信息将无法正常使用卿云go!',
-            })
-            wx.openSetting({
-            })
-          }
-        });
-      }
-      else if (res.authSetting['scope.userLocation'] == false) {
-        wx.showToast({
-          title: '提示:不授权位置信息将无法正常使用卿云go!',
-        })
-        wx.openSetting({
-        })
-      }
-      else {
-        console.log("yijingshouquan");
-      }
-    }
-  })
-
-
-  if (app.globalData.openid == "") {
-    this.getOpenId();
-  } else {
-    this.getCheckIns();
-  }
-
-  console.log('activity........!!!!!!!!!!!!!')
-  console.log(this.data.checkins);
-  console.log(this.data.classifiedCheckIns);
-};
 
 Page(activityObj);
 

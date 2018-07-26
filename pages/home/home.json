@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "shareDialog": "../../components/sharePic/sharePic"
+  }
+}

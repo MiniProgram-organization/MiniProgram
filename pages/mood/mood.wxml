@@ -1,8 +1,4 @@
-<!--pages/mood/mood.wxml-->
-
-<!--<import src="/pages/tabbar/tabbar.wxml" />
-<template is="tabbar" data="{{tabbar}}" /> -->
-<view style="width: {{windowWidth}}px; height:{{windowHeight}}px">
+<view style="width: {{windowWidth}}px; height:{{windowHeight-windowWidth*0.16}}px;background-color:#F8F8F8;">
   <view class='bq' style="width:80%; height:35%; margin:5% 10% 5% 10%;">
     <view class='row1'>
       <view class='block1'>

@@ -616,4 +616,3 @@ page {
     height: 40px;
     font-size: 15px;
 }
-@import "/pages/tabbar/tabbar.wxss"

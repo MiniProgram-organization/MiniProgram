@@ -1,6 +1,6 @@
 <!--<import src="/pages/tabbar/tabbar.wxml"/>
 <template is="tabbar" data="{{tabbar}}"/>-->
-
+<view style="width: {{windowWidth}}px; height:{{windowHeight-windowWidth*0.16}}px;background-color:#F8F8F8;">
 <view class="account-card-wrapper">
   <view class='account-card' bindtap="redirectToQRCode">
     <image src="{{avatarUrl}}" catchtap='previewImg'></image>
@@ -44,6 +44,7 @@
     <view class="fa icon-right-open"></view>
   </view>
   </view>
+</view>
 </view>
 
 

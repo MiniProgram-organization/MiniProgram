@@ -51,9 +51,15 @@
 					"query": ""
 				},
 				{
+					"id": 3,
+					"name": "home",
+					"pathName": "pages/home/home",
+					"query": ""
+				},
+				{
 					"id": -1,
-					"name": "versionCheck",
-					"pathName": "pages/versionCheck/versionCheck",
+					"name": "探索未知页面？",
+					"pathName": "pages/moodstatistics/moodstatistics",
 					"query": ""
 				}
 			]

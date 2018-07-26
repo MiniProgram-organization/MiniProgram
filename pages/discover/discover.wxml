@@ -1,5 +1,5 @@
 <!--pages/discover/discover.wxml-->
-<view style="width: {{windowWidth}}px; height:{{windowHeight-(windowWidth*0.16)}}px">
+<view style="width: {{windowWidth}}px; height:{{windowHeight-(windowWidth*0.16)}}px;background-color:#F8F8F8;">
 <view class="discover-friend-wrapper" style="height:{{windowHeight-(windowWidth*0.16)-210}}px">
   <view class="friend-icon-wrapper">
     <view class="friend-icon-wrapper2">

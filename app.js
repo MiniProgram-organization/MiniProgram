@@ -66,23 +66,11 @@ App({
     checkinLastTimeTable: new Array(),
     scores: 30,
 
-    version:-1
-  },
-  
-  editTabBar: function () {
-    /*
-    var tabbar = this.globalData.tabbar,
-      currentPages = getCurrentPages(),
-      _this = currentPages[currentPages.length - 1],
-      pagePath = _this.__route__;
-    (pagePath.indexOf('/') != 0) && (pagePath = '/' + pagePath);
-    for (var i in tabbar.list) {
-      tabbar.list[i].selected = false;
-      (tabbar.list[i].pagePath == pagePath) && (tabbar.list[i].selected = true);
-    }
-    _this.setData({
-      tabbar: tabbar
-    });*/
+    version:-1,
+
+    activity_refresh:false,
+    mood_refresh: false,
+    account_refresh: false,
   },
 
 

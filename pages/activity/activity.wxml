@@ -1,4 +1,4 @@
-<view style="width: {{windowWidth}}px; height:{{windowHeight}}px">
+<view style="width: {{windowWidth}}px; height:{{windowHeight-windowWidth*0.16}}px;background-color:#F8F8F8;">
   <view class="userInfoAuth" hidden="{{userInfoHidden}}">
   <view class='userInfo_mask'></view>
   <image class="userInfo_icon" src="../../pages/images/miniProgram.jpeg" mode='aspectFit'></image>

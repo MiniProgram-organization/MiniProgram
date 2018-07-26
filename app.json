@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/guide/guide",
     "pages/activity/activity",
     "pages/weather/weather",
     "pages/map/map",
@@ -28,8 +29,7 @@
     "pages/buysite/buysite",
     "pages/tipster/tipster",
     "pages/buynaming/buynaming",
-    "pages/all/all",
-    "pages/versionCheck/versionCheck"
+    "pages/home/home"
   ],
   "window": {
     "navigationBarBackgroundColor": "#0E7EE6",
