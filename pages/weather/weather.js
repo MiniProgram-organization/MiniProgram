@@ -105,10 +105,13 @@ var weatherObj = {
 
     generatePicSuccess:false,
     downloadPicSuccess:false,
-    canvasHidden:true
+    canvasHidden:true,
+
+    userInfoHiddenWeather:true
   },
 
   onShow: function () {
+    console.log("[Weather] onShow");
     
     if (app.globalData.openid == "") {
       this.getOpenIdWeather();
@@ -118,19 +121,19 @@ var weatherObj = {
   },
 
   onReady: function () {
+    console.log("[Weather] onReady");
     this.shareDialog = this.selectComponent("#shareDialog");
   },
   
   getOpenIdWeather: function () {
     console.log("[Weather] getOpenId");
+
     var that = this;
     var userInfoAuthorized = false;
 
     // 检查是否已经授权
     wx.getSetting({
       success(res) {
-        console.log("[Auth Setting]");
-        console.log(res);
         userInfoAuthorized = res.authSetting['scope.userInfo'];
         if (userInfoAuthorized == true) {
           // 已经授权了，进行服务器登录
@@ -146,11 +149,10 @@ var weatherObj = {
               if (res.confirm) {
                 // 同意了授权，显示真正的授权按钮
                 that.setData({
-                  userInfoHidden: false
+                  userInfoHiddenWeather: false
                 });
               } else {
                 // 拒绝了授权，显示提示
-                console.log("用户拒绝了身份信息授权");
                 wx.showToast({
                   title: '为了您更好的体验,请先同意授权',
                   icon: 'none',
@@ -168,23 +170,18 @@ var weatherObj = {
 
   },
 
-  /**
-   * 版本1.4中特有的部分：授权按钮的反应
-   */
   getUserInfoWeather: function (e) {
+    console.log("[Weather] getUserInfo");
     // 确认授权后，得到用户信息，进行登录
-    console.log(e);
     this.serverLoginWeather();
     this.setData({
-      userInfoHidden: true
+      userInfoHiddenWeather: true
     });
 
   },
 
-  /**
-   * 版本1.4中特有的部分：拿到用户的rawData之后进行服务器登录
-   */
   serverLoginWeather: function () {
+    console.log("[Weather] serverLoginWeather");
     var that = this;
     var systemInfo = wx.getSystemInfoSync();
 
@@ -207,10 +204,7 @@ var weatherObj = {
                 userSystemInfo: systemInfo,
               },
               success: function (res) {
-                console.log(systemInfo);
-                console.log(res);
                 if (res.data.status == "ERROR") {
-                  console.log(res.data.message);
                   wx.redirectTo({
                     url: '/pages/error/error',
                   })
@@ -228,6 +222,8 @@ var weatherObj = {
   },
 
   activity_to_weather_get_location: function(cnt){
+    console.log("[Weather] activity_to_weather_get_location");
+
     var that = this;
     wx.getLocation({
       type: 'wgs84', 
@@ -309,6 +305,8 @@ var weatherObj = {
   },
 
   afterOnShow:function(){
+    console.log("[Weather] afterOnShow");
+
     var inChina = wx.getStorageSync('inChina');
     this.setData({
       inChina: inChina
@@ -347,12 +345,16 @@ var weatherObj = {
   },
 
   loadInfo: function () {
+    console.log("[Weather] loadInfo");
+
     var getSuccess = 0;
     var timer = 0;
     this.getLocationResur(1);
   },
 
   getLocationResur: function (cnt) {
+    console.log("[Weather] getLocationResur");
+
     var that = this;
 
     wx.getLocation({
@@ -405,7 +407,9 @@ var weatherObj = {
   },
 
   loadWeather_inForeign: function (latitude, longitude, openid, sessionid) {
-    console.log('国外')
+    console.log("[Weather] loadWeather_inForeign");
+
+    
     var that = this;
     var data = {};
     if (this.data.weatherCity == "") {
@@ -432,7 +436,6 @@ var weatherObj = {
       method: 'POST',
       data: data,
       success: function (res) {
-        console.log(res.data)
         if (res.data.status != 'OK') {
           wx.showToast({
             title: '服务器功能未启用',
@@ -510,7 +513,6 @@ var weatherObj = {
           detail_3_unit: parseInt(res.data.weatherWorld.channel.atmosphere.pressure),
           lifestyle_font_size: 0,
         })
-        console.log(that.data.weather)
 
         if ((duration % 7 == 0) && ((duration % 28) != 0)) {
           if ((duration / 7) % 4 == 1) {
@@ -544,7 +546,6 @@ var weatherObj = {
         }
         else if (duration % 7 != 0) {
           var weather_object_day = (parseInt(duration / 7) + 1) * 7;
-          console.log(weather_object_day)
 
 
           if (weather_object_day % 28 == 0) {
@@ -576,6 +577,8 @@ var weatherObj = {
 
   },
   loadWeather_hefeng: function (latitude, longitude, openid, sessionid) {
+    console.log("[Weather] loadWeather_hefeng");
+
 
     var that = this;
     var data = {};
@@ -602,8 +605,6 @@ var weatherObj = {
       method: 'POST',
       data: data,
       success: function (res) {
-        console.log(openid)
-        console.log(res.data)
         if (res.data.status == "ERROR") {
           wx.showToast({
             title: '服务器功能未启用',
@@ -643,10 +644,8 @@ var weatherObj = {
         day0_weather['icon'] = "../images/weather/" + that.data.map_weather_to_pic[res.data.forecast[0].cond_code_d] + ".png"
         day1_weather['icon'] = "../images/weather/" + that.data.map_weather_to_pic[res.data.forecast[1].cond_code_d] + ".png"
         day2_weather['icon'] = "../images/weather/" + that.data.map_weather_to_pic[res.data.forecast[2].cond_code_d] + ".png"
-        console.log(res.data.forecast)
         var day2_xq = new Date(res.data.forecast[2].date).getDay();
 
-        console.log(day2_xq)
         if (day2_xq == 1) day2_weather['xq'] = '星期一'
         if (day2_xq == 2) day2_weather['xq'] = '星期二'
         if (day2_xq == 3) day2_weather['xq'] = '星期三'
@@ -755,7 +754,6 @@ var weatherObj = {
         }
         else if (duration % 7 != 0) {
           var weather_object_day = (parseInt(duration / 7) + 1) * 7;
-          console.log(weather_object_day)
 
 
           if (weather_object_day % 28 == 0) {
@@ -789,6 +787,8 @@ var weatherObj = {
 
   //分享弹窗下载事件
   _downloadEvent() {
+    console.log("[Weather] _downloadEvent");
+
     var that = this;
     wx.showLoading({
       title: '保存中',
@@ -803,7 +803,6 @@ var weatherObj = {
           wx.saveImageToPhotosAlbum({
             filePath: res.tempFilePath,
             success: function (res) {
-              console.log(res);
               wx.hideLoading();
               wx.showModal({
                 title: '已成功保存到相册',
@@ -814,7 +813,6 @@ var weatherObj = {
             },
             fail: function (res) {
               wx.hideLoading();
-              console.log(res)
               wx.showModal({
                 title: '提示',
                 content: '保存分享图片失败！',
@@ -824,7 +822,6 @@ var weatherObj = {
         },
         fail: function (res) {
           wx.hideLoading();
-          console.log(res);
           wx.showModal({
             title: '提示',
             content: '保存分享图片失败！',
@@ -836,6 +833,7 @@ var weatherObj = {
 
 
   _saveToAlbum() {
+    console.log("[Weather] _saveToAlbum");
     var that = this;
     wx.saveImageToPhotosAlbum({
       filePath: that.data.qrcodeUrl,
@@ -850,12 +848,9 @@ var weatherObj = {
       fail: function (res) {
         wx.openSetting({
           success: function (settingdata) {
-            console.log(settingdata)
             if (settingdata.authSetting['scope.writePhotosAlbum']) {
-              console.log('获取权限成功，给出再次点击图片保存到相册的提示。')
             }
             else {
-              console.log('获取权限失败，给出不给权限就无法正常使用的提示')
             }
           }
         });
@@ -864,6 +859,8 @@ var weatherObj = {
   },
   //分享事件
   _shareEvent() {
+    console.log("[Weather] _shareEvent");
+
     var that = this;
     this.onShareAppMessage();
 
@@ -871,6 +868,8 @@ var weatherObj = {
   },
   //关闭对话框事件
   _cancelEvent(){
+    console.log("[Weather] _cancelEvent");
+
     this.setData({
       canvasHidden:true
     })
@@ -879,6 +878,8 @@ var weatherObj = {
   },
 
   getQRCodeWeather: function(){
+    console.log("[Weather] getQRCodeWeather");
+
     this.setData({
       canvasHidden:false
     })
@@ -899,6 +900,8 @@ var weatherObj = {
     
   },
   toChooseArea: function (cnt) {
+    console.log("[Weather] toChooseArea");
+
     var that = this;
     wx.navigateTo({
       url: '../chooseArea/chooseArea'
@@ -914,6 +917,8 @@ var weatherObj = {
    * 注意：这一步只有在loadWeather_inXXX成功回调之后才使用
    */
   generate_sharePic:function(e){
+    console.log("[Weather] generate_sharePic");
+
     var that = this;
     var data = {
       latitude: that.data.latitude,
@@ -929,8 +934,6 @@ var weatherObj = {
         day2_weather: this.data.day2_weather
       }
     }
-    console.log("[WEATHER]generate_sharePic:data sent to server");
-    console.log(data);
 
     wx.request({
       url: 'https://40525433.fudan-mini-program.com/cgi-bin/WeatherImg.py',
@@ -938,7 +941,6 @@ var weatherObj = {
       data: data,
       success: function (e) {
         if (e.data.status == "OK") {
-          console.log(e.data)
           //得到了生成图片的网络地址，在页面数据中记录generatePicSuccess为true
           that.setData({
             qrcodeUrl: e.data.url,
@@ -948,8 +950,6 @@ var weatherObj = {
           wx.downloadFile({
             url: e.data.url,
             success: function (res) {
-              console.log("[WEATHER]generate_sharePic:download weather share message");
-              console.log(res);
               if(res.statusCode==200){
                 //成功缓存了图片，使用本地缓存地址
                 that.setData({
@@ -979,6 +979,9 @@ var weatherObj = {
   },
 
   _drawCanvas(){
+    console.log("[Weather] _drawCanvas");
+
+
     var that = this;
     var context = wx.createCanvasContext('sharePicCanvas');
     context.setFillStyle("#ffffff");
@@ -998,6 +1001,8 @@ var weatherObj = {
 
 
   onShareAppMessage: function () {
+    console.log("[Weather] onShareAppMessage");
+
     var that = this;
     return {
       title: '卿云Go 伴你走过一年四季~',

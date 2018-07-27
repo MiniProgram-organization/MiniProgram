@@ -64,41 +64,57 @@ var moodObj = {
 
   
   goToRecordMood_7: function(){
+    console.log("[Mood] goToRecordMood_7");
+
       wx.navigateTo({
         url: '../otherMood/otherMood?moodId=7'
       })
   },
   goToRecordMood_0: function () {
+    console.log("[Mood] goToRecordMood_0");
+
       wx.navigateTo({
         url: '../recordmood/recordmood?moodId=0'
       })
   },
   goToRecordMood_1: function () {
+    console.log("[Mood] goToRecordMood_1");
+
     wx.navigateTo({
       url: '../recordmood/recordmood?moodId=1' 
     })
   },
   goToRecordMood_2: function () {
+    console.log("[Mood] goToRecordMood_2");
+
     wx.navigateTo({
       url: '../recordmood/recordmood?moodId=2'
     })
   },
   goToRecordMood_3: function () {
+    console.log("[Mood] goToRecordMood_3");
+
     wx.navigateTo({
       url: '../recordmood/recordmood?moodId=3'
     })
   },
   goToRecordMood_4: function () {
+    console.log("[Mood] goToRecordMood_4");
+
     wx.navigateTo({
       url: '../recordmood/recordmood?moodId=4'
     })
   },
   goToRecordMood_5: function () {
+    console.log("[Mood] goToRecordMood_5");
+
     wx.navigateTo({
       url: '../recordmood/recordmood?moodId=5'
     })
   },
   goToRecordMood_6: function () {
+    console.log("[Mood] goToRecordMood_6");
+
     wx.navigateTo({
       url: '../recordmood/recordmood?moodId=6'
     })
@@ -107,7 +123,8 @@ var moodObj = {
 
 
   onShow: function () {
-    console.log("[心情] onShow");
+    console.log("[Mood] onShow");
+
     var duration = wx.getStorageSync('duration_mood');
     if (duration == "") {
       this.setData({
@@ -189,6 +206,8 @@ var moodObj = {
   },
 
   fetchHistoryMood() {
+    console.log("[Mood] fetchHistoryMood");
+
     var history_mood = wx.getStorageSync('history_mood');
     var that = this;
     var oldDatetmp = wx.getStorageSync('timestamp_mood');
@@ -247,6 +266,8 @@ var moodObj = {
   },
 
   classifyByDateMood: function () {
+    console.log("[Mood] classifyByDateMood");
+
     var that = this;
     var tempclassifyByDateMood = {};
     var currentDate = '';
@@ -275,6 +296,8 @@ var moodObj = {
   },
 
   calculateEmptyGrids(year, month) {
+    console.log("[Mood] calculateEmptyGrids");
+
     const firstDayOfWeek = this.getFirstDayOfWeek(year, month);
     let empytGrids = [];
     if (firstDayOfWeek > 0) {
@@ -294,13 +317,19 @@ var moodObj = {
   },
 
   getThisMonthDays(year, month) {
+    console.log("[Mood] getThisMonthDays");
+
     return new Date(year, month, 0).getDate();
   },
   
   getFirstDayOfWeek(year, month) {
+    console.log("[Mood] getFirstDayOfWeek");
+
     return new Date(Date.UTC(year, month - 1, 1)).getDay();
   },
   calculateEmptyGrids(year, month) {
+    console.log("[Mood] calculateEmptyGrids");
+
     const firstDayOfWeek = this.getFirstDayOfWeek(year, month);
     let empytGrids = [];
     if (firstDayOfWeek > 0) {
@@ -320,6 +349,8 @@ var moodObj = {
   },
 
   calculateDays(year, month) {
+    console.log("[Mood] calculateDays");
+
     let days = [];
 
     const thisMonthDays = this.getThisMonthDays(year, month);
@@ -338,6 +369,8 @@ var moodObj = {
   },
 
   getMoodByDate(year, month, date) {
+    console.log("[Mood] getMoodByDate");
+
     month = (month < 10 ? '0' : '') + month.toString();
     date = (date < 10 ? '0' : '') + date.toString();
     var full_date = year + '-' + month + '-' + date;
@@ -352,6 +385,8 @@ var moodObj = {
   
 
   handleCalendar(e) {
+    console.log("[Mood] handleCalendar");
+
     const handle = e.currentTarget.dataset.handle;
     const curYear = this.data.curYear;
     const curMonth = this.data.curMonth;
@@ -389,6 +424,8 @@ var moodObj = {
   },
   
   chooseYearAndMonth() {
+    console.log("[Mood] chooseYearAndMonth");
+
     const curYear = this.data.curYear;
     const curMonth = this.data.curMonth;
     let pickerYear = [];

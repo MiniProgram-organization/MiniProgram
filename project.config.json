@@ -61,6 +61,12 @@
 					"name": "探索未知页面？",
 					"pathName": "pages/moodstatistics/moodstatistics",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "activity",
+					"pathName": "pages/activity/activity",
+					"query": ""
 				}
 			]
 		}

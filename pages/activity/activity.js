@@ -33,22 +33,21 @@ var activityObj = {
     include_points: [],
 
     // 用户授权按钮隐藏
-    userInfoHidden: true,
+    userInfoHiddenActivity: true,
   },
 
   /* 得到用户的位置，得到用户的账户信息，进行服务器登录，获取签到历史记录*/
   onShow: function () {
-    console.log("[活动] onShow");
+    console.log("[Activity] onShow");
+
     /* 得到用户的位置，得到用户的账户信息，进行服务器登录，获取签到历史记录*/
     wx.getSetting({
       success(res) {
-        console.log(res)
         if (!res.authSetting['scope.userLocation']) {
 
           wx.authorize({
             scope: 'scope.userLocation',
             success() {
-              console.log('授权成功')
             },
             fail(res) {
               wx.showModal({
@@ -68,41 +67,33 @@ var activityObj = {
           })
         }
         else {
-          console.log("yijingshouquan");
         }
       }
     })
 
 
     if (app.globalData.openid == "") {
-      this.getOpenId();
+      this.getOpenIdActivity();
     } else {
       this.getCheckIns();
     }
 
-    console.log('activity........!!!!!!!!!!!!!')
-    console.log(this.data.checkins);
-    console.log(this.data.classifiedCheckIns);
   
   },
 
-  /**
-     * 版本1.4特有的部分：获取用户的身份信息
-     */
-  getOpenId: function () {
+  getOpenIdActivity: function () {
     console.log("[Activity] getOpenId");
+
     var that = this;
     var userInfoAuthorized = false;
 
     // 检查是否已经授权
     wx.getSetting({
       success(res) {
-        console.log("[Auth Setting]");
-        console.log(res);
         userInfoAuthorized = res.authSetting['scope.userInfo'];
         if (userInfoAuthorized == true) {
           // 已经授权了，进行服务器登录
-          that.serverLogin();
+          that.serverLoginActivity();
         } else {
           // 还未授权或者拒绝授权，显示授权按钮
           wx.showModal({
@@ -111,15 +102,16 @@ var activityObj = {
             confirmText: "同意",
             cancelText: "拒绝",
             success(res) {
+              console.log("[Activity] 用户同意了授权");
+              console.log(res);
               if (res.confirm) {
-                console.log("[Activity] 用户同意了授权");
                 // 同意了授权，显示真正的授权按钮
                 that.setData({
-                  userInfoHidden: false
+                  userInfoHiddenActivity: false
                 });
+                console.log(that.data.userInfoHiddenActivity);
               } else {
                 // 拒绝了授权，显示提示
-                console.log("用户拒绝了身份信息授权");
                 wx.showToast({
                   title: '为了您更好的体验,请先同意授权',
                   icon: 'none',
@@ -137,23 +129,20 @@ var activityObj = {
 
   },
 
-  /**
-   * 版本1.4中特有的部分：授权按钮的反应
-   */
-  getUserInfo: function (e) {
+  getUserInfoActivity: function (e) {
+    console.log("[Activity] getUserInfo");
+
     // 确认授权后，得到用户信息，进行登录
-    console.log(e);
-    this.serverLogin();
+    this.serverLoginActivity();
     this.setData({
-      userInfoHidden: true
+      userInfoHiddenActivity: true
     });
 
   },
 
-  /**
-   * 版本1.4中特有的部分：拿到用户的rawData之后进行服务器登录
-   */
-  serverLogin: function () {
+  serverLoginActivity: function () {
+    console.log("[Activity] serverLoginActivity");
+    
     var that = this;
     var systemInfo = wx.getSystemInfoSync();
 
@@ -176,10 +165,7 @@ var activityObj = {
                 userSystemInfo: systemInfo,
               },
               success: function (res) {
-                console.log(systemInfo);
-                console.log(res);
                 if (res.data.status == "ERROR") {
-                  console.log(res.data.message);
                   wx.redirectTo({
                     url: '/pages/error/error',
                   })
@@ -197,6 +183,8 @@ var activityObj = {
   },
 
   getCheckIns: function () {
+    console.log("[Activity] getCheckIns");
+
     //获取历史数据
     var checkins = wx.getStorageSync('checkins');
     var oldDatetmp = wx.getStorageSync('timestamp_checkins');
@@ -254,6 +242,8 @@ var activityObj = {
   },
 
   classifyByDate: function () {
+    console.log("[Activity] classifyByDate");
+
     var tempClassifyByDate = [];
     var that = this;
     var currentDate = '';
@@ -329,6 +319,8 @@ var activityObj = {
   },
 
   fetchData: function (cnt) {
+    console.log("[Activity] fetchData");
+
     var that = this;
     this.setData({
       windowWidth: app.globalData.windowWidth,
@@ -405,8 +397,6 @@ var activityObj = {
             sessionid: getApp().globalData.sessionid,
           },
           success: function (res) {
-            console.log('nation...')
-            console.log(res)
             if (res.data.status == 'OK') {
               if (res.data.nation == '中国') {
                 wx.setStorageSync('inChina', 1)
@@ -434,7 +424,6 @@ var activityObj = {
         })
       },
       fail: function (res) {
-        console.log(res)
         if (res.errMsg == 'getLocation:fail auth deny') {
           wx.showModal({
             title: '提示',
@@ -477,8 +466,6 @@ var activityObj = {
               },
               get_poi: 1,
               success: function (res) {
-                console.log("附近POI");
-                console.log(res.result.pois);
                 var coordinates = res.result.pois;
                 //marker数组
                 var tempMarkers = [];
@@ -529,7 +516,6 @@ var activityObj = {
 
   setDuration: function (duration) {
     console.log("[Activity] setDuration");
-    console.log(duration);
 
     if (duration == 0) {
       this.setData({
@@ -597,6 +583,8 @@ var activityObj = {
   },
 
   useMap: function (inChina, latitude, longitude) {
+    console.log("[Activity] useMap");
+
     var that = this;
     if (inChina == 1) {
       // 渲染周围的poi，和用户本身所在的点
@@ -658,6 +646,7 @@ var activityObj = {
 
   // 去签到页面和买地名页面
   redirectCheckIn: function () {
+    console.log("[Activity] redirectCheckIn");
     
     var that = this;
     wx.navigateTo({
@@ -665,6 +654,8 @@ var activityObj = {
     })
   },
   redirectBuySite: function(){
+    console.log("[Activity] redirectBuySite");
+
     wx.navigateTo({
       url: '../buysite/buysite?markers='
     })
@@ -673,20 +664,22 @@ var activityObj = {
 
   
   //去那3个统计页面
-  
   Todistrictsta: function () {
+    console.log("[Activity] Todistrictsta");
     var that = this;
     wx.navigateTo({
       url: '../districtsta/districtsta'
     })
   },
   Tocategorysta: function () {
+    console.log("[Activity] Tocategorysta");
     var that = this;
     wx.navigateTo({
       url: '../categorysta/categorysta'
     })
   },
   Toplacesta: function () {
+    console.log("[Activity] Toplacesta");
     var that = this;
     wx.navigateTo({
       url: '../placesta/placesta'
@@ -696,10 +689,10 @@ var activityObj = {
   
   
   chooseLocation: function(options){
+    console.log("[Activity] chooseLocation");
     var that = this;
     wx.chooseLocation({
       success: function (res) {
-        console.log(res)
         app.globalData.latitude = res.latitude;
         app.globalData.longitude = res.longitude;
         //存储一个缓存的经纬度,用于定位失败时使用
@@ -711,7 +704,6 @@ var activityObj = {
           latitude: res.latitude,
         });
         wx.setStorageSync('refresh_activity', 'no')
-        console.log(wx.getStorageSync('refresh_activity')+'choose_now')
       },
       fail: function () {
         // fail
@@ -726,6 +718,7 @@ var activityObj = {
 
   //用户拖动地图，其实我们这里什么都没做
   regionchange(e) {
+    console.log("[Activity] regionchange");
     // 地图发生变化的时候，获取中间点，也就是用户选择的位置
     if (e.type == 'end') {
       this.getLngLat()
@@ -739,7 +732,6 @@ var activityObj = {
 
   //点击地图上的marker
   markertap(e) {
-    console.log(e)
   },
 
   
@@ -747,6 +739,7 @@ var activityObj = {
   
   // 孤岛函数，没有人调用执行它
   getPlaces: function(){
+    console.log("[Activity] getPlaces");
     var that = this;
     wx.request({
       url: 'https://40525433.fudan-mini-program.com/cgi-bin/FrequentPOIs',

@@ -13,17 +13,22 @@ var accountObj = {
   },
 
   previewImg: function (e) {
+    console.log("[Account] previewImg");
+    
     wx.previewImage({
       urls: [this.data.avatarUrl],
     })
   },
 
   redirectToQRCode: function () {
+    
     // 因为加载太慢了，很影响用户体验，所以略去
     //this.getQRCode();
   },
 
   getQRCode: function () {
+    console.log("[Account] getQRCode");
+
     var that = this;
     wx.showLoading({
       title: '正在生成分享图片',
@@ -51,6 +56,8 @@ var accountObj = {
   },
 
   goToPrivacy: function () {
+    console.log("[Account] goToPrivacy");
+
     var that = this;
     wx.navigateTo({
       url: '../privacy/privacy'
@@ -58,6 +65,8 @@ var accountObj = {
   },
 
   goToAboutUs: function(){
+    console.log("[Account] goToAboutUs");
+
     var that = this;
     wx.navigateTo({
       url: '../aboutus/aboutus'
@@ -65,7 +74,8 @@ var accountObj = {
   },
 
   onShow: function () {
-    console.log("[账号] onShow");
+    console.log("[Account] onShow");
+
     var that = this;
     var nickName = "";
     var gender = "";

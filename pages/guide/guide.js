@@ -34,7 +34,7 @@ Page({
        function(){
          wx.redirectTo({url: '../home/home'});
       }
-      ,7000 );
+      ,3000 );
   },
 
   /**

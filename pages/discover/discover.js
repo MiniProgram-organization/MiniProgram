@@ -11,48 +11,64 @@ var discoverObj = {
   },
 
   goToFriends: function () {
+    console.log("[Discover] goToFriends");
+
     wx.navigateTo({
       url: '../friends/friends'
     })
   },
   findRestaurant: function(){
+    console.log("[Discover] findRestaurant");
     wx.navigateTo({
       url: '../discoverPOI/discoverPOI?type_en=restaurant&type_cn=餐饮'
     })
   },
   findSchool: function () {
+    console.log("[Discover] findSchool");
+
     wx.navigateTo({
       url: '../discoverPOI/discoverPOI?type_en=school&type_cn=学校'
     })
   },
   findMall: function () {
+    console.log("[Discover] findMall");
+
     wx.navigateTo({
       url: '../discoverPOI/discoverPOI?type_en=mall&type_cn=商场'
     })
   },
   findToilet: function () {
+    console.log("[Discover] findToilet");
+
     wx.navigateTo({
       url: '../discoverPOI/discoverPOI?type_en=toilet&type_cn=洗手间'
     })
   },
   findSubway: function(){
+    console.log("[Discover] findSubway");
+
     wx.navigateTo({
       url: '../discoverPOI/discoverPOI?type_en=subway&type_cn=地铁站'
     })
   },
   findScenic: function () {
+    console.log("[Discover] findScenic");
+
     wx.navigateTo({
       url: '../discoverPOI/discoverPOI?type_en=scenic&type_cn=景区'
     })
   },
   findATM: function(){
+    console.log("[Discover] findATM");
+
     wx.navigateTo({
       url: '../discoverPOI/discoverPOI?type_en=atm&type_cn=ATM'
     })
   },
 
   onShow: function () {
-    console.log("[发现] onShow");
+    console.log("[Discover] onShow");
+
     wx.getLocation({
       success: function (res) {
         app.globalData.latitude = res.latitude;
@@ -70,8 +86,9 @@ var discoverObj = {
         poi_type:''
       },
       success: function (res) {
-        console.log(res)
-        if (res.data.status != 'OK') console.log('记录log失败')
+        if (res.data.status != 'OK'){
+
+        }
       }
     })
   },
