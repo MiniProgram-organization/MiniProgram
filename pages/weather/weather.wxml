@@ -1,5 +1,5 @@
 
-<view class='back' style="width: {{windowWidth}}px; height:{{windowHeight-windowWidth*0.16}}px">
+<view class='back' style="width: {{windowWidth}}px; height:{{windowHeight}}px">
 <view class="userInfoAuth" hidden="{{userInfoHidden}}">
   <view class='userInfo_mask'></view>
   <image class="userInfo_icon" src="../../pages/images/miniProgram.jpeg" mode='aspectFit'></image>

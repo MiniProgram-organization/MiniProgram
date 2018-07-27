@@ -112,6 +112,7 @@ var activityObj = {
             cancelText: "拒绝",
             success(res) {
               if (res.confirm) {
+                console.log("[Activity] 用户同意了授权");
                 // 同意了授权，显示真正的授权按钮
                 that.setData({
                   userInfoHidden: false
