@@ -3,9 +3,6 @@ var app = getApp();
 var util = require("../../utils/utils.js");
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
     nickName:"玉",
     rank:32,
