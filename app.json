@@ -29,7 +29,8 @@
     "pages/buysite/buysite",
     "pages/tipster/tipster",
     "pages/buynaming/buynaming",
-    "pages/home/home"
+    "pages/home/home",
+    "pages/rank/rank"
   ],
   "window": {
     "navigationBarBackgroundColor": "#0E7EE6",
@@ -60,12 +61,6 @@
         "text": "活动",
         "iconPath": "/pages/images/icon/flag.png",
         "selectedIconPath": "/pages/images/icon/flag_blue.png"
-      },
-      {
-        "pagePath": "pages/mood/mood",
-        "text": "心情",
-        "iconPath": "/pages/images/icon/heart.png",
-        "selectedIconPath": "/pages/images/icon/heart_blue.png"
       },
       {
         "pagePath": "pages/discover/discover",

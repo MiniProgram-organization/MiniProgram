@@ -25,12 +25,6 @@ var versionCheck = {
           selected: true
         },
         {
-          text: "心情",
-          iconPath: "../images/icon/heart.png",
-          selectedIconPath: "../images/icon/heart_blue.png",
-          selected: false
-        },
-        {
           text: "发现",
           iconPath: "../images/icon/discover.png",
           selectedIconPath: "../images/icon/discover_blue.png",
@@ -105,12 +99,6 @@ var versionCheck = {
           iconPath: "../images/icon/weather.png",
           selectedIconPath: "../images/icon/weather_blue.png",
           selected: true
-        },
-        {
-          text: "发现",
-          iconPath: "../images/icon/discover.png",
-          selectedIconPath: "../images/icon/discover_blue.png",
-          selected: false
         }
       ];
       var tabbar = this.data.tabbar;

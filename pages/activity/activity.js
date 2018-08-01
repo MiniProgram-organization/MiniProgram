@@ -40,38 +40,6 @@ var activityObj = {
   onShow: function () {
     console.log("[Activity] onShow");
 
-    /* 得到用户的位置，得到用户的账户信息，进行服务器登录，获取签到历史记录*/
-    wx.getSetting({
-      success(res) {
-        if (!res.authSetting['scope.userLocation']) {
-
-          wx.authorize({
-            scope: 'scope.userLocation',
-            success() {
-            },
-            fail(res) {
-              wx.showModal({
-                title: '提示',
-                content: '不授权位置信息将无法正常使用卿云go!',
-              })
-              wx.openSetting({
-              })
-            }
-          });
-        }
-        else if (res.authSetting['scope.userLocation'] == false) {
-          wx.showToast({
-            title: '提示:不授权位置信息将无法正常使用卿云go!',
-          })
-          wx.openSetting({
-          })
-        }
-        else {
-        }
-      }
-    })
-
-
     if (app.globalData.openid == "") {
       this.getOpenIdActivity();
     } else {

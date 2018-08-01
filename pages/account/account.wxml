@@ -3,7 +3,7 @@
 <view style="width: {{windowWidth}}px; height:{{windowHeight}}px;">
 <view class="account-card-wrapper">
   <view class='account-card' bindtap="redirectToQRCode">
-    <image src="{{avatarUrl}}" catchtap='previewImg'></image>
+    <image src="{{avatarUrl}}" catchtap='previewImgAccount'></image>
     <view class="account-detail">
       <view class='account-name'>{{nickName}}</view>
       <view class='account-location'>{{country}} - {{province}}</view>
@@ -24,7 +24,16 @@
   </view>
 </view>
 
-
+<view class="account-slides-wrapper">
+  <view class='slides-item' bindtap="goToRank">
+    <view class="fa icon-chart-bar" style='color:#FC7F3A;'/>
+    <view class='slides-text-wrapper'>
+      <view class="slides-text">排行榜</view>
+      <view class="fa icon-right-open"></view>
+    </view>
+  
+  </view>
+</view>
 
 <view class="account-slides-wrapper">
   <view class='slides-item' bindtap="goToPrivacy">
@@ -45,6 +54,7 @@
   </view>
   </view>
 </view>
+
 </view>
 
 

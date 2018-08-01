@@ -1,4 +1,4 @@
-// pages/guide/guide.js
+// pages/rank/rank.js
 Page({
 
   /**
@@ -26,15 +26,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.toHome();
-  },
-
-  toHome:function(){
-    setTimeout(
-       function(){
-         wx.redirectTo({url: '../home/home'});
-      }
-      ,2000 );
+  
   },
 
   /**

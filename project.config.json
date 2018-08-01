@@ -30,32 +30,8 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 3,
 			"list": [
-				{
-					"id": 0,
-					"name": "发现页面",
-					"pathName": "pages/discover/discover",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "账号页面",
-					"pathName": "pages/account/account",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "all",
-					"pathName": "pages/all/all",
-					"query": ""
-				},
-				{
-					"id": 3,
-					"name": "home",
-					"pathName": "pages/home/home",
-					"query": ""
-				},
 				{
 					"id": -1,
 					"name": "探索未知页面？",
@@ -63,9 +39,21 @@
 					"query": ""
 				},
 				{
-					"id": -1,
+					"id": 1,
 					"name": "activity",
 					"pathName": "pages/activity/activity",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "home",
+					"pathName": "pages/home/home",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "rank",
+					"pathName": "pages/rank/rank",
 					"query": ""
 				}
 			]

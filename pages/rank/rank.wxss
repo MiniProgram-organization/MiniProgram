@@ -1,0 +1,123 @@
+/* pages/rank/rank.wxss */
+.rank_personal-wrapper{
+  width: 100%;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom,#0E7EE6,#65B1F5);
+}
+
+.rank_personal-board{
+  width: 90%;
+  height: 110px;
+  background: white ;
+  border-radius: 10px;
+  box-shadow: 0px 0px 0px #BBB;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rank_personal-board .little-board{
+  height: 100%;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.rank_personal-board .avatar-board{
+  justify-content: flex-end;
+}
+
+.little-little-board{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.rank_personal-board .little-board .score-title{
+  font-size: small;
+  color:#0E7EE6;
+}
+
+.rank_personal-board .little-board .score-context{
+  font-size: x-large;
+  color: #0E7EE6;
+  font-weight: bold;
+}
+
+.rank_personal-board .little-board image{
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+}
+
+.rank_personal-board .little-board .avatar-board-nickName{
+  font-size: small;
+  color: #0E7EE6;
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-top:4px;
+}
+
+.rank_list-wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rank_list-item{
+  width: 90%;
+  height: 80px;
+  margin-top:15px;
+  border-radius: 10px;
+  background: white;
+  display: flex;
+  align-items: center;
+}
+
+.rank_list-num{
+  font-size: x-large;
+  color:#0E7EE6;
+  margin-left:5px;
+  margin-right: 5px;
+  text-align: center;
+  width: 15%;
+}
+
+.rank_list-item-wrapper{
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rank_list-avatar-wrapper{
+  display: flex;
+  align-items: center;
+}
+
+.rank_list-avatar{
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+}
+
+.rank_list-nickname{
+  font-size: large;
+  margin-left:10px;
+  color:#0E7EE6;
+}
+
+.rank_list-award{
+  font-size: large;
+  color: #0E7EE6;
+}
+
+
+
