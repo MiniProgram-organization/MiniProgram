@@ -93,6 +93,18 @@ var accountObj = {
     })
   },
 
+  // 跳转到排行榜页面
+  goToRank:function(){
+    console.log("[Account] goToRank");
+
+    var avatarUrl = this.data.avatarUrl;
+    var nickName = this.data.nickName;
+    wx.navigateTo({
+      url: '../rank/rank?avatarUrl='+avatarUrl+'&nickName='+nickName
+    })
+
+  },
+
   // 跳转到隐私政策页面
   goToPrivacy: function () {
     console.log("[Account] goToPrivacy");
@@ -112,6 +124,7 @@ var accountObj = {
       url: '../aboutus/aboutus'
     })
   },
+
 
 
 

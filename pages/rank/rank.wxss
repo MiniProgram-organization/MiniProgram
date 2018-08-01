@@ -72,26 +72,28 @@
 }
 
 .rank_list-item{
-  width: 90%;
+  width: 95%;
   height: 80px;
-  margin-top:15px;
-  border-radius: 10px;
+  margin-top:10px;
+  border-radius: 5px;
   background: white;
   display: flex;
   align-items: center;
+  box-shadow: 0 0 3px #BBB;
 }
 
 .rank_list-num{
-  font-size: x-large;
+  font-size: 40rpx;
   color:#0E7EE6;
   margin-left:5px;
   margin-right: 5px;
   text-align: center;
-  width: 15%;
+  width: 10%;
 }
 
+
 .rank_list-item-wrapper{
-  width: 80%;
+  width: 78%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -103,21 +105,34 @@
 }
 
 .rank_list-avatar{
-  width: 60px;
-  height: 60px;
+  width: 55px;
+  height: 55px;
   border-radius: 30px;
 }
 
 .rank_list-nickname{
-  font-size: large;
-  margin-left:10px;
+  font-size: medium;
+  margin-left:15px;
   color:#0E7EE6;
 }
 
 .rank_list-award{
-  font-size: large;
+  font-size: 43rpx;
   color: #0E7EE6;
+  font-weight: bolder;
 }
+
+
+.num-1{
+  color:rgb(240,43,54);
+}
+.num-2{
+  color:rgb(253,111,55);
+}
+.num-3{
+  color:rgb(254,156,43);
+}
+
 
 
 
