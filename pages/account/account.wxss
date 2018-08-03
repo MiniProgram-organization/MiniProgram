@@ -107,14 +107,14 @@
   
 }
 
-#slide-helper1{
+.slide-helper1{
  border-bottom: 1px solid #EFEFEF;
 }
 
 .slides-item .fa{
   font-size: 20px;
-  margin-left: 20px;
-  margin-right: 20px;
+  text-align: center;
+  width: 50px;
 }
 
 .slides-text-wrapper{

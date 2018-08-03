@@ -776,7 +776,12 @@ var weatherObj = {
           }
         }
         //得到具体数据成功，向服务器发送请求生成分享图片
-        that.generate_sharePic();
+        // that.generate_sharePic();
+
+        console.log(that.data.weathericonURL);
+        console.log(that.data.day0_weather);
+        console.log(that.data.day1_weather);
+        console.log(that.data.day2_weather);
       },
       fail: function (res) {
        

@@ -37,20 +37,30 @@
         <block wx:for="{{markers}}">
           <view  bindtap="redictDetail" class="topic-item" index="{{index}}" id="{{item.POI_id}}">
             <image  sytle="margin:0px 0px 0px 10px" class="member-avatar" src="{{item.logoPath}}" background-size="cover"></image>
-            <view style="margin:0px 0px 0px 20px">
+            <!--<view style="margin:0px 0px 0px 20px">
               <view>
                 <view  ><text style='font-size:18px'>{{item.title}}</text></view>
                 <view class='row'>
                   <view  >
                     <text style='font-size:16px'>冠名人：{{item.ownerName}}</text>
                   </view>
-                  <!--
                   <view class='right'>
                     <button class='report_button' bindtap="tipsterNaming">举报
                     </button>
                   </view>
-                  -->
                 </view>
+              </view>
+            </view>-->
+            <view class="topic-info" sytle="margin-left:10px;">
+              <view class="topic-inner">
+                <view class="topic-left">
+                  <view class="topic-title"><text>{{item.venue}}</text></view>
+                  <view class="topic-title-buy"><text>{{item.title}}</text></view>
+                  <view>
+                    <text class="node-name" wx:if="{{item.new_name}}">冠名人: {{item.ownerName}}</text>
+                  </view>
+                </view>
+
               </view>
             </view>
           </view>

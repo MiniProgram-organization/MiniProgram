@@ -105,6 +105,15 @@ var accountObj = {
 
   },
 
+  // 跳转到买地名页面
+  goToBuySite: function () {
+    console.log("[Account] goToBuySite");
+
+    wx.navigateTo({
+      url: '../buysite/buysite?markers='
+    })
+  },
+
   // 跳转到隐私政策页面
   goToPrivacy: function () {
     console.log("[Account] goToPrivacy");

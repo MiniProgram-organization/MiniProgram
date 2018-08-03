@@ -55,6 +55,18 @@
 					"name": "rank",
 					"pathName": "pages/rank/rank",
 					"query": ""
+				},
+				{
+					"id": 4,
+					"name": "买地名",
+					"pathName": "pages/buynaming/buynaming",
+					"query": "target_venue=上海中医药大学&target_logoPath=../images/location/bureau.png&target_ownerName=&target_price=23&target_title=马路对面的中医药大学"
+				},
+				{
+					"id": -1,
+					"name": "买地名无冠名人",
+					"pathName": "pages/buynaming/buynaming",
+					"query": "target_venue=上海中医药大学&target_logoPath=../images/location/bureau.png&target_price=23"
 				}
 			]
 		}

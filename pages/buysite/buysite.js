@@ -97,47 +97,17 @@ Page({
             logoPath: '../images/location/' + app.globalData.locationMap[category.split(":")[0]] + '.png',
             category: category,
             venue: venue,
-            title: venue,
+            title: "",
             ad_info: ad_info,
-            ownerName: '暂无',
+            ownerName: '',
             price: 20,
+            new_name: false
           });
 
           poi_list.push(POI_id);
-          tempIncludePoints.push({
-            latitude: tempLatitude,
-            longitude: tempLongitude,
-          });
         }
 
-        wx.request({
-          url: 'https://40525433.fudan-mini-program.com/cgi-bin/POITitle',
-          method: 'POST',
-          data: {
-            openid: app.globalData.openid,
-            sessionid: app.globalData.sessionid,
-            POI_ids: poi_list
-          },
-          success: function (res) {
-            console.log("LLLLLL");
-            console.log(res);
-
-            for (var i = 0; i < tempMarkers.length; i++) {
-              for (var j = 0; j < res.data.POIs.length; j++) {
-                if (res.data.POIs[j].POI_id == tempMarkers[i].POI_id) {
-                  tempMarkers[i].title = res.data.POIs[j].title;
-                  tempMarkers[i].price = res.data.POIs[j].price;
-                  tempMarkers[i].ownerName = res.data.POIs[j].ownerName;
-                }
-              }
-            }
-            console.log(tempMarkers)
-            that.setData({
-              markers: tempMarkers,
-              include_points: tempIncludePoints
-            });
-          }
-        })
+        that.searchPOIname(poi_list,tempMarkers);
 
 
 
@@ -215,16 +185,35 @@ Page({
     })
   },
 
+  searchPOIname:function(poi_list,tempMarkers){
+    var that = this;
 
-  redirectToActivity: function () {
-    console.log("redirect to activity");
-    wx.switchTab({
-      url: '../activity/activity',
-      success: function (e) {
-
+    wx.request({
+      url: 'https://40525433.fudan-mini-program.com/cgi-bin/POITitle',
+      method: 'POST',
+      data: {
+        openid: app.globalData.openid,
+        sessionid: app.globalData.sessionid,
+        POI_ids: poi_list
       },
-      fail: function (res) {
-        console.log(res);
+      success: function (res) {
+
+        for (var i = 0; i < tempMarkers.length; i++) {
+          for (var j = 0; j < res.data.POIs.length; j++) {
+            if (res.data.POIs[j].POI_id == tempMarkers[i].POI_id) {
+              tempMarkers[i].title = res.data.POIs[j].title;
+              tempMarkers[i].price = res.data.POIs[j].price;
+              tempMarkers[i].ownerName = res.data.POIs[j].ownerName;
+              tempMarkers[i].new_name = true;
+            }
+          }
+        }
+
+        that.setData({
+          markers: tempMarkers
+        });
+
+        console.log(tempMarkers);
       }
     })
   },
@@ -257,8 +246,6 @@ Page({
     console.log(e)
     var target_id = e.currentTarget.id;
 
-    //console.log(target_id)
-    //console.log('target')
     var inChina = this.data.inChina;
     var target_latitude, target_longitude, target_category, target_venue, target_logoPath,
       target_price, target_adinfo_province, target_adinfo_city, target_adinfo_district, target_adinfo_country, target_ownerName, target_title;
@@ -308,18 +295,15 @@ Page({
     })
   },
 
-
   searchPOI: function () {
     var that = this;
     app.globalData.qqmapsdk.search({
       keyword: that.data.searchPOIVal,
       success: function (res) {
-        console.log("搜索");
-        console.log(res.data);
         var coordinates = res.data;
         //marker数组
         var tempMarkers = [];
-        var tempIncludePoints = [];
+        var poi_list = [];
 
         for (var i = 0; i < coordinates.length; i++) {
           var tempLatitude = coordinates[i].location.lat;
@@ -337,17 +321,13 @@ Page({
             venue: venue,
             ad_info: ad_info,
             price:20,
+            new_name:false
           });
-          tempIncludePoints.push({
-            latitude: tempLatitude,
-            longitude: tempLongitude,
-          });
+          poi_list.push(POI_id);
         }
-        console.log(tempMarkers);
 
-        that.setData({
-          markers: tempMarkers
-        });
+        // 这里对搜索得到的markers进行命名搜查
+        that.searchPOIname(poi_list,tempMarkers);
       },
       fail: function (res) {
         console.log(res);
@@ -355,53 +335,10 @@ Page({
     });
   },
 
-
-
-
-
   tipsterNaming: function() {
     wx.navigateTo({
       url: '../tipster/tipster',
     })
   },
 
-  
- 
- 
-  
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

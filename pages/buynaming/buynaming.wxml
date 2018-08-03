@@ -1,23 +1,41 @@
-<view>
-  <view style='text-align:center;'>
-    <image style="width: 256rpx;height: 256rpx;" class="member-avatar" src='{{iconPath}}'></image>
-  </view>
-  <view style='border-bottom:1px dashed #000;text-align:center;font-size:30px'>{{title}}</view>
-  <view style='border-bottom:1px dashed #000;text-align:center;font-size:15px'>原名:{{venue}}</view>
-  <view style='font-size:15px;text-align:center;border-bottom:1px dashed #000;text-align:center;'>冠名积分价: {{price}}</view>
-  <view></view>
+<view class="image-wrapper">
+  <image src="{{iconPath}}"></image>
+</view>
 
-  <view style='margin:5px 0 0 10%'>请输入新名称 (请务必包含原名哦~)</view>
-  <view>
-    <input style="margin:0 0 0 20%; width:60%; height:50%; border: 1px solid lightgray;border-radius: 25px" bindinput="newNamingtextChange" ></input>
-  </view>
-  <!--
-  <view style='margin:5px 0 0 20%'>请输入冠名人昵称</view>
-  <view>
-    <input style="margin:0 0 0 20%;width:60%; height:50%; border: 1px solid lightgray;border-radius: 25px" bindinput="newNicknametextChange"></input>
-  </view>-->
-  
-  <view style="text-align:center">
-    <button bindtap="submitNaming" style="margin:10% 20%; width:60%; background-color:#0E7EE6;color:white;">确认冠名</button>
-  </view>
+<view class="buy-sheet">
+        <view class="formc-cnt">
+          <view class="form-label">
+            <text>原名</text>
+            </view>
+            <input disabled='true' placeholder="{{venue}}" type="text" placeholder-class="static-placeholder"/>
+        </view>
+        <view class="formc-cnt" wx:if="{{has_owner}}">
+           <view class="form-label">
+            <text>现名</text>
+            </view>
+            <input disabled='true' placeholder="{{title}}" type="text" placeholder-class="static-placeholder"/>
+        </view>
+        <view class="formc-cnt" wx:if="{{has_owner}}">
+           <view class="form-label">
+            <text>冠名人</text>
+            </view>
+            <input disabled='true' placeholder="{{ownerName}}" type="text" placeholder-class="static-placeholder"/>
+        </view>
+        <view class="formc-cnt">
+           <view class="form-label">
+            <text>冠名价</text>
+            </view>
+            <input disabled='true' placeholder="{{price}}" type="text" placeholder-class="static-placeholder"/>
+        </view>
+        <view class="formc-cnt" style='border-bottom: 1px solid #eee;'>
+           <view class="form-label">
+            <text>冠名名称</text>
+            </view>
+            <input placeholder='新名称请包含地点原名~' bindblur="newNamingtextChange" type="text"/>
+        </view>
+</view>
+<view class="buy-sheet-wave-border"></view>
+
+<view>
+  <button type="primary" hover-class="btnhover"  style="background-color: #0E7EE6;" bindtap="submitNaming">确认冠名</button>
 </view>

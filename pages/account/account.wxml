@@ -1,6 +1,6 @@
 <!--<import src="/pages/tabbar/tabbar.wxml"/>
 <template is="tabbar" data="{{tabbar}}"/>-->
-<view style="width: {{windowWidth}}px; height:{{windowHeight}}px;">
+<view style="width: {{windowWidth}}px; height:{{windowHeight-(windowWidth*0.16)}}px;">
 <view class="account-card-wrapper">
   <view class='account-card' bindtap="redirectToQRCode">
     <image src="{{avatarUrl}}" catchtap='previewImgAccount'></image>
@@ -31,28 +31,40 @@
       <view class="slides-text">排行榜</view>
       <view class="fa icon-right-open"></view>
     </view>
-  
+  </view>
+
+  <view class='slide-helper slide-helper1'></view>
+  <view class='slide-helper'></view>
+
+  <view class='slides-item' bindtap="goToBuySite">
+    <view class="fa icon-bookmark" style='color:#4E8AF0;'></view>
+    <view class='slides-text-wrapper'>
+      <view class="slides-text">买地名</view>
+      <view class="fa icon-right-open"></view>
+    </view>
   </view>
 </view>
 
 <view class="account-slides-wrapper">
   <view class='slides-item' bindtap="goToPrivacy">
-  <view class="fa icon-user-secret" style='color:#9862EF;'></view>
+    <view class="fa icon-user-secret" style='color:#9862EF;'></view>
     <view class='slides-text-wrapper'>
-    <view class="slides-text">隐私政策</view>
-    <view class="fa icon-right-open"></view>
+      <view class="slides-text">隐私政策</view>
+      <view class="fa icon-right-open"></view>
     </view>
-  
   </view>
-  <view class='slide-helper' id="slide-helper1"></view>
+
+  <view class='slide-helper slide-helper1'></view>
   <view class='slide-helper'></view>
+
   <view class='slides-item' bindtap="goToAboutUs">
-  <view class="fa icon-th" style='font-size:18px;color:#1DABC4;'></view>
-  <view class='slides-text-wrapper'>
-    <view class="slides-text">关于我们</view>
-    <view class="fa icon-right-open"></view>
+    <view class="fa icon-th" style='font-size:18px;color:#1DABC4;'></view>
+    <view class='slides-text-wrapper'>
+      <view class="slides-text">关于我们</view>
+      <view class="fa icon-right-open"></view>
+    </view>
   </view>
-  </view>
+
 </view>
 
 </view>

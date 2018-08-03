@@ -1,1 +1,86 @@
 /* pages/buynaming/buynaming.wxss */
+page{
+  background: rgb(240,240,240);
+}
+
+.image-wrapper{
+  width: 100%;
+  text-align: center;
+  margin-top:20px;
+}
+
+.image-wrapper image{
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+  margin:auto;
+}
+
+.buy-sheet{
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -40px;
+  border-radius: 10px;
+  border-bottom: none;
+  background: white;
+  padding-top:40px;
+  padding-bottom:40px;
+}
+
+.buy-sheet-wave-border{
+  width: 90%;
+  height: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -10px;
+  border-bottom: none;
+  background: radial-gradient(circle at 50% 50%, #f0f0f0 0, #f0f0f0 50%, transparent 0);
+  background-repeat: repeat-x;
+  background-color: white;
+  background-size: 20px 20px;
+  background-position: 20px 10px;
+
+}
+
+.formc-cnt{
+  width: 80%;
+  padding: 16rpx 0; 
+  display: flex;
+  margin: 16rpx auto;
+  align-items: center;
+  justify-content: space-between;
+  }
+
+.form-label{
+  display: flex;
+  align-items: center;
+  font-size: 33rpx;
+  font-weight: bold;
+}
+
+.formc-cnt text{
+  text-align: left;
+}
+
+.formc-cnt input{
+  flex: 1;
+  display: block;
+  text-align: right;
+  }
+
+.static-placeholder{
+  color:black;
+  font-size: 33rpx;
+}
+
+button,.btnhover{
+  margin-top: 48rpx;
+  width: 90%;
+  display: block;
+  height: 50px;
+  padding: 0;
+  line-height: 50px;
+  border-radius: 5px;
+}
+
