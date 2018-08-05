@@ -1,7 +1,6 @@
 @import '../activity/activity.wxss';
 @import '../account/account.wxss';
 @import '../discover/discover.wxss';
-@import '../mood/mood.wxss';
 @import '../weather/weather.wxss';
 page{
   background-color:#F8F8F8;

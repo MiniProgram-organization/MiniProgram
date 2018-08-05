@@ -89,17 +89,6 @@ Page({
   
         }
       });
-    }else if (that.data.new_naming.indexOf(this.data.venue) < 0) {
-      // 新名称没有包含原名
-      wx.showModal({
-        title: '冠名失败',
-        content: '新名称必须包含原地名！',
-        showCancel: false,
-        success: function (res) {
-
-        }
-      });
-      
     }else{
 
       // 冠名成功，这里其实可以考虑做一个分享页面

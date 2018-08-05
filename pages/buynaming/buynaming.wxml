@@ -31,7 +31,7 @@
            <view class="form-label">
             <text>冠名名称</text>
             </view>
-            <input placeholder='新名称请包含地点原名~' bindblur="newNamingtextChange" type="text"/>
+            <input placeholder='请输入冠名名称(12字内)~' maxlength="12" bindblur="newNamingtextChange" type="text"/>
         </view>
 </view>
 <view class="buy-sheet-wave-border"></view>

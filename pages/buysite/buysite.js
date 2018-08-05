@@ -100,7 +100,7 @@ Page({
             title: "",
             ad_info: ad_info,
             ownerName: '',
-            price: 20,
+            price: 5,
             new_name: false
           });
 
@@ -168,7 +168,7 @@ Page({
             category: category,
             venue: venue,
             ad_info: ad_info,
-            price: 20,
+            price: 5,
 
           });
           tempIncludePoints.push({
@@ -238,8 +238,6 @@ Page({
     this.setData({
       searchPOIVal: e.detail.value
     });
-
-    this.searchPOI();
   },
 
   redictDetail: function (e) {
@@ -299,8 +297,10 @@ Page({
     var that = this;
     app.globalData.qqmapsdk.search({
       keyword: that.data.searchPOIVal,
+      page_size:20,
       success: function (res) {
         var coordinates = res.data;
+        console.log(coordinates.length);
         //marker数组
         var tempMarkers = [];
         var poi_list = [];
@@ -320,7 +320,7 @@ Page({
             category: category,
             venue: venue,
             ad_info: ad_info,
-            price:20,
+            price:5,
             new_name:false
           });
           poi_list.push(POI_id);

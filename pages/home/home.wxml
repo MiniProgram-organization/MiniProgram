@@ -12,9 +12,6 @@
   <view hidden="{{currentPage!='活动'}}">
     <include src="../activity/activity.wxml"/>
   </view>
-  <view hidden="{{currentPage!='心情'}}">
-    <include src="../mood/mood.wxml"/>
-  </view>
   <view hidden="{{currentPage!='发现'}}">
     <include src="../discover/discover.wxml"/>
   </view>

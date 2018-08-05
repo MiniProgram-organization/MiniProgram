@@ -69,7 +69,6 @@ App({
     version:-1,
 
     activity_refresh:false,
-    mood_refresh: false,
     account_refresh: false,
   },
 

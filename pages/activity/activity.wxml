@@ -23,7 +23,7 @@
   <cover-image class="buy-map-shadow" src="../images/shadow.png"></cover-image>
   
   <cover-view class="buy-map" bindtap='redirectBuySite'>
-  <cover-image class="bookmark" src="../images/bookmark.png"></cover-image>
+  <cover-image class="bookmark" src="../images/buysite.png"></cover-image>
   </cover-view>
 
 <!--

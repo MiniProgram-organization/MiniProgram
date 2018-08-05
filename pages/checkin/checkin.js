@@ -22,41 +22,6 @@ Page({
     inChina: 0
   },
 
-  onShareAppMessage: function (res) {
-    var that = this;
-    console.log(res);
-    if (res.from === 'button') {
-      // 来自页面内转发按钮
-      console.log(res.target)
-    }
-    return {
-      title: '自定义转发标题',
-      desc: '分享内容',
-      path: '/pages/activity/activity',
-      success: function (res) {
-        console.log(res);
-        // 转发成功
-      },
-      fail: function (res) {
-        console.log(res);
-        // 转发失败
-      }
-    }
-  },
-
-  redirectToActivity: function(){
-    console.log("redirect to activity");
-    wx.switchTab({
-      url: '../activity/activity',
-      success: function (e) {
-        
-      },
-      fail: function(res){
-        console.log(res);
-      }
-    })
-  },
-
   showInput: function () {
     this.setData({
       inputShowed: true
@@ -77,8 +42,6 @@ Page({
     this.setData({
       searchPOIVal: e.detail.value
     });
-
-    this.searchPOI();
   },
 
   redictDetail: function (e) {
@@ -123,6 +86,7 @@ Page({
       url: url
     })
   },
+
   searchPOI: function () {
     var that = this;
     app.globalData.qqmapsdk.search({
@@ -132,10 +96,6 @@ Page({
         longitude: that.data.longitude
       },
       success: function (res) {
-        console.log(that.data.latitude)
-        console.log(that.data.longitude)
-        console.log("搜索");
-        console.log(res.data);
         var coordinates = res.data;
         //marker数组
         var tempMarkers = [];
@@ -158,6 +118,10 @@ Page({
             category: category,
             venue: venue,
             ad_info: ad_info,
+            ownerName: '暂无',
+            title: venue,
+            price: 20,
+            second_title: ''
           });
           tempIncludePoints.push({
             latitude: tempLatitude,
@@ -168,9 +132,9 @@ Page({
 
         console.log(tempMarkers);
 
-        that.setData({
-          markers: tempMarkers
-        });
+        // 这里要加上搜索冠名的部分
+        that.getPOItitle(poi_list, tempMarkers);
+
       },
       fail: function (res) {
         console.log(res);
@@ -179,10 +143,6 @@ Page({
   },
 
   
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
     this.setData({
       qqmapsdk: new QQMapWX({
@@ -191,20 +151,42 @@ Page({
     })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   * 每次重新进入或者第一次进入时都会再次搜索一遍附近POI
-   */
   onShow: function () {
     this.fetchData();
   },
+
+  fetchData: function () {
+    var that = this;
+    console.log("获取openid" + app.globalData.openid);
+    this.setData({
+      windowWidth: app.globalData.windowWidth,
+      windowHeight: app.globalData.windowHeight
+    });
+    console.log('当前宽度' + this.data.windowWidth);
+    console.log('当前高度' + this.data.windowHeight);
+
+    wx.getLocation({
+      type: 'gcj02', //返回可以用于wx.openLocation的经纬度
+      success: function (res) {
+        console.log(res);
+        var latitude = res.latitude;
+        var longitude = res.longitude;
+        that.setData({
+          latitude: latitude,
+          longitude: longitude,
+        });
+        var inChina = wx.getStorageSync('inChina');
+        that.setData({
+          inChina: inChina
+        })
+        if (inChina == 1)
+          that.getChinaPOI(latitude, longitude);
+        else
+          that.getForeignPOI(latitude, longitude);
+      }
+    });
+  },
+
   getChinaPOI: function (latitude, longitude ){
     var that = this;
     //如果查询经纬度成功，则开始搜索附近POI
@@ -251,45 +233,7 @@ Page({
           });
         } 
 
-        wx.request({
-          url: 'https://40525433.fudan-mini-program.com/cgi-bin/POITitle',
-          method: 'POST',
-          data: {
-            openid: app.globalData.openid,
-            sessionid: app.globalData.sessionid,
-            POI_ids: poi_list
-          },
-          success: function (res) {
-            console.log("LLLLLL");
-            console.log(res);
-            
-            for (var i = 0; i < tempMarkers.length; i++) {
-              for (var j = 0; j < res.data.POIs.length; j++) {
-                if (res.data.POIs[j].POI_id == tempMarkers[i].POI_id) {
-                  tempMarkers[i].title = res.data.POIs[j].title;
-                  tempMarkers[i].price = res.data.POIs[j].price;
-                  tempMarkers[i].ownerName = res.data.POIs[j].ownerName;
-                }
-              }
-            }
-            for (var i = 0; i < tempMarkers.length; i++)
-            {
-              if(tempMarkers[i].ownerName == '暂无')
-              {
-                tempMarkers[i].second_title = '暂无冠名人';
-              }
-              else {
-                tempMarkers[i].second_title = tempMarkers[i].title + ' - ' + tempMarkers[i].ownerName;      
-              }
-            }
-            console.log("wxn");
-            console.log(tempMarkers);
-            that.setData({
-              markers: tempMarkers,
-              include_points: tempIncludePoints
-            });
-          }
-        })
+        that.getPOItitle(poi_list,tempMarkers);
 
 
       },
@@ -337,7 +281,6 @@ Page({
             }
             else break;
           }
-          console.log(icon)
 
           tempMarkers.push({
             POI_id: POI_id,
@@ -357,84 +300,54 @@ Page({
         }
         
         that.setData({
-          markers: tempMarkers,
-          include_points: tempIncludePoints
+          markers: tempMarkers
         });
 
       }
     })
   },
-  fetchData: function () {
+
+  getPOItitle: function (poi_list, tempMarkers){
     var that = this;
-    console.log("获取openid" + app.globalData.openid);
-    this.setData({
-      windowWidth: app.globalData.windowWidth,
-      windowHeight: app.globalData.windowHeight
-    });
-    console.log('当前宽度' + this.data.windowWidth);
-    console.log('当前高度' + this.data.windowHeight);
-
-    wx.getLocation({
-      type: 'gcj02', //返回可以用于wx.openLocation的经纬度
+    wx.request({
+      url: 'https://40525433.fudan-mini-program.com/cgi-bin/POITitle',
+      method: 'POST',
+      data: {
+        openid: app.globalData.openid,
+        sessionid: app.globalData.sessionid,
+        POI_ids: poi_list
+      },
       success: function (res) {
+        console.log("LLLLLL");
         console.log(res);
-        var latitude = res.latitude;
-        var longitude = res.longitude;
+
+        for (var i = 0; i < tempMarkers.length; i++) {
+          for (var j = 0; j < res.data.POIs.length; j++) {
+            if (res.data.POIs[j].POI_id == tempMarkers[i].POI_id) {
+              tempMarkers[i].title = res.data.POIs[j].title;
+              tempMarkers[i].price = res.data.POIs[j].price;
+              tempMarkers[i].ownerName = res.data.POIs[j].ownerName;
+            }
+          }
+        }
+
+
+        for (var i = 0; i < tempMarkers.length; i++) {
+          if (tempMarkers[i].ownerName == '暂无') {
+            tempMarkers[i].second_title = '';
+          }
+          else {
+            tempMarkers[i].second_title = tempMarkers[i].title + ' - ' + tempMarkers[i].ownerName;
+          }
+        }
+
         that.setData({
-          latitude: latitude,
-          longitude: longitude,
+          markers: tempMarkers
         });
-        var inChina = wx.getStorageSync('inChina');
-        //var inChina = 0
-        that.setData({
-          inChina: inChina
-        })
-        if (inChina == 1) 
-          that.getChinaPOI(latitude, longitude);
-        else
-          that.getForeignPOI(latitude, longitude);
       }
-    });
+    })
 
-    setTimeout(function () {
-      that.setData({
-        hidden: true
-      })
-    }, 300)
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
   }
+
+
 })
