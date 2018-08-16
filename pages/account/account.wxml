@@ -37,7 +37,7 @@
   <view class='slide-helper'></view>
 
   <view class='slides-item' bindtap="goToBuySite">
-    <view class="fa icon-fort" style='color:#4E8AF0;'></view>
+    <view class="fa icon-fort" style='color:#ED2A2A;'></view>
     <view class='slides-text-wrapper'>
       <view class="slides-text">买地名</view>
       <view class="fa icon-right-open"></view>

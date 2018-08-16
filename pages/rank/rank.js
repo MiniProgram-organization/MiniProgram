@@ -59,7 +59,7 @@ Page({
     console.log(localTime);
 
     wx.request({
-      url: 'https://40525433.fudan-mini-program.com/cgi-bin/WeeklyRanking',
+      url: 'https://40525433.fudan-mini-program.com/cgi-bin/WeeklyRank',
       method: 'POST',
       data: {
         openid: app.globalData.openid,
@@ -67,11 +67,13 @@ Page({
         localTime:localTime
       },
       success:function(res){
+        console.log("weeklyRank");
+        console.log(res);
 
-        if(res.status == "OK"){
+        if(res.data.status == "OK"){
           that.setData({
-            rank:res.rank,
-            award:res.award
+            rank:res.data.rank,
+            award:res.data.award
           });
 
           that.requestRankList();
@@ -80,6 +82,7 @@ Page({
         }
       },
       fail:function(err){
+        console.log("weeklyrank fail");
         that.loadingFail();
       }
     });
@@ -91,7 +94,7 @@ Page({
     var localTime = util.formatTime(new Date());
 
     wx.request({
-      url: 'https://40525433.fudan-mini-program.com/cgi-bin/RankList',
+      url: 'https://40525433.fudan-mini-program.com/cgi-bin/ranklist',
       method: 'POST',
       data: {
         openid: app.globalData.openid,
@@ -99,10 +102,14 @@ Page({
         localTime: localTime
       },
       success: function (res) {
+        console.log("ranklist");
+        console.log(res);
+        var ranklist = res.data.ranklist.slice(0,100);
+        console.log(ranklist);
 
-        if (res.status == "OK") {
+        if (res.data.status == "OK") {
           that.setData({
-            rankList: res.rankList
+            ranklist: ranklist
           });
 
           that.setData({
@@ -113,6 +120,7 @@ Page({
         }
       },
       fail: function (err) {
+        console.log("ranklist fail");
         that.loadingFail();
       }
     });

@@ -125,12 +125,15 @@
 
 .num-1{
   color:rgb(240,43,54);
+  font-weight: bolder;
 }
 .num-2{
   color:rgb(253,111,55);
+  font-weight: bolder;
 }
 .num-3{
   color:rgb(254,156,43);
+  font-weight: bolder;
 }
 
 

@@ -199,6 +199,8 @@ var activityObj = {
             that.setData({
               checkins: res.data.checkins
             });
+
+            console.log(res.data.checkins);
             wx.setStorageSync('checkins', res.data.checkins);
             // 对数据进行整理，方便展示
             that.classifyByDate();
@@ -275,6 +277,8 @@ var activityObj = {
     //最后一个也需要塞入进去
     tempClassifyByDate.push(currentClass);
 
+    console.log(tempClassifyByDate);
+
     this.setData({
       classifiedCheckIns: tempClassifyByDate,
       checkInTimes: checkInTimes,
@@ -315,6 +319,8 @@ var activityObj = {
           sessionid: getApp().globalData.sessionid,
         },
         success: function (res) {
+          console.log("[Activity] Scores");
+          console.log(res.data);
           if (res.data.status == "ERROR") {
             wx.showToast({
               title: '获取连续天数失败！',
