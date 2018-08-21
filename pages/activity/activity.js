@@ -306,8 +306,11 @@ var activityObj = {
     else oldDate = oldDatetmp;
 
     var duration = wx.getStorageSync('duration_checkin');
+    var mayor_count = wx.getStorageSync('mayor_count');
     
-    if (duration != "" && ((nowDate - oldDate) < 86400)) {
+    var hasStorage = (duration!="") && (mayor_count!="");
+    
+    if (hasStorage && ((nowDate - oldDate) < 86400)) {
       this.setDuration(duration.data)
     } else {
       //如果没有缓存
@@ -336,8 +339,13 @@ var activityObj = {
             wx.setStorageSync('duration_weather', res.data.duration_weather);
             wx.setStorageSync('duration_mood', res.data.duration_mood);
             wx.setStorageSync('scores', res.data.scores);
+            wx.setStorageSync('mayor_count', res.data.mayor_count);
+            wx.setStorageSync('buyTitleCount', res.data.buyTitleCount);
+            
 
             app.globalData.scores = res.data.scores;
+            app.globalData.mayor_count = res.data.mayor_count;
+            app.globalData.buyTitleCount = res.data.buyTitleCount;
             // 提醒用户连续签到的奖励
             that.setDuration(res.data.duration_checkin)
           }

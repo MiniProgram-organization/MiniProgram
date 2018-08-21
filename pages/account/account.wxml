@@ -5,23 +5,38 @@
   <view class='account-card' bindtap="redirectToQRCode">
     <image src="{{avatarUrl}}" catchtap='previewImgAccount'></image>
     <view class="account-detail">
-      <view class='account-name'>{{nickName}}</view>
+      <view class='account-name'>{{nickName}}
+      <view class='fa icon-male' hidden="{{gender!=1}}" />
+      <view class='fa icon-female' hidden="{{gender!=2}}"/>
+      </view>
       <view class='account-location'>{{country}} - {{province}}</view>
     </view>
   </view>
 </view>
 
 <view class='account-item-wrapper'>
+
   <view class='account-item'>
     <view class='item-main'>{{scores}}</view>
     <view class='item-sub'>积分</view>
   </view>
+
   <view class='item-helper'></view>
-  <view class='item-helper' id='second-helper'></view>
-  <view class='account-item' >
-    <view class='item-main' id='gender'>{{gender}}</view>
-    <view class='item-sub'>性别</view>
+  <view class='item-helper second-helper'></view>
+
+  <view class='account-item'>
+    <view class='item-main'>{{mayor_count}}</view>
+    <view class='item-sub'>地主</view>
   </view>
+
+  <view class='item-helper'></view>
+  <view class='item-helper second-helper'></view>
+
+  <view class='account-item' >
+    <view class='item-main' >{{buyTitleCount}}</view>
+    <view class='item-sub'>冠名</view>
+  </view>
+
 </view>
 
 <view class="account-slides-wrapper">

@@ -28,17 +28,24 @@
   margin-left: 20px;
   overflow: hidden;
   max-width: 70%;
+  
 }
+
+.account-name .fa{
+  font-size: 18px;
+  font-weight: lighter;
+}
+
 .account-name{
   color: white;
-  font-size: 20px;
+  font-size: 37rpx;
   white-space: nowrap;
   overflow: hidden;
 }
 
 .account-location{
   color:aliceblue;
-  font-size: 13px;
+  font-size: 24rpx;
   white-space: nowrap;
   overflow: hidden;
 }
@@ -61,26 +68,22 @@
 }
 
 .item-helper{
-  width: 10%;
-  height: 50px;
+  width: 2px;
+  height: 40px;
 }
 
-#second-helper{
+.second-helper{
   border-left:1px solid #BBB;
 }
 
 .item-main{
-  font-size: 23px;
+  font-size: 42rpx;
   font-weight: bold;
   color: #0E7EE6;
 }
 
-#gender{
-  font-size: 21px;
-}
-
 .item-sub{
-  font-size: 13px;
+  font-size: 24rpx;
   color: #BBB;
   font-weight: lighter;
 }

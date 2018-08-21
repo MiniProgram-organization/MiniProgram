@@ -10,6 +10,8 @@ var accountObj = {
     city: '',
     qrcodeUrl: '',
     scores:0,
+    mayor_count:0,
+    buyTitleCount:0
   },
 
   onShow: function () {
@@ -20,10 +22,9 @@ var accountObj = {
     var gender = "";
     var province = "";
     var country = "";
-    var genderChoose = ['未知', '男', '女']
 
     nickName = app.globalData.rawData.nickName;
-    gender = genderChoose[app.globalData.rawData.gender];
+    gender = app.globalData.rawData.gender;
     province = app.globalData.rawData.province;
     country = app.globalData.rawData.country;
 
@@ -32,11 +33,25 @@ var accountObj = {
     if (province == "") province = " ";
     if (country == "") country = " ";
 
-    var socresTemp = wx.getStorageSync('scores')
+    var socresTemp = wx.getStorageSync('scores');
     var scores = 0;
+    var buyTitleCountTemp = wx.getStorageSync('buyTitleCount');
+    var buyTitleCount = 0;
+    var mayor_countTemp = wx.getStorageSync('mayor_count');
+    var mayor_count = 0;
+    console.log("mayor_count");
+    console.log(mayor_countTemp);
+    console.log("buyTitleCount");
+    console.log(buyTitleCountTemp);
 
     if (socresTemp != 0) {
       scores = socresTemp;
+    }
+    if (buyTitleCountTemp != 0) {
+      buyTitleCount = buyTitleCountTemp;
+    }
+    if (mayor_countTemp != 0) {
+      mayor_count = mayor_countTemp;
     }
     this.setData({
       nickName: nickName,
@@ -45,6 +60,8 @@ var accountObj = {
       province: province,
       country: country,
       scores: scores,
+      buyTitleCount: buyTitleCount,
+      mayor_count:mayor_count
     });
   },
 
