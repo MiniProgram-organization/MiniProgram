@@ -17,7 +17,12 @@ Page({
     venue:"就在你周围",
     mayor_available:false,
 
-    details_height:90
+    mayor_count:0,
+    buyTitleCount:0,
+
+    details_height:90,
+    windowWidth: app.globalData.windowWidth,
+    windowHeight: app.globalData.windowHeight
   },
 
   onLoad:function(options){
@@ -56,15 +61,18 @@ Page({
         console.log(res);
         console.log(res.data);
         if(res.data.status=="OK"){
-          var location = res.data.country;
-          if(res.data.province!=""){
-            location = location + "·" + res.data.province;
+
+          // 这里location采取精细化设置，以最细节的一个为准
+          if (res.data.city != "") {
+            location =  res.data.city;
+          }else if(res.data.province!=""){
+            location =  res.data.province;
+          } else if (res.data.country != ""){
+            location = res.data.country;
           }
-          if(res.data.city!=""){
-            location = location + "·" + res.data.city;
-          }
+
           if(location==""){
-            location = "(神秘的人~)"
+            location = "保密"
           }
 
           
@@ -75,7 +83,8 @@ Page({
           if (res.data.mayor_count >= 0) {
             that.setData({
               mayor_available: true,
-              mayor_count: res.data.mayor_count
+              mayor_count: res.data.mayor_count,
+              buyTitleCount:res.data.buyTitleCount
             });
           } else {
             this.setData({

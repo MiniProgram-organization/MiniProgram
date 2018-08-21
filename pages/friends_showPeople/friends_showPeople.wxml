@@ -1,28 +1,42 @@
-<!--pages/friends_showPeople/friends_showPeople.wxml-->
-<view class="page">
-    <view class="page__bd friends_people-page-flex">
-        <view class="friends_people-avatar">
-          <image class="friends_people-avatar-img" src="{{avatarUrl}}" bindtap='previewImg'></image>
+<view class="image-wrapper">
+  <image src="{{avatarUrl}}" bindtap='previewImg'></image>
+</view>
+
+<view class="card">
+
+    <view class="avatar-card">
+      <view class="account-detail">
+        <view class='account-name-wrapper'>
+          <view class='account-name'>{{nickName}}</view>
+          <view class='fa icon-male' hidden="{{gender!=1}}" style="color:#146dc9"/>
+          <view class='fa icon-female' hidden="{{gender!=2}}" style="color:#e10050"/>
         </view>
-        <view class="friends_people-nickName"><span class="friends_people-nickName-span">{{nickName}}</span><image class="friends-gender" hidden="{{gender==0}}" src="{{(gender==1)?icon_male:icon_female}}"></image>
+        <view class='account-location-wrapper'>
+          <view class='fa icon-location'></view>
+          <view class='account-location'>{{venue}}</view>
         </view>
-        <view class="friends_people-details" style="height:{{details_height}}px">
-        <view class="friends_people-labels">
-          <view class="friends_people-label">所在地：</view>
-          <view class="friends_people-label" wx:if="{{mayor_available}}">地主数：</view>
-          <view class="friends_people-label">附近签到：</view>
-        </view>
-        <view class="friends_people-content">
-          <view class="friends_people-detail-cell">{{location}}</view>
-          <view class="friends_people-detail-cell" wx:if="{{mayor_available}}">{{mayor_count}}</view>
-          <view class="friends_people-detail-cell">{{venue}}</view>
-        </view>
-        </view>
-        <view class="weui-footer friends_showPeople-footer weui-footer_fixed-bottom">
+      </view>
+    </view>
+
+    <view class="info-wrapper">
+      <view class="info-cell">
+        <view class="info-content">{{mayor_count}}</view>
+        <view class="info-label">地主</view>
+      </view>
+      <view class="info-cell">
+        <view class="info-content">{{buyTitleCount}}</view>
+        <view class="info-label">冠名地</view>
+      </view>
+      <view class="info-cell">
+        <view class="info-content info-location">{{location}}</view>
+        <view class="info-label">所在地</view>
+      </view>
+    </view>
+</view>
+
+<view class="weui-footer friends_showPeople-footer weui-footer_fixed-bottom">
             <view class="weui-footer__links">
                 <navigator url="../privacy/privacy" class="weui-footer__link">隐私条款</navigator>
             </view>
-            <view class="weui-footer__text">Copyright © 2017-2018 卿云Go</view>
-        </view>       
-    </view>
+            <view class="weui-footer__text" style='color:white;'>Copyright © 2017-2018 卿云Go</view>
 </view>

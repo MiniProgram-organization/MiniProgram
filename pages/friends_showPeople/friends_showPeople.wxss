@@ -1,96 +1,139 @@
-/* pages/friends_showPeople/friends_showPeople.wxss */
-.friends_people-page-flex{
-  display: flex;
-  flex-wrap:wrap;
-  align-items: center;
+page{
+  background: linear-gradient(to bottom,#0E7EE6,rgb(137,197,251));
 }
 
-.friends_people-avatar{
+.image-wrapper{
   width: 100%;
   text-align: center;
-  padding: 100px;
-  padding-top: 100px;
-  padding-bottom: 20px;
+  margin-top:40px;
 }
 
-.friends_people-avatar-img{
+.image-wrapper image{
+  width: 100px;
+  height: 100px;
+  border-radius: 60px;
+  margin: auto;
+  box-shadow: 0px 0px 5px #BBB;
+}
+
+.card{
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -60px;
+  border-radius: 15px;
+  padding-top:20px;
+  background: white;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0px 0px 5px #BBB;
+
+}
+
+.avatar-card{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top:50px;
+}
+
+.avatar-card image{
   width: 120px;
   height: 120px;
-  vertical-align: top;
-  border-radius: 100%;
-  border: 8px solid white;
+  border-radius: 60px;
 }
 
-.friends_people-nickName{
-  width:100%;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-  word-break:break-all;
-  text-align: center;
+.account-detail{
+  width: 90%;
+  margin-top:20px;
+  margin-bottom:20px;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+.account-name-wrapper{
   display: flex;
-  display: -webkit-flex;
   justify-content: center;
   align-items: center;
 }
 
-.friends_people-nickName-span{
-  font-weight:400;
-  font-size:larger;
-
+.account-name{
+  font-size: 35rpx;
+  font-weight: bold;
 }
 
-.friends-gender{
-  width:20px;
-  height:20px;
-  margin-left:5px;
+.account-name-wrapper .fa{
+  font-size: 35rpx;
+  margin-left:10rpx;
 }
 
-.friends_people-details{
-  width: 100%;
-  padding-top: 50px;
-  height: 90px;
+.account-location-wrapper{
+  margin-top:5px;
   display: flex;
-  display:-webkit-flex;
-  align-items: center;
   justify-content: center;
-  
-}
-
-.friends_people-labels{
-  display:flex;
-  display: -webkit-flex;
-  flex-direction: column;
-  height: 100%;
-  justify-content: space-between; 
-  align-items: flex-end;
-
-}
-
-.friends_people-label{
-  font-size:normal;
-  color:#4788CB;
-}
-
-.friends_people-content{
-  margin-left: 15px;
-  display:flex;
-  display: -webkit-flex;
-  flex-direction: column;
-  height: 100%;
-  justify-content: space-between; 
-  align-items: flex-start;
-  max-width: 60%;
-}
-
-.friends_people-detail-cell{
-  font-size:normal;
-  color: #999;
+  align-items: center;
+  white-space: nowrap;
   max-width: 100%;
+  overflow: auto;
+}
+
+.account-location-wrapper view {
+  font-size: 30rpx;
+  color:grey;
+  white-space: nowrap;
+}
+
+.account-location-wrapper .fa{
+  margin-right: 10rpx;
+  color:grey;
+}
+
+
+
+
+
+.info-wrapper{
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 60px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.info-cell{
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   overflow: hidden;
-  max-height: 25px;
+}
+
+.info-content{
+  color:#0E7EE6;
+  font-size: 44rpx;
+  font-weight: bolder;
+  margin-bottom: 5px;
+  white-space: nowrap;
+  max-width: 80%;
+  overflow: auto;
+}
+
+.info-label{
+  color:grey;
+  font-size: small;
+  font-weight: lighter;
+}
+
+.info-location{
+  font-size: 39rpx;
 }
 
 .friends_showPeople-footer{
   width: 100%;
 }
+
