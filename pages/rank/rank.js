@@ -7,6 +7,7 @@ Page({
     nickName:"玉",
     rank:32,
     award:100,
+    buyTitleCount:0,
     avatarUrl:"https://wx.qlogo.cn/mmopen/vi_32/nMg3EGicm0baeaZSYW2PGPKiamOlSwNae47QHmickDibr4M9icIO3j4AH3Af14FLFIrYT2W4g2tjIzU8vjvWFW6icg4A/132",
     ranklist: [
       {
@@ -73,7 +74,8 @@ Page({
         if(res.data.status == "OK"){
           that.setData({
             rank:res.data.rank,
-            award:res.data.award
+            award:res.data.award,
+            buyTitleCount:res.data.buyTitleCount
           });
 
           that.requestRankList();

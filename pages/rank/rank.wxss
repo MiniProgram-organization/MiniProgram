@@ -1,69 +1,86 @@
 /* pages/rank/rank.wxss */
-.rank_personal-wrapper{
+.personal-wrapper{
   width: 100%;
-  height: 150px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(to bottom,#0E7EE6,#65B1F5);
+  height: 100px;
+  background:#0E7EE6;
 }
 
-.rank_personal-board{
-  width: 90%;
-  height: 110px;
-  background: white ;
-  border-radius: 10px;
-  box-shadow: 0px 0px 0px #BBB;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.rank_personal-board .little-board{
+.personal-second-wrapper{
+  width: 95%;
   height: 100%;
-  width: 30%;
+  margin: auto;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 
-.rank_personal-board .avatar-board{
-  justify-content: flex-end;
+.personal-rank{
+  font-size: 40rpx;
+  color:white;
+  margin-left:5px;
+  margin-right: 5px;
+  text-align: center;
+  width: 10%;
 }
 
-.little-little-board{
+.personal-board-wrapper{
+  width: 78%;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
 }
 
-
-.rank_personal-board .little-board .score-title{
-  font-size: small;
-  color:#0E7EE6;
+.avatar-wrapper{
+  display: flex;
+  align-items: center;
 }
 
-.rank_personal-board .little-board .score-context{
-  font-size: x-large;
-  color: #0E7EE6;
-  font-weight: bold;
-}
-
-.rank_personal-board .little-board image{
+.avatar-wrapper image{
   width: 60px;
   height: 60px;
-  border-radius: 30px;
+  border-radius: 40px;
+  border: 5px solid white;
 }
 
-.rank_personal-board .little-board .avatar-board-nickName{
-  font-size: small;
-  color: #0E7EE6;
-  font-weight: bold;
-  margin-bottom: 10px;
-  margin-top:4px;
+.personal-detail{
+  margin-left:15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }
+
+.personal-nickname{
+  color:white;
+  font-weight: bold;
+}
+
+.personal-buyTitle-wrapper{
+  display: flex;
+  align-items: center;
+  margin-top: 10rpx;
+}
+
+.personal-buyTitle-wrapper .fa{
+  font-size: 33rpx;
+  color: #F7B578;
+}
+
+.personal-buyTitle{
+  text-align: center;
+  font-size: 30rpx;
+  color:#F7B578;
+  margin-left: 10rpx;
+  line-height: 40rpx;
+}
+
+.personal-score{
+  font-size: 43rpx;
+  color: white;
+  font-weight: bolder;
+}
+
+
+
 
 .rank_list-wrapper{
   display: flex;
@@ -110,10 +127,36 @@
   border-radius: 30px;
 }
 
-.rank_list-nickname{
-  font-size: medium;
+.rank_list-detail{
   margin-left:15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.rank_list-nickname{
   color:#0E7EE6;
+}
+
+.rank_list-buyTitle-wrapper{
+  display: flex;
+  align-items: flex-start;
+  margin-top: 8rpx;
+}
+
+.rank_list-buyTitle-wrapper .fa{
+  font-size: 33rpx;
+  color: #F7B578;
+}
+
+.rank_list-buyTitle{
+  text-align: center;
+  font-size: 30rpx;
+  color:#F7B578;
+  font-weight: lighter;
+  margin-left: 10rpx;
+  line-height: 40rpx;
 }
 
 .rank_list-award{

@@ -1,25 +1,25 @@
 <!--pages/rank/rank.wxml-->
 <import src="../../utils/wxml/loading.wxml" />
 <view wx:if="{{loading}}">
-<view class="rank_personal-wrapper">
-  <view class="rank_personal-board">
-    <view class="little-board">
-      <view class="little-little-board">
-        <view class="score-title">排名</view>
-        <view class="score-context">{{rank}}</view>
-      </view>
-    </view>
-    <view class="little-board avatar-board">
+
+<view class="personal-wrapper">
+  <view class="personal-second-wrapper">
+  <view class="personal-rank">{{rank}}</view>
+  <view class="personal-board-wrapper">
+    <view class="avatar-wrapper">
       <image src='{{avatarUrl}}'></image>
-      <view class="avatar-board-nickName">{{nickName}}</view>
-    </view>
-    <view class="little-board">
-      <view class="little-little-board">
-        <view class="score-title">月积分</view>
-        <view class="score-context">{{award}}</view>
+      <view class="personal-detail">
+        <view class="personal-nickname">{{nickName}}</view>
+        <view class="personal-buyTitle-wrapper">
+          <view class="fa icon-star"></view>
+          <view class="personal-buyTitle">{{buyTitleCount}}</view>
+        </view>
       </view>
     </view>
+    <view class="personal-score">{{award}}</view>
   </view>
+  </view>
+  
 </view>
 
 <view class="rank_list-wrapper">
@@ -28,7 +28,13 @@
     <view class="rank_list-item-wrapper">
     <view class="rank_list-avatar-wrapper">
       <image class="rank_list-avatar" src="{{item.avatarUrl}}"></image>
-      <view class="rank_list-nickname">{{item.nickName}}</view>
+      <view class="rank_list-detail">
+        <view class="rank_list-nickname">{{item.nickName}}</view>
+        <view class="rank_list-buyTitle-wrapper">
+          <view class="fa icon-star"></view>
+          <view class="rank_list-buyTitle">{{item.buyTitleCount}}</view>
+        </view>
+      </view>
       </view>
       <view class="rank_list-award ">{{item.award}}</view>
     </view>
