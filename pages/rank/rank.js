@@ -139,6 +139,23 @@ Page({
         });
       }
     });
+  },
+
+  goToTitleHistorySelf:function(){
+    var url = "../buyTitleHistory/buyTitleHistory?self=1&number=" + this.data.buyTitleCount;
+    wx.navigateTo({
+      url: url,
+    });
+  },
+
+  goToTitleHistoryOther:function(e){
+    var num = e.currentTarget.dataset.num;
+    var buyTitleCount_other = this.data.ranklist[num].buyTitleCount;
+    var openid_other = this.data.ranklist[num].openid;
+    var url = "../buyTitleHistory/buyTitleHistory?self=0&number=" + buyTitleCount_other+"&openid_other="+openid_other;
+    wx.navigateTo({
+      url: url,
+    });
   }
 
 

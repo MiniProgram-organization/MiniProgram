@@ -1,0 +1,41 @@
+<import src="../../utils/wxml/loading.wxml" />
+<view class="no_record_wrapper" wx:if="{{no_record}}">
+  <image src="../images/util/no_record.png"></image>
+  <view class="no_record_word">暂无冠名记录</view>
+</view>
+<view wx:else>
+  <view wx:if="{{!loading}}">
+    <view class='card' wx:for="{{history}}" wx:key="index">
+      <view class="upper-card" style='background-color:{{item.color}};'>
+        <image src="../images/location/undefined.png"></image>
+        <view hidden="{{self==0}}" class="upper-detail-wrapper">
+          <view class="detail-price-wrapper">
+            <view class="fa icon-money"></view>
+            <view class="detail-price">{{item.price}}</view>
+          </view>
+          <view class="detail-date">{{item.date}}</view>
+        </view>
+      </view>
+      <view class="wave-border" style='background-color:{{item.color}};'></view>
+      <view class="down-card">
+        <view class="down-detail-wrapper">
+          <view class="before-name-wrapper" style='color:{{item.color}};'>
+            <view class="fa icon-location-outline" /> 
+            <view class="before-name">{{item.venue}}</view>
+          </view>
+          <view class="new-name-wrapper" style='color:{{item.color}};'>
+            <view class="fa icon-location-1" />
+            <view class="new-name">{{item.title}}</view>
+          </view>
+        </view>
+        <view class="valid-wrapper">
+          <view class="valid" style='background-color:{{item.color}};'>
+            <view wx:if="{{item.valid}}" class='fa icon-ok'></view>
+            <view wx:else class="fa icon-cancel"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <template wx:else is="loading" />
+</view>

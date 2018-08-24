@@ -118,6 +118,11 @@ Page({
           // 这里要改变冠名人的积分
           var new_score = score - show_price;
           wx.setStorageSync("scores", new_score);
+          // 这里要改变冠名人的冠名数
+          var buyTitleCount = wx.getStorageSync('buyTitleCount');
+          buyTitleCount += 1;
+          wx.setStorageSync('buyTitleCount', buyTitleCount);
+          
           app.globalData.account_refresh = true;
           
           setTimeout(function(){wx.navigateBack({ })},1500);

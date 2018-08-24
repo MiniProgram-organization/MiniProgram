@@ -15,6 +15,7 @@ Page({
     king_user_icon:'',
     king_user_num:0,
     POI_name:'',
+    king_before:''
   },
   redictDetail: function (e) {
     console.log(e.currentTarget);
@@ -68,11 +69,13 @@ Page({
     var that = this;
     that.setData({
       POI_id: options.POI_id,
-      POI_name: options.POI_name
+      POI_name: options.POI_name,
+      king_before:options.king_before
     });
     that.getKingUser();
     that.requestPoiHistory();
   },
+
   getKingUser: function(){
     var that = this;
     wx.request({
@@ -86,11 +89,23 @@ Page({
         
       },
       success: function (res) {
+        console.log("[showPeople] FrequentUsers");
+        console.log(res);
         that.setData({
           king_user_name:res.data.users[0].nickName,
           king_user_num: res.data.users[0].check_num,
           king_user_icon:res.data.users[0].avatarUrl
-        })
+        });
+
+        // 这里检查地主有没有变成用户自己
+        var king_before = that.data.king_before;
+        if(res.data.users[0].openid == app.globalData.openid){
+          if (king_before != app.globalData.openid){
+            var mayor_count_before = wx.getStorageSync("mayor_count");
+            mayor_count_before += 1;
+            wx.setStorageSync('mayor_count', mayor_count_before);
+          }
+        }
       },
       fail: function(res){
 

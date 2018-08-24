@@ -184,6 +184,7 @@ var activityObj = {
           }
           else {
             wx.setStorageSync('timestamp_checkins', (Date.parse(new Date()) / 1000));
+            console.log(res.data.checkins);
             for (var i = 0; i < res.data.checkins.length; i++) {
               res.data.checkins[i].date = res.data.checkins[i]['datetime'].split(" ")[0];
               res.data.checkins[i].time = res.data.checkins[i]['datetime'].split(" ")[1];

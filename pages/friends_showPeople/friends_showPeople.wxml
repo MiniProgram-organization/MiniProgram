@@ -23,7 +23,7 @@
         <view class="info-content">{{mayor_count}}</view>
         <view class="info-label">地主</view>
       </view>
-      <view class="info-cell">
+      <view class="info-cell" bindtap='goToBuyTitleHistory'>
         <view class="info-content">{{buyTitleCount}}</view>
         <view class="info-label">冠名地</view>
       </view>

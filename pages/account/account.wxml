@@ -32,9 +32,9 @@
   <view class='item-helper'></view>
   <view class='item-helper second-helper'></view>
 
-  <view class='account-item' >
+  <view class='account-item' bindtap='goToBuyTitleHistory' >
     <view class='item-main' >{{buyTitleCount}}</view>
-    <view class='item-sub'>冠名</view>
+    <view class='item-sub'>冠名 <span style="font-weight:bolder;">＞</span></view>
   </view>
 
 </view>

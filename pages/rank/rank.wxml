@@ -10,7 +10,7 @@
       <image src='{{avatarUrl}}'></image>
       <view class="personal-detail">
         <view class="personal-nickname">{{nickName}}</view>
-        <view class="personal-buyTitle-wrapper">
+        <view class="personal-buyTitle-wrapper" catchtap='goToTitleHistorySelf'>
           <view class="fa icon-star"></view>
           <view class="personal-buyTitle">{{buyTitleCount}}</view>
         </view>
@@ -30,7 +30,7 @@
       <image class="rank_list-avatar" src="{{item.avatarUrl}}"></image>
       <view class="rank_list-detail">
         <view class="rank_list-nickname">{{item.nickName}}</view>
-        <view class="rank_list-buyTitle-wrapper">
+        <view class="rank_list-buyTitle-wrapper" data-num="{{index}}" catchtap='goToTitleHistoryOther'>
           <view class="fa icon-star"></view>
           <view class="rank_list-buyTitle">{{item.buyTitleCount}}</view>
         </view>
@@ -40,6 +40,7 @@
     </view>
   </view>
 </view>
+
 </view>
 
 <template wx:else is="loading" />

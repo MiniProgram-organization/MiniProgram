@@ -151,6 +151,15 @@ var accountObj = {
     })
   },
 
+  goToBuyTitleHistory:function(){
+    console.log("[Account] goToBuyTitleHistory");
+
+    var url = "../buyTitleHistory/buyTitleHistory?self=1&number="+this.data.buyTitleCount;
+    wx.navigateTo({
+      url: url,
+    });
+  }
+
 
 
 

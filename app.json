@@ -26,7 +26,8 @@
     "pages/tipster/tipster",
     "pages/buynaming/buynaming",
     "pages/home/home",
-    "pages/rank/rank"
+    "pages/rank/rank",
+    "pages/buyTitleHistory/buyTitleHistory"
   ],
   "window": {
     "navigationBarBackgroundColor": "#0E7EE6",

@@ -48,6 +48,7 @@ Page({
       }],
       in_china: options.in_china,
     });
+
   },
 
   textChange: function (e) {
@@ -155,133 +156,169 @@ Page({
           return
         }
       }
+
+
+      // 先查询一下未签到的时候地主数是谁
+      var that = this;
       wx.request({
-        url: 'https://40525433.fudan-mini-program.com/cgi-bin/CheckIn',
+        url: 'https://40525433.fudan-mini-program.com/cgi-bin/FrequentUsers',
         method: 'POST',
-        
         data: {
-          POI_id: that.data.POI_id,
-          POI_info: {
-            category: that.data.category,
-            venue: that.data.venue,
-            latitude: that.data.latitude, //poi所在纬度
-            longitude: that.data.longitude, //poi所在经度
-            province: that.data.ad_province,
-            city: that.data.ad_city,
-            district: that.data.ad_district,
-          },
-          created_by_user: false,
           openid: app.globalData.openid,
           sessionid: app.globalData.sessionid,
-          latitude: app.globalData.latitude,//用户所在纬度
-          longitude: app.globalData.longitude,  //用户所在经度
-          text: that.data.text,
-          in_china: that.data.in_china,
+          POI_id: that.data.POI_id,
+          user_num: 1,
         },
-        success: function (e) {
+        success: function (res) {
+          console.log("[map] frequentUsers");
+          console.log(res);
 
-          var datetime = new Date();
-          var time = e.data.time;
-          var date = e.data.date
-          var height_p = 65;
-          if (that.data.text != ""){
-            height_p = 80;
+          var king_before = "";
+          if(res.data.user_num == 0){
+            king_before = "undefined";
+          }else{
+            king_before = res.data.users[0].openid;
           }
-          var old_history = wx.getStorageSync('checkins');
 
-          if (e.data.status == "OK") {
-            app.globalData.checkinLastTimeTable[that.data.POI_id.toString()] = now_timestamp;
-            console.log(app.globalData.checkinLastTimeTable)
-            var award = e.data.award;
-            var scores = e.data.scores;
-            var duration = e.data.duration;
+          wx.request({
+            url: 'https://40525433.fudan-mini-program.com/cgi-bin/CheckIn',
+            method: 'POST',
 
-            wx.setStorageSync('scores', scores);
-            wx.setStorageSync('duration_checkin', {
-              data:duration
-            });
-
-            if (!old_history) {
-              console.log("没有缓存");
-              wx.setStorage({
-                key: 'checkins',
-                data: [{
-                  POI_latitude: that.data.latitude,
-                  POI_longitude: that.data.longitude,
-                  latitude: app.globalData.latitude,
-                  longitude: app.globalData.longitude,
-                  POI_id: that.data.POI_id,
-                  category: that.data.category,
-                  venue: that.data.venue,
-                  time: time,
-                  text: that.data.text,
-                  date: date,
-                  logoPath: that.data.logoPath,
-                  text: that.data.text,
-                  height_p: height_p,
-                }]
-              })
-            } else {
-              console.log("有历史缓存");
-              //插入头部，因为是按照时间倒序排列的
-              old_history.unshift({
-                POI_latitude: that.data.latitude,
-                POI_longitude: that.data.longitude,
-                latitude: app.globalData.latitude,
-                longitude: app.globalData.longitude,
-                POI_id: that.data.POI_id,
+            data: {
+              POI_id: that.data.POI_id,
+              POI_info: {
                 category: that.data.category,
                 venue: that.data.venue,
-                time: time,
-                text: that.data.text,
-                date: date,
-                logoPath: that.data.logoPath,
-                text: that.data.text,
-                height_p: height_p,
-              });
-              wx.setStorage({
-                key: 'checkins',
-                data: old_history,
-              });
+                latitude: that.data.latitude, //poi所在纬度
+                longitude: that.data.longitude, //poi所在经度
+                province: that.data.ad_province,
+                city: that.data.ad_city,
+                district: that.data.ad_district,
+              },
+              created_by_user: false,
+              openid: app.globalData.openid,
+              sessionid: app.globalData.sessionid,
+              latitude: app.globalData.latitude,//用户所在纬度
+              longitude: app.globalData.longitude,  //用户所在经度
+              text: that.data.text,
+              in_china: that.data.in_china,
+            },
+            success: function (e) {
+
+              var datetime = new Date();
+              var time = e.data.time;
+              var date = e.data.date
+              var height_p = 65;
+              if (that.data.text != "") {
+                height_p = 80;
+              }
+              var old_history = wx.getStorageSync('checkins');
+
+              if (e.data.status == "OK") {
+                app.globalData.checkinLastTimeTable[that.data.POI_id.toString()] = now_timestamp;
+                console.log(app.globalData.checkinLastTimeTable)
+                var award = e.data.award;
+                var scores = e.data.scores;
+                var duration = e.data.duration;
+
+                wx.setStorageSync('scores', scores);
+                wx.setStorageSync('duration_checkin', {
+                  data: duration
+                });
+
+                if (!old_history) {
+                  console.log("没有缓存");
+                  wx.setStorage({
+                    key: 'checkins',
+                    data: [{
+                      POI_latitude: that.data.latitude,
+                      POI_longitude: that.data.longitude,
+                      latitude: app.globalData.latitude,
+                      longitude: app.globalData.longitude,
+                      POI_id: that.data.POI_id,
+                      category: that.data.category,
+                      venue: that.data.venue,
+                      time: time,
+                      text: that.data.text,
+                      date: date,
+                      logoPath: that.data.logoPath,
+                      text: that.data.text,
+                      height_p: height_p,
+                    }]
+                  })
+                } else {
+                  console.log("有历史缓存");
+                  //插入头部，因为是按照时间倒序排列的
+                  old_history.unshift({
+                    POI_latitude: that.data.latitude,
+                    POI_longitude: that.data.longitude,
+                    latitude: app.globalData.latitude,
+                    longitude: app.globalData.longitude,
+                    POI_id: that.data.POI_id,
+                    category: that.data.category,
+                    venue: that.data.venue,
+                    time: time,
+                    text: that.data.text,
+                    date: date,
+                    logoPath: that.data.logoPath,
+                    text: that.data.text,
+                    height_p: height_p,
+                  });
+                  wx.setStorage({
+                    key: 'checkins',
+                    data: old_history,
+                  });
+                }
+
+
+                wx.redirectTo({
+                  url: '../showpeople/showpeople?POI_id=' + that.data.POI_id + '&POI_name=' + that.data.venue + '&king_before=' + king_before,
+                  success: function (e) {
+                    if (award > 0) {
+                      wx.showToast({
+                        title: "签到成功\n" + '+' + award + '分',
+                        icon: 'success',
+                        duration: 2000
+                      });
+                    }
+                    else {
+                      wx.showToast({
+                        title: "签到成功",
+                        icon: 'success',
+                        duration: 2000
+                      });
+                    }
+                  }
+                });
+
+              } else {
+
+                wx.showToast({
+                  title: "签到失败",
+                  icon: 'loading',
+                  duration: 2000
+
+                });
+
+              }
+            },
+            fail: function (e) {
+              console.log("获取位置网络连接失败");
             }
 
-            wx.redirectTo({
-              url: '../showpeople/showpeople?POI_id=' + that.data.POI_id+'&POI_name='+that.data.venue,
-              success: function (e) {
-                if (award > 0){
-                  wx.showToast({
-                    title: "签到成功\n" +'+'+award+'分',
-                    icon: 'success',
-                    duration: 2000
-                  });
-                }
-                else{
-                  wx.showToast({
-                    title: "签到成功",
-                    icon: 'success',
-                    duration: 2000
-                  });
-                }
-              }
-            })
-
-          } else {
-
-            wx.showToast({
-              title: "签到失败",
-              icon: 'loading',
-              duration: 2000
-
-            });
-
-          }
+          });
         },
-        fail: function (e) {
-          console.log("获取位置网络连接失败");
+        fail: function (res) {
+
         }
+      })
+      
 
-      });
+    },
 
+    requestCheckin:function(king_before){
+      var that = this;
+      
     },
 
 
