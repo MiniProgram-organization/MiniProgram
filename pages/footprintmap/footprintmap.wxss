@@ -1,0 +1,64 @@
+/* pages/main/main.wxss */
+.page-wrapper{
+}
+
+.card{
+  padding-top: 15px;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.avatar-wrapper{
+  display: flex;
+  align-items: center;
+}
+
+.avatar-wrapper image{
+  width: 70px;
+  height: 70px;
+  border-radius: 40px;
+  border: 3px solid white;
+  margin-left: 20px;
+}
+
+.nickname{
+  font-size: 30rpx;
+  margin-left: 8px;
+}
+
+.personal-word{
+  font-size: 30rpx;
+  margin-right: 20px;
+}
+
+.personal-word span{
+  display: inline-block;
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #0E7EE6;
+  margin-left: 6px;
+  margin-right: 6px;
+}
+
+.tip-word{
+  width: 100%;
+  font-size: 30rpx;
+  color: grey;
+  font-weight: lighter;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.button-wrapper{
+  width: 100%;
+  margin-top: 20px;
+}
+
+.button-wrapper button{
+  background: #0E7EE6;
+  color: white;
+  width:40%;
+}

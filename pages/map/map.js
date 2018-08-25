@@ -226,6 +226,9 @@ Page({
                   data: duration
                 });
 
+                //签到成功了，重新申请足迹地图
+                that.requestForFootprint();
+
                 if (!old_history) {
                   console.log("没有缓存");
                   wx.setStorage({
@@ -321,55 +324,46 @@ Page({
       
     },
 
+  requestForFootprint:function(){
+    var province_num = wx.getStorageSync("provice_num");
+    var valid = wx.getStorageSync("footprint_valid");
 
+    wx.request({
+      url: 'https://40525433.fudan-mini-program.com/cgi-bin/Area',
+      method: 'POST',
+      data: {
+        openid: getApp().globalData.openid,
+        sessionid: getApp().globalData.sessionid,
+        area_type: 0
+      },
+      success: function (res) {
+        var num = res.data.area_num;
+        if(num!=province_num){
+          //签到的地方是一个新的省
+          wx.setStorageSync("footprint_valid", 0)
+        }
 
+        //请求足迹地图
+        wx.request({
+          url: 'https://40525433.fudan-mini-program.com/cgi-bin/CheckinImg.py',
+          method: 'POST',
+          data: {
+            openid: getApp().globalData.openid,
+            sessionid: getApp().globalData.sessionid,
+            latitude: app.globalData.latitude,
+            longitude: app.globalData.longitude
+          },
+          success: function (res) {
+            if (res.data.status == "OK") {
+              wx.setStorageSync("footprintUrl", res.data.url);
+              wx.setStorageSync("footprintValid", 1);
+            }
 
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-    
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+          }
+        })
+      }
+    })
   }
+
+  
 })

@@ -27,7 +27,8 @@
     "pages/buynaming/buynaming",
     "pages/home/home",
     "pages/rank/rank",
-    "pages/buyTitleHistory/buyTitleHistory"
+    "pages/buyTitleHistory/buyTitleHistory",
+    "pages/footprintmap/footprintmap"
   ],
   "window": {
     "navigationBarBackgroundColor": "#0E7EE6",

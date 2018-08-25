@@ -44,9 +44,49 @@ var activityObj = {
       this.getOpenIdActivity();
     } else {
       this.getCheckIns();
+      // 提前申请足迹地图
+      this.requestForFootprint();
     }
 
+    
+
   
+  },
+
+  requestForFootprint:function(){
+    wx.setStorageSync("footprintValid", 0);
+    wx.request({
+      url: 'https://40525433.fudan-mini-program.com/cgi-bin/Area',
+      method: 'POST',
+      data: {
+        openid: getApp().globalData.openid,
+        sessionid: getApp().globalData.sessionid,
+        area_type: 0
+      },
+      success: function (res) {
+        var num = res.data.area_num;
+        wx.setStorageSync("province_num", num);
+
+        //请求足迹地图
+        wx.request({
+          url: 'https://40525433.fudan-mini-program.com/cgi-bin/CheckinImg.py',
+          method: 'POST',
+          data: {
+            openid: getApp().globalData.openid,
+            sessionid: getApp().globalData.sessionid,
+            latitude:app.globalData.latitude,
+            longitude:app.globalData.longitude
+          },
+          success: function (res) {
+            if(res.data.status=="OK"){
+              wx.setStorageSync("footprintUrl", res.data.url);
+              wx.setStorageSync("footprintValid", 1);
+            }
+
+          }
+        })
+      }
+    })
   },
 
   getOpenIdActivity: function () {
@@ -141,6 +181,8 @@ var activityObj = {
                 }
                 getApp().globalData.openid = res.data.openid;
                 getApp().globalData.sessionid = res.data.sessionid;
+                // 提前申请足迹地图
+                that.requestForFootprint();
                 that.getCheckIns();
               }
             })
@@ -641,6 +683,13 @@ var activityObj = {
 
     wx.navigateTo({
       url: '../buysite/buysite?markers='
+    })
+  },
+
+  goToFootprint:function(){
+    console.log("[Activity] goToFootprint");
+    wx.navigateTo({
+      url: '../footprintmap/footprintmap'
     })
   },
 

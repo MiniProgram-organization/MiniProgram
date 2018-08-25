@@ -1,0 +1,20 @@
+<!--pages/main/main.wxml-->
+<view class="page-wrapper"> 
+<view class="card">
+  <view class="avatar-wrapper">
+    <image src="{{avatarUrl}}"></image>
+    <view class="nickname">{{nickname}}</view>
+  </view>
+  <view class='personal-word'>去过<span>{{provinceCount}}</span>个省</view>
+</view>
+ <zoomImgByView 
+          id='mapLayout'
+          img_src="{{imgSrc}}"
+          view_width="{{viewWidth}}"
+          view_height="{{viewHeight}}"/> 
+
+<view class="tip-word">(可双指缩放调整大小)</view>
+<!--<view class="button-wrapper">
+  <button class="weui-btn" type='primary'>下载到本地</button>
+</view>-->
+</view>

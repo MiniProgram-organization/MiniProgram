@@ -25,9 +25,10 @@ Page({
       data: {
         openid: getApp().globalData.openid,
         sessionid: getApp().globalData.sessionid,
-        area_type: 2
+        area_type: 0
       },
       success: function(res){
+        console.log(res);
         if(res.data.status == "OK"){
           var districtList = res.data.areas;
           console.log(districtList);

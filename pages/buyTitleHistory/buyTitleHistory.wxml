@@ -7,7 +7,7 @@
   <view wx:if="{{!loading}}">
     <view class='card' wx:for="{{history}}" wx:key="index">
       <view class="upper-card" style='background-color:{{item.color}};'>
-        <image src="../images/location/undefined.png"></image>
+        <image src="{{item.logoPath}}"></image>
         <view hidden="{{self==0}}" class="upper-detail-wrapper">
           <view class="detail-price-wrapper">
             <view class="fa icon-money"></view>

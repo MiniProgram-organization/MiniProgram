@@ -26,11 +26,12 @@
   <cover-image class="bookmark" src="../images/buysite.png"></cover-image>
   </cover-view>
 
-<!--
-  <cover-view class="choose-location" bindtap='chooseLocation'>
-  <cover-image class="bookmark" src="../images/location.png"></cover-image>
+
+  <cover-image class="footprint-shadow" src="../images/shadow.png"></cover-image>
+  <cover-view class="footprint" bindtap='goToFootprint'>
+  <cover-image class="footprint-logo" src="../images/foot.png"></cover-image>
   </cover-view>
-  -->
+
 
   </map>
   <view style="width:80%; margin:5% 10% 10% 10%">

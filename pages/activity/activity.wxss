@@ -145,6 +145,28 @@ border-radius:25px;
 font-size:large;
 }
 
+.footprint{
+  top:75%;
+  height:40px;
+  width:40px;
+  position:absolute;
+  left:5%;
+  background-color:white;
+  border-color: gainsboro;
+  text-align:center;
+  line-height:40px;
+  border-radius:25px;
+}
+
+
+.footprint-shadow{
+  position:absolute;
+  top:76%;
+  left:5%;
+  width: 43px;
+  height: 43px;
+}
+
 
 
 .buy-map-shadow{
@@ -183,5 +205,12 @@ font-size:large;
   margin-left: auto;
   margin-right: auto;
   margin-top:10px;
+}
 
+.footprint-logo{
+  width: 25px;
+  height: 25px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top:7px;
 }

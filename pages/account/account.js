@@ -53,6 +53,7 @@ var accountObj = {
     if (mayor_countTemp != 0) {
       mayor_count = mayor_countTemp;
     }
+    console.log(app.globalData.rawData.avatarUrl);
     this.setData({
       nickName: nickName,
       avatarUrl: app.globalData.rawData.avatarUrl,

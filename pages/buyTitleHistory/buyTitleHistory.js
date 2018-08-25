@@ -48,6 +48,7 @@ Page({
       // 发送请求
       this.requestHistory();
     }
+    this.requestForPic();
   
   },
 
@@ -73,6 +74,7 @@ Page({
         localTime: localTime
       };
     }
+    console.log(requestData);
 
    
 
@@ -91,6 +93,8 @@ Page({
           for(var i=0;i<history.length;i++){
             var item = history[i];
             item.color = "#0E7EE6";
+            var category = item.category;
+            item.logoPath = '../images/location/' + app.globalData.locationMap[category.split(":")[0]] + '.png';
             if (item.valid == false) {
               item.color = "grey";
             }
@@ -101,6 +105,8 @@ Page({
             }
             history[i] = item;    
           }
+          
+          console.log(history);
           
 
           that.setData({
@@ -126,6 +132,29 @@ Page({
       }
     })
   },
+
+  requestForPic:function(){
+    var requestData = {
+      openid: app.globalData.openid,
+      sessionid: app.globalData.sessionid,
+      latitude: app.globalData.latitude,
+      longitude: app.globalData.longitude
+    };
+    wx.request({
+      url: "https://40525433.fudan-mini-program.com/cgi-bin/CheckinImg.py",
+      method: 'POST',
+      data: requestData,
+      success: function (res) {
+        console.log("CheckinImg.py response");
+        console.log(res);
+        console.log(res.data);
+        
+      },
+      fail: function (res) {
+        
+      }
+    })
+  }
 
 
 })

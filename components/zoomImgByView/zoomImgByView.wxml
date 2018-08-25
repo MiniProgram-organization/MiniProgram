@@ -1,0 +1,14 @@
+<!--component/zoomImgByView/zoomImgByView.wxml-->
+<view 
+    style="width:{{view_width}}px;height:{{view_height}}px;background:{{backgroundcolor}}">
+    <image
+      id="mapImage"
+      style="width:{{imgWidth}}px;height:{{imgHeight}}px;position: relative;top:0px;bottom:0px;margin-top:{{marginTop}}px;margin-left:{{marginLeft}}px;"
+      src="{{img_src}}"
+      mode="aspectFill"
+      catchload="_imgLoadEvent"
+      catchtouchstart='_touchStartEvent'
+      catchtouchmove='_touchMoveEvent'
+      catchtouchend='_touchEndEvent'
+      catchtouchcancel='_touchEndEvent'/>
+</view>

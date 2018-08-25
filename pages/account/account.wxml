@@ -11,6 +11,7 @@
       </view>
       <view class='account-location'>{{country}} - {{province}}</view>
     </view>
+    <view class='fa  icon-foot' catchtap='goToFootprint'></view>
   </view>
 </view>
 

@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "zoomImgByView": "../../components/zoomImgByView/zoomImgByView"
+  },
+  "navigationBarTitleText": "足迹地图"
+}

@@ -135,3 +135,12 @@
   font-size:20px;
   color: #AFAFAF;
 }
+
+.icon-foot{
+  font-size: 60px;
+  position: absolute;
+  top: 55px;
+  left: 75%;
+  color: rgba(255,255,255,0.5);
+  border-radius: 40px;
+}
