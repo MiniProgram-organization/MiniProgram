@@ -151,7 +151,7 @@ font-size:large;
   width:40px;
   position:absolute;
   left:5%;
-  background-color:white;
+  background-color:#0E7EE6;
   border-color: gainsboro;
   text-align:center;
   line-height:40px;
@@ -208,9 +208,9 @@ font-size:large;
 }
 
 .footprint-logo{
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   margin-left: auto;
   margin-right: auto;
-  margin-top:7px;
+  margin-top:10px;
 }
