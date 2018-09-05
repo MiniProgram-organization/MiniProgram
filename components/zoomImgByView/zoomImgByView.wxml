@@ -1,6 +1,6 @@
 <!--component/zoomImgByView/zoomImgByView.wxml-->
 <view 
-    style="width:{{view_width}}px;height:{{view_height}}px;background:{{backgroundcolor}}">
+    style="width:{{view_width}}px;height:{{view_height}}px;background:gray;margin-left:auto;margin-right:auto;border-radius:10px;">
     <image
       id="mapImage"
       style="width:{{imgWidth}}px;height:{{imgHeight}}px;position: relative;top:0px;bottom:0px;margin-top:{{marginTop}}px;margin-left:{{marginLeft}}px;"

@@ -27,10 +27,10 @@ Page({
     });
     wx.getSystemInfo({
       success: res => {
-        var height = res.windowWidth*27/30;
+        var height = res.windowWidth*27*0.83/30;
         this.setData({
           viewHeight: height,
-          viewWidth: res.windowWidth,
+          viewWidth: res.windowWidth*0.83,
         })
       }
     });

@@ -1,11 +1,35 @@
 /* pages/main/main.wxss */
+page{
+}
+
 .page-wrapper{
+  margin-top: 20px;
+  background: white;
+  box-shadow: 0 0 5px #bbb;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title-wrapper{
+  width: 100%;
+  margin-top:20px;
+  margin-bottom: 10px;
+  font-size: 38rpx;
+  color:gray;
+  font-weight: lighter;
+  text-align: center;
 }
 
 .card{
-  padding-top: 15px;
-  width: 100%;
-  height: 80px;
+  padding-top: 10px;
+  width: 85%;
+  height: 70px;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -17,21 +41,22 @@
 }
 
 .avatar-wrapper image{
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   border-radius: 40px;
-  border: 3px solid white;
-  margin-left: 20px;
+  box-shadow: 0 0 5px #bbb;
 }
 
 .nickname{
   font-size: 30rpx;
   margin-left: 8px;
+  color: gray;
 }
 
 .personal-word{
   font-size: 30rpx;
-  margin-right: 20px;
+  color: gray;
+  font-weight: lighter;
 }
 
 .personal-word span{
@@ -43,22 +68,25 @@
   margin-right: 6px;
 }
 
-.tip-word{
-  width: 100%;
+
+
+.logo-card{
+  width: 85%;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom:10px;
+}
+
+.logo-word{
   font-size: 30rpx;
-  color: grey;
   font-weight: lighter;
-  margin-top: 10px;
-  text-align: center;
+  color: gray;
 }
 
-.button-wrapper{
-  width: 100%;
-  margin-top: 20px;
-}
-
-.button-wrapper button{
-  background: #0E7EE6;
-  color: white;
-  width:40%;
+.logo-card image{
+  width: 80px;
+  height: 80px;
+  margin-left: 10px;
 }

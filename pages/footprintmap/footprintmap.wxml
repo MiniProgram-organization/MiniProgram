@@ -1,5 +1,13 @@
 <!--pages/main/main.wxml-->
 <view class="page-wrapper"> 
+<view class="title-wrapper">华 / 夏 / 足 / 迹</view>
+
+ <zoomImgByView 
+          id='mapLayout'
+          img_src="{{imgSrc}}"
+          view_width="{{viewWidth}}"
+          view_height="{{viewHeight}}"/> 
+
 <view class="card">
   <view class="avatar-wrapper">
     <image src="{{avatarUrl}}"></image>
@@ -7,14 +15,9 @@
   </view>
   <view class='personal-word'>去过<span>{{provinceCount}}</span>个省</view>
 </view>
- <zoomImgByView 
-          id='mapLayout'
-          img_src="{{imgSrc}}"
-          view_width="{{viewWidth}}"
-          view_height="{{viewHeight}}"/> 
+<view class="logo-card">
+  <view class="logo-word">/* 卿云Go 陪你看世界 */</view>
+  <image src="../images/miniProgram.jpeg"></image>
+</view>
 
-<view class="tip-word">(可双指缩放调整大小)</view>
-<!--<view class="button-wrapper">
-  <button class="weui-btn" type='primary'>下载到本地</button>
-</view>-->
 </view>
