@@ -89,7 +89,16 @@ Page({
   
         }
       });
+    } else if ((that.data.new_naming).replace(/\s+/g, "") == ""){ 
+      wx.showModal({
+        title: '冠名失败',
+        content: '新地名不能为空！',
+        showCancel: false,
+        success: function (res) {
+        }
+      });
     }else{
+      console.log(that.data.new_naming);
 
       // 冠名成功，这里其实可以考虑做一个分享页面
       var requestData = {
@@ -110,8 +119,7 @@ Page({
        data: requestData,
        success: function(res){
          console.log(res)
-         if (res.data.status != 'ERROR')
-         {
+         if (res.data.status != 'ERROR') {
           wx.showToast({
             title: '冠名成功!',
           });
@@ -126,8 +134,8 @@ Page({
           app.globalData.account_refresh = true;
           
           setTimeout(function(){wx.navigateBack({ })},1500);
-         }
-         else{
+
+         } else{
            wx.showModal({
              title: '提示',
              content: '冠名失败！请稍后再试',

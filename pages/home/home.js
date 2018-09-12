@@ -44,7 +44,7 @@ var versionCheck = {
   onLoad: function (options) {
     var that = this;
     wx.request({
-      url: 'https://40525433.fudan-mini-program.com/cgi-bin/Version',
+      url: 'https://40525433.fudan-mini-program.com/cgi-bin/Version2',
       method: 'POST',
       data: {
         version_code: '0.97'
@@ -74,6 +74,7 @@ var versionCheck = {
         }
       },
       fail: function (res) {
+        console.log(res);
         console.log("[Home] fail");
         wx.showToast({
           title: '读取版本错误!',
